@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+
+    <package name="default" namespace="/" extends="struts-default">
+    <!-- 定义新的拦截器栈  配置prepare的拦截器的alwaysInvokePrepare 的参数为false -->
+    <interceptors>
+    	<interceptor-stack name="sshStack">
+    		<interceptor-ref name="paramsPrepareParamsStack">
+    			<param name="prepare.alwaysInvokePrepare">false</param>
+    		</interceptor-ref>
+    	</interceptor-stack>
+    </interceptors>
+    
+    <!-- 使用新拦截器 -->
+    <default-interceptor-ref name="sshStack"></default-interceptor-ref>
+    
+    	<action name="emp-*" class="com.xiaoy.actions.EmployeeAction" method="{1}">
+    	
+    		<result name="list">/WEB-INF/views/emp-list.jsp</result>
+    		
+    		<result name="ajax-success" type="stream">
+    			<param name="contentType">text/html</param>
+    			<param name="inputName">inputStream</param>
+    		</result>
+    		
+    		<result name="input">/WEB-INF/views/emp-input.jsp</result>
+    		
+    		<result name="success" type="redirectAction">emp-list</result>
+    	</action>
+    </package>
+
+</struts>    

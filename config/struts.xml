@@ -3,35 +3,33 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 	"http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
+
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.devMode" value="true" />
+    <!-- 更改Struts的开发模式 -->
+	<constant name="struts.devMode" value="true"/>
+	<!-- 配置Struts的简单模式 -->
+	<constant name="struts.ui.theme" value="simple"></constant>
 
-    <package name="default" namespace="/" extends="struts-default">
-    <!-- 定义新的拦截器栈  配置prepare的拦截器的alwaysInvokePrepare 的参数为false -->
-    <interceptors>
-    	<interceptor-stack name="sshStack">
-    		<interceptor-ref name="paramsPrepareParamsStack">
-    			<param name="prepare.alwaysInvokePrepare">false</param>
-    		</interceptor-ref>
-    	</interceptor-stack>
-    </interceptors>
-    
-    <!-- 使用新拦截器 -->
-    <default-interceptor-ref name="sshStack"></default-interceptor-ref>
-    
-    	<action name="emp-*" class="com.xiaoy.actions.EmployeeAction" method="{1}">
-    	
-    		<result name="list">/WEB-INF/views/emp-list.jsp</result>
-    		
-    		<result name="ajax-success" type="stream">
-    			<param name="contentType">text/html</param>
-    			<param name="inputName">inputStream</param>
-    		</result>
-    		
-    		<result name="input">/WEB-INF/views/emp-input.jsp</result>
-    		
-    		<result name="success" type="redirectAction">emp-list</result>
-    	</action>
-    </package>
-
+    <!-- 初始化页面左侧菜单============start -->
+	<package name="menu" namespace="/MenuMag" extends="struts-default">
+		<action name="menuAction_*" class="com.xiaoy.menu.web.MenuAction" method="{1}">
+			<result name="home">/WEB-INF/page/MenuMag/home.jsp</result>
+			<result name="buttom">/WEB-INF/page/MenuMag/buttom.jsp</result>
+			<result name="left">/WEB-INF/page/MenuMag/left.jsp</result>
+			<result name="top">/WEB-INF/page/MenuMag/top.jsp</result>
+		</action>
+	</package>
+	<!-- 初始化页面左侧菜单============end -->
+	
+	<!-- 资源管理====start -->
+	<package name="resource" namespace="/ResourceMag" extends="struts-default">
+		<action name="noticeAction_*" class="com.xiaoy.resource.web.action.NoticeAction" method="{1}">
+			<result name="noticeIndex">/WEB-INF/page/ResourceMag/noticeIndex.jsp</result>
+			<result name="saveNotice" type="redirectAction">
+				<param name="actionName">noticeAction_noticeIndex</param>
+				<param name="namespace">/ResourceMag</param>
+			</result>
+		</action>
+	</package>
+	<!-- 资源管理====end -->
 </struts>    

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-3-25 22:47:42 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xiaoy.base.entites.Notice" table="NOTICE">
+        <id name="noticeUuid" type="java.lang.String">
+            <column name="NOTICE_UUID" length="32" />
+            <generator class="uuid" />
+        </id>
+        <property name="noticeTit" type="java.lang.String">
+            <column name="NOTICE_TIT" length="20" />
+        </property>
+        <property name="notice" type="java.lang.String">
+            <column name="NOTICE" length="200" />
+        </property>
+        <property name="noticeTime" type="java.util.Date">
+            <column name="NOTICE_TIME" length="20" />
+        </property>
+        <property name="noticeName" type="java.lang.String">
+            <column name="NOTICE_NAME" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

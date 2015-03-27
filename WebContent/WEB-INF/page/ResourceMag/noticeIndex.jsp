@@ -5,63 +5,7 @@
 <title>公告信息编辑</title>
 <link href="${pageContext.request.contextPath }/css/Style.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
-
-<script type="text/javascript"> 
-  function checkchar(){
-  
-	  if($("#noticeTit").val().length>20){
-	  
-	     alert("公告标题字数不能超过20字");
-	     return;
-	  }
-	  
-	  if($("#notice").val().length>200){
-	  
-	     alert("公告内容字数不能超过200字");
-	     return;
-	  }
-	  
-	  $("#Form1").attr("action", "resource/noticeAction_saveNotice");
-	  $("#Form1").submit();
-	  
-	  loading();
-	  alert(" 公告保存成功!");
-  }
-  
-  function addEnter(element){
-  	$("#" + element).val($("#" + element).val() + "<br/>");
-  }
-  
-  //保存时显示的进度条
-  	var len = 500 ;
-	var add = 0 ;
-	function openContenFrame(){
-	    var td1 = document.getElementById('tdOne') ;
-	    var td2 = document.getElementById('tdTwo') ;
-	    add = add+10 ;
-	    td1.width = add ;
-	    if(len - add <= 0){
-	       td2.width = 1 ;
-	    }else{
-	       td2.width = len - add ;
-	    }
-	    if(add<=len) {
-		   ;
-	    }else{
-	       td1.width = 1 ;
-	       td2.width = 500 ;
-	       add = 0 ;
-	    }
-	    setTimeout('openContenFrame()',100) ;
-	}
-	
-	function loading(){
-	    document.getElementById("load").style.display="";
-	    document.getElementById("opperate1").style.display="none";
-	    document.getElementById("opperate2").style.display="none";
-	    openContenFrame();
-	}
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/myJquery.js"></script>
 
 </head>
 
@@ -127,37 +71,46 @@
 			<TR height=10><td></td></TR>			
 			<tr>
 			  	<td>
-	                <TABLE style="WIDTH: 105px; HEIGHT: 20px" border="0">
+	            	<TABLE style="WIDTH: 105px; HEIGHT: 20px" border="0">
 						<TR>
 							<TD align="center" background="${pageContext.request.contextPath }/images/cotNavGround.gif"><img src="${pageContext.request.contextPath }/images/yin.gif" width="15"></TD>
 							<TD class="DropShadow" background="${pageContext.request.contextPath }/images/cotNavGround.gif">公告信息</TD>
 						</TR>
-		             </TABLE>
-                  </td>
+		            </TABLE>
+                </td>
+                <td align="right">
+					<input style="font-size:12px; color:black; height=20;width=80" id="BT_Del" onclick="deletes();" type="button" value="删除" name="BT_Reset" >
+                </td>
 			</tr>
 			<tr>
 				<td class="ta_01" align="center" bgColor="#f5fafe" colspan=3>			
 						<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="DataGrid1"
 							style="BORDER-RIGHT:gray 1px solid; BORDER-TOP:gray 1px solid; BORDER-LEFT:gray 1px solid; WIDTH:100%; WORD-BREAK:break-all; BORDER-BOTTOM:gray 1px solid; BORDER-COLLAPSE:collapse; BACKGROUND-COLOR:#f5fafe; WORD-WRAP:break-word">
 							<tr style="FONT-WEIGHT:bold;FONT-SIZE:12pt;HEIGHT:25px;BACKGROUND-COLOR:#afd1f3">
-								<td align="center" width="20%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">公告标题</td>
-								<td align="center" width="40%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">公告内容</td>
-								<td align="center" width="20%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">创建日期</td>
-								<td align="center" width="20%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">公告人</td>
+								<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">
+									<input type="checkbox" id="checkbox" name="checkbox" onclick="quanxuan();">
+								</td>
+								<td align="center" width="15%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">公告标题</td>
+								<td align="center" width="50%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">公告内容</td>
+								<td align="center" width="15%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">创建日期</td>
+								<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">公告人</td>
 							</tr>
 							<s:if test="#request.commonList != null">
 								<s:iterator value="%{#request.commonList}" var="common">
-									<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-										<td style="HEIGHT:22px" align="center" width="20%">
+									<tr id="noticeIndex" onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+										<td style="HEIGHT:22px" align="center" width="5%">
+											<input type="checkbox" id="${common.noticeUuid}" name="ids" class="ids">
+										</td>
+										<td style="HEIGHT:22px" align="center" width="15%">
 											<s:property value="%{#common.noticeTit}"/>
 										</td>
-										<td style="HEIGHT:22px" align="center" width="40%">
+										<td style="HEIGHT:22px" align="center" width="50%">
 											<s:property value="%{#common.notice}"/>
 										</td>
-										<td style="HEIGHT:22px" align="center" width="20%">
+										<td style="HEIGHT:22px" align="center" width="15%">
 											<s:property value="%{#common.noticeTime}"/>
 										</td>
-										<td style="HEIGHT:22px" align="center" width="20%">
+										<td style="HEIGHT:22px" align="center" width="10%">
 											<s:property value="%{#common.noticeName}"/>
 										</td>
 									</tr>

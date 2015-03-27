@@ -39,12 +39,6 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 			hql = new StringBuffer(" delete " + this.entityClass.getSimpleName() + " where 1 = 1 ");
 			hql.append(" and userId in (:id) ");
 			
-//			//获得条件
-//			String hqlWhere = this.getAppendHqlWhere();
-			
-//			//获得参数
-//			Map<String, Object> paramsMap = this.setParamMapValue();
-			
 			if(paramsMapValue != null && paramsMapValue.size() > 0)
 			{
 				hql.append(hqlWhere);
@@ -54,9 +48,11 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 			
 			query.setParameterList("id", ids);
 			
-			
-			//设置参数
-			this.settingParam(hqlWhere, paramsMapValue, query);
+			if(!StringUtils.isEmpty(hqlWhere))
+			{
+				//设置参数
+				this.settingParam(hqlWhere, paramsMapValue, query);
+			}
 			
 			query.executeUpdate();
 			
@@ -105,13 +101,7 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 	@Override
 	public List<T> findCollectionByCondition(String hqlWhere,Map<String, Object> paramsMapValue)
 	{
-		StringBuffer hql = new StringBuffer("from " + entityClass.getSimpleName() + " f where 1 = 1 ");
-		
-//		//获得条件
-//		String hqlWhere = this.getAppendHqlWhere();
-		
-//		//获得参数
-//		Map<String, Object> paramsMap = this.setParamMapValue();
+		StringBuffer hql = new StringBuffer("from " + entityClass.getSimpleName() + " e where 1 = 1 ");
 		
 		if(paramsMapValue != null && paramsMapValue.size() > 0)
 		{
@@ -120,10 +110,11 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 		
 		Query query = this.getSession().createQuery(hql.toString());
 		
-		
-		//设置参数
-		this.settingParam(hqlWhere, paramsMapValue, query);
-		
+		if(!StringUtils.isEmpty(hqlWhere))
+		{
+			//设置参数
+			this.settingParam(hqlWhere, paramsMapValue, query);
+		}
 		return query.list();
 	}
 
@@ -153,6 +144,18 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 		
 	}
 	
+	public Object findObjectHQL(String hql)
+	{
+		Object t = (Object)this.getSession().createQuery(hql).uniqueResult();
+		return t;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Object> findListHQL(String hql)
+	{
+		List<Object> t = (List<Object>)this.getSession().createQuery(hql).list();
+		return t;
+	}
 	
 	/**
 	 * 设置条件查询的参数
@@ -179,123 +182,4 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 			}
 		}
 	}
-
-
-//	@SuppressWarnings("unchecked")
-//	@Override
-//	public List<T> findCollectionByArrayIds(Serializable[] ids)
-//	{
-//		StringBuffer hql = new StringBuffer("from " + entityClass.getSimpleName() + " f where 1 = 1 ");
-//		
-//		if(ids != null && ids.length > 0)
-//		{
-//			hql.append(" and id in (:id)");
-//		}
-//		
-//		//获得条件
-//		String hqlWhere = this.getAppendHqlWhere();
-//		
-//		//拼接条件
-//		hql.append(hqlWhere);
-//		
-//		Query query = this.getSession().createQuery(hql.toString());
-//		
-//		query.setParameter("id", ids);
-//		
-//		//获得参数
-//		Map<String, Object> paramsMap = this.setParamMapValue();
-//		
-//		//设置参数
-//		this.settingParam(hqlWhere, paramsMap, query);
-//		
-//		List<T> list = query.list();
-//		
-//		return list;
-//	}
-//
-//	@SuppressWarnings("unchecked")
-//	@Override
-//	public List<T> findCollectionByCollectionIds(Collection<T> ids)
-//	{
-//		StringBuffer hql = new StringBuffer("from " + entityClass.getSimpleName() + " f where 1 = 1 ");
-//		
-//		if(ids != null && ids.size() > 0)
-//		{
-//			hql.append(" and id in (:id)");
-//		}
-//		
-//		//获得条件
-//		String hqlWhere = this.getAppendHqlWhere();
-//		
-//		//拼接条件
-//		hql.append(hqlWhere);
-//		
-//		Query query = this.getSession().createQuery(hql.toString());
-//		
-//		query.setParameter("id", ids);
-//		
-//		//获得参数
-//		Map<String, Object> paramsMap = this.setParamMapValue();
-//		
-//		//设置参数
-//		this.settingParam(hqlWhere, paramsMap, query);
-//		
-//		return query.list();
-//	}
-	
-//	/**
-//	 * 用于Hql语句的拼接(需要重写)
-//	 * @return	拼接后的Hql语句
-//	 *
-//	 * @author XiaoY
-//	 * @date: 
-//	 * 2014年12月13日 下午7:21:34
-//	 */
-//	protected String getAppendHqlWhere(){
-//		
-//		return "";
-//	}
-//	
-//	/**
-//	 * 获得拼接hql语句的参数(需要重写)
-//	 * @return	Map&ltString, Object&gt
-//	 *
-//	 * @author XiaoY
-//	 * @date: 
-//	 * 2014年12月13日 下午7:23:25
-//	 */
-//	protected Map<String, Object> setParamMapValue()
-//	{
-//		return new HashMap<String, Object>();
-//	}
-
-//	@Override
-//	public void deleteObjectByArrayIds(Serializable[] ids)
-//	{
-//		StringBuffer hql = null;
-//		if(ids != null && ids.length > 0){
-//			hql = new StringBuffer(" delete " + this.entityClass.getSimpleName() + " where 1 = 1 ");
-//			hql.append(" id in (:id) ");
-//			
-//			//获得条件
-//			String hqlWhere = this.getAppendHqlWhere();
-//			
-//			hql.append(hqlWhere);
-//			
-//			Query query = this.getSession().createQuery(hql.toString());
-//			
-//			query.setParameter("id", ids);
-//			
-//			Map<String, Object> paramsMap = this.setParamMapValue();
-//			
-//			this.settingParam(hqlWhere, paramsMap, query);
-//			
-//			query.executeUpdate();
-//			
-//		}else 
-//		{
-//			System.out.println("数组删除出错---->" + ids);
-//		}
-//	}
-
 }

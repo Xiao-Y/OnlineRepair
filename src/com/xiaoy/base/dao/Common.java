@@ -33,6 +33,12 @@ import java.util.Map;
  *查询出现所有的对象，可以添加排序<br>
  *	public List&ltT&gt findObject(String hqlWhere);<p>
  *
+ *传入一个SQl语句查询，得出一条数据<br>
+ *	public Object findObjectHQL(String hql);<p>
+ *
+ *传入一个SQL语句查询，得出一个集合<br>
+ *	public Lis t&lt Object &gt findListHQL(String hql);<p>
+ *
  *根据条件查询出一个集合（不分页）,可以通过hqlWhere添加查询条件，paramMapValue设置查询参数<br>
  *	List&ltT&gt findCollectionByCondition(String hqlWhere,Map<String, Object> paramsMapValue);<p>
  *
@@ -56,14 +62,6 @@ public interface Common<T>{
 	 * @param id 任意类型的id
 	 */
 	public void deleteObjectByid(Serializable id);
-	
-//	/**
-//	 * 通过一个数组删除多个对象,可以通过重写getAppendHqlWhere方法添加查询条件，
-//	 * 重写setParamMapValue方法设置查询参数
-//	 * 
-//	 * @param id	任意类型的数组
-//	 */
-//	public void deleteObjectByArrayIds(Serializable[] ids);
 	
 	/**
 	 * 通过一个集合删除多个对象,可以通过hqlWhere添加查询条件，paramMapValue设置查询参数
@@ -124,31 +122,19 @@ public interface Common<T>{
 	 */
 	public List<T> findObject(String hqlWhere);
 	
-//	/**
-//	 * 通过一个id数组查询出一组对象,可以通过重写getAppendHqlWhere方法添加查询条件，
-//	 * 重写setParamMapValue方法设置查询参数
-//	 * 
-//	 * @param ids	数组对象
-//	 * @return	集合对象（泛型）
-//	 *
-//	 * @author XiaoY
-//	 * @date: 
-//	 * 2014年12月13日 下午4:52:14
-//	 */
-//	public List<T> findCollectionByArrayIds(Serializable[] ids);
-
-//	/**
-//	 * 通过一个id集合查询出一组对象,可以通过重写getAppendHqlWhere方法添加查询条件，
-//	 * 重写setParamMapValue方法设置查询参数
-//	 * 
-//	 * @param ids	集合对象
-//	 * @return	集合对象（泛型）
-//	 *
-//	 * @author XiaoY
-//	 * @date: 
-//	 * 2014年12月13日 下午4:49:30
-//	 */
-//	public List<T> findCollectionByCollectionIds(Collection<T> ids);
+	/**
+	 * 传入一个SQl语句查询，得出一条数据
+	 * @param sql
+	 * @return	T
+	 */
+	public Object findObjectHQL(String hql);
+	
+	/**
+	 * 传入一个SQL语句查询，得出一个集合
+	 * @param sql	SQL语句
+	 * @return
+	 */
+	public List<Object> findListHQL(String hql);
 	
 	/**
 	 *	带条件的查询，不分页。可以通过hqlWhere添加查询条件，paramMapValue设置查询参数

@@ -1,5 +1,3 @@
-此文件主要用于在线申报系统的原型设计
-
 访问路径：
 http://localhost:8090/OnlineRepairDemo/index.jsp
 
@@ -78,3 +76,20 @@ pub.css		公有的样式
 	actingIndex.jsp					公告
 	logList.jsp						日志列表
 	logIndex.jsp					日志初始列表
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

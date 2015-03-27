@@ -247,7 +247,7 @@
 						</tr>
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/ResourceMag/dictionaryIndex.jsp' target="main">数据字典</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/ResourceMag/dictionaryAction_dictionaryIndex.action' target="main">数据字典</a>
 							</td>
 						</tr>
 						<tr height="25">

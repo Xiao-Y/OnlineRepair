@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-3-27 21:34:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xiaoy.base.entites.Dictionary" table="DICTIONARY">
+        <id name="seqID" type="java.lang.Integer">
+            <column name="SEQID" />
+            <generator class="assigned" />
+        </id>
+        <property name="keyWord" type="java.lang.String">
+            <column name="KEYWORD" />
+        </property>
+        <property name="ddlCode" type="java.lang.Integer">
+            <column name="DDL_CODE" />
+        </property>
+        <property name="ddlName" type="java.lang.String">
+            <column name="DDL_NAME" />
+        </property>
+    </class>
+</hibernate-mapping>

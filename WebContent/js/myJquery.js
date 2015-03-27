@@ -93,7 +93,6 @@ function loading() {
 }
 // 添加保存时显示的进度条=======end
 
-
 // 公告删除操作的Ajax========start
 function deletes() {
 	var url = "${pageContext.request.contextPath }/ResourceMag/noticeAction_deleteNotice.action";
@@ -104,12 +103,12 @@ function deletes() {
 			return false;
 		}
 	});
-	
-	if(flag == false){
+
+	if (flag == false) {
 		alert("请选择需要删除的公告");
 		return false;
 	}
-	
+
 	if (flag) {
 		$.each($("input:checkbox"), function(i, val) {
 			if (val.checked == true && i != 0) {
@@ -122,7 +121,7 @@ function deletes() {
 				$.post(url, args, function(data) {
 					if (data == "1") {
 						$tr.remove();
-					}else{
+					} else {
 						alert("删除失败");
 					}
 				});
@@ -131,4 +130,64 @@ function deletes() {
 	}
 }
 // 公告删除操作的Ajax========end
+
+// 数据字典的操作================start
+
+//当类型发生改变的时候
+function changetype() {
+	if($("#keyWord").val() == "jerrynew"){
+		var textStr = "<input type=\"text\" name=\"keywordname\" maxlength=\"50\" size=\"24\"> ";
+		$("#newtypename").html("类型名称：");
+		$("#newddlText").html(textStr);
+	}else{
+		var textStr = "";
+		$("#newtypename").html("");
+		$("#newddlText").html(textStr);
+	}
+}
+
+/**
+ * 为table指定行添加一行 
+ * tab 表id 
+ * row 行数，
+ * 如：0->第一行 1->第二行 -2->倒数第二行 -1->最后一行 
+ * trHtml 添加行的html代码
+ */
+function addTr() {
+	// 获取table最后一行 $("#tab tr:last")
+	// 获取table第一行 $("#tab tr").eq(0)
+	// 获取table倒数第二行 $("#tab tr").eq(-2)
+	var $tr = $("#dictTbl tr").eq(-1);
+	var length = $("#dictTbl").find("tr").length;
+	var trHtml = 
+		"<tr>" +
+			"<td class=\"ta_01\" align=\"center\"  width=\"15%\">"+ length + "</td>"+
+			"\<td class=\"ta_01\" align=\"center\"  width=\"60%\">" +
+				"<input name=\"itemname\" type=\"text\" id=\""+length+"\" size=\"45\" maxlength=25>" +
+			"</td>"+
+			"<td class=\"ta_01\" align=\"center\"  width=\"25%\">" +
+				"<a href='javascript:delTableRow(\""+length +"\")'>" +
+					"<img src=../images/delete.gif width=15 height=14 border=0 style=CURSOR:hand>" +
+				"</a>" +
+			"</td>" +
+		"</tr>";
+	
+	$tr.after(trHtml);
+}
+
+/**
+ * 删除一行
+ * @param rowNum	当前行的编号
+ */
+function delTableRow(rowNum) {
+	var tbl = document.getElementById("dictTbl");
+	if (tbl.rows.length > rowNum) {
+		tbl.deleteRow(rowNum);
+		for (var i = rowNum; i < tbl.rows.length; i++) {
+			tbl.rows[i].cells[0].innerText = i;
+			tbl.rows[i].cells[2].innerHTML = "<a href='javascript:delTableRow(\"" + i + "\")'><img src=../images/delete.gif width=15 height=14 border=0 style=CURSOR:hand></a>";
+		}
+	}
+}
+// 数据字典的操作================end
 

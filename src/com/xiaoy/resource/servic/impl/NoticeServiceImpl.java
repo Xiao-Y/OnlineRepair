@@ -1,4 +1,4 @@
-package com.xiaoy.resource.biz.impl;
+package com.xiaoy.resource.servic.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoy.base.entites.Notice;
 import com.xiaoy.base.util.DateHelper;
-import com.xiaoy.resource.biz.NoticeService;
 import com.xiaoy.resource.dao.NoticeDao;
+import com.xiaoy.resource.servic.NoticeService;
 import com.xiaoy.resource.web.form.NoticeForm;
 
 @Service
@@ -83,5 +83,13 @@ public class NoticeServiceImpl implements NoticeService
 			}
 		}
 		return list;
+	}
+
+
+	@Override
+	@Transactional(readOnly=false, isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
+	public void deleteNotice(String id)
+	{
+		noticeDao.deleteObjectByid(id);
 	}
 }

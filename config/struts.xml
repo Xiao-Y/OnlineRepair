@@ -29,6 +29,12 @@
 				<param name="actionName">noticeAction_noticeIndex</param>
 				<param name="namespace">/ResourceMag</param>
 			</result>
+			
+			<!-- 用于Ajax删除 -->
+			<result name="ajax-success" type="stream">
+    			<param name="contentType">text/html</param>
+    			<param name="inputName">inputStream</param>
+    		</result>
 		</action>
 	</package>
 	<!-- 资源管理====end -->

@@ -1,4 +1,4 @@
-package com.xiaoy.resource.biz;
+package com.xiaoy.resource.servic;
 
 import java.util.List;
 
@@ -17,4 +17,10 @@ public interface NoticeService
 	 * @return	List &ltNoticeForm&gt
 	 */
 	public List<NoticeForm> getNoticeList();
+
+	/**
+	 * 根据id删除公告信息
+	 * @param id	公告的id
+	 */
+	public void deleteNotice(String id);
 }

@@ -30,8 +30,8 @@ import java.util.Map;
  *根据一个id查询出一个对象<br>
  *	public T findObjectById(Serializable id);<p>
  *
- *查询出所的对象<br>
- *	public List&ltT&gt findObject();<p>
+ *查询出现所有的对象，可以添加排序<br>
+ *	public List&ltT&gt findObject(String hqlWhere);<p>
  *
  *根据条件查询出一个集合（不分页）,可以通过hqlWhere添加查询条件，paramMapValue设置查询参数<br>
  *	List&ltT&gt findCollectionByCondition(String hqlWhere,Map<String, Object> paramsMapValue);<p>
@@ -118,10 +118,11 @@ public interface Common<T>{
 	public T findObjectById(Serializable id);
 	
 	/**
-	 * 查询出所的对象
+	 * 查询出现所有的对象，可以添加排序
+	 * @param hqlWhere	添加排序使用
 	 * @return
 	 */
-	public List<T> findObject();
+	public List<T> findObject(String hqlWhere);
 	
 //	/**
 //	 * 通过一个id数组查询出一组对象,可以通过重写getAppendHqlWhere方法添加查询条件，

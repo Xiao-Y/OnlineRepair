@@ -15,7 +15,9 @@ public class NoticeDaoImpl extends CommonImpl<Notice> implements NoticeDao
 	@Override
 	public List<Notice> findNoticeList()
 	{
-		List<Notice> list = this.findObject();
+		String hqlWhere = " ORDER BY noticeTime DESC";
+		List<Notice> list = this.findObject(hqlWhere);
+		
 		return list;
 	}
 }

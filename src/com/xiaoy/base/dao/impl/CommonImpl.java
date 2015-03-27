@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 
 import com.xiaoy.base.dao.Common;
@@ -89,9 +90,14 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> findObject()
+	public List<T> findObject(String hqlWhere)
 	{
-		List<T> t = (List<T>)this.getSession().createQuery("from " + entityClass.getSimpleName()).list();
+		String hql = "from " + entityClass.getSimpleName();
+		if(!StringUtils.isEmpty(hqlWhere))
+		{
+			hql = hql + hqlWhere;
+		}
+		List<T> t = (List<T>)this.getSession().createQuery(hql).list();
 		return t;
 	}
 	

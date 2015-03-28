@@ -35,4 +35,10 @@ public interface DictionaryDao extends Common<Dictionary>
 	 * @return	List &ltDictionary&gt
 	 */
 	public List<Dictionary> findCollectionByConditionNoPage(String keyword);
+	
+	/**
+	 * 通过主键SeqId来删除
+	 * @param ids	主键集合
+	 */
+	public void deleteObjectByCollectionIds(List<Integer> ids);
 }

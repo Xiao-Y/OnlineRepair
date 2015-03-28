@@ -6,7 +6,7 @@
     <class name="com.xiaoy.base.entites.Dictionary" table="DICTIONARY">
         <id name="seqID" type="java.lang.Integer">
             <column name="SEQID" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="keyWord" type="java.lang.String">
             <column name="KEYWORD" />

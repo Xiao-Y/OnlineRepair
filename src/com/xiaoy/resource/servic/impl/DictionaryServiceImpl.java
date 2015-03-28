@@ -63,16 +63,15 @@ public class DictionaryServiceImpl implements DictionaryService
 			//分两步：1.先删除原来的数据项。2.添加新的数据项
 			//根据数据类型查询对应的数据项
 			List<Dictionary> list = this.findDictionaryByCondition(keyword);
-			List<String> str = new ArrayList<String>();
+			List<Integer> str = new ArrayList<Integer>();
 			for(Dictionary d : list)
 			{
-				str.add(d.getSeqID().toString());
+				str.add(d.getSeqID());
 			}
-			dictionaryDao.deleteObjectByCollectionIds(str,null,null);
+			dictionaryDao.deleteObjectByCollectionIds(str);
 			//保存数据字典
 			this.saveDictionaryWithParams(keyword, itemname);
 		}
-		
 	}
 
 	@Override

@@ -68,7 +68,7 @@ public class DictionaryAction extends BaseAction implements ModelDriven<Dictiona
 	public String dictionarySave()
 	{
 		dictionaryService.saveDictionary(dictionaryForm);
-		return "saveDictionary";
+		return "dictionarySave";
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class DictionaryAction extends BaseAction implements ModelDriven<Dictiona
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
-	public String remove()
+	public String dictionaryRemove()
 	{
 		String seqID = dictionaryForm.getSeqID();
 		Integer i = Integer.parseInt(seqID);

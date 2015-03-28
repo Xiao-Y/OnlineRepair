@@ -43,7 +43,7 @@
 		<action name="dictionaryAction_*" class="com.xiaoy.resource.web.action.DictionaryAction" method="{1}">
 			<result name="dictionaryIndex">/WEB-INF/page/ResourceMag/dictionaryIndex.jsp</result>
 			<result name="dictionaryEdit">/WEB-INF/page/ResourceMag/dictionaryEdit.jsp</result>
-			<result name="saveDictionary" type="redirectAction">
+			<result name="dictionarySave" type="redirectAction">
 				<param name="actionName">dictionaryAction_dictionaryIndex</param>
 				<param name="namespace">/ResourceMag</param>
 			</result>

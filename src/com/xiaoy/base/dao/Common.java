@@ -13,7 +13,7 @@ import java.util.Map;
  *	public void deleteObjectByid(Serializable id);<p>
  *
  *根据一个集合删除一组对象,可以通过hqlWhere添加查询条件，paramMapValue设置查询参数 <br>
- *	public void deleteObjectByCollectionIds(Collection&ltT&gt collection,String hqlWhere,Map<String, Object> paramsMapValue);<p>
+ *	public void deleteObjectByCollectionIds(Map &ltString, Object&gt ids,String hqlWhere,Map<String, Object> paramsMapValue);<p>
  *
  *更新一个对象<br>
  *	public void updateObject(T entity);<p>
@@ -66,11 +66,11 @@ public interface Common<T>{
 	/**
 	 * 通过一个集合删除多个对象,可以通过hqlWhere添加查询条件，paramMapValue设置查询参数
 	 * 
-	 * @param collection	集合
+	 * @param ids	集合 key为删除的主键
 	 * @param hqlWhere 查询条件
 	 * @param paramsMapValue	设置查询参数
 	 */
-	public void deleteObjectByCollectionIds(Collection<String> ids,String hqlWhere,Map<String, Object> paramsMapValue);
+	public void deleteObjectByCollectionIds(Map<String, Object> ids,String hqlWhere,Map<String, Object> paramsMapValue);
 	
 	/**
 	 * 更新一个对象

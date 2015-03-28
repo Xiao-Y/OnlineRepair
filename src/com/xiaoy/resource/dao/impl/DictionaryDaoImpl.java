@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.xiaoy.base.dao.impl.CommonImpl;
@@ -50,5 +51,14 @@ public class DictionaryDaoImpl extends CommonImpl<Dictionary> implements Diction
 		
 		List<Dictionary> list = this.findCollectionByCondition(hqlWhere.toString(), paramsMapValue);
 		return list;
+	}
+
+	@Override
+	public void deleteObjectByCollectionIds(List<Integer> ids)
+	{
+		String hql = "delete Dictionary where seqID in(:ids)";
+		Query query = this.getSession().createQuery(hql);
+		query.setParameterList("ids", ids);
+		query.executeUpdate();
 	}
 }

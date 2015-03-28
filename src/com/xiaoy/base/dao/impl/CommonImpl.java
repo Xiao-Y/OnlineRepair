@@ -31,22 +31,39 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 		this.getSession().delete(this.getSession().get(entityClass, id));
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
-	public void deleteObjectByCollectionIds(Collection<String> ids,String hqlWhere, Map<String, Object> paramsMapValue)
+	public void deleteObjectByCollectionIds(Map<String, Object> ids,String hqlWhere, Map<String, Object> paramsMapValue)
 	{
 		StringBuffer hql = null;
 		if(ids != null && ids.size() > 0){
 			hql = new StringBuffer(" delete " + this.entityClass.getSimpleName() + " where 1 = 1 ");
-			hql.append(" and userId in (:id) ");
 			
 			if(paramsMapValue != null && paramsMapValue.size() > 0)
 			{
 				hql.append(hqlWhere);
 			}
 			
+			if(ids != null && ids.size() > 0)
+			{
+				for(Map.Entry<String, Object> id : ids.entrySet())
+				{
+					hql.append(" and " + id.getKey() + " in(:" + id.getKey() +")");
+				}
+			}
+			
 			Query query = this.getSession().createQuery(hql.toString());
 			
-			query.setParameterList("id", ids);
+			for(Map.Entry<String, Object> id : ids.entrySet())
+			{
+				if(id.getValue() instanceof Collection){
+					query.setParameterList(id.getKey(), (Collection) id.getValue());
+				}else
+				{
+					query.setParameter(id.getKey(), id.getValue());
+					query.setParameter(id.getKey(), id.getValue());
+				}
+			}
 			
 			if(!StringUtils.isEmpty(hqlWhere))
 			{

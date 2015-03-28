@@ -45,7 +45,7 @@
 	</s:form>
 
 	<s:form name="Form2" id="Form2" method="post" cssStyle="margin: 0px;">
-		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
+		<table cellSpacing="1" id="tableOld" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
 			<tr>
 				<td>
 					<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="dictTbl" style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
@@ -71,8 +71,8 @@
 			<tr>
 				<td align="center" colspan=3><input type="button" name="saveitem" value="保存" style="font-size: 12px; color: black;" onClick="return saveDict();"></td>
 			</tr>
-			<s:hidden name="keywordname"/>
-			<s:hidden name="typeflag"/>
+			<s:hidden name="keywordname" id="keywordname"/>
+			<s:hidden name="typeflag" id="typeflag"/>
 		</table>
 	</s:form>
 </body>

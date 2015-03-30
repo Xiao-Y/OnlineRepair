@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.action.BaseAction;
 import com.xiaoy.resource.servic.DictionaryService;
+import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.web.form.DictionaryForm;
 
 @SuppressWarnings("serial")
@@ -21,6 +22,10 @@ public class DictionaryAction extends BaseAction implements ModelDriven<Dictiona
 
 	@Resource
 	private DictionaryService dictionaryService;
+	
+	//日志信息
+	@Resource
+	private LogService logService;
 
 	private DictionaryForm dictionaryForm = new DictionaryForm();
 
@@ -46,6 +51,7 @@ public class DictionaryAction extends BaseAction implements ModelDriven<Dictiona
 	{
 		List<DictionaryForm> list = dictionaryService.findKeyWord();
 		request.setAttribute("systemList", list);
+		logService.saveLog(request, "【数据字典】", "查看数据字典");
 		return "dictionaryIndex";
 	}
 	
@@ -58,6 +64,7 @@ public class DictionaryAction extends BaseAction implements ModelDriven<Dictiona
 		String keyWord = dictionaryForm.getKeyWord();
 		List<DictionaryForm> list = dictionaryService.findDictionaryListByKeyWord(keyWord);
 		request.setAttribute("systemList", list);
+		logService.saveLog(request, "【数据字典】", "编辑数据字典");
 		return "dictionaryEdit";
 	}
 
@@ -68,6 +75,7 @@ public class DictionaryAction extends BaseAction implements ModelDriven<Dictiona
 	public String dictionarySave()
 	{
 		dictionaryService.saveDictionary(dictionaryForm);
+		logService.saveLog(request, "【数据字典】", "修改-添加数据字典");
 		return "dictionarySave";
 	}
 	
@@ -89,6 +97,7 @@ public class DictionaryAction extends BaseAction implements ModelDriven<Dictiona
 		{
 			e.printStackTrace();
 		}
+		logService.saveLog(request, "【数据字典】", "删除数据字典");
 		return "ajax-success";
 	}
 }

@@ -23,11 +23,12 @@ import com.xiaoy.resource.dao.DictionaryDao;
 public class DictionaryDaoImpl extends CommonImpl<Dictionary> implements DictionaryDao
 {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Object> findKeyWord()
 	{
-		String sql = "select distinct e.keyWord from Dictionary e";
-		List<Object> list = this.findListHQL(sql);
+		String hql = "select distinct e.keyWord from Dictionary e";
+		List<Object> list = (List<Object>) this.getSession().createQuery(hql).list();
 		return list;
 	}
 
@@ -35,7 +36,7 @@ public class DictionaryDaoImpl extends CommonImpl<Dictionary> implements Diction
 	public String findDDLName(String ddlCode, String keyWord)
 	{
 		String hql = "select ddlName from Dictionary where keyWord = '" + keyWord + "' and ddlCode = '" + ddlCode + "'";
-		String ddlName = (String) this.findObjectHQL(hql);
+		String ddlName = (String) this.getSession().createQuery(hql).uniqueResult();
 		return ddlName;
 	}
 

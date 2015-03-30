@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-3-28 16:15:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xiaoy.base.entites.Log" table="LOG">
+        <id name="logID" type="java.lang.String">
+            <column name="LOGID" />
+            <generator class="uuid" />
+        </id>
+        <property name="ipAddress" type="java.lang.String">
+            <column name="IPADDRESS" />
+        </property>
+        <property name="opeName" type="java.lang.String">
+            <column name="OPENAME" />
+        </property>
+        <property name="opeTime" type="java.util.Date">
+            <column name="OPETIME" />
+        </property>
+        <property name="details" type="java.lang.String">
+            <column name="DETAILS" />
+        </property>
+    </class>
+</hibernate-mapping>

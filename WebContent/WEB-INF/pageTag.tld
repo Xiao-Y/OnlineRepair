@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+	version="2.1">
+
+	<!-- 文件的描述 -->
+	<description>pageTag 1.0 core library</description>
+	<display-name>pageTag core</display-name>
+	<tlib-version>1.0</tlib-version>
+
+	<!-- 建议在jsp页面上使用的前缀 -->
+	<short-name>x</short-name>
+	<!-- 作为tld文件的id，用来唯一标识当前的tld文件，多个tld文件 utl 不能相同， 通过jsp中的 talib 标签的 url 使用 -->
+	<uri>http://www.xiaoy.com/pageTag/core</uri>
+
+	<tag>
+		<description>通用分页标签</description>
+		<name>pager</name>
+		<tag-class>com.xiaoy.base.util.PageTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>pageNo</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>recordCount</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>pageSize</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>url</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

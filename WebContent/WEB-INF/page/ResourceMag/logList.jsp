@@ -24,9 +24,9 @@
 					style="BORDER-RIGHT:gray 1px solid; BORDER-TOP:gray 1px solid; BORDER-LEFT:gray 1px solid; WIDTH:100%; WORD-BREAK:break-all; BORDER-BOTTOM:gray 1px solid; BORDER-COLLAPSE:collapse; BACKGROUND-COLOR:#f5fafe; WORD-WRAP:break-word">
 					<tr style="FONT-WEIGHT:bold;FONT-SIZE:12pt;HEIGHT:25px;BACKGROUND-COLOR:#afd1f3">
 						<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作人</td>
-						<td align="center" width="25%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">ip地址</td>
+						<td align="center" width="20%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">ip地址</td>
 						<td align="center" width="25%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作时间</td>
-						<td align="center" width="40%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作情况</td>
+						<td align="center" width="45%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作情况</td>
 					</tr>
 					<s:if test="%{#request.formList != null}">
 						<s:iterator value="%{#request.formList}" var="list">
@@ -35,13 +35,13 @@
 								<td style="HEIGHT:22px" align="center" width="10%">
 									<s:property value="%{#list.opeName}"/>
 								</td>
-								<td style="HEIGHT:22px" align="center" width="25%">
+								<td style="HEIGHT:22px" align="center" width="20%">
 									<s:property value="%{#list.ipAddress}"/>
 								</td>
 								<td style="HEIGHT:22px" align="center" width="25%">
 									<s:property value="%{#list.opeTime}"/>
 								</td>									
-								<td style="HEIGHT:22px" align="center" width="40%">
+								<td style="HEIGHT:22px" align="center" width="45%">
 									<s:property value="%{#list.details}"/>
 								</td>
 							</tr>

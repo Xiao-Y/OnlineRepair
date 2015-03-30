@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.action.BaseAction;
+import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.servic.NoticeService;
 import com.xiaoy.resource.web.form.NoticeForm;
 
@@ -22,6 +23,10 @@ public class NoticeAction extends BaseAction implements ModelDriven<NoticeForm>
 	@Resource
 	private NoticeService noticeService;
 
+	// 日志信息
+	@Resource
+	private LogService logService;
+
 	private NoticeForm noticeForm = new NoticeForm();
 
 	@Override
@@ -30,37 +35,42 @@ public class NoticeAction extends BaseAction implements ModelDriven<NoticeForm>
 		return noticeForm;
 	}
 
-	//要删除的公告id
+	// 要删除的公告id
 	private String id;
-	
-	//获得输入流
+
+	// 获得输入流
 	private InputStream inputStream;
-	
+
 	/**
 	 * 显示公告信息列表，及编辑页面
+	 * 
 	 * @return
 	 */
 	public String noticeIndex()
 	{
 		List<NoticeForm> list = noticeService.getNoticeList();
 		request.setAttribute("commonList", list);
+		logService.saveLog(request, "【公告管理】", "查看公告列表");
 		return "noticeIndex";
 	}
-	
+
 	/**
 	 * 保存公告信息
+	 * 
 	 * @return
 	 */
 	public String saveNotice()
 	{
 		noticeService.saveNotice(noticeForm);
+		logService.saveLog(request, "【公告管理】", "添加公告信息");
 		return "saveNotice";
 	}
 
 	/**
 	 * 根据id删除公告信息
+	 * 
 	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	public String deleteNotice() throws UnsupportedEncodingException
 	{
@@ -73,6 +83,7 @@ public class NoticeAction extends BaseAction implements ModelDriven<NoticeForm>
 			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
 			e.printStackTrace();
 		}
+		logService.saveLog(request, "【公告管理】", "删除公告信息");
 		return "ajax-success";
 	}
 

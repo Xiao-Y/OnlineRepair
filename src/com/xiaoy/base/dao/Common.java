@@ -13,7 +13,7 @@ import java.util.Map;
  *	public void deleteObjectByid(Serializable id);<p>
  *
  *根据一个集合删除一组对象,可以通过hqlWhere添加查询条件，paramMapValue设置查询参数 <br>
- *	public void deleteObjectByCollectionIds(Map &ltString, Object&gt ids,String hqlWhere,Map<String, Object> paramsMapValue);<p>
+ *	public void deleteObjectByCollectionIds(String hqlWhere,Map<String, Object> paramsMapValue);<p>
  *
  *更新一个对象<br>
  *	public void updateObject(T entity);<p>
@@ -30,27 +30,8 @@ import java.util.Map;
  *根据一个id查询出一个对象<br>
  *	public T findObjectById(Serializable id);<p>
  *
- *查询出现所有的对象，可以添加排序<br>
- *	public List&ltT&gt findObject(String hqlWhere);<p>
- *
- *传入一个SQl语句查询，得出一条数据<br>
- *	public Object findObjectHQL(String hql);<p>
- *
- *传入一个SQL语句查询，得出一个集合<br>
- *	public Lis t&lt Object &gt findListHQL(String hql);<p>
- *
  *根据条件查询出一个集合（不分页）,可以通过hqlWhere添加查询条件，paramMapValue设置查询参数<br>
  *	List&ltT&gt findCollectionByCondition(String hqlWhere,Map<String, Object> paramsMapValue);<p>
- *
- *----------------------废---弃---的---方---法---start：以下方法主键名只能为id，受到很在的限制------------<br>
- *根据id数组删除一组对象，可以通过重写getAppendHqlWhere方法添加查询条件，重写setParamMapValue方法设置查询参数<br>
- *	public void deleteObjectByArrayIds(Serializable[] ids)<p>
- *通过一个id数组查询出一组对象,可以通过重写getAppendHqlWhere方法添加查询条件，重写setParamMapValue方法设置查询参数<br>
- *	public List&ltT&gt findCollectionByArrayIds(Serializable[] ids);<p>
- *通过一个id集合查询出一组对象,可以通过重写getAppendHqlWhere方法添加查询条件，重写setParamMapValue方法设置查询参数<br>
- *	public List&ltT&gt findCollectionByCollectionIds(Collection&ltT&gt ids);<p>
- *------------------------废---弃---的---方---法---end------------------------<br>
- *
  *
  * @author XiaoY
  * 2014年11月5日 下午10:58:20
@@ -64,13 +45,12 @@ public interface Common<T>{
 	public void deleteObjectByid(Serializable id);
 	
 	/**
-	 * 通过一个集合删除多个对象,可以通过hqlWhere添加查询条件，paramMapValue设置查询参数
+	 * 通过一个集合删除多个对象,可以通过hqlWhere添加删除条件，paramMapValue设置删除参数
 	 * 
-	 * @param ids	集合 key为删除的主键
 	 * @param hqlWhere 查询条件
 	 * @param paramsMapValue	设置查询参数
 	 */
-	public void deleteObjectByCollectionIds(Map<String, Object> ids,String hqlWhere,Map<String, Object> paramsMapValue);
+	public void deleteObjectByCollectionIds(String hqlWhere,Map<String, Object> paramsMapValue);
 	
 	/**
 	 * 更新一个对象
@@ -114,27 +94,6 @@ public interface Common<T>{
 	 * 2014年11月5日 下午10:04:01
 	 */
 	public T findObjectById(Serializable id);
-	
-	/**
-	 * 查询出现所有的对象，可以添加排序
-	 * @param hqlWhere	添加排序使用
-	 * @return
-	 */
-	public List<T> findObject(String hqlWhere);
-	
-	/**
-	 * 传入一个SQl语句查询，得出一条数据
-	 * @param sql
-	 * @return	T
-	 */
-	public Object findObjectHQL(String hql);
-	
-	/**
-	 * 传入一个SQL语句查询，得出一个集合
-	 * @param sql	SQL语句
-	 * @return
-	 */
-	public List<Object> findListHQL(String hql);
 	
 	/**
 	 *	带条件的查询，不分页。可以通过hqlWhere添加查询条件，paramMapValue设置查询参数

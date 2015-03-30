@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+/*标签的字体样式*/
+.pagination {
+	margin-top: 20px;
+	text-align: left;
+	font-family: 宋体, Arial, Verdana;
+	font-size: 13px;
+	line-height: 150%;
+	min-width: 800px;
+	word-break: break-all;
+}
+
+/* 分页标签样式 */
+.pagination {
+	padding: 5px;
+	float: right;
+}
+
+.pagination a,.pagination a:link,.pagination a:visited {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #aaaadd;
+	text-decoration: none;
+	color: #006699;
+}
+
+.pagination a:hover,.pagination a:active {
+	border: 1px solid #ff0000;
+	color: #000;
+	text-decoration: none;
+}
+
+.pagination span.current {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #ff0000;
+	font-weight: bold;
+	background-color: #ff0000;
+	color: #FFF;
+}
+
+.pagination span.disabled {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #eee;
+	color: #ddd;
+}

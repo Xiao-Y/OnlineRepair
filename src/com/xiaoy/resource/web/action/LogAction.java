@@ -1,6 +1,5 @@
 package com.xiaoy.resource.web.action;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -18,7 +17,6 @@ import com.xiaoy.resource.web.form.LogForm;
 @Controller
 public class LogAction extends BaseAction implements ModelDriven<LogForm>
 {
-
 	@Resource
 	private LogService logService;
 
@@ -37,7 +35,7 @@ public class LogAction extends BaseAction implements ModelDriven<LogForm>
 	{
 		return inputStream;
 	}
-
+	
 	/**
 	 * 显示日志信息列表
 	 * 
@@ -56,17 +54,10 @@ public class LogAction extends BaseAction implements ModelDriven<LogForm>
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
-	public String deleteNotice() throws UnsupportedEncodingException
+	public String deleteLog()
 	{
-		try
-		{
-			// noticeService.deleteNotice(id);
-			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
-		} catch (Exception e)
-		{
-			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
-			e.printStackTrace();
-		}
-		return "ajax-success";
+		String[] ids = logForm.getLogId();
+		logService.deleteLogByIds(ids);
+		return "logIndex";
 	}
 }

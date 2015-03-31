@@ -14,6 +14,9 @@ public class LogForm
 	/* 操作明细 */
 	private String details;
 	
+	/* 用于删除的id集合*/
+	private String[] logId;
+	
 	public String getLogID()
 	{
 		return logID;
@@ -62,5 +65,15 @@ public class LogForm
 	public void setDetails(String details)
 	{
 		this.details = details;
+	}
+
+	public String[] getLogId()
+	{
+		return logId;
+	}
+
+	public void setLogId(String[] logId)
+	{
+		this.logId = logId;
 	}
 }

@@ -116,6 +116,13 @@
 									</tr>
 								</s:iterator>
 							</s:if>
+							<s:else>
+								<tr id="noticeIndex" onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+									<td colspan=5 style="HEIGHT:22px" align="center" width="100%">
+										没有更多数据...
+									</td>
+								</tr>
+							</s:else>
 						</table>
 					</td>
 				</tr>        

@@ -28,13 +28,4 @@ public class LogDaoImpl extends CommonImpl<Log> implements LogDao
 		hqlWhere.append(" order by e.opeTime desc ");
 		return super.findCollectionByCondition(hqlWhere.toString(), paramsMap);
 	}
-
-	@Override
-	public void deleteObjectByCollectionIds(String[] ids)
-	{
-		String hqlWhere = " and logID in(:logID)";
-		 Map<String, Object> paramsMapValue = new HashMap<String, Object>();
-		 paramsMapValue.put("logID", ids);
-		this.deleteObjectByCollectionIds(hqlWhere, paramsMapValue);
-	}
 }

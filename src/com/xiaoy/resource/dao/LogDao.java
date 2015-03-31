@@ -15,7 +15,4 @@ public interface LogDao extends Common<Log>
 	 */
 	public List<Log> findCollectionByCondition(LogForm logForm);
 	
-	//public List<log> findCollectionByConditionWithPage(LogForm logForm,)
-	
-	public void deleteObjectByCollectionIds(String[] ids);
 }

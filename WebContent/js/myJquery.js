@@ -269,3 +269,15 @@ function findDDl(){
 }
 // 数据字典的操作================end
 
+//日志管理=====================start
+function logDelete(){
+  	var flag = window.confirm('你确定要删除所有的日志吗');
+  	if(!flag){
+  		return;
+  	}else{
+  		$("#Form2").attr("action","ResourceMag/logAction_deleteLog.action");
+  		$("#Form2").submit();
+  	}
+}
+//日志管理=====================end
+

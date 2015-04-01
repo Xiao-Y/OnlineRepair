@@ -5,20 +5,20 @@
 <hibernate-mapping>
     <class name="com.xiaoy.base.entites.Notice" table="NOTICE">
         <id name="noticeUuid" type="java.lang.String">
-            <column name="NOTICE_UUID" length="32" />
+            <column name="NOTICE_UUID"/>
             <generator class="uuid" />
         </id>
         <property name="noticeTit" type="java.lang.String">
-            <column name="NOTICE_TIT" length="20" />
+            <column name="NOTICE_TIT"/>
         </property>
         <property name="notice" type="java.lang.String">
-            <column name="NOTICE" length="200" />
+            <column name="NOTICE"/>
         </property>
         <property name="noticeTime" type="java.util.Date">
-            <column name="NOTICE_TIME" length="20" />
+            <column name="NOTICE_TIME"/>
         </property>
         <property name="noticeName" type="java.lang.String">
-            <column name="NOTICE_NAME" length="10" />
+            <column name="NOTICE_NAME"/>
         </property>
     </class>
 </hibernate-mapping>

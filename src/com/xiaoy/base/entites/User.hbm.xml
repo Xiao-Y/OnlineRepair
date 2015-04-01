@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-1 13:39:58 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xiaoy.base.entites.User" table="USER">
+        <id name="userUuid" type="java.lang.String">
+            <column name="USERUUID" />
+            <generator class="uuid" />
+        </id>
+        <property name="loginName" type="java.lang.String">
+            <column name="LOGIN_NAME" />
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="SexCode" type="java.lang.String">
+            <column name="SEX_CODE" />
+        </property>
+        <property name="RoleCode" type="java.lang.String">
+            <column name="ROLE_CODE" />
+        </property>
+        <property name="maintainTypeCode" type="java.lang.String">
+            <column name="MAINTAIN_TYPE_CODE" />
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="PHONE" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="ADDRESS" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="registerTime" type="java.util.Date">
+            <column name="REGISTER_TIME" />
+        </property>
+    </class>
+</hibernate-mapping>

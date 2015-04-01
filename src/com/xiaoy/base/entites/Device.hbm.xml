@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-3-31 23:26:15 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xiaoy.base.entites.Device" table="DEVICE">
+        <id name="deviceTypeUuid" type="java.lang.String">
+            <column name="DEVICETYPE_UUID" />
+            <generator class="uuid" />
+        </id>
+        <property name="deviceName" type="java.lang.String">
+            <column name="DEVICE_NAME" />
+        </property>
+        <property name="version" type="java.lang.String">
+            <column name="VERSION" />
+        </property>
+        <property name="userUuid" type="java.lang.String">
+            <column name="USER_UUID" />
+        </property>
+        <property name="producerName" type="java.lang.String">
+            <column name="PRODUCER_NAME" />
+        </property>
+        <property name="producerPhone" type="java.lang.String">
+            <column name="PRODUCER_PHONE" />
+        </property>
+        <property name="devicePrice" type="java.lang.Double">
+            <column name="DEVICE_PRICE" />
+        </property>
+        <property name="deviceAmount" type="java.lang.Integer">
+            <column name="DEVICE_AMOUNT" />
+        </property>
+        <property name="devicePicUrl" type="java.lang.String">
+            <column name="DEVICEPIC_URL" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+    </class>
+</hibernate-mapping>

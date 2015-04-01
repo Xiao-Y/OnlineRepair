@@ -9,13 +9,13 @@
             <generator class="uuid" />
         </id>
         <property name="ipAddress" type="java.lang.String">
-            <column name="IPADDRESS" />
+            <column name="IP_ADDRESS" />
         </property>
         <property name="opeName" type="java.lang.String">
-            <column name="OPENAME" />
+            <column name="OPE_NAME" />
         </property>
         <property name="opeTime" type="java.util.Date">
-            <column name="OPETIME" />
+            <column name="OPE_TIME" />
         </property>
         <property name="details" type="java.lang.String">
             <column name="DETAILS" />

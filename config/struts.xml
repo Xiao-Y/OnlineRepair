@@ -34,6 +34,15 @@
 		</action>
 	</package>
 	<!-- 初始化页面左侧菜单============end -->
+	
+	<!-- 设备管理==========start -->
+	<package name="device" namespace="/DeviceMag" extends="default">
+		<action name="deviceAction_*" class="com.xiaoy.device.web.action.DeviceAction" method="{1}">
+			<result name="deviceInfoList">/WEB-INF/page/DeviceMag/deviceInfoList.jsp</result>
+		</action>
+	</package>
+	<!-- 设备管理==========end -->
+	
 
 	<!-- 资源管理====start -->
 	<package name="resource" namespace="/ResourceMag" extends="default">

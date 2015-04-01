@@ -37,16 +37,11 @@ public interface LogService
 	 */
 	void deleteLogByIds(String[] ids);
 	
-//	/**
-//	 * 通过条件查询出日志文件
-//	 * @param elecLogForm	日志对象
-//	 * @param request	分页需要
-//	 * @return	List &ltElecLogForm&gt
-//	 *
-//	 * @author XiaoY
-//	 * @date: 
-//	 * 2014年12月30日 下午3:58:49
-//	 */
-//	List<ElecLogForm> findElecLogByCondition(ElecLogForm elecLogForm, HttpServletRequest request);
+	/**
+	 * 带条件的查询，根据条件查询出现总记录数
+	 * @param logForm	查询条件
+	 * @return
+	 */
+	public Integer countByCollection(LogForm logForm);
 
 }

@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.xiaoy.base.web.form.BaseForm;
+
 /**
  *	 公接口<br>
  *	所有的Dao接口必须extends<br>
@@ -107,6 +109,27 @@ public interface Common<T>{
 	 * 2014年12月13日 下午11:22:52
 	 */
 	public List<T> findCollectionByCondition(String hqlWhere,Map<String, Object> paramsMapValue);
+	
+	/**
+	 *	带条件的查询，分页。可以通过hqlWhere添加查询条件，paramMapValue设置查询参数
+	 * 
+	 * @param hqlWhere 查询条件
+	 * @param paramsMapValue	设置查询参数
+	 * @param BaseForm	分页对象
+	 * @return	List&ltT&gt
+	 *
+	 * @author XiaoY
+	 * @date: 2015年4月1日
+	 */
+	public List<T> findCollectionByConditionWithPage(BaseForm baseForm,String hqlWhere,Map<String, Object> paramsMapValue);
+	
+	/**
+	 * 带条件的查询，根据条件查询出现总记录数
+	 * @param hqlWhere	查询条件
+	 * @param paramsMapValue	设置参数
+	 * @return
+	 */
+	public Integer countByCollection(String hqlWhere,Map<String, Object> paramsMapValue);
 	
 }
 

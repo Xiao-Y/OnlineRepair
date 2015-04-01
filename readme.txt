@@ -78,6 +78,25 @@ pub.css		公有的样式
 	logIndex.jsp					日志初始列表
 	
 	
+分页的使用方法：
+1.添加PageTag.java文件。
+2.添加pgaeTag.tld文件到WEB-INF下
+3.添加分页对象BaseForm,需要分页的页面都要继承BaseForm.java
+
+Action、service中传入父类Form,dao中调用父类的findCollectionByConditionWithPage和countByCollection。
+一个是查询分页的数据，一个是查询总记录数的
+Action中将分页后的数据放入到request中，将总记录数放入到当前父类的Form的setRecordCount中。
+
+页面上使用：
+<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action"/>
+
+
+
+错误记录：
+Object转Integer时报错：
+解决方法：
+Integer.parseInt(count.toString())
+	
 	
 	
 	

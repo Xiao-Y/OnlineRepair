@@ -14,7 +14,7 @@
 	<body >
 		<s:form id="Form1" name="Form1" action="" method="post" cssStyle="margin:0px;"> 
 			<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
-				<TR height=10><td></td></TR>
+				<tr height=10><td></td></tr>
 				<tr>
 					<td class="ta_01" colspan=2 align="center" background="../images/b-info.gif">
 						<font face="宋体" size="2"><strong>日志信息管理</strong></font>
@@ -22,12 +22,9 @@
 				</tr>
 				<tr>
 					<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-						操作人：<s:textfield name="opeName" value="" id="opeName" cssStyle="width:140px" />
+						操作人：<s:textfield name="opeName" value="%{#list.opeName}" id="opeName" cssStyle="width:140px" />
 					</td>
 				</tr>
-				<s:hidden name="initflag" id="initflag" value="1"/>
-				<s:hidden name="pageNO" id="pageNO"/>
-				<s:hidden name="pageSize" id="pageSize"/>
 		    </table>	
 		</s:form>
 		<s:form id="Form2" name="Form2" action="" method="post">
@@ -90,6 +87,6 @@
 				</TBODY>
 			</table>
 		</s:form>
-		<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="PageServlet"/>
+		<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action"/>
 	</body>
 </HTML>

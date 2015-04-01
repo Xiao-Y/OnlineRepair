@@ -44,6 +44,8 @@ public class LogAction extends BaseAction implements ModelDriven<LogForm>
 	public String logIndex()
 	{
 		List<LogForm> list = logService.findLogByCondition(logForm);
+		Integer count = logService.countByCollection(logForm);
+		logForm.setRecordCount(count);
 		request.setAttribute("formList", list);
 		return "logIndex";
 	}

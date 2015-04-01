@@ -57,7 +57,7 @@
 					<table border="0" width="100%" cellspacing="0" cellpadding="0">
 						<tr>
 							<td width="100%" align="center"><A
-								href="system/elecMenuAction_loading.do" target="mainFrame"><font
+								href="${pageContext.request.contextPath }/MenuMag/menuAction_home" target="_top"><font
 									color="#FFFFFF"><b>返回首页</b></font></a> <font color="#FFFFFF"><b>|</b></font>
 								<a href="system/elecMenuAction_logout.do" target="_top"> <font
 									color="#FFFFFF"><b>重新登录</b></font></a> <font color="#FFFFFF"><b>|</b></font>

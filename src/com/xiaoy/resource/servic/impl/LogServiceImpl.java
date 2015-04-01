@@ -51,26 +51,12 @@ public class LogServiceImpl implements LogService
 		return list;
 	}
 	
-//	@Override
-//	public List<ElecLogForm> findElecLogByCondition(ElecLogForm elecLogForm,HttpServletRequest request)
-//	{
-//		StringBuffer hqlWhere = new StringBuffer("");
-//		Map<String, Object> paramsMap = new HashMap<String, Object>();
-//		if(elecLogForm != null && !StringUtils.isEmpty(elecLogForm.getOpeName()))
-//		{
-//			hqlWhere.append(" and e.opeName like :opeName ");
-//			paramsMap.put("opeName", "%" + elecLogForm.getOpeName() + "%");
-//		}
-//		hqlWhere.append(" order by e.opeTime desc ");
-//		//List<ElecLog> elecLog = elecLogDao.findCollectionByConditionNoPage(hqlWhere, paramsMap);
-//		PageInfo pageInfo = new PageInfo(request);
-//		List<ElecLog> elecLog = elecLogDao.findCollectionByConditionWithPage(hqlWhere, paramsMap, pageInfo);
-//		request.setAttribute("page", pageInfo.getPageBean());
-//		
-//		List<ElecLogForm> list = this.elecLogPoListToVoList(elecLog);
-//		return list;
-//	}
-
+	@Override
+	public Integer countByCollection(LogForm logForm) {
+		Integer count = logDao.countByCollection(logForm);
+		return count;
+	}
+	
 	/**
 	 * 日志文件的po对象转换成vo对象
 	 * @param elecLog	po对象

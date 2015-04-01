@@ -26,6 +26,21 @@ public class LogDaoImpl extends CommonImpl<Log> implements LogDao
 			paramsMap.put("opeName", "%" + logForm.getOpeName() + "%");
 		}
 		hqlWhere.append(" order by e.opeTime desc ");
-		return super.findCollectionByCondition(hqlWhere.toString(), paramsMap);
+		List<Log> log = super.findCollectionByConditionWithPage(logForm,hqlWhere.toString(), paramsMap);
+		return log;
+	}
+
+	@Override
+	public Integer countByCollection(LogForm logForm) {
+		StringBuffer hqlWhere = new StringBuffer("");
+		Map<String, Object> paramsMap = new HashMap<String, Object>();
+		if (logForm != null && !StringUtils.isEmpty(logForm.getOpeName()))
+		{
+			hqlWhere.append(" and e.opeName like :opeName ");
+			paramsMap.put("opeName", "%" + logForm.getOpeName() + "%");
+		}
+		
+		Integer count = super.countByCollection(hqlWhere.toString(), paramsMap);
+		return count;
 	}
 }

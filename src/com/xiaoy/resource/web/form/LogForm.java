@@ -1,7 +1,9 @@
 package com.xiaoy.resource.web.form;
 
+import com.xiaoy.base.web.form.BaseForm;
 
-public class LogForm
+
+public class LogForm extends BaseForm
 {
 	/* 日志ID */
 	private String logID;

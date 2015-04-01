@@ -10,6 +10,7 @@ import org.hibernate.Query;
 
 import com.xiaoy.base.dao.Common;
 import com.xiaoy.base.util.GenericSuperclass;
+import com.xiaoy.base.web.form.BaseForm;
 
 /**
  * @author XiaoY
@@ -92,6 +93,50 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 		return query.list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> findCollectionByConditionWithPage(BaseForm baseForm,String hqlWhere,
+			Map<String, Object> paramsMapValue) {
+		StringBuffer hql = new StringBuffer("from "
+				+ entityClass.getSimpleName() + " e where 1 = 1 ");
+
+		hql.append(hqlWhere);
+
+		Query query = this.getSession().createQuery(hql.toString());
+		//从第几条记录开始
+		query.setFirstResult((baseForm.getPageNo() - 1) * baseForm.getPageSize());
+		//每页显示的记录数
+		query.setMaxResults(baseForm.getPageSize());
+		
+		if (!StringUtils.isEmpty(hqlWhere) && paramsMapValue != null
+				&& paramsMapValue.size() > 0)
+		{
+			// 设置参数
+			this.settingParam(hqlWhere, paramsMapValue, query);
+		}
+		return query.list();
+	}
+	
+	@Override
+	public Integer countByCollection(String hqlWhere,
+			Map<String, Object> paramsMapValue) {
+		StringBuffer sql = new StringBuffer(" select count(*) from "
+				+ entityClass.getSimpleName() + " e where 1 = 1 ");
+
+		sql.append(hqlWhere);
+
+		Query query = this.getSession().createSQLQuery(sql.toString());
+		
+		if (!StringUtils.isEmpty(hqlWhere) && paramsMapValue != null
+				&& paramsMapValue.size() > 0)
+		{
+			// 设置参数
+			this.settingParam(hqlWhere, paramsMapValue, query);
+		}
+		Object count = query.uniqueResult();
+		return Integer.parseInt(count.toString());
+	}
+	
 	@Override
 	public void updateObjectCollection(Collection<T> entities)
 	{

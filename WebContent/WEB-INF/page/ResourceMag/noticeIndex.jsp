@@ -11,6 +11,7 @@
 
 <body>
 <s:form name="Form1" id="Form1" method="post">
+	<br/>
 	<table id="opperate1" cellspacing="1" cellpadding="5" width="90%" align="center" bgcolor="#f5fafe" style="border:1px solid #8ba7e3" border="0">
         <tr>
 			<td class="ta_01" colspan=2 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">

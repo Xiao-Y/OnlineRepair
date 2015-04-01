@@ -14,5 +14,12 @@ public interface LogDao extends Common<Log>
 	 * @return
 	 */
 	public List<Log> findCollectionByCondition(LogForm logForm);
+
+	/**
+	 * 根据条件查询出现记录数
+	 * @param logForm	查询条件
+	 * @return	记录数
+	 */
+	public Integer countByCollection(LogForm logForm);
 	
 }

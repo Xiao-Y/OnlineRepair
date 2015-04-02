@@ -1,16 +1,9 @@
-package com.xiaoy.base.entites;
+package com.xiaoy.resource.web.form;
 
-import java.util.Date;
+import com.xiaoy.base.web.form.BaseForm;
 
-/**
- * 用户信息实体类<br/>
- * 用于存放用户信息<br>
- *
- * @author XiaoY
- * @date 2015年4月1日
- */
-public class User {
-	
+public class UserForm extends BaseForm
+{
 	/* 用户id */
 	private String userUuid;
 	/* 登陆名 */
@@ -32,93 +25,115 @@ public class User {
 	/* 密码 */
 	private String password;
 	/* 注册时间 */
-	private Date registerTime;
-	
-	public String getUserUuid() {
+	private String registerTime;
+
+	public String getUserUuid()
+	{
 		return userUuid;
 	}
 
-	public void setUserUuid(String userUuid) {
+	public void setUserUuid(String userUuid)
+	{
 		this.userUuid = userUuid;
 	}
 
-	public String getLoginName() {
+	public String getLoginName()
+	{
 		return loginName;
 	}
 
-	public void setLoginName(String loginName) {
+	public void setLoginName(String loginName)
+	{
 		this.loginName = loginName;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public String getSexCode() {
+	public String getSexCode()
+	{
 		return SexCode;
 	}
 
-	public void setSexCode(String sexCode) {
+	public void setSexCode(String sexCode)
+	{
 		SexCode = sexCode;
 	}
 
-	public String getRoleCode() {
+	public String getRoleCode()
+	{
 		return RoleCode;
 	}
 
-	public void setRoleCode(String roleCode) {
+	public void setRoleCode(String roleCode)
+	{
 		RoleCode = roleCode;
 	}
 
-	public String getMaintainTypeCode() {
+	public String getMaintainTypeCode()
+	{
 		return maintainTypeCode;
 	}
 
-	public void setMaintainTypeCode(String maintainTypeCode) {
+	public void setMaintainTypeCode(String maintainTypeCode)
+	{
 		this.maintainTypeCode = maintainTypeCode;
 	}
 
-	public String getPhone() {
+	public String getPhone()
+	{
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone(String phone)
+	{
 		this.phone = phone;
 	}
 
-	public String getAddress() {
+	public String getAddress()
+	{
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(String address)
+	{
 		this.address = address;
 	}
 
-	public String getRemark() {
+	public String getRemark()
+	{
 		return remark;
 	}
 
-	public void setRemark(String remark) {
+	public void setRemark(String remark)
+	{
 		this.remark = remark;
 	}
 
-	public String getPassword() {
+	public String getPassword()
+	{
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(String password)
+	{
 		this.password = password;
 	}
 
-	public Date getRegisterTime() {
+	public String getRegisterTime()
+	{
 		return registerTime;
 	}
 
-	public void setRegisterTime(Date registerTime) {
+	public void setRegisterTime(String registerTime)
+	{
 		this.registerTime = registerTime;
 	}
 }

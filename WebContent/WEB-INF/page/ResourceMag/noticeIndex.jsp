@@ -120,7 +120,7 @@
 							<s:else>
 								<tr id="noticeIndex" onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 									<td colspan=5 style="HEIGHT:22px" align="center" width="100%">
-										没有更多数据...
+										<font color="#FF0000">没有更多数据...</font>
 									</td>
 								</tr>
 							</s:else>

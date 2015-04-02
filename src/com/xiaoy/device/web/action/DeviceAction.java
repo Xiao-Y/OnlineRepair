@@ -34,5 +34,24 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 		request.setAttribute("deviceList", list);
 		return "deviceInfoList";
 	}
+	
+	/**
+	 * 进入添加页面
+	 * @return
+	 */
+	public String toDeviceAdd()
+	{
+		return "toDeviceAdd";
+	}
+	
+	/**
+	 * 保存设备信息
+	 * @return
+	 */
+	public String deviceSave()
+	{
+		deviceService.deviceSave(deviceForm);
+		return "deviceInfoList";
+	}
 
 }

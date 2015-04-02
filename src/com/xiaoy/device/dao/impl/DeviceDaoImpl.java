@@ -19,38 +19,69 @@ public class DeviceDaoImpl extends CommonImpl<Device> implements DeviceDao
 	@Override
 	public List<Device> findDeviceInfoByCondition(DeviceForm deviceForm)
 	{
-		StringBuffer hqlWhere = null;
-		Map<String, Object> paramsMapValue = null;
-		if(deviceForm != null)
-		{
-			hqlWhere = new StringBuffer();
-			paramsMapValue = new HashMap<String, Object>();
-			
-			if(!StringUtils.isEmpty(deviceForm.getDeviceName()))
-			{
-				hqlWhere.append(" and deviceName = :deviceName ");
-				paramsMapValue.put("deviceName", deviceForm.getDeviceName());
-			}
-			
-			if(!StringUtils.isEmpty(deviceForm.getVersion()))
-			{
-				hqlWhere.append(" and version = :version ");
-				paramsMapValue.put("version", deviceForm.getVersion());
-			}
-			
-			//if(!StringUtils.isEmpty(deviceForm.))
-		}
-		
-		
-		List<Device> list = super.findCollectionByCondition(hqlWhere.toString(), paramsMapValue);
-		return null;
+		Map<String, Object> paramsMapValue = this.getParamsMap(deviceForm);
+		StringBuffer hqlWhere = this.getHqlWhere(deviceForm); 
+		return super.findCollectionByConditionWithPage(deviceForm, hqlWhere.toString(), paramsMapValue);
 	}
 
 	@Override
 	public Integer countDeviceInfoByCondition(DeviceForm deviceForm)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> paramsMapValue = this.getParamsMap(deviceForm);
+		StringBuffer hqlWhere = this.getHqlWhere(deviceForm); 
+		Object count = super.countByCollection(hqlWhere.toString(), paramsMapValue);
+		return Integer.parseInt(count.toString());
 	}
-
+	
+	/**
+	 * 添加条件查询的参数
+	 * @param deviceForm	查询条件
+	 * @return	Map&ltString, Object&gt	参数
+	 */
+	private Map<String, Object> getParamsMap(DeviceForm deviceForm)
+	{
+		Map<String, Object> paramsMapValue = null;
+		if(deviceForm != null)
+		{
+			paramsMapValue = new HashMap<String, Object>();
+			
+			if(!StringUtils.isEmpty(deviceForm.getDeviceName()))
+			{
+				paramsMapValue.put("deviceName", deviceForm.getDeviceName());
+			}
+			
+			if(!StringUtils.isEmpty(deviceForm.getVersion()))
+			{
+				paramsMapValue.put("version", deviceForm.getVersion());
+			}
+		}
+		
+		return paramsMapValue;
+	}
+	
+	/**
+	 * 拼接查询条件
+	 * @param deviceForm	查询条件
+	 * @return	查询条件
+	 */
+	private StringBuffer getHqlWhere(DeviceForm deviceForm)
+	{
+		StringBuffer hqlWhere = null;
+		if(deviceForm != null)
+		{
+			hqlWhere = new StringBuffer();
+			
+			if(!StringUtils.isEmpty(deviceForm.getDeviceName()))
+			{
+				hqlWhere.append(" and deviceName = :deviceName ");
+			}
+			
+			if(!StringUtils.isEmpty(deviceForm.getVersion()))
+			{
+				hqlWhere.append(" and version = :version ");
+			}
+		}
+		
+		return hqlWhere;
+	}
 }

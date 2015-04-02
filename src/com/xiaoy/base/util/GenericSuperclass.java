@@ -27,7 +27,6 @@ public class GenericSuperclass
 		// Type[] type = pt.getActualTypeArguments();
 		// return (Class) type[0];
 
-		System.out.println("开始泛型类型转换");
 		ParameterizedType pt = (ParameterizedType) tClass
 				.getGenericSuperclass();
 		Class entity = (Class) pt.getActualTypeArguments()[0];

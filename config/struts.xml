@@ -11,21 +11,23 @@
 	<constant name="struts.ui.theme" value="simple"></constant>
 
 	<!-- 异常信息的处理=====start -->
-	<package name="default" namespace="" extends="struts-default">
 		<!-- 定义全局的逻辑结果与物理结果的映射 -->
+		<!-- 定义异常的声明 -->
+			<!-- result是结果处理result exception是catch中捕捉的异常类型 -->
+	<!-- 
+	<package name="default" namespace="" extends="struts-default">
 		<global-results>
 			<result name="exception">/404.jsp</result>
 		</global-results>
-		<!-- 定义异常的声明 -->
 		<global-exception-mappings>
-			<!-- result是结果处理result exception是catch中捕捉的异常类型 -->
 			<exception-mapping result="exception" exception="java.lang.Exception"/>
 		</global-exception-mappings>
 	</package>
+	 -->
 	<!-- 异常信息的处理=====end -->
 
 	<!-- 初始化页面左侧菜单============start -->
-	<package name="menu" namespace="/MenuMag" extends="default">
+	<package name="menu" namespace="/MenuMag" extends="struts-default">
 		<action name="menuAction_*" class="com.xiaoy.menu.web.MenuAction" method="{1}">
 			<result name="home">/WEB-INF/page/MenuMag/home.jsp</result>
 			<result name="buttom">/WEB-INF/page/MenuMag/buttom.jsp</result>
@@ -36,16 +38,21 @@
 	<!-- 初始化页面左侧菜单============end -->
 	
 	<!-- 设备管理==========start -->
-	<package name="device" namespace="/DeviceMag" extends="default">
+	<package name="device" namespace="/DeviceMag" extends="struts-default">
 		<action name="deviceAction_*" class="com.xiaoy.device.web.action.DeviceAction" method="{1}">
 			<result name="deviceInfoList">/WEB-INF/page/DeviceMag/deviceInfoList.jsp</result>
+			<result name="toDeviceAdd">/WEB-INF/page/DeviceMag/deviceInfoAdd.jsp</result>
+			<result name="deviceSave" type="redirectAction">
+				<param name="actionName">deviceAction_deviceInfoList</param>
+				<param name="namespace">/DeviceMag</param>
+			</result>
 		</action>
 	</package>
 	<!-- 设备管理==========end -->
 	
 
 	<!-- 资源管理====start -->
-	<package name="resource" namespace="/ResourceMag" extends="default">
+	<package name="resource" namespace="/ResourceMag" extends="struts-default">
 		<!-- 公告=====start -->
 		<action name="noticeAction_*" class="com.xiaoy.resource.web.action.NoticeAction" method="{1}">
 			<result name="noticeIndex">/WEB-INF/page/ResourceMag/noticeIndex.jsp

@@ -77,7 +77,7 @@
 								<s:else>
 									<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 										<td colspan=4 style="HEIGHT:22px" align="center" width="100%">
-											没有更多数据...
+											<font color="#FF0000">没有更多数据...</font>
 										</td>
 									</tr>
 								</s:else>

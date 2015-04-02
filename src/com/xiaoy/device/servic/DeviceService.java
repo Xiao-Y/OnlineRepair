@@ -21,4 +21,10 @@ public interface DeviceService
 	 */
 	Integer countDeviceInfoByCondition(DeviceForm deviceForm);
 
+	/**
+	 * 保存设备信息
+	 * @param deviceForm	设备信息
+	 */
+	void deviceSave(DeviceForm deviceForm);
+
 }

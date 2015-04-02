@@ -18,8 +18,6 @@ public class DeviceForm extends BaseForm
 	private String deviceName;
 	/* 型号 */
 	private String version;
-	/* 设备负责人uuid */
-	private String userUuid;
 	/* 生产商 */
 	private String producerName;
 	/* 生产商联系方式 */
@@ -32,7 +30,7 @@ public class DeviceForm extends BaseForm
 	private String devicePicUrl;
 	/* 备注 */
 	private String remark;
-
+	
 	public String getDeviceTypeUuid()
 	{
 		return deviceTypeUuid;
@@ -61,16 +59,6 @@ public class DeviceForm extends BaseForm
 	public void setVersion(String version)
 	{
 		this.version = version;
-	}
-
-	public String getUserUuid()
-	{
-		return userUuid;
-	}
-
-	public void setUserUuid(String userUuid)
-	{
-		this.userUuid = userUuid;
 	}
 
 	public String getProducerName()

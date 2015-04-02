@@ -1,6 +1,11 @@
 //在新窗口打开
 function openWindow(link) {
-	another = open(link, 'NewWindow');
+	another = open(link,'NewWindow');
+}
+
+//打开添加页面
+function openAdd(url){
+	window.location.href = url;
 }
 
 // 关闭当前页面

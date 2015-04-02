@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="com.xiaoy.base.entites.User" table="USER">
         <id name="userUuid" type="java.lang.String">
-            <column name="USERUUID" />
+            <column name="USER_UUID" />
             <generator class="uuid" />
         </id>
         <property name="loginName" type="java.lang.String">

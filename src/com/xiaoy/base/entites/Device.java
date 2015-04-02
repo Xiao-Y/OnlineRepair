@@ -2,11 +2,10 @@ package com.xiaoy.base.entites;
 
 /**
  * 设备信息实体类
+ * 
  * @author XiaoY
- * @explain 
- * 用于存放设备的信息
- * @date: 
- * 2015年3月31日 下午11:25:24
+ * @explain 用于存放设备的信息
+ * @date: 2015年3月31日 下午11:25:24
  */
 public class Device
 {
@@ -16,8 +15,6 @@ public class Device
 	private String deviceName;
 	/* 型号 */
 	private String version;
-	/* 设备负责人uuid */
-	private String userUuid;
 	/* 生产商 */
 	private String producerName;
 	/* 生产商联系方式 */
@@ -59,16 +56,6 @@ public class Device
 	public void setVersion(String version)
 	{
 		this.version = version;
-	}
-
-	public String getUserUuid()
-	{
-		return userUuid;
-	}
-
-	public void setUserUuid(String userUuid)
-	{
-		this.userUuid = userUuid;
 	}
 
 	public String getProducerName()

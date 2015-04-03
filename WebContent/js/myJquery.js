@@ -54,7 +54,7 @@ function checkchar() {
 		return;
 	}
 
-	$("#Form1").attr("action", "resource/noticeAction_saveNotice");
+	$("#Form1").attr("action", "${pageContext.request.contextPath }/ResourceMa/noticeAction_saveNotice.action");
 	$("#Form1").submit();
 
 	loading();
@@ -159,7 +159,7 @@ function changetype() {
 
 //删除一行属性
 function remove(ddlCode,seqID){
-	var url = "../ResourceMag/dictionaryAction_dictionaryRemove.action";
+	var url = "${pageContext.request.contextPath }/ResourceMag/dictionaryAction_dictionaryRemove.action";
 	var args = {
 			"seqID": seqID,
 			"time" : new Date
@@ -214,7 +214,7 @@ function saveDict() {
 			}
 		}
 	}
-	$("#Form2").attr("action", "ResourceMag/dictionaryAction_dictionarySave.action");
+	$("#Form2").attr("action", "${pageContext.request.contextPath }/ResourceMag/dictionaryAction_dictionarySave.action");
 	$("#Form2").submit();
 }
 
@@ -265,31 +265,42 @@ function delTableRow(rowNum) {
 //异步加载查询出来的数据
 function findDDl(){
 	var keyWord = $("#keyWord").val();
-	var url = "ResourceMag/dictionaryAction_dictionaryEdit.action";
+	var url = "${pageContext.request.contextPath }/ResourceMag/dictionaryAction_dictionaryEdit.action";
 	var args = {"date" : new Date, "keyWord" : keyWord};
-	$.post(url, args, function(data) {
+	var dataType = "HTML";
+	$.post(url, args,function(data) {
 		$("#tableOld").attr("");
 		$("#Form2").html(data);
-	});
+	},dataType);
 }
 // 数据字典的操作================end
 
 //日志管理=====================start
-function logDelete(){
-  	var flag = window.confirm('你确定要删除所有的日志吗');
-  	if(!flag){
-  		return;
-  	}else{
-  		$("#Form2").attr("action","ResourceMag/logAction_deleteLog.action");
-  		$("#Form2").submit();
-  	}
+function logDelete(meg){
+	if(meg == "page"){
+		var flag = window.confirm('你确定要删除当前面的日志');
+		if(!flag){
+			return;
+		}else{
+			$("#Form2").attr("action","${pageContext.request.contextPath }/ResourceMag/logAction_deleteLog.action");
+			$("#Form2").submit();
+		}
+	}else if(meg == "all"){
+		var flag = window.confirm('你确定要删除所有的日志');
+		if(!flag){
+			return;
+		}else{
+			$("#Form2").attr("action","${pageContext.request.contextPath }/ResourceMag/logAction_deleteLogAll.action");
+			$("#Form2").submit();
+		}
+	}
 }
 //日志管理=====================end
 
 //设备管理=====================start
 //ajax删除设备信息
 function deletesDevice(deviceUuid,deviceName){
-	var f = confirm('你确定要删除 ' + deviceName + ' ？')
+	var f = confirm('你确定要删除 ' + deviceName + ' ？');
 	if(f){
 		var $tr = $("#"+deviceUuid);
 		var url = "${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceDelete.action";

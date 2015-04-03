@@ -70,7 +70,7 @@ public class LogServiceImpl implements LogService
 	{
 		List<LogForm> list = null;
 		
-		if(log != null)
+		if(log != null && log.size() > 0)
 		{
 			list = new ArrayList<LogForm>();
 			for(Log e : log)
@@ -104,5 +104,12 @@ public class LogServiceImpl implements LogService
 		paramsMapValue.put("logID", list);
 		
 		logDao.deleteObjectByCollectionIds(hqlWhere,paramsMapValue);
+	}
+
+	@Override
+	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
+	public void deleteLogAll()
+	{
+		logDao.deleteObjectByCollectionIds("", null);
 	}
 }

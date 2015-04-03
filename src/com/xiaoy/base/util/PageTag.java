@@ -126,7 +126,7 @@ public class PageTag extends TagSupport
 					.append(")'>尾页</a>&nbsp;");
 		}
 
-		sb.append(" 跳到<select onChange='turnOverPage(this.value)'>&nbsp;");
+		sb.append(" 跳到&nbsp;<select onChange='turnOverPage(this.value)'>&nbsp;");
 		for (int i = 1; i <= pageCount; i++)
 		{
 			if (i == pageNo)

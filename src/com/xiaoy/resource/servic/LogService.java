@@ -44,4 +44,9 @@ public interface LogService
 	 */
 	public Integer countByCollection(LogForm logForm);
 
+	/**
+	 * 删除所有的日志信息
+	 */
+	void deleteLogAll();
+
 }

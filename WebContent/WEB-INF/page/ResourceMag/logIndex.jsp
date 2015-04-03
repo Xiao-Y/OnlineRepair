@@ -42,7 +42,8 @@
 	                   </td>
 						<td class="ta_01" align="right">
 						    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="查询" name="BT_find"  onclick="gotoquery('system/elecLogAction_home.do')"/>&nbsp;&nbsp;
-							<input style="font-size:12px; color:black; height=20;width=80" id="BT_Delete" type="button" value="删除所有日志" name="BT_Delete"  onClick="logDelete()" />
+							<input style="font-size:12px; color:black; height=20;width=80" id="BT_Delete" type="button" value="删除当前页日志" name="BT_Delete"  onClick="logDelete('page')" />
+							<input style="font-size:12px; color:black; height=20;width=80" id="BT_Delete" type="button" value="删除所有日志" name="BT_Delete"  onClick="logDelete('all')" />
 						</td>
 					</tr>
 				<tr>

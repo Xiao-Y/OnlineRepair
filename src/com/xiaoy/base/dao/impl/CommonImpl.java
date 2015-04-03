@@ -35,7 +35,7 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 	public void deleteObjectByCollectionIds(String hqlWhere,
 			Map<String, Object> paramsMapValue)
 	{
-		StringBuffer hql = new StringBuffer(" delete "
+		StringBuffer hql = new StringBuffer(" delete from "
 				+ this.entityClass.getSimpleName() + " where 1 = 1 ");
 
 		hql.append(hqlWhere);

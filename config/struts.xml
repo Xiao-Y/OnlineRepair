@@ -119,6 +119,10 @@
 		<!-- 日志管理======start -->
 		<action name="logAction_*" class="com.xiaoy.resource.web.action.LogAction" method="{1}">
 			<result name="logIndex">/WEB-INF/page/ResourceMag/logIndex.jsp</result>
+			<result name="deleteLog" type="redirectAction">
+				<param name="actionName">logAction_logIndex</param>
+				<param name="namespace">/ResourceMag</param>
+			</result>
 		</action>
 		<!-- 日志管理======end -->
 

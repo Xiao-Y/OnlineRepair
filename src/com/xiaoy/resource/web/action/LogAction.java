@@ -59,7 +59,16 @@ public class LogAction extends BaseAction implements ModelDriven<LogForm>
 	public String deleteLog()
 	{
 		String[] ids = logForm.getLogId();
-		logService.deleteLogByIds(ids);
-		return "logIndex";
+		if(ids != null && ids.length > 0)
+		{
+			logService.deleteLogByIds(ids);
+		}
+		return "deleteLog";
+	}
+	
+	public String deleteLogAll()
+	{
+		logService.deleteLogAll();
+		return "deleteLog";
 	}
 }

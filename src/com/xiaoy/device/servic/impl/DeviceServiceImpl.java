@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoy.base.entites.Device;
@@ -36,15 +38,8 @@ public class DeviceServiceImpl implements DeviceService
 		for(Device d : list)
 		{
 			DeviceForm form = new DeviceForm();
-			form.setDeviceTypeUuid(d.getDeviceTypeUuid());
-			form.setDeviceAmount(d.getDeviceAmount().toString());
-			form.setDeviceName(d.getDeviceName());
-			form.setDevicePicUrl(d.getDevicePicUrl());
-			form.setDevicePrice(d.getDevicePrice() + "");
-			form.setDeviceTypeUuid(d.getDeviceTypeUuid());
-			form.setProducerName(d.getProducerName());
-			form.setProducerPhone(d.getProducerPhone());
-			form.setRemark(d.getRemark());
+			//设备的Vo对象转换成Po对象
+			form = this.DeviceVoToPo(form, d);
 			listForm.add(form);
 		}
 			
@@ -59,9 +54,70 @@ public class DeviceServiceImpl implements DeviceService
 	}
 
 	@Override
+	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
 	public void deviceSave(DeviceForm deviceForm)
 	{
 		Device entity = new Device();
+		//设备的Po对象转换成Vo对象
+		entity = this.DeviceFormPoToVo(deviceForm, entity);
+		deviceDao.saveObject(entity);
+	}
+
+	@Override
+	public DeviceForm getfindDeviceByUuid(String deviceTypeUuid) {
+		
+		Device device = deviceDao.findObjectById(deviceTypeUuid);
+		
+		DeviceForm deviceForm = new DeviceForm();
+		//设备的Po对象转换成Vo对象
+		deviceForm = this.DeviceVoToPo(deviceForm, device);
+		return deviceForm;
+	}
+
+	@Override
+	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
+	public void deviceUpdate(DeviceForm deviceForm) {
+		Device entity = new Device();
+		//设备的Po对象转换成Vo对象
+		entity = this.DeviceFormPoToVo(deviceForm, entity);
+		deviceDao.updateObject(entity);
+	}
+	
+	@Override
+	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
+	public void deviceDeleteByUuid(String deviceTypeUuid) {
+		deviceDao.deleteObjectByid(deviceTypeUuid);
+	}
+	
+	/**
+	 * 设备的Vo对象转换成Po对象
+	 * @param form	Po对象
+	 * @param d	Vo对象
+	 * @return	DeviceForm Po对象
+	 */
+	private DeviceForm DeviceVoToPo(DeviceForm form, Device d)
+	{
+		form.setDeviceTypeUuid(d.getDeviceTypeUuid());
+		form.setDeviceAmount(d.getDeviceAmount().toString());
+		form.setDeviceName(d.getDeviceName());
+		form.setDevicePicUrl(d.getDevicePicUrl());
+		form.setDevicePrice(d.getDevicePrice() + "");
+		form.setDeviceTypeUuid(d.getDeviceTypeUuid());
+		form.setProducerName(d.getProducerName());
+		form.setProducerPhone(d.getProducerPhone());
+		form.setVersion(d.getVersion());
+		form.setRemark(d.getRemark());
+		return form;
+	}
+	
+	/**
+	 * 设备的Po对象转换成Vo对象
+	 * @param deviceForm	Po对象
+	 * @param entity	Vo对象
+	 * @return	Device	Vo对象
+	 */
+	private Device DeviceFormPoToVo(DeviceForm deviceForm, Device entity)
+	{
 		entity.setDeviceTypeUuid(deviceForm.getDeviceTypeUuid());
 		entity.setDeviceAmount(!StringUtils.isEmpty(deviceForm.getDeviceAmount()) ? Integer.parseInt(deviceForm.getDeviceAmount()) : 0);
 		entity.setDeviceName(deviceForm.getDeviceName());
@@ -70,8 +126,9 @@ public class DeviceServiceImpl implements DeviceService
 		entity.setDeviceTypeUuid(deviceForm.getDeviceTypeUuid());
 		entity.setProducerName(deviceForm.getProducerName());
 		entity.setProducerPhone(deviceForm.getProducerPhone());
+		entity.setVersion(deviceForm.getVersion());
 		entity.setRemark(deviceForm.getRemark());
 		
-		deviceDao.saveObject(entity);
+		return entity;
 	}
 }

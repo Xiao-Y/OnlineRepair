@@ -1,19 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="x" uri="http://www.xiaoy.com/pageTag/core"%>
+<jsp:include page="/pub.jsp"/>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>设备信息管理</title>
-
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/myJquery.js"></script>
-
-<style type="text/css">
-* {
-	font-size: 12px;
-}
-</style>
 
 <script type="text/javascript">
 	/**
@@ -73,7 +66,7 @@
 	<!-- 查询输入end -->
 	
 	<!-- 执行查询begin -->
-	<s:form action="">
+	<s:form id="Form2" name="Form2" action="" method="post">
 		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
 			<tr height=10><td></td></TR>			
 			<tr>
@@ -109,10 +102,9 @@
 						<!-- 列表数据 begin -->
 						<s:if test="%{#request.deviceList != null && #request.deviceList.size() > 0}">
 						<s:iterator value="%{#request.deviceList}" var="device">
-						<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+						<tr id="${deviceTypeUuid}" onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 							<td style="height:22px" align="center" width="20%">
-								<input type="hidden" id="123">
-								<a href="${pageContext.request.contextPath }/page/DeviceMag/deviceInfoView.jsp?deviceTypeUuid=${deviceTypeUuid}">
+								<a href="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceView.action?deviceTypeUuid=${deviceTypeUuid}">
 									<s:property value="%{#device.deviceName}"/>
 								</a>
 							</td>
@@ -126,11 +118,11 @@
 								<s:property value="%{#device.devicePrice}"/>
 							</td>									
 							<td align="center" style="HEIGHT: 22px" align="center" width="10%">																	
-							   <a href="${pageContext.request.contextPath }/page/DeviceMag/deviceInfoEdit.jsp">
+							   <a href="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceEdit.action?deviceTypeUuid=${deviceTypeUuid}">
 							   <img src="${pageContext.request.contextPath }/images/edit.gif" border="0" style="cursor:hand"></a>													
 							</td>
 							<td align="center" style="HEIGHT: 22px" align="center" width="10%">
-								<a href="system/elecUserAction_delete.do?userID=" onclick="return confirm('你确定要删除 ${deviceName} ？')">
+								<a href="javascript:deletesDevice('${deviceTypeUuid}','${deviceName}')">
 								<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="cursor:hand"></a>												
 							</td>
 						</tr>
@@ -149,6 +141,7 @@
 			</tr>
 		</table>
 	</s:form>
+	<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceInfoList.action"/>
 	<!-- 执行查询end -->
 </body>
 </html>

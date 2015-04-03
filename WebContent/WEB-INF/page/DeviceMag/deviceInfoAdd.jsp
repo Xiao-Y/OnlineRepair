@@ -1,32 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<jsp:include page="/pub.jsp"/>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/myJquery.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/uploadPreview/uploadPreview.js"></script>
-
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jqueryValidate/jquery.validate.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jqueryValidate/jquery.validate.message_cn.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jqueryValidate/com.validate.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jqueryValidate/com.validate.expand.js"></script>
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
 
 <title>添加设备信息</title>
 <script>
    window.onload = function () { 
-        new uploadPreview({ UpBtn: "up_img", DivShow: "imgdiv", ImgShow: "imgShow" });
+        new uploadPreview({ UpBtn: "image", DivShow: "imgdiv", ImgShow: "imgShow" });
     }
-   
 </script>
 
 
 </head>
 <body>
-<form name="Form1" method="post" id="Form1" class="form-validate" action="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceSave.action">
+<form enctype="multipart/form-data" name="Form1" method="post" id="Form1" class="form-validate" action="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceSave.action">
 	<br>
     <table cellSpacing="1" cellPadding="5" width="880" align="center" bgColor="#eeeeee" style="border:1px solid #8ba7e3" border="0">
 		<tr>
@@ -72,7 +62,7 @@
 		<tr>
 			<td class="ta_01" align="right" bgcolor="#f5fafe">设备图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
-				<s:file id="up_img" name="up_img"/>
+				<s:file id="image" name="image"/>
 			</td>
 		</tr>
 		<tr>

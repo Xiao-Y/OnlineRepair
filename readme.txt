@@ -77,27 +77,80 @@ pub.css		公有的样式
 	logList.jsp						日志列表
 	logIndex.jsp					日志初始列表
 	
+一、使用技术：
+	①分页的使用方法：
+		1.添加PageTag.java文件。
+		2.添加pgaeTag.tld文件到WEB-INF下
+		3.添加分页对象BaseForm,需要分页的页面都要继承BaseForm.java
+		
+		Action、service中传入父类Form,dao中调用父类的findCollectionByConditionWithPage和countByCollection。
+		一个是查询分页的数据，一个是查询总记录数的
+		Action中将分页后的数据放入到request中，将总记录数放入到当前父类的Form的setRecordCount中。
+		
+		页面上使用：
+		<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action"/>
 	
-分页的使用方法：
-1.添加PageTag.java文件。
-2.添加pgaeTag.tld文件到WEB-INF下
-3.添加分页对象BaseForm,需要分页的页面都要继承BaseForm.java
+	②jqueryValidate使用方法：
+		1.引入js及css
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jqueryValidate/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jqueryValidate/jquery.validate.message_cn.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jqueryValidate/com.validate.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jqueryValidate/com.validate.expand.js"></script>
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
+		2.要验证的表单中添加class="form-validate"
+		3.需要验证的输入项中添加data-rule-required="true"
+		注意：
+			com.validate.expand.js中可以添加自定义的方法，使用请参照其它方法;
+			com.validate.js用于显示错误信息
+			jquery.validate.message_cn.js将英文信息修改为中文
+		
+	③My97DatePicker	日历使用方法：
+		1.引入<script type="text/javascript" src="${pageContext.request.contextPath }/js/My97DatePicker/WdatePicker.js"></script>
+		2.输入项中onclick="WdatePicker({readOnly:true,highLineWeekDay:false})" 
+			readOnly为true表示不允许手动写入，highLineWeekDay为false表示不显示周
+			
+	④uploadPreview	上传图片预览使用方法：
+		1.添加js代码：
+			<script>
+			   window.onload = function () { 
+			        new uploadPreview({ UpBtn: "up_img", DivShow: "imgdiv", ImgShow: "imgShow" });
+			    }
+			</script>
+		2.
+			上传图上：<input type="file" id="up_img" />
+			显示图片：<div id="imgdiv"><img id="imgShow" width="500px" height="300px"/></div>
+		注意：
+			UpBtn中的名字要与上传图片的id相同，
+			DivShow中的名字要与显示图片中的div的id相同
+			ImgShow中的名字要与显示图片中的img中的id相同
 
-Action、service中传入父类Form,dao中调用父类的findCollectionByConditionWithPage和countByCollection。
-一个是查询分页的数据，一个是查询总记录数的
-Action中将分页后的数据放入到request中，将总记录数放入到当前父类的Form的setRecordCount中。
 
-页面上使用：
-<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action"/>
-
-
-
-错误记录：
-Object转Integer时报错：
-解决方法：
-Integer.parseInt(count.toString())
+二、页面修改
+	①去掉设备信息管理中的“设备负责人”及“设备负责人联系方式”
+	②修改页面加载js、css方式为添加公有的pub.jsp
 	
-	
+
+三、错误记录：
+	①Object转Integer时报错：
+		解决方法：
+		Integer.parseInt(count.toString())
+		
+	②添加设备信息后保存不上
+		解决方法：
+		没有在service层添加事务
+		@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
+		
+	③上传图片的时候出现错误：
+		解决方法：
+		上传图片的时候主要是由于修改时出现问题，修改设备信息的时候可能没有修改图片信息。
+		所有要做一个判断，是否有新图片上传。如果有新图片上传，设置form的enctype="multipart/form-data"，
+		直接更新设备对象。如果没有修改图片。使用jquery设置form中enctype的属性为""，使用隐藏域将以前的
+		图片路径再传到Action中，放入路径属性中再更新。更新、保存都要做上传图片处理。
+		
+	④分页标签不显示：
+		解决方法：
+		检查是否引用分面标签及css样式。在引用的公用pub.jsp中不知道是什么原因在请求Action时出现错误。
+		删除所有的html元素后只保留<%@ page language="java" pageEncoding="UTF-8"%>就可以请求到。
 	
 	
 	

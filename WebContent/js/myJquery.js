@@ -286,3 +286,23 @@ function logDelete(){
 }
 //日志管理=====================end
 
+//设备管理=====================start
+//ajax删除设备信息
+function deletesDevice(deviceUuid,deviceName){
+	var f = confirm('你确定要删除 ' + deviceName + ' ？')
+	if(f){
+		var $tr = $("#"+deviceUuid);
+		var url = "${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceDelete.action";
+		var args = {"date":new Date,"deviceTypeUuid":deviceUuid};
+		$.post(url,args,function(data){
+			if(data == "1"){
+				$tr.remove();
+			}else{
+				alert("删除失败！");
+			}
+		});
+	}
+}
+//设备管理=====================end
+
+

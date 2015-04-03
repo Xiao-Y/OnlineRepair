@@ -27,4 +27,23 @@ public interface DeviceService
 	 */
 	void deviceSave(DeviceForm deviceForm);
 
+	/**
+	 * 通过设备的Uuid获取设备信息
+	 * @param deviceTypeUuid	设备Uuid
+	 * @return	DeviceForm 设备信息
+	 */
+	DeviceForm getfindDeviceByUuid(String deviceTypeUuid);
+
+	/**
+	 * 更新设备信息
+	 * @param deviceForm	设备信息
+	 */
+	void deviceUpdate(DeviceForm deviceForm);
+
+	/**
+	 * 根据设备的uuid删除设备信息
+	 * @param deviceTypeUuid	设备uuid
+	 */
+	void deviceDeleteByUuid(String deviceTypeUuid);
+
 }

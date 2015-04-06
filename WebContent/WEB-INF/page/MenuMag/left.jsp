@@ -102,7 +102,7 @@
 						</tr>
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/UserMag/userInfoList.jsp' target="main">用户信息</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/UserMag/userAction_userIndex.action' target="main">用户信息</a>
 							</td>
 						</tr>
 					</table>

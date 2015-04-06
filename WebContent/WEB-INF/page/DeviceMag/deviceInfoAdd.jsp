@@ -43,7 +43,7 @@
 	       	</td>
 	       	<td align="right" bgColor="#f5fafe" class="ta_01">生产商联系方式：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff">
-	       		<s:textfield name="producerPhone" id="producerPhone" maxlength="25" size="20" data-rule-required="true"/>
+	       		<s:textfield name="producerPhone" id="producerPhone" maxlength="11" size="11" data-rule-required="true" data-rule-mobilezh="true"/>
 	       	</td>
 		</tr>
 		

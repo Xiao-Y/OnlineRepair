@@ -123,6 +123,9 @@ pub.css		公有的样式
 			UpBtn中的名字要与上传图片的id相同，
 			DivShow中的名字要与显示图片中的div的id相同
 			ImgShow中的名字要与显示图片中的img中的id相同
+			
+	⑤使用Struts2标签：
+		可以使用ActionContext.getContext().getValueStack().push(userForm);进行页面数据的显示
 
 
 二、页面修改
@@ -156,7 +159,9 @@ pub.css		公有的样式
 		解决方法：
 		没有添加事务注解。删除条件上要用""参数上用null。条件上不能用null，会被当做条件执行，结果就是报错。
 	
-	
+	⑥没有实例化的错误：
+		解决方法：
+		主要是没有在applicationContext.xml中添加自动扫描。
 	
 	
 	

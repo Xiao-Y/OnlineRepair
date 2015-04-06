@@ -14,11 +14,8 @@
         <property name="name" type="java.lang.String">
             <column name="NAME" />
         </property>
-        <property name="SexCode" type="java.lang.String">
+        <property name="sexCode" type="java.lang.String">
             <column name="SEX_CODE" />
-        </property>
-        <property name="RoleCode" type="java.lang.String">
-            <column name="ROLE_CODE" />
         </property>
         <property name="maintainTypeCode" type="java.lang.String">
             <column name="MAINTAIN_TYPE_CODE" />

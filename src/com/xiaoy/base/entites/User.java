@@ -18,9 +18,7 @@ public class User {
 	/* 用户姓名 */
 	private String name;
 	/* 性别id */
-	private String SexCode;
-	/* 角色id */
-	private String RoleCode;
+	private String sexCode;
 	/* 维护的类别 */
 	private String maintainTypeCode;
 	/* 联系方式 */
@@ -59,19 +57,11 @@ public class User {
 	}
 
 	public String getSexCode() {
-		return SexCode;
+		return sexCode;
 	}
 
 	public void setSexCode(String sexCode) {
-		SexCode = sexCode;
-	}
-
-	public String getRoleCode() {
-		return RoleCode;
-	}
-
-	public void setRoleCode(String roleCode) {
-		RoleCode = roleCode;
+		this.sexCode = sexCode;
 	}
 
 	public String getMaintainTypeCode() {

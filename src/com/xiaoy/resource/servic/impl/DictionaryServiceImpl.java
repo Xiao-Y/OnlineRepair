@@ -34,10 +34,10 @@ public class DictionaryServiceImpl implements DictionaryService
 	public List<DictionaryForm> findDictionaryListByKeyWord(String keyWord)
 	{
 		//根据数据类型查询对应的数据项
-				List<Dictionary> list = this.findDictionaryByCondition(keyWord);
-				List<DictionaryForm> listForm = this.dictionaryPOListToVOList(list);
-				
-				return listForm;
+		List<Dictionary> list = this.findDictionaryByCondition(keyWord);
+		List<DictionaryForm> listForm = this.dictionaryPOListToVOList(list);
+		
+		return listForm;
 	}
 
 	@Override

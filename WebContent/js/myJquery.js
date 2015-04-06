@@ -308,12 +308,34 @@ function deletesDevice(deviceUuid,deviceName){
 		$.post(url,args,function(data){
 			if(data == "1"){
 				$tr.remove();
-			}else{
+			}else if(data == "0"){
 				alert("删除失败！");
+			}else{
+				alert("服务器错误，稍后再试！");
 			}
 		});
 	}
 }
 //设备管理=====================end
+
+//删除用户信息==============start
+function deleteUser(name,userUuid){
+	var f = confirm('你确定要删除 ' + name + ' ？');
+	if(f){
+		var $tr = $("#"+userUuid);
+		var url = "${pageContext.request.contextPath }/UserMag/userAction_userDelete.action";
+		var args = {"date":new Date,"userUuid":userUuid};
+		$.post(url,args,function(data){
+			if(data == "1"){
+				$tr.remove();
+			}else if(data == "0"){
+				alert("删除失败！");
+			}else{
+				alert("服务器错误，稍后再试！");
+			}
+		});
+	}
+}
+//删除用户信息==============end
 
 

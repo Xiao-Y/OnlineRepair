@@ -2,6 +2,17 @@ package com.xiaoy.resource.web.form;
 
 public class DictionaryForm
 {
+	
+	/**
+	 * 维护类别
+	 */
+	public static final String MAINTAIN_TYPE_NAME = "维护类型";
+	
+	/**
+	 * 性别
+	 */
+	public static final String SEX_NAME = "性别";
+	
 	/* 字典id */
 	private String seqID;
 	/* 查询关键字 */
@@ -13,7 +24,7 @@ public class DictionaryForm
 
 	// 保存关键字
 	private String keywordname;
-
+	
 	/**
 	 * 保存数据字典时的标识量<br>
 	 * 值 = new 新添加一种数据类型，并添加数据项，保存<br>

@@ -125,7 +125,7 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 
 		sql.append(hqlWhere);
 
-		Query query = this.getSession().createSQLQuery(sql.toString());
+		Query query = this.getSession().createQuery(sql.toString());
 		
 		if (!StringUtils.isEmpty(hqlWhere) && paramsMapValue != null
 				&& paramsMapValue.size() > 0)

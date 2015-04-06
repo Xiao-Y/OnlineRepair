@@ -18,10 +18,12 @@
 	//清除查询条件
 	$().ready(function(){
 		$("#BT_Reset").click(function(){
-			$("#deviceName").val("");
-			$("#version").val("");
-			$("#producer").val("");
-			$("#rank").val("");
+			$("#loginName").val("");
+			$("#name").val("");
+			$("#sexCode").val("");
+			$("#maintainTypeCode").val("");
+			
+			$("#form1").submit();
 		});
 	});
 	
@@ -34,7 +36,7 @@
 </head>
 <body>
 	<!-- 查询输入start -->
-	<form action="" id="form1" name="form1">
+	<form action="${pageContext.request.contextPath}/UserMag/userAction_userIndex.action" id="form1" name="form1" method="post">
 		<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
 			<tr>
 				<td class="ta_01" colspan=6 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
@@ -48,12 +50,12 @@
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				登陆名：</td>
 				<td class="ta_01" >
-					<input name="loginName" id="loginName" size="21">
+					<s:textfield name="loginName" id="loginName" size="21" maxlength="21"/>
 				</td>
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				姓名：</td>
 				<td class="ta_01" >
-					<input name="username" id="username" size="21">
+					<s:textfield name="name" id="name" size="21" maxLength="21"/>
 				</td>
 			</tr>
 			<tr>
@@ -62,7 +64,7 @@
 				<td class="ta_01" >
 					<s:select list="%{#request.sex}" id="sexCode" name="sexCode"
 						  listKey="ddlCode" listValue="ddlName"
-						  headerKey="0" headerValue="------请选择------"
+						  headerKey="" headerValue="------请选择------"
 						  cssStyle="width:140px"
 					/>
 				</td>
@@ -71,17 +73,15 @@
 				<td class="ta_01" >
 					<s:select list="%{#request.maintainType}" id="maintainTypeCode" name="maintainTypeCode"
 						  listKey="ddlCode" listValue="ddlName"
-						  headerKey="0" headerValue="------请选择------"
+						  headerKey="" headerValue="------请选择------"
 						  cssStyle="width:140px"
 					/>
 				</td>
 			</tr>
 	    </table>	
-	</form>
 	<!-- 查询输入end -->
 	
 	<!-- 执行查询begin -->
-	<form action="" id="form2" name="form2">
 		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
 			<tr height=10><td></td></TR>			
 			<tr>
@@ -94,7 +94,7 @@
 		             </table>
 	                 </td>
 				<td class="ta_01" align="right">
-				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="button" value="查询" name="BT_Find" >&nbsp;&nbsp;
+				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="submit" value="查询" name="BT_Find" >&nbsp;&nbsp;
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_Reset" >&nbsp;&nbsp;
 					<input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="添加用户信息" name="BT_Add" onclick="link('${pageContext.request.contextPath }/UserMag/userAction_toUserAdd.action')">
 				</td>

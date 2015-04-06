@@ -163,7 +163,9 @@ pub.css		公有的样式
 		解决方法：
 		主要是没有在applicationContext.xml中添加自动扫描。
 	
-	
+	⑦出现乱码：
+		解决方法：
+		修改form的提交方式为method="post"
 	
 	
 	

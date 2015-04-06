@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.action.BaseAction;
+import com.xiaoy.base.util.DateHelper;
 import com.xiaoy.device.servic.DeviceService;
 import com.xiaoy.device.web.form.DeviceForm;
 import com.xiaoy.resource.servic.LogService;
@@ -80,9 +82,9 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
         if (deviceForm.getImage() != null) {
             this.uploadImage(deviceForm);
         }
-        if(!StringUtils.isEmpty(deviceForm.getImageFileName()))
+        if(!StringUtils.isEmpty(deviceForm.getNewFileName()))
         {
-        	deviceForm.setDevicePicUrl("/"+ DEVICE_IMAGE_URL +"/" + deviceForm.getImageFileName());
+        	deviceForm.setDevicePicUrl("/"+ DEVICE_IMAGE_URL +"/" + deviceForm.getNewFileName());
         }
 		deviceService.deviceSave(deviceForm);
 		logService.saveLog(request, "【设备管理】", "完成添加设备");
@@ -120,11 +122,11 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 	public String deviceUpdate()
 	{
 		//如果修改了图片，取新图片的信息
-		if(!StringUtils.isEmpty(deviceForm.getImageFileName()))
+		if(!StringUtils.isEmpty(deviceForm.getNewFileName()))
 		{	if (deviceForm.getImage() != null) {
 				this.uploadImage(deviceForm);
 	        }
-			deviceForm.setDevicePicUrl("/"+ DEVICE_IMAGE_URL +"/" + deviceForm.getImageFileName());
+			deviceForm.setDevicePicUrl("/"+ DEVICE_IMAGE_URL +"/" + deviceForm.getNewFileName());
 		}else//如果没有修改图片，取原图片的路径
 		{
 			String devicePicUrl = request.getParameter("oldUrl");
@@ -161,7 +163,9 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 	private void uploadImage(DeviceForm deviceForm)
 	{
 		String realpath = ServletActionContext.getServletContext().getRealPath("/" + DEVICE_IMAGE_URL);
-        File savefile = new File(new File(realpath), deviceForm.getImageFileName());
+		String newFileName = DateHelper.dateTimeConverString(new Date(),"yyyyMMddhhmmss");
+		deviceForm.setNewFileName(newFileName);
+        File savefile = new File(new File(realpath), newFileName);
         if (!savefile.getParentFile().exists())
             savefile.getParentFile().mkdirs();
         try {

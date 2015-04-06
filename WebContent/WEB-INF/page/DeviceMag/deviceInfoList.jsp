@@ -20,8 +20,9 @@
 		$("#BT_Reset").click(function(){
 			$("#deviceName").val("");
 			$("#version").val("");
-			$("#producer").val("");
-			$("#rank").val("");
+			$("#producerName").val("");
+			
+			$("#form1").submit();
 		});
 	});
 	
@@ -34,7 +35,7 @@
 </head>
 <body>
 	<!-- 查询输入start -->
-	<s:form action="">
+	<form action="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceInfoList.action" id="form1" name="form1" method="post">
 		<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
 			<tr>
 				<td class="ta_01" colspan=6 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
@@ -48,25 +49,23 @@
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				设备名：</td>
 				<td class="ta_01" >
-					<input name="deviceName" id="deviceName" size="21">
+					<s:textfield name="deviceName" id="deviceName" size="21"/>
 				</td>
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				型号：</td>
 				<td class="ta_01" >
-					<input name="version" id="version" size="21">
+					<s:textfield name="version" id="version" size="21"/>
 				</td>
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				生产商：</td>
 				<td class="ta_01" >
-					<input name="producer" id="producer" size="21">
+					<s:textfield name="producerName" id="producerName" size="21"/>
 				</td>
 			</tr>
 	    </table>	
-	</s:form>
 	<!-- 查询输入end -->
 	
 	<!-- 执行查询begin -->
-	<s:form id="Form2" name="Form2" action="" method="post">
 		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
 			<tr height=10><td></td></TR>			
 			<tr>
@@ -79,7 +78,7 @@
 		             </table>
 	                 </td>
 				<td class="ta_01" align="right">
-				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="button" value="查询" name="BT_Find" >&nbsp;&nbsp;
+				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="submit" value="查询" name="BT_Find" >&nbsp;&nbsp;
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_Reset" >&nbsp;&nbsp;
 					<input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="添加设备" name="BT_Add" onclick="link('${pageContext.request.contextPath }/DeviceMag/deviceAction_toDeviceAdd.action')">
 				</td>
@@ -140,7 +139,7 @@
 				</td>
 			</tr>
 		</table>
-	</s:form>
+	</form>
 	<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceInfoList.action"/>
 	<!-- 执行查询end -->
 </body>

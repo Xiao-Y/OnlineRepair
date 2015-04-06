@@ -169,27 +169,28 @@ public class UserServiceImpl implements UserService
 			conditionMap = new HashMap<String, Object>();
 			if(!StringUtils.isEmpty(userForm.getLoginName()))
 			{
-				hqlWhere.append(" and loginName like :loginName");
+				hqlWhere.append(" and e.loginName like :loginName");
 				paramMap.put("loginName","%" + userForm.getLoginName() + "%");
 			}
 			
 			if(!StringUtils.isEmpty(userForm.getName()))
 			{
-				hqlWhere.append(" and name like :name");
+				hqlWhere.append(" and e.name like :name");
 				paramMap.put("name", "%" + userForm.getName() + "%");
 			}
 			
 			if(!StringUtils.isEmpty(userForm.getSexCode()))
 			{
-				hqlWhere.append(" and sexCode =:sexCode");
+				hqlWhere.append(" and e.sexCode = :sexCode");
 				paramMap.put("sexCode", userForm.getSexCode());
 			}
 			
 			if(!StringUtils.isEmpty(userForm.getMaintainTypeCode()))
 			{
-				hqlWhere.append(" and maintainTypeCode =:maintainTypeCode");
+				hqlWhere.append(" and e.maintainTypeCode = :maintainTypeCode");
 				paramMap.put("maintainTypeCode", userForm.getMaintainTypeCode());
 			}
+			hqlWhere.append(" order by e.registerTime desc ");
 			conditionMap.put("hqlWhere", hqlWhere.toString());
 			conditionMap.put("paramMap", paramMap);
 		}

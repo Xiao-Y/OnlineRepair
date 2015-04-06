@@ -52,14 +52,20 @@ public class DeviceDaoImpl extends CommonImpl<Device> implements DeviceDao
 			
 			if(!StringUtils.isEmpty(deviceForm.getDeviceName()))
 			{
-				hqlWhere.append(" and deviceName = :deviceName ");
-				paramsMapValue.put("deviceName", deviceForm.getDeviceName());
+				hqlWhere.append(" and deviceName like :deviceName ");
+				paramsMapValue.put("deviceName", "%" + deviceForm.getDeviceName() + "%");
 			}
 			
 			if(!StringUtils.isEmpty(deviceForm.getVersion()))
 			{
 				hqlWhere.append(" and version = :version ");
 				paramsMapValue.put("version", deviceForm.getVersion());
+			}
+			
+			if(!StringUtils.isEmpty(deviceForm.getProducerName()))
+			{
+				hqlWhere.append(" and producerName like :producerName ");
+				paramsMapValue.put("producerName", "%" + deviceForm.getProducerName() + "%");
 			}
 			
 			map = new HashMap<String, Object>();

@@ -38,6 +38,9 @@ public class DeviceForm extends BaseForm {
 	private String imageFileName; 
 	// 文件类型
 	private String imageContentType; 
+	
+	//文件的新名字
+	private String newFileName;
 
 	public String getDeviceTypeUuid() {
 		return deviceTypeUuid;
@@ -133,5 +136,15 @@ public class DeviceForm extends BaseForm {
 
 	public void setImageContentType(String imageContentType) {
 		this.imageContentType = imageContentType;
+	}
+
+	public String getNewFileName()
+	{
+		return newFileName;
+	}
+
+	public void setNewFileName(String newFileName)
+	{
+		this.newFileName = newFileName;
 	}
 }

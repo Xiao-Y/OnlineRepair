@@ -1,18 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="x" uri="http://www.xiaoy.com/pageTag/core"%>
-
+<jsp:include page="/pub.jsp"/>
 <html>
 	<head>
 		<title>用户管理</title>		
-		<link href="${pageContext.request.contextPath }/css/Style.css" type="text/css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath }/css/pageTag.css" rel="stylesheet" type="text/css"/>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/myJquery.js"></script>
 	</head>
 		
 	<body >
-		<s:form id="Form1" name="Form1" action="" method="post" cssStyle="margin:0px;"> 
+		<form id="Form1" name="Form1" action="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action" method="post" cssStyle="margin:0px;"> 
 			<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
 				<tr height=10><td></td></tr>
 				<tr>
@@ -26,8 +22,6 @@
 					</td>
 				</tr>
 		    </table>	
-		</s:form>
-		<s:form id="Form2" name="Form2" action="" method="post">
 			<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
 				<TBODY>
 					<TR height=10><td></td></TR>			
@@ -69,7 +63,7 @@
 											<td style="HEIGHT:22px" align="center" width="25%">
 												<s:property value="%{#list.opeTime}"/>
 											</td>									
-											<td style="HEIGHT:22px" align="center" width="45%">
+											<td style="HEIGHT:22px" align="left" width="45%">
 												<s:property value="%{#list.details}"/>
 											</td>
 										</tr>
@@ -87,7 +81,7 @@
 					</tr>
 				</TBODY>
 			</table>
-		</s:form>
+		</form>
 		<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action"/>
 	</body>
 </HTML>

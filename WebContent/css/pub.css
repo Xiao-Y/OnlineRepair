@@ -1,7 +1,9 @@
 body {
-	margin: 0px;
-	color: #000000;
-	background-color: #ffffff
+	background-color: #FFFFFF;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
 }
 
 td {
@@ -18,7 +20,7 @@ a {
 }
 
 * {
-	font-size: 12px;
+	font-size: 13px;
 }
 
 span.has-error {

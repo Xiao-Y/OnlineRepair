@@ -1,11 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<jsp:include page="/pub.jsp"/>
 <html>
 <head>
 <title>资源管理</title>
-<link href="${pageContext.request.contextPath }/css/Style.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/myJquery.js"></script>
+
 </head>
 
 <body>

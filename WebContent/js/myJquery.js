@@ -53,11 +53,10 @@ function checkchar() {
 		alert("公告内容字数不能超过200字");
 		return;
 	}
-
-	$("#Form1").attr("action", "${pageContext.request.contextPath }/ResourceMa/noticeAction_saveNotice.action");
-	$("#Form1").submit();
-
-	loading();
+	if($("#Form1").valid()){
+		$("#Form1").submit();
+		loading();
+	}
 }
 // 检查添加公告时公告标题和公告内容是否合法=====end
 

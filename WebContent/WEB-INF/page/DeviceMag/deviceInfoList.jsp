@@ -7,7 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>设备信息管理</title>
-
 <script type="text/javascript">
 	/**
 	//超链接在新窗口显示 
@@ -101,7 +100,7 @@
 						<!-- 列表数据 begin -->
 						<s:if test="%{#request.deviceList != null && #request.deviceList.size() > 0}">
 						<s:iterator value="%{#request.deviceList}" var="device">
-						<tr id="${deviceTypeUuid}" onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+						<tr id="${deviceTypeUuid}" onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 							<td style="height:22px" align="center" width="20%">
 								<a href="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceView.action?deviceTypeUuid=${deviceTypeUuid}">
 									<s:property value="%{#device.deviceName}"/>

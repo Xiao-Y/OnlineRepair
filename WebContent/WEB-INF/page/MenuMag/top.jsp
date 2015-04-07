@@ -29,8 +29,8 @@
 				<td width="20%" height="19" bgcolor="#0965CA">
 					<table border="0" width="100%" cellspacing="0" cellpadding="0">
 						<tr>
-							<td width="15%" align="center"><font color="#FFFFFF"><b>|</b></font></td>
-							<td width="75%" align="center">
+							<td width="10%" align="center"><font color="#FFFFFF"><b>|</b></font></td>
+							<td width="85%" align="center">
 								<font color=#FFFFFF> 
 									<!-- 显示当前时间 -->
 									<b id="time">

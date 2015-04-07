@@ -1,5 +1,7 @@
 package com.xiaoy.base.web.form;
 
+import java.io.File;
+
 public class BaseForm {
 
 	// 每页要显示的记录数
@@ -10,6 +12,18 @@ public class BaseForm {
 	
 	// 总记录数
 	protected Integer recordCount;
+	
+	//图片文件
+	protected File image;
+	
+	//图片文件名字
+	protected String imageFileName;
+	
+	//图片文件新名字
+	protected String newFileName;
+	
+	//上传文件类型
+	protected String imageContentType;
 
 	public Integer getPageSize() {
 		return pageSize;
@@ -33,5 +47,37 @@ public class BaseForm {
 
 	public void setRecordCount(Integer recordCount) {
 		this.recordCount = recordCount;
+	}
+
+	public File getImage() {
+		return image;
+	}
+
+	public void setImage(File image) {
+		this.image = image;
+	}
+
+	public String getImageFileName() {
+		return imageFileName;
+	}
+
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+
+	public String getNewFileName() {
+		return newFileName;
+	}
+
+	public void setNewFileName(String newFileName) {
+		this.newFileName = newFileName;
+	}
+
+	public String getImageContentType() {
+		return imageContentType;
+	}
+
+	public void setImageContentType(String imageContentType) {
+		this.imageContentType = imageContentType;
 	}
 }

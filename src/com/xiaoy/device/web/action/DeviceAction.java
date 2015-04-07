@@ -1,23 +1,18 @@
 package com.xiaoy.device.web.action;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.action.BaseAction;
-import com.xiaoy.base.util.DateHelper;
+import com.xiaoy.base.util.UploadImageHelper;
 import com.xiaoy.device.servic.DeviceService;
 import com.xiaoy.device.web.form.DeviceForm;
 import com.xiaoy.resource.servic.LogService;
@@ -26,8 +21,6 @@ import com.xiaoy.resource.servic.LogService;
 @Controller
 public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 {
-	private static String DEVICE_IMAGE_URL = "deviceUploadImages";
-	
 	@Resource
 	private DeviceService deviceService;
 	
@@ -79,12 +72,15 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 	 */
 	public String deviceSave()
 	{
-        if (deviceForm.getImage() != null) {
-            this.uploadImage(deviceForm);
+        if (deviceForm.getImage() != null) 
+        {
+        	//上传图片
+        	UploadImageHelper.uploadImage(deviceForm);
+        	logService.saveLog(request, "【设备管理】", "添加“"+ deviceForm.getDeviceName()+"”图片");
         }
         if(!StringUtils.isEmpty(deviceForm.getNewFileName()))
         {
-        	deviceForm.setDevicePicUrl("/"+ DEVICE_IMAGE_URL +"/" + deviceForm.getNewFileName());
+        	deviceForm.setDevicePicUrl(UploadImageHelper.PICURL);
         }
 		deviceService.deviceSave(deviceForm);
 		logService.saveLog(request, "【设备管理】", "完成添加设备");
@@ -99,7 +95,7 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 	{
 		deviceForm = deviceService.getfindDeviceByUuid(deviceForm.getDeviceTypeUuid());
 		request.setAttribute("device", deviceForm);
-		logService.saveLog(request, "【设备管理】", "查看 "+ deviceForm.getDeviceName()+" 设备");
+		logService.saveLog(request, "【设备管理】", "查看“"+ deviceForm.getDeviceName()+"”设备");
 		return "deviceView";
 	}
 
@@ -111,7 +107,7 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 	{
 		deviceForm = deviceService.getfindDeviceByUuid(deviceForm.getDeviceTypeUuid());
 		request.setAttribute("device", deviceForm);
-		logService.saveLog(request, "【设备管理】", "进入 "+ deviceForm.getDeviceName()+" 编辑");
+		logService.saveLog(request, "【设备管理】", "进入“"+ deviceForm.getDeviceName()+"”编辑");
 		return "deviceEdit";
 	}
 	
@@ -122,18 +118,21 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 	public String deviceUpdate()
 	{
 		//如果修改了图片，取新图片的信息
-		if(!StringUtils.isEmpty(deviceForm.getNewFileName()))
-		{	if (deviceForm.getImage() != null) {
-				this.uploadImage(deviceForm);
+		if(!StringUtils.isEmpty(deviceForm.getImageFileName()))
+		{	if (deviceForm.getImage() != null)
+			{
+				//上传图片
+				UploadImageHelper.uploadImage(deviceForm);
+				logService.saveLog(request, "【设备管理】", "修改“"+ deviceForm.getDeviceName()+"”图片");
 	        }
-			deviceForm.setDevicePicUrl("/"+ DEVICE_IMAGE_URL +"/" + deviceForm.getNewFileName());
+			deviceForm.setDevicePicUrl(UploadImageHelper.PICURL);
 		}else//如果没有修改图片，取原图片的路径
 		{
 			String devicePicUrl = request.getParameter("oldUrl");
 			deviceForm.setDevicePicUrl(devicePicUrl);
 		}
 		deviceService.deviceUpdate(deviceForm);
-		logService.saveLog(request, "【设备管理】", "更改 "+ deviceForm.getDeviceName()+" 设备");
+		logService.saveLog(request, "【设备管理】", "更改“"+ deviceForm.getDeviceName()+"”设备");
 		return "deviceUpdate";
 	}
 	
@@ -152,27 +151,7 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
 			e.printStackTrace();
 		}
-		logService.saveLog(request, "【设备管理】", "删除 "+ deviceForm.getDeviceName()+" 设备");
+		logService.saveLog(request, "【设备管理】", "删除“"+ deviceForm.getDeviceName()+"”设备");
 		return "ajax-success";
-	}
-	
-	/**
-	 * 上传图片
-	 * @param deviceForm
-	 */
-	private void uploadImage(DeviceForm deviceForm)
-	{
-		String realpath = ServletActionContext.getServletContext().getRealPath("/" + DEVICE_IMAGE_URL);
-		String newFileName = DateHelper.dateTimeConverString(new Date(),"yyyyMMddhhmmss");
-		deviceForm.setNewFileName(newFileName);
-        File savefile = new File(new File(realpath), newFileName);
-        if (!savefile.getParentFile().exists())
-            savefile.getParentFile().mkdirs();
-        try {
-			FileUtils.copyFile(deviceForm.getImage(), savefile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		logService.saveLog(request, "【设备管理】", "添加/修改 "+ deviceForm.getDeviceName()+" 图片");
 	}
 }

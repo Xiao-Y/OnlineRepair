@@ -1,16 +1,13 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<jsp:include page="/pub.jsp"/>
 <html>
 <head>
 <title>公告信息编辑</title>
-<link href="${pageContext.request.contextPath }/css/Style.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/myJquery.js"></script>
-
 </head>
 
 <body>
-<s:form name="Form1" id="Form1" method="post">
+<s:form name="Form1" id="Form1" method="post" cssClass="form-validate" action="ResourceMa/noticeAction_saveNotice.action">
 	<br/>
 	<table id="opperate1" cellspacing="1" cellpadding="5" width="90%" align="center" bgcolor="#f5fafe" style="border:1px solid #8ba7e3" border="0">
         <tr>
@@ -21,15 +18,15 @@
 		<TR height=10><td></td><td></td></TR>
 		
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe" width="15%">公告标题：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe" width="15%">公告标题：</td>
 			<td class="ta_01" bgcolor="#ffffff" style="word-break: break-all">
-			<input id="noticeTit" name="noticeTit" style="width: 500px; height: 25px; padding: 1;FONT-FAMILY: 宋体; FONT-SIZE: 9pt" maxlength="20">
+				<input id="noticeTit" name="noticeTit" data-rule-required="true" style="width: 500px; height: 25px; padding: 1;FONT-FAMILY: 宋体; FONT-SIZE: 9pt" maxlength="20">
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe" width="15%">公告内容：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe" width="15%">公告内容：</td>
 			<td class="ta_01" bgcolor="#ffffff" style="word-break: break-all">
-			<textarea id="notice" name="notice" style="width: 500px; height: 160px; padding: 1;FONT-FAMILY: 宋体; FONT-SIZE: 9pt" onkeydown="if(event.keyCode==13)addEnter('notice');"></textarea>
+			<textarea id="notice" name="notice" data-rule-required="true" style="width: 500px; height: 160px; padding: 1;FONT-FAMILY: 宋体; FONT-SIZE: 9pt" onkeydown="if(event.keyCode==13)addEnter('notice');"></textarea>
 			</td>
 		</tr>
         <tr>
@@ -98,7 +95,7 @@
 							</tr>
 							<s:if test="#request.commonList != null">
 								<s:iterator value="%{#request.commonList}" var="common">
-									<tr id="noticeIndex" onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+									<tr id="noticeIndex" onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 										<td style="HEIGHT:22px" align="center" width="5%">
 											<input type="checkbox" id="${common.noticeUuid}" name="ids" class="ids">
 										</td>
@@ -118,7 +115,7 @@
 								</s:iterator>
 							</s:if>
 							<s:else>
-								<tr id="noticeIndex" onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+								<tr id="noticeIndex" onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 									<td colspan=5 style="HEIGHT:22px" align="center" width="100%">
 										<font color="#FF0000">没有更多数据...</font>
 									</td>

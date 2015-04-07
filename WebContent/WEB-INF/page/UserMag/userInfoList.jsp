@@ -47,19 +47,19 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
 				登陆名：</td>
 				<td class="ta_01" >
 					<s:textfield name="loginName" id="loginName" size="21" maxlength="21"/>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
 				姓名：</td>
 				<td class="ta_01" >
 					<s:textfield name="name" id="name" size="21" maxLength="21"/>
 				</td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
 				性别：</td>
 				<td class="ta_01" >
 					<s:select list="%{#request.sex}" id="sexCode" name="sexCode"
@@ -68,7 +68,7 @@
 						  cssStyle="width:140px"
 					/>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
 				维护类别：</td>
 				<td class="ta_01" >
 					<s:select list="%{#request.maintainType}" id="maintainTypeCode" name="maintainTypeCode"
@@ -117,7 +117,7 @@
 						<!-- 列表数据 begin -->
 						<s:if test="%{#request.users != null && #request.users.size() > 0}">
 							<s:iterator value="%{#request.users}" var="user">
-								<tr id="<s:property value="%{#user.userUuid}"/>" onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+								<tr id="<s:property value="%{#user.userUuid}"/>" onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 									<td style="height:22px" align="center" width="20%">
 										<a href="${pageContext.request.contextPath }/UserMag/userAction_userView.action?userUuid=<s:property value="%{#user.userUuid}"/>">
 											<s:property value="%{#user.loginName}"/>
@@ -146,7 +146,7 @@
 							</s:iterator>
 						</s:if>
 						<s:else>
-							<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+							<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 								<td colspan=6 style="HEIGHT:22px" align="center" width="100%">
 									<font color="#FF0000">没有更多数据...</font>
 								</td>

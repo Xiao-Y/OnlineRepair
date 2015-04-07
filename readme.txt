@@ -126,11 +126,19 @@ pub.css		公有的样式
 			
 	⑤使用Struts2标签：
 		可以使用ActionContext.getContext().getValueStack().push(userForm);进行页面数据的显示
+		
+	⑥上传图片方法的使用：
+		1.xxForm需要继承BaseForm 上传的文件id和name为image不能改变。
+		2.程序中调用com.xiaoy.base.util.UploadImageHelper中的uploadImage(BaseForm)方法
+		3.Action中UploadImageHelper.uploadImage(xxForm);
+		4.设备图片保存路径UploadImageHelper.PICURL
 
 
 二、页面修改
 	①去掉设备信息管理中的“设备负责人”及“设备负责人联系方式”
 	②修改页面加载js、css方式为添加公有的pub.jsp
+	③去掉Function.js
+	④去掉Style.css
 	
 
 三、错误记录：

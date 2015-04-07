@@ -1,7 +1,5 @@
 package com.xiaoy.device.web.form;
 
-import java.io.File;
-
 import com.xiaoy.base.web.form.BaseForm;
 
 /**
@@ -31,16 +29,6 @@ public class DeviceForm extends BaseForm {
 	private String devicePicUrl;
 	/* 备注 */
 	private String remark;
-
-	// 上传的文件
-	private File image; 
-	// 文件名称
-	private String imageFileName; 
-	// 文件类型
-	private String imageContentType; 
-	
-	//文件的新名字
-	private String newFileName;
 
 	public String getDeviceTypeUuid() {
 		return deviceTypeUuid;
@@ -112,39 +100,5 @@ public class DeviceForm extends BaseForm {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-	public File getImage() {
-		return image;
-	}
-
-	public void setImage(File image) {
-		this.image = image;
-	}
-
-	public String getImageFileName() {
-		return imageFileName;
-	}
-
-	public void setImageFileName(String imageFileName) {
-		this.imageFileName = imageFileName;
-	}
-
-	public String getImageContentType() {
-		return imageContentType;
-	}
-
-	public void setImageContentType(String imageContentType) {
-		this.imageContentType = imageContentType;
-	}
-
-	public String getNewFileName()
-	{
-		return newFileName;
-	}
-
-	public void setNewFileName(String newFileName)
-	{
-		this.newFileName = newFileName;
 	}
 }

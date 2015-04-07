@@ -1,5 +1,4 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<link href="${pageContext.request.contextPath }/css/Style.css" type="text/css" rel="stylesheet">
 <!-- 分页标签样式 -->
 <link href="${pageContext.request.contextPath }/css/pageTag.css" rel="stylesheet" type="text/css"/>
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />

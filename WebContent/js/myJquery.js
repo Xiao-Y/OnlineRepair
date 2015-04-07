@@ -337,4 +337,42 @@ function deleteUser(name,userUuid){
 }
 //删除用户信息==============end
 
+//批量删除用户信息==========start 
+function userDel() {
+	var url = "${pageContext.request.contextPath }/UserMag/userAction_userDelete.action";
+	var flag = false;
+	$.each($("input:checkbox"), function(i, val) {
+		if (val.checked == true) {
+			flag = confirm("确定要删除用户信息？");
+			return false;
+		}
+	});
+
+	if (flag == false) {
+		alert("请选择需要删除的用户");
+		return false;
+	}
+
+	if (flag) {
+		$.each($("input:checkbox"), function(i, val) {
+			if (val.checked == true && i != 0) {
+				var $tr = $(this).parent().parent();
+				var id = $(this).attr("id");
+				var args = {
+					"time" : new Date,
+					"userUuid" : id
+				};
+				$.post(url, args, function(data) {
+					if (data == "1") {
+						$tr.remove();
+					} else {
+						alert("删除失败");
+					}
+				});
+			}
+		});
+	}
+}
+//批量删除用户信息==========end 
+
 

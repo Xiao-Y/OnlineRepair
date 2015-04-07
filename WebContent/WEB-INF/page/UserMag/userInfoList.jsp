@@ -96,6 +96,7 @@
 				<td class="ta_01" align="right">
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="submit" value="查询" name="BT_Find" >&nbsp;&nbsp;
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_Reset" >&nbsp;&nbsp;
+				    <input style="font-size:12px; color:black; height=20;width=80" id="userDel" onclick="userDel();" type="button" value="批量删除" name="BT_Reset" >&nbsp;&nbsp;
 					<input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="添加用户信息" name="BT_Add" onclick="link('${pageContext.request.contextPath }/UserMag/userAction_toUserAdd.action')">
 				</td>
 			</tr>
@@ -105,9 +106,12 @@
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
 						<tr style="font-weight:bold;font-size:12pt;height:25px;background-color:#afd1f3">
+							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">
+								<input type="checkbox" id="checkbox" name="checkbox" onclick="quanxuan();">
+							</td>
 							<td align="center" width="20%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">登陆名</td>
 						    <td align="center" width="20%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">姓名</td>
-							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">性别</td>
+							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">性别</td>
 							<td align="center" width="20%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">联系方式</td>
 							<td align="center" width="10%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">编辑</td>
 							<td align="center" width="10%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">删除</td>
@@ -118,6 +122,9 @@
 						<s:if test="%{#request.users != null && #request.users.size() > 0}">
 							<s:iterator value="%{#request.users}" var="user">
 								<tr id="<s:property value="%{#user.userUuid}"/>" onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+									<td style="HEIGHT:22px" align="center" width="5%">
+										<s:checkbox id="%{#user.userUuid}" name="ids" class="ids"/>
+									</td>
 									<td style="height:22px" align="center" width="20%">
 										<a href="${pageContext.request.contextPath }/UserMag/userAction_userView.action?userUuid=<s:property value="%{#user.userUuid}"/>">
 											<s:property value="%{#user.loginName}"/>
@@ -128,10 +135,10 @@
 											<s:property value="%{#user.name}"/>
 										</a>
 									</td>
-									<td style="height:22px" align="center" width="20%">
+									<td style="height:22px" align="center" width="5%">
 										<s:property value="%{#user.sex}"/>
 									</td>									
-									<td style="height:22px" align="center" width="10%">
+									<td style="height:22px" align="center" width="20%">
 										<s:property value="%{#user.phone}"/>
 									</td>
 									<td align="center" style="HEIGHT: 22px" align="center" width="10%">																	

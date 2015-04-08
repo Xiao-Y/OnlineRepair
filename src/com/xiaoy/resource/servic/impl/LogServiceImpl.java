@@ -1,11 +1,8 @@
 package com.xiaoy.resource.servic.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -92,18 +89,7 @@ public class LogServiceImpl implements LogService
 	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
 	public void deleteLogByIds(String[] ids)
 	{
-		List<String> list = null;
-		Map<String, Object> paramsMapValue = null;
-		String hqlWhere = "";
-		if(ids != null && ids.length > 0)
-		{
-			hqlWhere = " and logID in(:logID)";
-			list = Arrays.asList(ids);
-			paramsMapValue = new HashMap<String, Object>();
-		}
-		paramsMapValue.put("logID", list);
-		
-		logDao.deleteObjectByCollectionIds(hqlWhere,paramsMapValue);
+		logDao.deleteLogByIds(ids);
 	}
 
 	@Override

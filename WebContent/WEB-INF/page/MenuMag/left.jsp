@@ -97,7 +97,7 @@
 					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/UserMag/userInfoEdit.jsp' target="main">个人信息</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/UserMag/userAction_userInfo.action' target="main">个人信息</a>
 							</td>
 						</tr>
 						<tr height="25">

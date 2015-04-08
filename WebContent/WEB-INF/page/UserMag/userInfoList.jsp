@@ -36,7 +36,7 @@
 </head>
 <body>
 	<!-- 查询输入start -->
-	<form action="${pageContext.request.contextPath}/UserMag/userAction_userIndex.action" id="form1" name="form1" method="post">
+	<form action="" id="form1" name="form1" method="post">
 		<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
 			<tr>
 				<td class="ta_01" colspan=6 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
@@ -50,12 +50,12 @@
 				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
 				登陆名：</td>
 				<td class="ta_01" >
-					<s:textfield name="loginName" id="loginName" size="21" maxlength="21"/>
+					<s:textfield name="loginName" id="loginName" size="18" maxlength="21"/>
 				</td>
 				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
 				姓名：</td>
 				<td class="ta_01" >
-					<s:textfield name="name" id="name" size="21" maxLength="21"/>
+					<s:textfield name="name" id="name" size="18" maxLength="21"/>
 				</td>
 			</tr>
 			<tr>
@@ -94,9 +94,9 @@
 		             </table>
 	                 </td>
 				<td class="ta_01" align="right">
-				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="submit" value="查询" name="BT_Find" >&nbsp;&nbsp;
+				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" onclick="userFind();" type="button" value="查询" name="BT_Find" >&nbsp;&nbsp;
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_Reset" >&nbsp;&nbsp;
-				    <input style="font-size:12px; color:black; height=20;width=80" id="userDel" onclick="userDel();" type="button" value="批量删除" name="BT_Reset" >&nbsp;&nbsp;
+				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Del" onclick="userDel();" type="button" value="批量删除" name="BT_Del" >&nbsp;&nbsp;
 					<input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="添加用户信息" name="BT_Add" onclick="link('${pageContext.request.contextPath }/UserMag/userAction_toUserAdd.action')">
 				</td>
 			</tr>
@@ -123,7 +123,7 @@
 							<s:iterator value="%{#request.users}" var="user">
 								<tr id="<s:property value="%{#user.userUuid}"/>" onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 									<td style="HEIGHT:22px" align="center" width="5%">
-										<s:checkbox id="%{#user.userUuid}" name="ids" class="ids"/>
+										<input type="checkbox" id="${user.userUuid }" name="ids" class="ids" value="${user.userUuid }">
 									</td>
 									<td style="height:22px" align="center" width="20%">
 										<a href="${pageContext.request.contextPath }/UserMag/userAction_userView.action?userUuid=<s:property value="%{#user.userUuid}"/>">

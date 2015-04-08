@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -91,7 +92,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 	{
 		userService.userSave(userForm);
 		logService.saveLog(request, "【用户信息】", "保存“"+ userForm.getName()+ "”用户信息");
-		return "userSave";
+		return "success";
 	}
 	
 	/**
@@ -104,6 +105,23 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 		ActionContext.getContext().getValueStack().push(userForm);
 		logService.saveLog(request, "【用户信息】", "查看“"+ userForm.getName()+ "”用户详细信息");
 		return "userView";
+	}
+	
+	/**
+	 * 进入个人用户信息查看页
+	 * @return	编辑页面
+	 */
+	public String userInfo()
+	{
+		//TODO 暂时的用户uuid，
+		userForm = userService.findUserByUuid("402880904c96dc65014c96dcd2b30002");
+		//标识为用户个人信息
+		userForm.setFalg("1");
+		ActionContext.getContext().getValueStack().push(userForm);
+		//数据类型发送到页面
+		this.sendPageData();
+		logService.saveLog(request, "【用户信息】", "查看个用户详细信息");
+		return "userEdit";
 	}
 	
 	/**
@@ -120,13 +138,33 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 		return "userEdit";
 	}
 	
+	/**
+	 * 更新用户信息
+	 * @return
+	 */
 	public String userUpdate()
 	{
 		userService.userUpdate(userForm);
 		logService.saveLog(request, "【用户信息】", "更新“"+ userForm.getName()+ "”用户信息");
-		return "userUpdate";
+		//个人用户信息
+		if(!StringUtils.isEmpty(userForm.getFalg()))
+		{
+			userForm.setFalg("2");
+			ActionContext.getContext().getValueStack().push(userForm);
+			//数据类型发送到页面
+			this.sendPageData();
+			logService.saveLog(request, "【用户信息】", "编辑“"+ userForm.getName()+ "”用户信息");
+			return "userEdit";
+		}else{
+			return "success";
+		}
 	}
 	
+	/**
+	 * 删除单个用户
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	public String userDelete() throws UnsupportedEncodingException
 	{
 		String userUuid = request.getParameter("userUuid");
@@ -143,6 +181,17 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 			e.printStackTrace();
 		}
 		return "ajax-success";
+	}
+	
+	/**
+	 * 批量删除用户
+	 * @return
+	 */
+	public String userDeletes()
+	{
+		String[] ids = userForm.getIds();
+		userService.userDeletes(ids);
+		return "success";
 	}
 	
 	/**

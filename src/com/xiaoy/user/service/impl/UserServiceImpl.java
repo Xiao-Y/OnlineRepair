@@ -90,6 +90,11 @@ public class UserServiceImpl implements UserService
 		userDao.deleteObjectByid(userUuid);
 	}
 
+	@Override
+	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
+	public void userDeletes(String[] ids) {
+		userDao.deleteUserByIds(ids);
+	}
 	
 	/**
 	 * 用户的Vo对象转换成Po对象

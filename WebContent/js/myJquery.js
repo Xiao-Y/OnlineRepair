@@ -281,16 +281,16 @@ function logDelete(meg){
 		if(!flag){
 			return;
 		}else{
-			$("#Form2").attr("action","${pageContext.request.contextPath }/ResourceMag/logAction_deleteLog.action");
-			$("#Form2").submit();
+			$("#Form1").attr("action","${pageContext.request.contextPath }/ResourceMag/logAction_deleteLog.action");
+			$("#Form1").submit();
 		}
 	}else if(meg == "all"){
 		var flag = window.confirm('你确定要删除所有的日志');
 		if(!flag){
 			return;
 		}else{
-			$("#Form2").attr("action","${pageContext.request.contextPath }/ResourceMag/logAction_deleteLogAll.action");
-			$("#Form2").submit();
+			$("#Form1").attr("action","${pageContext.request.contextPath }/ResourceMag/logAction_deleteLogAll.action");
+			$("#Form1").submit();
 		}
 	}
 }
@@ -354,25 +354,17 @@ function userDel() {
 	}
 
 	if (flag) {
-		$.each($("input:checkbox"), function(i, val) {
-			if (val.checked == true && i != 0) {
-				var $tr = $(this).parent().parent();
-				var id = $(this).attr("id");
-				var args = {
-					"time" : new Date,
-					"userUuid" : id
-				};
-				$.post(url, args, function(data) {
-					if (data == "1") {
-						$tr.remove();
-					} else {
-						alert("删除失败");
-					}
-				});
-			}
-		});
+		$("#form1").attr("action", "${pageContext.request.contextPath }/UserMag/userAction_userDeletes.action");
+		$("#form1").submit();
 	}
 }
 //批量删除用户信息==========end 
+
+//查询用户信息==============start
+function userFind(){
+	$("#form1").attr("action", "${pageContext.request.contextPath}/UserMag/userAction_userIndex.action");
+	$("#form1").submit();
+}
+//查询用户信息==============end
 
 

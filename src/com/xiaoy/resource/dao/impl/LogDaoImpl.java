@@ -1,5 +1,6 @@
 package com.xiaoy.resource.dao.impl;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,5 +43,21 @@ public class LogDaoImpl extends CommonImpl<Log> implements LogDao
 		
 		Integer count = super.countByCollection(hqlWhere.toString(), paramsMap);
 		return count;
+	}
+
+	@Override
+	public void deleteLogByIds(String[] ids) {
+		List<String> list = null;
+		Map<String, Object> paramsMapValue = null;
+		String hqlWhere = "";
+		if(ids != null && ids.length > 0)
+		{
+			hqlWhere = " and logID in(:logID)";
+			list = Arrays.asList(ids);
+			paramsMapValue = new HashMap<String, Object>();
+		}
+		paramsMapValue.put("logID", list);
+		
+		super.deleteObjectByCollectionIds(hqlWhere,paramsMapValue);
 	}
 }

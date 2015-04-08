@@ -6,7 +6,6 @@
 <head>
 
 <title>编辑用户信息</title>
-
 </head>
 <body>
 	<s:form name="Form1" id="Form1" method="post" cssClass="form-validate" action="UserMag/userAction_userUpdate">
@@ -75,6 +74,7 @@
 			</TR>
 			<tr>
 				<td class="ta_01" style="WIDTH: 100%" align="center" bgColor="#f5fafe" colSpan="4">
+					<s:hidden id="falg" name="falg"/>
 					<input type="submit" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55">
 					<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
 					<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="返回"  name="Reset1" onClick="history.back()">
@@ -82,5 +82,12 @@
 			</tr>
 		</table>　
 	</s:form>
+	<script type="text/javascript">
+		$().ready(function(){
+			if($("#falg").val() == '2'){
+				alert("保存成功!");
+			}
+		});
+	</script>
 </body>
 </html>

@@ -21,5 +21,11 @@ public interface LogDao extends Common<Log>
 	 * @return	记录数
 	 */
 	public Integer countByCollection(LogForm logForm);
+
+	/**
+	 * 通过一组uuid数组，批量删除日志信息
+	 * @param ids	uuid数组
+	 */
+	public void deleteLogByIds(String[] ids);
 	
 }

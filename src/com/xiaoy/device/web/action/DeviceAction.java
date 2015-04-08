@@ -84,7 +84,7 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
         }
 		deviceService.deviceSave(deviceForm);
 		logService.saveLog(request, "【设备管理】", "完成添加设备");
-		return "deviceSave";
+		return "success";
 	}
 	
 	/**
@@ -133,7 +133,7 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 		}
 		deviceService.deviceUpdate(deviceForm);
 		logService.saveLog(request, "【设备管理】", "更改“"+ deviceForm.getDeviceName()+"”设备");
-		return "deviceUpdate";
+		return "success";
 	}
 	
 	/**

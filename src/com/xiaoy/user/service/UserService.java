@@ -44,4 +44,10 @@ public interface UserService
 	 * @param userUuid	用户uuid
 	 */
 	public void userDelete(String userUuid);
+
+	/**
+	 * 通过一组uuid数组，批量删除用户信息
+	 * @param ids	用户uuid数组
+	 */
+	public void userDeletes(String[] ids);
 }

@@ -218,7 +218,7 @@
 					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/AuthorityMag/roleIndex.jsp' target="main">角色权限管理</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/AuthorityMag/roleAction_home.action' target="main">角色权限管理</a>
 							</td>
 						</tr>
 					</table>

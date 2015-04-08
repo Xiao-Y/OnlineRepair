@@ -154,4 +154,18 @@
 
 	</package>
 	<!-- 资源管理====end -->
+	
+	<!-- 权限管理=============start -->
+	<package name="authority" namespace="/AuthorityMag" extends="struts-default">
+	<!--  角色管理 -->
+		<action name="roleAction_*" class="com.xiaoy.authority.web.action.RoleAction" method="{1}">
+			<result name="home">/WEB-INF/page/AuthorityMag/roleIndex.jsp</result>
+			<result name="edit">/WEB-INF/page/AuthorityMag/roleEdit.jsp</result>
+			<result name="list" type="redirectAction">
+				<param name="actionName">roleAction_home</param>
+				<param name="namespace">/AuthorityMag</param>
+			</result>
+		</action>
+	</package>
+	<!-- 权限管理=============end -->
 </struts>    

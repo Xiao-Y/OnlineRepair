@@ -114,7 +114,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 	public String userInfo()
 	{
 		//TODO 暂时的用户uuid，
-		userForm = userService.findUserByUuid("402880904c96dc65014c96dcd2b30002");
+		userForm = userService.findUserByUuid("40283f824c8e0f10014c8e10a0020000");
 		//标识为用户个人信息
 		userForm.setFalg("1");
 		ActionContext.getContext().getValueStack().push(userForm);

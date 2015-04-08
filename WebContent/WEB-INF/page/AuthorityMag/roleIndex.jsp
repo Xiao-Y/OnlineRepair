@@ -3,10 +3,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/myJquery.js"></script>
-		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
-
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<jsp:include page="/pub.jsp"/>
 		<title>角色权限管理</title>
 				
 		<script language="javascript">
@@ -22,13 +20,12 @@
        
        function selectRole(){
           
-          if($("#role").val()=="0"){
-        	  window.location.href="${pageContext.request.contextPath }/page/AuthorityMag/roleIndex.jsp";            
+          if($("#Form1 :input[name=roleId]").val()=="0"){
+         	 $("#Form1").attr("action","${pageContext.request.contextPath }/AuthorityMag/roleAction_home.action");
+             $("#Form1").submit();            
           }else{
-            $().ready(function(){
-            	$("#form2").text("");
-            	$("#form2").load("${pageContext.request.contextPath }/page/AuthorityMag/roleEdit.jsp");
-            });
+        	  $("#Form2").text("");
+              $("#Form2").load("${pageContext.request.contextPath }/AuthorityMag/roleAction_edit.action");
           }
        }
 		
@@ -36,7 +33,7 @@
 	</HEAD>
 		
 	<body>
-		<form name="form1" id="form1"  method="post" style="margin:0px;">
+		<s:form name="Form1" id="Form1"  method="post" cssStyle="margin:0px;">
 			<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
 				<tbody>
 					<tr>
@@ -51,15 +48,11 @@
 					<tr>
 						<td class="ta_01" align="right" width="35%" >角色类型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td class="ta_01" align="left"  width="65%" >
-							<select name="role" id="role" class="bg role" style="width:180px"  onchange="selectRole()">
-								 <option value="0">请选择</option>
-								 <option value="1">系统管理员</option>
-								 <option value="2">高级管理员</option>
-								 <option value="3">中级管理员</option>
-								 <option value="4">业务用户</option>
-								 <option value="5">一般用户</option>
-								 <option value="6">普通用户</option>
-							 </select>  
+							<s:select list="#request.systemList" name="roleId" 
+							  listKey="ddlCode" listValue="ddlName" id="roleId"
+							  headerKey="0" headerValue="请选择"
+							  cssClass="bg" cssStyle="width:180px" onchange="selectRole()"
+							/> 
 						 </td>				
 					</tr>
 				    
@@ -68,9 +61,9 @@
 					</tr>
 				</tbody>
 			</table>
-		</form>
+		</s:form>
 
-		<form  name="form2" id="form2"  method="post" style="margin:0px;">
+		<s:form  name="Form2" id="Form2"  method="post" cssStyle="margin:0px;">
 			<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
 		 		<tr>
 		  			<td>
@@ -78,55 +71,33 @@
 		   					<legend align="left">权限分配</legend>
 		     				<table cellspacing="0" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">			 
 					  			<tr>
-						 			<td class="ta_01" colspan=2 align="left" width="100%" > 
-									<br>
-							          	技术设施维护管理 : 
-			   	                        <input type="checkbox"  name="selectoper" value="a" >
-						             	仪器设备管理&nbsp;&nbsp;&nbsp;
-		   	                         	<input type="checkbox"  name="selectoper" value="b" >
-						            	 设备校准检修&nbsp;&nbsp;&nbsp;
-							            <input type="checkbox"  name="selectoper" value="c" >
-						            	 设备购置计划&nbsp;&nbsp;&nbsp;
-						            <br>
-						         		技术资料图纸管理 : 
-						       			<input type="checkbox"  name="selectoper" value="d" >
-						             	资料图纸管理 &nbsp;&nbsp;&nbsp;
-						      	    <br>
-									          站点设备运行管理 : 
-									    <input type="checkbox"  name="selectoper" value="e" >
-									         站点基本信息&nbsp;&nbsp;&nbsp;
-						      	      	<input type="checkbox"  name="selectoper" value="f" >
-						            	 运行情况&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		   	                         	<input type="checkbox"  name="selectoper" value="g" >
-						            	 维护情况&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-									<br>&nbsp;
-						         		监测台建筑管理 : 
-		   	                         	<input type="checkbox"  name="selectoper" value="k" >
-						             	监测台建筑管理
-									<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						          		系统管理 : 
-		   	                         	<input type="checkbox"  name="selectoper" value="l" >
-						             	角色管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		   	                         	<input type="checkbox"  name="selectoper" value="m" >
-						             	待办事宜 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		   	                         	<input type="checkbox"  name="selectoper" value="n" >
-						             	数据字典维护 &nbsp;&nbsp;&nbsp;
-									<br>&nbsp;&nbsp;&nbsp;
-						          		操作权限分配 : 
-		   	                         	<input type="checkbox"  name="selectoper" value="o" >
-						             	新增功能 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		   	                         	<input type="checkbox"  name="selectoper" value="p" >
-						            	删除功能&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		   	                         	<input type="checkbox"  name="selectoper" value="q" >
-						             	编辑功能&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						   			</td>
-								</tr>						
+						 			<s:set value="%{''}" scope="request" var="parentCode"/>
+									<s:if test="%{#request.xmlList != null}">
+										<s:iterator value="%{#request.xmlList}" var="xml">
+											<s:if test="%{#request.parentCode == #xml.parentCode}">
+												<input type="checkbox"  name="selectoper" value='<s:property value="%{#xml.code}"/>' >
+												<s:property value="%{#xml.name}"/>
+											</s:if>
+											<s:else>
+												<s:set value="%{#xml.parentCode}" scope="request" var="parentCode"/>
+												<br>
+												<s:iterator begin="0" end="%{8 - #request.parentName.length()}" step="1">
+													&nbsp;
+												</s:iterator>
+												<s:property value="%{#xml.parentName}"/> :
+												<input type="checkbox"  name="selectoper" value='<s:property value="%{#xml.code}"/>' >
+												<s:property value="%{#xml.name}"/>
+											</s:else>
+										</s:iterator>
+									</s:if>
+								</tr>
+								<s:hidden name="roleStr" id="roleStr"/>
+								<s:hidden name="roleid" id="roleId"/>						
 				 			</table>	
 		        		</fieldset>
 			  		</td>
 			 	</tr>					
 			</table>
-			<input type="hidden" value="" id="roleid" name="roleid">
-		</form>
+		</s:form>
 	</body>
 </html>

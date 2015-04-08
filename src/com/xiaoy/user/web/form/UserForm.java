@@ -29,8 +29,29 @@ public class UserForm extends BaseForm
 	/* 注册时间 */
 	private String registerTime;
 	
+	/**
+	 * 为1时标识为用户个人信息
+	 * 为2时标识为更新个人信息
+	 */
 	private String falg;
 	
+	/**
+	 * 判断该角色是否拥有某个用户：<br/>
+	 * flag == 0: 表示该角色不拥有某个用户<br/>
+	 * flag == 1: 表示该角色拥有某个用户<br/>
+	 */
+	private String flag;
+	
+	public String getFlag()
+	{
+		return flag;
+	}
+
+	public void setFlag(String flag)
+	{
+		this.flag = flag;
+	}
+
 	public String getUserUuid()
 	{
 		return userUuid;

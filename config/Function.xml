@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+应对需求变更：
+	原数据a,b,c,d,e,f,g,h......
+	    数据库中的存储结构，即组成权限的字符串String popedom = abcdefth......
+	    页面控制popedom.contains("a") 是否具有权限
+	
+	现数据aa,ab,ac,ad...az，ba,bb,bc...bz,ca......
+	    数据库中存储结构，即组成权限的字符串String popedom = aa@ab@ac@ad......
+	    页面控制 popedom.contains("aa") 是否具有权限
+	        或者String [] dom = popedom.split("@");
+	          dom[i].equal("aa")，用于判断是否具有权限 
+ -->
+    
+
+<Data>
+
+  <Function>
+     <FunctionCode>a</FunctionCode>
+     <FunctionName>设备信息管理</FunctionName>
+     <ParentCode>device</ParentCode>
+     <ParentName>设备管理</ParentName>
+  </Function>
+      
+  <Function>
+     <FunctionCode>b</FunctionCode>
+     <FunctionName>查询设备状态</FunctionName>
+     <ParentCode>device</ParentCode>
+     <ParentName>设备管理</ParentName>
+  </Function> 
+   
+  <Function>
+     <FunctionCode>c</FunctionCode>
+     <FunctionName>个人信息</FunctionName>
+     <ParentCode>user</ParentCode>
+     <ParentName>用户信息管理</ParentName>
+  </Function>
+
+  <Function>
+     <FunctionCode>d</FunctionCode>
+     <FunctionName>用户信息</FunctionName>
+     <ParentCode>user</ParentCode>
+     <ParentName>用户信息管理</ParentName>
+  </Function> 
+
+  <Function>
+     <FunctionCode>e</FunctionCode>
+     <FunctionName>申报故障</FunctionName>
+     <ParentCode>reporting</ParentCode>
+     <ParentName>申报故障管理</ParentName>
+  </Function> 
+  
+  <Function>
+     <FunctionCode>f</FunctionCode>
+     <FunctionName>故障信息列表</FunctionName>
+     <ParentCode>reporting</ParentCode>
+     <ParentName>申报故障管理</ParentName>
+  </Function> 
+   
+  <Function>
+     <FunctionCode>g</FunctionCode>
+     <FunctionName>待审核</FunctionName>
+     <ParentCode>audit</ParentCode>
+     <ParentName>故障申报审核</ParentName>
+  </Function> 
+  
+  <Function>
+     <FunctionCode>h</FunctionCode>
+     <FunctionName>审核通过</FunctionName>
+     <ParentCode>audit</ParentCode>
+     <ParentName>故障申报审核</ParentName>
+  </Function>
+     
+  <Function>
+     <FunctionCode>i</FunctionCode>
+     <FunctionName>审核未通过</FunctionName>
+     <ParentCode>audit</ParentCode>
+     <ParentName>故障申报审核</ParentName>
+  </Function>
+  
+  <Function>
+     <FunctionCode>j</FunctionCode>
+     <FunctionName>我的评价</FunctionName>
+     <ParentCode>evaluate</ParentCode>
+     <ParentName>评价留言管理</ParentName>
+  </Function>	
+    
+  <Function>
+     <FunctionCode>k</FunctionCode>
+     <FunctionName>留言管理</FunctionName>
+     <ParentCode>evaluate</ParentCode>
+     <ParentName>评价留言管理</ParentName>
+  </Function> 
+       
+  <Function>
+     <FunctionCode>l</FunctionCode>
+     <FunctionName>角色权限管理</FunctionName>
+     <ParentCode>authority</ParentCode>
+     <ParentName>权限管理</ParentName>
+  </Function>
+  
+  <Function>
+     <FunctionCode>m</FunctionCode>
+     <FunctionName>发布公告</FunctionName>
+     <ParentCode>resource</ParentCode>
+     <ParentName>资源管理</ParentName>
+  </Function>  
+  
+  <Function>
+     <FunctionCode>n</FunctionCode>
+     <FunctionName>数据字典</FunctionName>
+     <ParentCode>resource</ParentCode>
+     <ParentName>资源管理</ParentName>
+  </Function>
+  
+  <Function>
+     <FunctionCode>o</FunctionCode>
+     <FunctionName>日志管理</FunctionName>
+     <ParentCode>resource</ParentCode>
+     <ParentName>资源管理</ParentName>
+  </Function>
+  
+  <Function>
+     <FunctionCode>p</FunctionCode>
+     <FunctionName>用户性别统计</FunctionName>
+     <ParentCode>resource</ParentCode>
+     <ParentName>资源管理</ParentName>
+  </Function>
+  
+  <Function>
+     <FunctionCode>q</FunctionCode>
+     <FunctionName>维护人员类别统计</FunctionName>
+     <ParentCode>count</ParentCode>
+     <ParentName>统计管理</ParentName>
+  </Function>
+  
+  <Function>
+     <FunctionCode>q</FunctionCode>
+     <FunctionName>各种评价数量统计</FunctionName>
+     <ParentCode>count</ParentCode>
+     <ParentName>统计管理</ParentName>
+  </Function>
+
+</Data>

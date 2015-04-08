@@ -36,7 +36,7 @@
 		       	</td>
 		       	<td align="right" bgColor="#f5fafe" class="ta_01">注册日期：</td>
 				<td class="ta_01" bgColor="#ffffff">
-					<s:textfield name="registerTime" id="registerTime" maxlength="20" size="20" cssClass="Wdate" cssStyle="width: 134px" readonly="true"/>
+					<s:textfield name="registerTime" id="registerTime" maxlength="20" size="20" cssStyle="width: 134px" readonly="true"/>
 				</td>
 			</tr>
 			<tr>

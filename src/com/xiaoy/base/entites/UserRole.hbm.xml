@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-12-22 20:55:38 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xiaoy.base.entites.UserRole" table="USER_ROLE">
+        <id name="seqId" type="java.lang.Integer">
+            <column name="SEQID" />
+            <generator class="increment" />
+        </id>
+        <property name="userId" type="java.lang.String">
+            <column name="USERID" />
+        </property>
+        <property name="roleId" type="java.lang.String">
+            <column name="ROLEID" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+    </class>
+</hibernate-mapping>

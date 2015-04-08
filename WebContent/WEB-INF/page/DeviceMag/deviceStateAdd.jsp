@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<form name="Form1" method="post">
+<form enctype="multipart/form-data" name="Form1" method="post" id="Form1" class="form-validate">
 	<br>
     <table cellSpacing="1" cellPadding="5" width="880" align="center" bgColor="#eeeeee" style="border:1px solid #8ba7e3" border="0">
 		<tr>
@@ -64,7 +64,7 @@
 			
 		</tr>
 		<tr>
-			<td align="right" width="15%" bgColor="#f5fafe" class="ta_01">上次检修日期：<font color="#FF0000">*</font></td>
+			<td align="right" width="15%" bgColor="#f5fafe" class="ta_01">上次检修日期：</td>
 	       	<td class="ta_01" width="35%" bgColor="#ffffff">
 				<input class="Wdate" type="text" size="20" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})">
 	       	</td>
@@ -114,7 +114,7 @@
 			<td class="ta_01" style="WIDTH: 100%" align="center" bgColor="#f5fafe" colSpan="4">
 			<input type="button" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55"   onClick="check_null()">
 			 <FONT face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
-			<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="关闭"  name="Reset1"  onClick="custom_close()">
+			<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="返回"  name="Reset1"  onClick="history.back()">
 				
 			</td>
 		</tr>

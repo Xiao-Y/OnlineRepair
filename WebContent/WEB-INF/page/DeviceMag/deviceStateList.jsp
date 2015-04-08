@@ -129,13 +129,13 @@
 								<input type="checkbox" id="checkbox" name="checkbox" onclick="quanxuan();">
 							</td>
 						  	<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">区域</td>
-						  	<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</td>
-						  	<td align="center" width="20%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备名</td>
+						  	<td align="center" width="15%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</td>
+						  	<td align="center" width="15%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备名</td>
 							<td align="center" width="15%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">型号</td>
-							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装日期</td>
+							<td align="center" width="20%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装日期</td>
 							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">运行状态</td>
-							<td width="10%" align="center" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">编辑</td>
-							<td width="10%" align="center" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">删除</td>
+							<td width="5%" align="center" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">编辑</td>
+							<td width="5%" align="center" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">删除</td>
 						</tr>
 						<!-- 列表标题 end -->
 						
@@ -149,10 +149,10 @@
 									<td style="height:22px" align="center" width="10%">
 										<s:property value="%{#list.areaName}"/>
 									</td>
-									<td style="height:22px" align="center" width="10%">
+									<td style="height:22px" align="center" width="15%">
 										<s:property value="%{#list.installationSiteCode}"/>
 									</td>
-									<td style="height:22px" align="center" width="20%">
+									<td style="height:22px" align="center" width="15%">
 										<input type="hidden" id="123">
 										<a href="${pageContext.request.contextPath }/page/DeviceMag/deviceStateView.jsp">
 											<s:property value="%{#list.deviceName}"/>
@@ -161,17 +161,17 @@
 									<td style="height:22px" align="center" width="15%">
 										<s:property value="%{#list.version}"/>
 									</td>
-									<td style="height:22px" align="center" width="10%">
+									<td style="height:22px" align="center" width="20%">
 										<s:property value="%{#list.installationTime}"/>
 									</td>									
 									<td style="height:22px" align="center" width="10%">
 										<s:property value="%{#list.stateCode}"/>
 									</td>
-									<td align="center" style="HEIGHT: 22px" align="center" width="10%">																	
+									<td align="center" style="HEIGHT: 22px" align="center" width="5%">																	
 									   <a href="${pageContext.request.contextPath }/page/DeviceMag/deviceStateEdit.jsp">
 									   <img src="${pageContext.request.contextPath }/images/edit.gif" border="0" style="cursor:hand"></a>													
 									</td>
-									<td align="center" style="HEIGHT: 22px" align="center" width="10%">
+									<td align="center" style="HEIGHT: 22px" align="center" width="5%">
 										<a href="system/elecUserAction_delete.do?userID=" onclick="return confirm('你确定要删除  灯管 ？')">
 										<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="cursor:hand"></a>												
 									</td>
@@ -180,7 +180,7 @@
 						</s:if>
 						<s:else>
 							<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-								<td colspan=6 style="HEIGHT:22px" align="center" width="100%">
+								<td colspan=9 style="HEIGHT:22px" align="center" width="100%">
 									<font color="#FF0000">没有更多数据...</font>
 								</td>
 							</tr>

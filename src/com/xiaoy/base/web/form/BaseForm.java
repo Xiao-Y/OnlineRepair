@@ -25,6 +25,8 @@ public class BaseForm {
 	//上传文件类型
 	protected String imageContentType;
 
+	protected String[] ids;
+	
 	public Integer getPageSize() {
 		return pageSize;
 	}
@@ -79,5 +81,13 @@ public class BaseForm {
 
 	public void setImageContentType(String imageContentType) {
 		this.imageContentType = imageContentType;
+	}
+
+	public String[] getIds() {
+		return ids;
+	}
+
+	public void setIds(String[] ids) {
+		this.ids = ids;
 	}
 }

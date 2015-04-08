@@ -68,7 +68,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 		
 		//数据类型发送到页面
 		this.sendPageData();
-		logService.saveLog(request, "【用户信息】", "查看用户信息列表");
+		logService.saveLog(request, "【用户信息】--【用户信息管理】", "查看用户信息列表");
 		return "userIndex";
 	}
 	
@@ -80,7 +80,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 	{
 		//数据类型发送到页面
 		this.sendPageData();
-		logService.saveLog(request, "【用户信息】", "进入用户信息添加面");
+		logService.saveLog(request, "【用户信息】--【用户信息管理】", "进入用户信息添加面");
 		return "toUserAdd";
 	}
 	
@@ -91,7 +91,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 	public String userSave()
 	{
 		userService.userSave(userForm);
-		logService.saveLog(request, "【用户信息】", "保存“"+ userForm.getName()+ "”用户信息");
+		logService.saveLog(request, "【用户信息】--【用户信息管理】", "保存“"+ userForm.getName()+ "”用户信息");
 		return "success";
 	}
 	
@@ -103,7 +103,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 	{
 		userForm = userService.findUserByUuid(userForm.getUserUuid());
 		ActionContext.getContext().getValueStack().push(userForm);
-		logService.saveLog(request, "【用户信息】", "查看“"+ userForm.getName()+ "”用户详细信息");
+		logService.saveLog(request, "【用户信息】--【用户信息管理】", "查看“"+ userForm.getName()+ "”用户详细信息");
 		return "userView";
 	}
 	
@@ -120,7 +120,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 		ActionContext.getContext().getValueStack().push(userForm);
 		//数据类型发送到页面
 		this.sendPageData();
-		logService.saveLog(request, "【用户信息】", "查看个用户详细信息");
+		logService.saveLog(request, "【用户信息】--【个人信息】", "查看个用户详细信息");
 		return "userEdit";
 	}
 	
@@ -134,7 +134,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 		ActionContext.getContext().getValueStack().push(userForm);
 		//数据类型发送到页面
 		this.sendPageData();
-		logService.saveLog(request, "【用户信息】", "编辑“"+ userForm.getName()+ "”用户信息");
+		logService.saveLog(request, "【用户信息】--【用户信息管理】", "编辑“"+ userForm.getName()+ "”用户信息");
 		return "userEdit";
 	}
 	
@@ -153,7 +153,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 			ActionContext.getContext().getValueStack().push(userForm);
 			//数据类型发送到页面
 			this.sendPageData();
-			logService.saveLog(request, "【用户信息】", "编辑“"+ userForm.getName()+ "”用户信息");
+			logService.saveLog(request, "【用户信息】--【个人信息】", "编辑“"+ userForm.getName()+ "”用户信息");
 			return "userEdit";
 		}else{
 			return "success";
@@ -171,13 +171,13 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 		try
 		{
 			userForm = userService.findUserByUuid(userUuid);
-			logService.saveLog(request, "【用户信息】", "删除“"+ userForm.getName()+ "”用户信息成功");
+			logService.saveLog(request, "【用户信息】--【用户信息管理】", "删除“"+ userForm.getName()+ "”用户信息成功");
 			userService.userDelete(userUuid);
 			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e)
 		{
 			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
-			logService.saveLog(request, "【用户信息】", "删除“"+ userForm.getName()+ "”用户信息失败");
+			logService.saveLog(request, "【用户信息】--【用户信息管理】", "删除“"+ userForm.getName()+ "”用户信息失败");
 			e.printStackTrace();
 		}
 		return "ajax-success";
@@ -190,7 +190,14 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 	public String userDeletes()
 	{
 		String[] ids = userForm.getIds();
-		userService.userDeletes(ids);
+		if(ids != null && ids.length > 0){
+			for(int i = 0; i < ids.length; i++)
+			{
+				UserForm userForm = userService.findUserByUuid(ids[i]);
+				logService.saveLog(request, "【用户信息】--【用户信息管理】", "批量删除“"+ userForm.getName()+ "”用户信息成功");
+			}
+			userService.userDeletes(ids);
+		}
 		return "success";
 	}
 	

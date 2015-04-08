@@ -39,7 +39,8 @@ function quanxuan() {
 }
 // 全选、全不选(第一个复选框name为checkbox,其它都要为ids)==========end
 
-// 检查添加公告时公告标题和公告内容是否合法=====start
+//资源管理====================start
+// 检查添加公告时公告标题和公告内容是否合法
 function checkchar() {
 
 	if ($("#noticeTit").val().length > 20) {
@@ -58,15 +59,13 @@ function checkchar() {
 		loading();
 	}
 }
-// 检查添加公告时公告标题和公告内容是否合法=====end
 
-// 为换行添加换行符========start
+// 为换行添加换行符
 function addEnter(element) {
 	$("#" + element).val($("#" + element).val() + "<br/>");
 }
-// 为换行添加换行符========end
 
-// 添加保存时显示的进度条=======start
+// 添加保存时显示的进度条
 var len = 500;
 var add = 0;
 function openContenFrame() {
@@ -89,15 +88,15 @@ function openContenFrame() {
 	setTimeout('openContenFrame()', 100);
 }
 
+//加载进度条
 function loading() {
 	document.getElementById("load").style.display = "";
 	document.getElementById("opperate1").style.display = "none";
 	document.getElementById("opperate2").style.display = "none";
 	openContenFrame();
 }
-// 添加保存时显示的进度条=======end
 
-// 公告删除操作的Ajax========start
+// 公告删除操作的Ajax
 function deletes() {
 	var url = "${pageContext.request.contextPath }/ResourceMag/noticeAction_deleteNotice.action";
 	var flag = false;
@@ -133,9 +132,6 @@ function deletes() {
 		});
 	}
 }
-// 公告删除操作的Ajax========end
-
-// 数据字典的操作================start
 
 //当类型发生改变的时候
 function changetype() {
@@ -272,9 +268,8 @@ function findDDl(){
 		$("#Form2").html(data);
 	},dataType);
 }
-// 数据字典的操作================end
 
-//日志管理=====================start
+//删除日志
 function logDelete(meg){
 	if(meg == "page"){
 		var flag = window.confirm('你确定要删除当前面的日志');
@@ -294,7 +289,7 @@ function logDelete(meg){
 		}
 	}
 }
-//日志管理=====================end
+//资源管理====================start
 
 //设备管理=====================start
 //ajax删除设备信息
@@ -315,9 +310,32 @@ function deletesDevice(deviceUuid,deviceName){
 		});
 	}
 }
+
+//批量删除设备
+function deviceDelete(){
+	var url = "${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceDeletes.action";
+	var flag = false;
+	$.each($("input:checkbox"), function(i, val) {
+		if (val.checked == true) {
+			flag = confirm("确定要删除设备信息？");
+			return false;
+		}
+	});
+
+	if (flag == false) {
+		alert("请选择需要删除的设备信息");
+		return false;
+	}
+
+	if (flag) {
+		$("#form1").attr("action", url);
+		$("#form1").submit();
+	}
+}
 //设备管理=====================end
 
-//删除用户信息==============start
+//用户信息管理操作===============start
+//删除用户信息
 function deleteUser(name,userUuid){
 	var f = confirm('你确定要删除 ' + name + ' ？');
 	if(f){
@@ -335,9 +353,8 @@ function deleteUser(name,userUuid){
 		});
 	}
 }
-//删除用户信息==============end
 
-//批量删除用户信息==========start 
+//批量删除用户信息 
 function userDel() {
 	var url = "${pageContext.request.contextPath }/UserMag/userAction_userDelete.action";
 	var flag = false;
@@ -354,17 +371,17 @@ function userDel() {
 	}
 
 	if (flag) {
-		$("#form1").attr("action", "${pageContext.request.contextPath }/UserMag/userAction_userDeletes.action");
+		$("#form1").attr("action", url);
 		$("#form1").submit();
 	}
 }
-//批量删除用户信息==========end 
 
-//查询用户信息==============start
+//查询用户信息
 function userFind(){
 	$("#form1").attr("action", "${pageContext.request.contextPath}/UserMag/userAction_userIndex.action");
 	$("#form1").submit();
 }
-//查询用户信息==============end
+
+//用户信息管理操作===============end
 
 

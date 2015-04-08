@@ -28,8 +28,6 @@ public class UserForm extends BaseForm
 	private String password;
 	/* 注册时间 */
 	private String registerTime;
-	/* 用户uuid集合*/
-	private String[] ids;
 	
 	private String falg;
 	
@@ -151,14 +149,6 @@ public class UserForm extends BaseForm
 	public void setMaintainType(String maintainType)
 	{
 		this.maintainType = maintainType;
-	}
-
-	public String[] getIds() {
-		return ids;
-	}
-
-	public void setIds(String[] ids) {
-		this.ids = ids;
 	}
 
 	public String getFalg() {

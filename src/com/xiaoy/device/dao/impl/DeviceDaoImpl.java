@@ -1,5 +1,6 @@
 package com.xiaoy.device.dao.impl;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,20 @@ public class DeviceDaoImpl extends CommonImpl<Device> implements DeviceDao
 		StringBuffer hqlWhere = (StringBuffer) this.getHqlMap(deviceForm).get("hqlWhere"); 
 		Object count = super.countByCollection(hqlWhere.toString(), paramsMapValue);
 		return Integer.parseInt(count.toString());
+	}
+	
+
+	@Override
+	public void deleteDeviceByIds(String[] ids) {
+		String hqlWhere = "";
+		Map<String, Object> paramsMapValue = null;
+		if(ids != null && ids.length > 0){
+			List<String> list = Arrays.asList(ids);
+			paramsMapValue = new HashMap<String, Object>();
+			hqlWhere = " and deviceTypeUuid in(:deviceTypeUuid)";
+			paramsMapValue.put("deviceTypeUuid", list);
+			super.deleteObjectByCollectionIds(hqlWhere, paramsMapValue);
+		}
 	}
 	
 	/**

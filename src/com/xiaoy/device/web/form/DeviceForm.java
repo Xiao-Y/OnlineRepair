@@ -29,7 +29,7 @@ public class DeviceForm extends BaseForm {
 	private String devicePicUrl;
 	/* 备注 */
 	private String remark;
-
+	
 	public String getDeviceTypeUuid() {
 		return deviceTypeUuid;
 	}

@@ -89,6 +89,13 @@ public class DeviceServiceImpl implements DeviceService
 		deviceDao.deleteObjectByid(deviceTypeUuid);
 	}
 	
+
+	@Override
+	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
+	public void deviceDeleteByIds(String[] ids) {
+		deviceDao.deleteDeviceByIds(ids);
+	}
+	
 	/**
 	 * 设备的Vo对象转换成Po对象
 	 * @param form	Po对象

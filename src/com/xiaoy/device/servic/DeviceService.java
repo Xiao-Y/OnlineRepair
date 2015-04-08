@@ -46,4 +46,10 @@ public interface DeviceService
 	 */
 	void deviceDeleteByUuid(String deviceTypeUuid);
 
+	/**
+	 * 批量删除设备信息
+	 * @param ids	设备uuid
+	 */
+	void deviceDeleteByIds(String[] ids);
+
 }

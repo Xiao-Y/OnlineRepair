@@ -79,6 +79,7 @@
 				<td class="ta_01" align="right">
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="submit" value="查询" name="BT_Find" >&nbsp;&nbsp;
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_Reset" >&nbsp;&nbsp;
+				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_delet" onclick="deviceDelete();" type="button" value="批量删除" name="BT_delet" >&nbsp;&nbsp;
 					<input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="添加设备" name="BT_Add" onclick="link('${pageContext.request.contextPath }/DeviceMag/deviceAction_toDeviceAdd.action')">
 				</td>
 			</tr>
@@ -88,6 +89,9 @@
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
 						<tr style="font-weight:bold;font-size:12pt;height:25px;background-color:#afd1f3">
+							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">
+								<input type="checkbox" id="checkbox" name="checkbox" onclick="quanxuan();">
+							</td>
 						  	<td align="center" width="20%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备名</td>
 							<td align="center" width="20%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">型号</td>
 							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备数量(件)</td>
@@ -101,6 +105,9 @@
 						<s:if test="%{#request.deviceList != null && #request.deviceList.size() > 0}">
 						<s:iterator value="%{#request.deviceList}" var="device">
 						<tr id="${deviceTypeUuid}" onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+							<td style="HEIGHT:22px" align="center" width="5%">
+								<input type="checkbox" id="${deviceTypeUuid }" name="ids" class="ids" value="${deviceTypeUuid }">
+							</td>
 							<td style="height:22px" align="center" width="20%">
 								<a href="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceView.action?deviceTypeUuid=${deviceTypeUuid}">
 									<s:property value="%{#device.deviceName}"/>

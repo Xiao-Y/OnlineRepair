@@ -23,4 +23,10 @@ public interface DeviceDao extends Common<Device>
 	 */
 	Integer countDeviceInfoByCondition(DeviceForm deviceForm);
 
+	/**
+	 * 批量删除设备信息
+	 * @param ids	设备uuid
+	 */
+	void deleteDeviceByIds(String[] ids);
+
 }

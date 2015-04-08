@@ -3,10 +3,10 @@ package com.xiaoy.device.dao;
 import java.util.List;
 
 import com.xiaoy.base.dao.Common;
-import com.xiaoy.base.entites.Device;
-import com.xiaoy.device.web.form.DeviceForm;
+import com.xiaoy.base.entites.DeviceInfo;
+import com.xiaoy.device.web.form.DeviceInfoForm;
 
-public interface DeviceDao extends Common<Device>
+public interface DeviceInfoDao extends Common<DeviceInfo>
 {
 
 	/**
@@ -14,14 +14,14 @@ public interface DeviceDao extends Common<Device>
 	 * @param deviceForm	查询条件
 	 * @return
 	 */
-	List<Device> findDeviceInfoByCondition(DeviceForm deviceForm);
+	List<DeviceInfo> findDeviceInfoByCondition(DeviceInfoForm deviceForm);
 
 	/**
 	 * 根据条件查询出现设备的总记录数
 	 * @param deviceForm	查询条件
 	 * @return
 	 */
-	Integer countDeviceInfoByCondition(DeviceForm deviceForm);
+	Integer countDeviceInfoByCondition(DeviceInfoForm deviceForm);
 
 	/**
 	 * 批量删除设备信息

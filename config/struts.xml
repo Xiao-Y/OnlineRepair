@@ -56,7 +56,8 @@
 	
 	<!-- 设备管理==========start -->
 	<package name="device" namespace="/DeviceMag" extends="struts-default">
-		<action name="deviceAction_*" class="com.xiaoy.device.web.action.DeviceAction" method="{1}">
+		<!-- 设备信息管理 -->
+		<action name="deviceAction_*" class="com.xiaoy.device.web.action.DeviceInfoAction" method="{1}">
 			<result name="deviceInfoList">/WEB-INF/page/DeviceMag/deviceInfoList.jsp</result>
 			<result name="toDeviceAdd">/WEB-INF/page/DeviceMag/deviceInfoAdd.jsp</result>
 			<result name="deviceView">/WEB-INF/page/DeviceMag/deviceInfoView.jsp</result>
@@ -72,6 +73,12 @@
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+		</action>
+		
+		<!-- 设备运行状态管理 -->
+		<action name="deviceStateAction_*" class="com.xiaoy.device.web.action.DeviceStateAction" method="{1}">
+			<result name="deviceStateList">/WEB-INF/page/DeviceMag/deviceStateList.jsp</result>
+			<result name="toDeviceStateAdd">/WEB-INF/page/DeviceMag/deviceStateAdd.jsp</result>
 		</action>
 	</package>
 	<!-- 设备管理==========end -->

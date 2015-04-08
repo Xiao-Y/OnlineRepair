@@ -11,33 +11,33 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xiaoy.base.entites.Device;
-import com.xiaoy.device.dao.DeviceDao;
-import com.xiaoy.device.servic.DeviceService;
-import com.xiaoy.device.web.form.DeviceForm;
+import com.xiaoy.base.entites.DeviceInfo;
+import com.xiaoy.device.dao.DeviceInfoDao;
+import com.xiaoy.device.servic.DeviceInfoService;
+import com.xiaoy.device.web.form.DeviceInfoForm;
 
 @Service
 @Transactional(readOnly=true)
-public class DeviceServiceImpl implements DeviceService
+public class DeviceInfoServiceImpl implements DeviceInfoService
 {
 
 	@Resource
-	private DeviceDao deviceDao;
+	private DeviceInfoDao deviceDao;
 	
 	@Override
-	public List<DeviceForm> findDeviceInfoByCondition(DeviceForm deviceForm)
+	public List<DeviceInfoForm> findDeviceInfoByCondition(DeviceInfoForm deviceForm)
 	{
-		List<Device> list = deviceDao.findDeviceInfoByCondition(deviceForm);
-		List<DeviceForm> listForm = this.deviceListVOToListPo(list);
+		List<DeviceInfo> list = deviceDao.findDeviceInfoByCondition(deviceForm);
+		List<DeviceInfoForm> listForm = this.deviceListVOToListPo(list);
 		return listForm;
 	}
 
-	private List<DeviceForm> deviceListVOToListPo(List<Device> list)
+	private List<DeviceInfoForm> deviceListVOToListPo(List<DeviceInfo> list)
 	{
-		List<DeviceForm> listForm = new ArrayList<DeviceForm>();
-		for(Device d : list)
+		List<DeviceInfoForm> listForm = new ArrayList<DeviceInfoForm>();
+		for(DeviceInfo d : list)
 		{
-			DeviceForm form = new DeviceForm();
+			DeviceInfoForm form = new DeviceInfoForm();
 			//设备的Vo对象转换成Po对象
 			form = this.DeviceVoToPo(form, d);
 			listForm.add(form);
@@ -47,7 +47,7 @@ public class DeviceServiceImpl implements DeviceService
 	}
 
 	@Override
-	public Integer countDeviceInfoByCondition(DeviceForm deviceForm)
+	public Integer countDeviceInfoByCondition(DeviceInfoForm deviceForm)
 	{
 		Integer count = deviceDao.countDeviceInfoByCondition(deviceForm);
 		return count;
@@ -55,20 +55,20 @@ public class DeviceServiceImpl implements DeviceService
 
 	@Override
 	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
-	public void deviceSave(DeviceForm deviceForm)
+	public void deviceSave(DeviceInfoForm deviceForm)
 	{
-		Device entity = new Device();
+		DeviceInfo entity = new DeviceInfo();
 		//设备的Po对象转换成Vo对象
 		entity = this.DeviceFormPoToVo(deviceForm, entity);
 		deviceDao.saveObject(entity);
 	}
 
 	@Override
-	public DeviceForm getfindDeviceByUuid(String deviceTypeUuid) {
+	public DeviceInfoForm getfindDeviceByUuid(String deviceTypeUuid) {
 		
-		Device device = deviceDao.findObjectById(deviceTypeUuid);
+		DeviceInfo device = deviceDao.findObjectById(deviceTypeUuid);
 		
-		DeviceForm deviceForm = new DeviceForm();
+		DeviceInfoForm deviceForm = new DeviceInfoForm();
 		//设备的Po对象转换成Vo对象
 		deviceForm = this.DeviceVoToPo(deviceForm, device);
 		return deviceForm;
@@ -76,8 +76,8 @@ public class DeviceServiceImpl implements DeviceService
 
 	@Override
 	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
-	public void deviceUpdate(DeviceForm deviceForm) {
-		Device entity = new Device();
+	public void deviceUpdate(DeviceInfoForm deviceForm) {
+		DeviceInfo entity = new DeviceInfo();
 		//设备的Po对象转换成Vo对象
 		entity = this.DeviceFormPoToVo(deviceForm, entity);
 		deviceDao.updateObject(entity);
@@ -102,7 +102,7 @@ public class DeviceServiceImpl implements DeviceService
 	 * @param d	Vo对象
 	 * @return	DeviceForm Po对象
 	 */
-	private DeviceForm DeviceVoToPo(DeviceForm form, Device d)
+	private DeviceInfoForm DeviceVoToPo(DeviceInfoForm form, DeviceInfo d)
 	{
 		form.setDeviceTypeUuid(d.getDeviceTypeUuid());
 		form.setDeviceAmount(d.getDeviceAmount().toString());
@@ -123,7 +123,7 @@ public class DeviceServiceImpl implements DeviceService
 	 * @param entity	Vo对象
 	 * @return	Device	Vo对象
 	 */
-	private Device DeviceFormPoToVo(DeviceForm deviceForm, Device entity)
+	private DeviceInfo DeviceFormPoToVo(DeviceInfoForm deviceForm, DeviceInfo entity)
 	{
 		entity.setDeviceTypeUuid(deviceForm.getDeviceTypeUuid());
 		entity.setDeviceAmount(!StringUtils.isEmpty(deviceForm.getDeviceAmount()) ? Integer.parseInt(deviceForm.getDeviceAmount()) : 0);

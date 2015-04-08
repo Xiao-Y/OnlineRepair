@@ -73,7 +73,7 @@
 						</tr>
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/DeviceMag/deviceStateList.jsp' target="main">查询设备状态</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceStateList.action' target="main">查询设备状态</a>
 							</td>
 						</tr>
 					</table>

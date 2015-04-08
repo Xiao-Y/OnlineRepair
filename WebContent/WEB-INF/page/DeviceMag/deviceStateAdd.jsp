@@ -3,11 +3,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/myJquery.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/uploadPreview/uploadPreview.js"></script>
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="x" uri="http://www.xiaoy.com/pageTag/core"%>
+<jsp:include page="/pub.jsp"/>
 
 <title>添加设备状态信息</title>
 <script>
@@ -20,37 +18,33 @@
 <body>
 <form name="Form1" method="post">
 	<br>
-    <table cellSpacing="1" cellPadding="5" width="580" align="center" bgColor="#eeeeee" style="border:1px solid #8ba7e3" border="0">
+    <table cellSpacing="1" cellPadding="5" width="880" align="center" bgColor="#eeeeee" style="border:1px solid #8ba7e3" border="0">
 		<tr>
 			<td class="ta_01" align="center" colSpan="4" background="${pageContext.request.contextPath }/images/b-info.gif">
 				<font face="宋体" size="2"><strong>添加设备状态信息</strong></font>
 			</td>
 		</tr>
 	    <tr>
-	       <td align="center" bgColor="#f5fafe" class="ta_01">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域：<font color="#FF0000">*</font></td>
-	       <td class="ta_01" bgColor="#ffffff">
-	       		<select id="area" name="area" style="width: 140px">
-					<option>------请选择------</option>				
-					<option>教室</option>				
-					<option>寝室</option>				
-					<option>机房</option>				
-				</select>
+	       <td align="right" width="15%" bgColor="#f5fafe" class="ta_01">区域：<font color="#FF0000">*</font></td>
+	       <td class="ta_01" width="35%" bgColor="#ffffff">
+	       		<s:select list="%{#request.area}" id="areaCode" name="areaCode"
+					  listKey="ddlCode" listValue="ddlName"
+					  cssStyle="width:140px"
+				/>
 	       </td>
-	       <td align="center" bgColor="#f5fafe" class="ta_01">安装位置：<font color="#FF0000">*</font></td>
-	       	<td class="ta_01" bgColor="#ffffff">
-	       		<select id="installationSite" name="installationSite" style="width: 140px">
-					<option>------请选择------</option>				
-					<option>A4897</option>				
-					<option>D3425</option>				
-					<option>G5432</option>				
-				</select>
-	       	</td>
+	       <td align="right" width="15%" bgColor="#f5fafe" class="ta_01">安装位置：<font color="#FF0000">*</font></td>
+	       <td class="ta_01" width="35%" bgColor="#ffffff">
+	      		<s:select list="%{#request.installationSite}" id="installationSiteCode" name="installationSiteCode"
+				  listKey="ddlCode" listValue="ddlName"
+				  cssStyle="width:140px"
+				/>
+	       </td>
 	       
 	    </tr>
 	    
 		<tr>
-			<td align="center" bgColor="#f5fafe" class="ta_01">设&nbsp;&nbsp;备&nbsp;&nbsp;名：<font color="#FF0000">*</font></td>
-	       <td class="ta_01" bgColor="#ffffff">
+			<td align="right" width="15%" bgColor="#f5fafe" class="ta_01">设备名：<font color="#FF0000">*</font></td>
+	       <td class="ta_01" width="35%" bgColor="#ffffff">
 	       		<select id="deviceName" name="deviceName" style="width: 140px">
 					<option>------请选择------</option>				
 					<option>电脑</option>				
@@ -58,8 +52,8 @@
 					<option>水管</option>				
 				</select>
 	       </td>
-			<td align="center" bgColor="#f5fafe" class="ta_01">型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：<font color="#FF0000">*</font></td>
-	       	<td class="ta_01" bgColor="#ffffff">
+			<td align="right" width="15%" bgColor="#f5fafe" class="ta_01">型号：<font color="#FF0000">*</font></td>
+	       	<td class="ta_01" width="35%" bgColor="#ffffff">
 	       		<select id="version" name="version" style="width: 140px">
 					<option>------请选择------</option>				
 					<option>87783</option>				
@@ -70,46 +64,45 @@
 			
 		</tr>
 		<tr>
-			<td align="center" bgColor="#f5fafe" class="ta_01">上次检修日期：<font color="#FF0000">*</font></td>
-	       	<td class="ta_01" bgColor="#ffffff">
+			<td align="right" width="15%" bgColor="#f5fafe" class="ta_01">上次检修日期：<font color="#FF0000">*</font></td>
+	       	<td class="ta_01" width="35%" bgColor="#ffffff">
 				<input class="Wdate" type="text" size="20" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})">
 	       	</td>
-		    <td align="center" bgColor="#f5fafe" class="ta_01">下次检修日期：</td>
-			<td class="ta_01" bgColor="#ffffff">
+		    <td align="right" width="15%" bgColor="#f5fafe" class="ta_01">下次检修日期：</td>
+			<td class="ta_01" width="35%" bgColor="#ffffff">
 				<input class="Wdate" type="text" size="20" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})">
 			</td>
 		</tr>
 		
 		<tr>
-			<td align="center" bgColor="#f5fafe" class="ta_01">安装日期：</td>
-			<td class="ta_01" bgColor="#ffffff">
+			<td align="right" width="15%" bgColor="#f5fafe" class="ta_01">安装日期：</td>
+			<td class="ta_01" width="35%" bgColor="#ffffff">
 				<input class="Wdate" type="text" size="20" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})">
 			</td>
-		   <td align="center" bgColor="#f5fafe" class="ta_01">运行状态：</td>
-			<td class="ta_01" bgColor="#ffffff">
-				<select id="stateId" name="stateId" style="width: 140px">
-					<option value="stateId">------请选择------</option>				
-					<option>正常运行</option>				
-					<option>运行异常</option>				
-				</select>
+		   <td align="right" width="15%" bgColor="#f5fafe" class="ta_01">运行状态：</td>
+			<td class="ta_01" width="35%" bgColor="#ffffff">
+				<s:select list="%{#request.state}" id="stateCode" name="stateCode"
+				  listKey="ddlCode" listValue="ddlName"
+				  cssStyle="width:140px"
+				/>
 			</td>
 		</tr>
 		
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe">设备图片：</td>
-			<td class="ta_01" bgcolor="#ffffff" colspan="3">
+			<td class="ta_01" width="15%" align="right" bgcolor="#f5fafe">设备图片：</td>
+			<td class="ta_01" width="85%" bgcolor="#ffffff" colspan="3">
 				<input type="file" id="up_img" />
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe">上传的图片：</td>
-			<td class="ta_01" bgcolor="#ffffff" colspan="3">
+			<td class="ta_01" width="15%" align="right" bgcolor="#f5fafe">上传的图片：</td>
+			<td class="ta_01" width="85%" bgcolor="#ffffff" colspan="3">
 				<div id="imgdiv"><img id="imgShow" width="500px" height="300px" /></div>
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</td>
-			<td class="ta_01" bgcolor="#ffffff" colspan="3">
+			<td class="ta_01" width="15%" align="right" bgcolor="#f5fafe">备注：</td>
+			<td class="ta_01" width="85%" bgcolor="#ffffff" colspan="3">
 				<textarea name="remark" id="remark" style="width:95%" rows="4" cols="52"></textarea>
 			</td>
 		</tr>
@@ -124,6 +117,9 @@
 			<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="关闭"  name="Reset1"  onClick="custom_close()">
 				
 			</td>
+		</tr>
+		<tr align="left">
+			<td colspan="4">温馨提示： <font color="#FF0000">* 为必填项</font></td>
 		</tr>
 	</table>　
 </form>

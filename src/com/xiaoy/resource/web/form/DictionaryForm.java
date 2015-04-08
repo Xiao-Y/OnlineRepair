@@ -13,6 +13,21 @@ public class DictionaryForm
 	 */
 	public static final String SEX_NAME = "性别";
 	
+	/**
+	 * 区域
+	 */
+	public static final String AREA_NAME = "区域";
+	
+	/**
+	 * 运行状态
+	 */
+	public static final String STATE_NAME = "运行状态";
+	
+	/**
+	 * 安装位置
+	 */
+	public static final String INSTALLATION_SITE_NAME = "安装位置";
+	
 	/* 字典id */
 	private String seqID;
 	/* 查询关键字 */

@@ -13,28 +13,28 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.action.BaseAction;
 import com.xiaoy.base.util.UploadImageHelper;
-import com.xiaoy.device.servic.DeviceService;
-import com.xiaoy.device.web.form.DeviceForm;
+import com.xiaoy.device.servic.DeviceInfoService;
+import com.xiaoy.device.web.form.DeviceInfoForm;
 import com.xiaoy.resource.servic.LogService;
 
 @SuppressWarnings("serial")
 @Controller
-public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
+public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceInfoForm>
 {
 	@Resource
-	private DeviceService deviceService;
+	private DeviceInfoService deviceService;
 	
 	//注入日志
 	@Resource
 	private LogService logService;
 	
-	private DeviceForm deviceForm = new DeviceForm();
+	private DeviceInfoForm deviceForm = new DeviceInfoForm();
 	
 	//获取输入流，用于ajax的删除
 	private InputStream inputStream;
 	
 	@Override
-	public DeviceForm getModel()
+	public DeviceInfoForm getModel()
 	{
 		return deviceForm;
 	}
@@ -49,7 +49,7 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 	 */
 	public String deviceInfoList()
 	{
-		List<DeviceForm> list = deviceService.findDeviceInfoByCondition(deviceForm);
+		List<DeviceInfoForm> list = deviceService.findDeviceInfoByCondition(deviceForm);
 		deviceForm.setRecordCount(deviceService.countDeviceInfoByCondition(deviceForm));
 		request.setAttribute("deviceList", list);
 		logService.saveLog(request, "【设备管理】--【设备信息管理】", "查看设备列表");
@@ -160,7 +160,7 @@ public class DeviceAction extends BaseAction implements ModelDriven<DeviceForm>
 		String[] ids = deviceForm.getIds();
 		if(ids != null && ids.length > 0){
 			for(int i = 0; i < ids.length; i++){
-				DeviceForm deviceForm = deviceService.getfindDeviceByUuid(ids[i]); 
+				DeviceInfoForm deviceForm = deviceService.getfindDeviceByUuid(ids[i]); 
 				logService.saveLog(request, "【设备管理】--【设备信息管理】", "批量删除“"+ deviceForm.getDeviceName()+"”设备");
 			}
 			deviceService.deviceDeleteByIds(ids);

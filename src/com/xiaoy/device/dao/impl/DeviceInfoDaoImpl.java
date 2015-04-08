@@ -9,17 +9,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.xiaoy.base.dao.impl.CommonImpl;
-import com.xiaoy.base.entites.Device;
-import com.xiaoy.device.dao.DeviceDao;
-import com.xiaoy.device.web.form.DeviceForm;
+import com.xiaoy.base.entites.DeviceInfo;
+import com.xiaoy.device.dao.DeviceInfoDao;
+import com.xiaoy.device.web.form.DeviceInfoForm;
 
 @Repository
-public class DeviceDaoImpl extends CommonImpl<Device> implements DeviceDao
+public class DeviceInfoDaoImpl extends CommonImpl<DeviceInfo> implements DeviceInfoDao
 {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Device> findDeviceInfoByCondition(DeviceForm deviceForm)
+	public List<DeviceInfo> findDeviceInfoByCondition(DeviceInfoForm deviceForm)
 	{
 		Map<String, Object> paramsMapValue = (Map<String, Object>) this.getHqlMap(deviceForm).get("paramsMapValue");
 		StringBuffer hqlWhere = (StringBuffer) this.getHqlMap(deviceForm).get("hqlWhere"); 
@@ -28,7 +28,7 @@ public class DeviceDaoImpl extends CommonImpl<Device> implements DeviceDao
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Integer countDeviceInfoByCondition(DeviceForm deviceForm)
+	public Integer countDeviceInfoByCondition(DeviceInfoForm deviceForm)
 	{
 		Map<String, Object> paramsMapValue = (Map<String, Object>) this.getHqlMap(deviceForm).get("paramsMapValue");
 		StringBuffer hqlWhere = (StringBuffer) this.getHqlMap(deviceForm).get("hqlWhere"); 
@@ -55,7 +55,7 @@ public class DeviceDaoImpl extends CommonImpl<Device> implements DeviceDao
 	 * @param deviceForm	查询条件
 	 * @return	Map&ltString, Object&gt	参数和查询条件
 	 */
-	private Map<String, Object> getHqlMap(DeviceForm deviceForm)
+	private Map<String, Object> getHqlMap(DeviceInfoForm deviceForm)
 	{
 		Map<String,Object> map = null;
 		Map<String, Object> paramsMapValue = null;

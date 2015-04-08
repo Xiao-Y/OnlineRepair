@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2015-3-31 23:26:15 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-	<class name="com.xiaoy.base.entites.Device" table="DEVICE">
+	<class name="com.xiaoy.base.entites.DeviceInfo" table="DEVICEINFO">
 		<id name="deviceTypeUuid" type="java.lang.String">
 			<column name="DEVICETYPE_UUID" />
 			<generator class="uuid" />

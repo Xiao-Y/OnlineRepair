@@ -1,16 +1,14 @@
-package com.xiaoy.device.web.form;
-
-import com.xiaoy.base.web.form.BaseForm;
+package com.xiaoy.base.entites;
 
 /**
- * 设备信息
+ * 设备信息实体类
  * 
  * @author XiaoY
- * @explain
- * 
- * @date: 2015年4月1日 下午10:39:55
+ * @explain 用于存放设备的信息
+ * @date: 2015年3月31日 下午11:25:24
  */
-public class DeviceForm extends BaseForm {
+public class DeviceInfo
+{
 	/* 设备信息uuid */
 	private String deviceTypeUuid;
 	/* 设备名 */
@@ -22,83 +20,101 @@ public class DeviceForm extends BaseForm {
 	/* 生产商联系方式 */
 	private String producerPhone;
 	/* 设备价格 */
-	private String devicePrice;
+	private Double devicePrice;
 	/* 设备数量 */
-	private String deviceAmount;
+	private Integer deviceAmount;
 	/* 设备图片URL */
 	private String devicePicUrl;
 	/* 备注 */
 	private String remark;
-	
-	public String getDeviceTypeUuid() {
+
+	public String getDeviceTypeUuid()
+	{
 		return deviceTypeUuid;
 	}
 
-	public void setDeviceTypeUuid(String deviceTypeUuid) {
+	public void setDeviceTypeUuid(String deviceTypeUuid)
+	{
 		this.deviceTypeUuid = deviceTypeUuid;
 	}
 
-	public String getDeviceName() {
+	public String getDeviceName()
+	{
 		return deviceName;
 	}
 
-	public void setDeviceName(String deviceName) {
+	public void setDeviceName(String deviceName)
+	{
 		this.deviceName = deviceName;
 	}
 
-	public String getVersion() {
+	public String getVersion()
+	{
 		return version;
 	}
 
-	public void setVersion(String version) {
+	public void setVersion(String version)
+	{
 		this.version = version;
 	}
 
-	public String getProducerName() {
+	public String getProducerName()
+	{
 		return producerName;
 	}
 
-	public void setProducerName(String producerName) {
+	public void setProducerName(String producerName)
+	{
 		this.producerName = producerName;
 	}
 
-	public String getProducerPhone() {
+	public String getProducerPhone()
+	{
 		return producerPhone;
 	}
 
-	public void setProducerPhone(String producerPhone) {
+	public void setProducerPhone(String producerPhone)
+	{
 		this.producerPhone = producerPhone;
 	}
 
-	public String getDevicePrice() {
+	public double getDevicePrice()
+	{
 		return devicePrice;
 	}
 
-	public void setDevicePrice(String devicePrice) {
+	public void setDevicePrice(Double devicePrice)
+	{
 		this.devicePrice = devicePrice;
 	}
 
-	public String getDeviceAmount() {
+	public Integer getDeviceAmount()
+	{
 		return deviceAmount;
 	}
 
-	public void setDeviceAmount(String deviceAmount) {
+	public void setDeviceAmount(Integer deviceAmount)
+	{
 		this.deviceAmount = deviceAmount;
 	}
 
-	public String getDevicePicUrl() {
+	public String getDevicePicUrl()
+	{
 		return devicePicUrl;
 	}
 
-	public void setDevicePicUrl(String devicePicUrl) {
+	public void setDevicePicUrl(String devicePicUrl)
+	{
 		this.devicePicUrl = devicePicUrl;
 	}
 
-	public String getRemark() {
+	public String getRemark()
+	{
 		return remark;
 	}
 
-	public void setRemark(String remark) {
+	public void setRemark(String remark)
+	{
 		this.remark = remark;
 	}
 }

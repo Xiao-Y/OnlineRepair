@@ -28,6 +28,18 @@ public class DeviceInfo
 	/* 备注 */
 	private String remark;
 
+	public DeviceInfo() {
+	}
+
+	public DeviceInfo(String deviceName) {
+		this.deviceName = deviceName;
+	}
+
+	public DeviceInfo(String deviceTypeUuid, String version) {
+		this.deviceTypeUuid = deviceTypeUuid;
+		this.version = version;
+	}
+
 	public String getDeviceTypeUuid()
 	{
 		return deviceTypeUuid;

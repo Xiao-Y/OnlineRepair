@@ -97,7 +97,7 @@ public class PageTag extends TagSupport
 		}
 		// ----------------------------------------------------
 
-		sb.append(recordCount + "条记录  总共" + pageCount + "页,").append("当前第" + pageNo + "页 &nbsp;");
+		sb.append("总共" + recordCount + "条记录   分" + pageNo +"/"+ pageCount + "页   ");
 
 		if (pageNo == 1)
 		{

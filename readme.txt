@@ -132,7 +132,32 @@ pub.css		公有的样式
 		2.程序中调用com.xiaoy.base.util.UploadImageHelper中的uploadImage(BaseForm)方法
 		3.Action中UploadImageHelper.uploadImage(xxForm);
 		4.设备图片保存路径UploadImageHelper.PICURL
-
+	
+	⑦使用谷歌的Gson.jar将集合转换成json：
+		1.Gson gson = new Gson();
+		2.String json = gson.toJson(list);
+		3.发送数据到页面
+			try {
+				response.getOutputStream().print(json);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		4.页面上：
+			var deviceName = $("#deviceName").val();
+		   	var url = "${pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceVersion.action";
+		   	var dataType = "JSON";
+		   	var data = {"date":new Date,"deviceName":deviceName};
+		   
+			$.post(url,data,function(data){
+			   var html = '';
+			   $.each(data,function(i){
+				   html = html + '<option value="'+ data[i].deviceTypeUuid +'" >'+ data[i].version + '</option>';
+			   });
+			   $("#version").html(html);
+		   	},dataType);
+		注意：
+			方法无返回值，页面使用ajax接收。dataType = "JSON";
+			
 
 二、页面修改
 	①去掉设备信息管理中的“设备负责人”及“设备负责人联系方式”

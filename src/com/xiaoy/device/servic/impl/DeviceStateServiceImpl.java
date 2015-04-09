@@ -80,4 +80,10 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 		return formList;
 	}
 
+	@Override
+	public int countDeviceStateByCondition(DeviceStateForm deviceStateForm) {
+		int count = deviceStateDao.countDeviceStateByCondition(deviceStateForm);
+		return count;
+	}
+
 }

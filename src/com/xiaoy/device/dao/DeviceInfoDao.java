@@ -29,4 +29,16 @@ public interface DeviceInfoDao extends Common<DeviceInfo>
 	 */
 	void deleteDeviceByIds(String[] ids);
 
+	/**
+	 * 查询出现所有设备的名称
+	 * @return	List &ltDeviceInfoForm&gt
+	 */
+	List<DeviceInfoForm> findDeviceName();
+
+	/**
+	 * 通过设备名称查找出设备的所有型号
+	 * @return	List &ltDeviceInfoForm&gt
+	 */
+	List<DeviceInfoForm> findDeviceVersionByName(String deviceName);
+
 }

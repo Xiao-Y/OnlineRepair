@@ -332,6 +332,22 @@ function deviceDelete(){
 		$("#form1").submit();
 	}
 }
+
+//异步加载设备型号
+function changeDevice(){
+	   var deviceName = $("#deviceName").val();
+	   var url = "${pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceVersion.action";
+	   var dataType = "JSON";
+	   var data = {"date":new Date,"deviceName":deviceName};
+	   $.post(url,data,function(data){
+		   var html = '';
+		   $.each(data,function(i){
+			   html = html + '<option value="'+ data[i].deviceTypeUuid +'" >'+ data[i].version + '</option>';
+		   });
+		   $("#version").html(html);
+	   },dataType);
+	}
+
 //设备管理=====================end
 
 //用户信息管理操作===============start

@@ -17,16 +17,34 @@ import com.xiaoy.device.web.form.DeviceStateForm;
 @Repository
 public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements DeviceStateDao {
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<DeviceState> findDeviceStateConditionWithPage(DeviceStateForm deviceStateForm) {
-		String hqlWhere = (String) this.getHqlMap(deviceStateForm).get("hqlWhere");
-		Map<String, Object> paramsMapValue = (Map<String, Object>) this.getHqlMap(deviceStateForm).get("paramsMapValue");
-		
+		String hqlWhere = null;
+		Map<String, Object> paramsMapValue = null;
+		Map<String, Object> map = this.getHqlMap(deviceStateForm);
+		if(map != null && map.size() > 0){
+			hqlWhere = (String) map.get("hqlWhere");
+			paramsMapValue = (Map<String, Object>) map.get("paramsMapValue");
+		}
 		List<DeviceState> list = this.findCollectionByConditionWithPage(deviceStateForm, hqlWhere, paramsMapValue);
 		return list;
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public int countDeviceStateByCondition(DeviceStateForm deviceStateForm) {
+		String hqlWhere = null;
+		Map<String, Object> paramsMapValue = null;
+		Map<String, Object> map = this.getHqlMap(deviceStateForm);
+		if(map != null && map.size() > 0){
+			hqlWhere = (String) map.get("hqlWhere");
+			paramsMapValue = (Map<String, Object>) map.get("paramsMapValue");
+		}
+		int count = super.countByCollection(hqlWhere, paramsMapValue);
+		return count;
+	}
+	
 	/**
 	 * 添加条件查询的参数和查询条件
 	 * @param deviceForm	查询条件

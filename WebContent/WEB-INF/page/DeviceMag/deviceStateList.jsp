@@ -191,6 +191,7 @@
 			</tr>
 		</table>
 	</form>
+	<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceStateList.action"/>
 	<!-- 执行查询end -->
 </body>
 </html>

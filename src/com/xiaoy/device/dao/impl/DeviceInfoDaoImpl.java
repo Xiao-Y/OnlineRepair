@@ -1,11 +1,13 @@
 package com.xiaoy.device.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.xiaoy.base.dao.impl.CommonImpl;
@@ -21,8 +23,14 @@ public class DeviceInfoDaoImpl extends CommonImpl<DeviceInfo> implements DeviceI
 	@Override
 	public List<DeviceInfo> findDeviceInfoByCondition(DeviceInfoForm deviceForm)
 	{
-		Map<String, Object> paramsMapValue = (Map<String, Object>) this.getHqlMap(deviceForm).get("paramsMapValue");
-		StringBuffer hqlWhere = (StringBuffer) this.getHqlMap(deviceForm).get("hqlWhere"); 
+		Map<String, Object> paramsMapValue = null;
+		StringBuffer hqlWhere = null;
+		
+		if(this.getHqlMap(deviceForm) != null)
+		{
+			paramsMapValue = (Map<String, Object>) this.getHqlMap(deviceForm).get("paramsMapValue");
+			hqlWhere = (StringBuffer) this.getHqlMap(deviceForm).get("hqlWhere"); 
+		}
 		return super.findCollectionByConditionWithPage(deviceForm, hqlWhere.toString(), paramsMapValue);
 	}
 
@@ -89,5 +97,32 @@ public class DeviceInfoDaoImpl extends CommonImpl<DeviceInfo> implements DeviceI
 		}
 		
 		return map;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<DeviceInfoForm> findDeviceName() {
+		String hql = "select distinct deviceName from DeviceInfo";
+		Query query = this.getSession().createQuery(hql);
+		List<Object[]> dn = query.list();
+		List<DeviceInfoForm> list = null;
+		if(dn != null && dn.size() > 0){
+			list = new ArrayList<DeviceInfoForm>();
+			for(Object o : dn){
+				DeviceInfoForm df = new DeviceInfoForm();
+				df.setDeviceName((String) o);
+				list.add(df);
+			}
+		}
+		return list;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<DeviceInfoForm> findDeviceVersionByName(String deviceName) {
+		String hql = "select new DeviceInfo(deviceTypeUuid, version) from DeviceInfo where 1 = 1 and deviceName = :deviceName";
+		Query query = this.getSession().createQuery(hql).setString("deviceName", deviceName);
+		List<DeviceInfoForm> list = query.list();
+		return list;
 	}
 }

@@ -96,6 +96,18 @@ public class DeviceInfoServiceImpl implements DeviceInfoService
 		deviceDao.deleteDeviceByIds(ids);
 	}
 	
+	@Override
+	public List<DeviceInfoForm> findDeviceName() {
+		List<DeviceInfoForm> dss = deviceDao.findDeviceName();
+		return dss;
+	}
+
+	@Override
+	public List<DeviceInfoForm> findDeviceVersionByName(String deviceName) {
+		List<DeviceInfoForm> list = deviceDao.findDeviceVersionByName(deviceName);
+		return list;
+	}
+	
 	/**
 	 * 设备的Vo对象转换成Po对象
 	 * @param form	Po对象

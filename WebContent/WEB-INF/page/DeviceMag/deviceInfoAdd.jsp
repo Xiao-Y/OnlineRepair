@@ -30,9 +30,9 @@
 	       <td class="ta_01" bgColor="#ffffff" style="width: 30%">
 	       		<s:textfield name="deviceName" id="deviceName" maxlength="25" size="20" data-rule-required="true"/>
 	       </td>
-	       <td width="18%" align="right" bgColor="#f5fafe" class="ta_01" style="width: 20%">型号：<font color="#FF0000">*</font></td>
+	       <td align="right" bgColor="#f5fafe" class="ta_01" style="width: 20%">型号：<font color="#FF0000">*</font></td>
 	       <td class="ta_01" bgColor="#ffffff" style="width: 30%">
-	       		<s:textfield name="version" id="version" maxlength="25" size="20" data-rule-required="true"/>
+	       		<s:textfield name="version" id="version" maxlength="25" size="20" data-rule-required="true" data-rule-storeDomain="true"/>
 	       </td>
 	    </tr>
 	    

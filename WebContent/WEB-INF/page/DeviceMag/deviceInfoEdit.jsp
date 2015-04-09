@@ -40,7 +40,7 @@
 	       </td>
 	       <td width="18%" align="right" bgColor="#f5fafe" class="ta_01" width="20%">型号：<font color="#FF0000">*</font></td>
 	       <td class="ta_01" bgColor="#ffffff" width="30%">
-	       		<input name="version" id="version" maxlength="25" size="20" value="${device.version}"  data-rule-required="true">
+	       		<input name="version" id="version" maxlength="25" size="20" value="${device.version}"  data-rule-storeDomain="true" data-rule-required="true">
 	       </td>
 	    </tr>
 	    

@@ -14,4 +14,11 @@ public interface DeviceStateService {
 	List<DeviceStateForm> findDeviceStateConditionWithPage(
 			DeviceStateForm deviceStateForm);
 
+	/**
+	 * 根据条件查询出现记录数
+	 * @param deviceStateForm	查询条件
+	 * @return	记录数
+	 */
+	int countDeviceStateByCondition(DeviceStateForm deviceStateForm);
+
 }

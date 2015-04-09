@@ -1,5 +1,6 @@
 package com.xiaoy.device.web.action;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -9,10 +10,13 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.action.BaseAction;
 import com.xiaoy.base.util.UploadImageHelper;
+import com.xiaoy.device.servic.DeviceInfoService;
 import com.xiaoy.device.servic.DeviceStateService;
+import com.xiaoy.device.web.form.DeviceInfoForm;
 import com.xiaoy.device.web.form.DeviceStateForm;
 import com.xiaoy.resource.servic.DictionaryService;
 import com.xiaoy.resource.servic.LogService;
@@ -33,6 +37,12 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 	 */
 	@Resource
 	private DictionaryService dictionaryService;
+	
+	/**
+	 * 设备信息
+	 */
+	@Resource
+	private DeviceInfoService deviceInfoService;
 	
 	@Resource
 	private DeviceStateService deviceStateService;
@@ -59,6 +69,8 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 	public String deviceStateList()
 	{
 		List<DeviceStateForm> list = deviceStateService.findDeviceStateConditionWithPage(deviceStateForm);
+		int count = deviceStateService.countDeviceStateByCondition(deviceStateForm);
+		deviceStateForm.setRecordCount(count);
 		request.setAttribute("formList", list);
 		//向页面上发送类型数据
 		this.sendPageData();
@@ -74,10 +86,32 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 	{
 		//向页面上发送类型数据
 		this.sendPageData();
+		//获取所有设备的名称
+		List<DeviceInfoForm> list = deviceInfoService.findDeviceName();
+		request.setAttribute("list", list);
 		logService.saveLog(request, "【设备管理】--【设备信息管理】", "进入设备添加");
 		return "toDeviceStateAdd";
 	}
 
+	/**
+	 * 用户异步请求显示设备型号<br/>
+	 * 使用了谷歌的集合转json的Gson.jar
+	 */
+	public void deviceVersion(){
+		List<DeviceInfoForm> list = deviceInfoService.findDeviceVersionByName(deviceStateForm.getDeviceName());
+		Gson gson = new Gson();
+		String json = gson.toJson(list);
+		try {
+			response.getOutputStream().print(json);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String deviceStateSave(){
+		return "success";
+	}
+	
 	/**
 	 * 向页面上发送类型数据
 	 */

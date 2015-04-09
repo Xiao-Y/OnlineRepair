@@ -15,4 +15,11 @@ public interface DeviceStateDao extends Common<DeviceState> {
 	 */
 	List<DeviceState> findDeviceStateConditionWithPage(DeviceStateForm deviceStateForm);
 
+	/**
+	 * 根据条件查询出现总记录数
+	 * @param deviceStateForm	查询条件
+	 * @return	总记录数
+	 */
+	int countDeviceStateByCondition(DeviceStateForm deviceStateForm);
+
 }

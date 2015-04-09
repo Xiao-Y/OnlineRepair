@@ -52,4 +52,17 @@ public interface DeviceInfoService
 	 */
 	void deviceDeleteByIds(String[] ids);
 
+	/**
+	 * 获取所有设备的名称
+	 * @return	List &ltDeviceStateForm&gt	设备名称集合
+	 */
+	List<DeviceInfoForm> findDeviceName();
+
+	/**
+	 * 通过设备名称查找出现设备的所有型号
+	 * @param deviceName	设备名称
+	 * @return	List &ltDeviceInfoForm&gt	含有设备型号的集合
+	 */
+	List<DeviceInfoForm> findDeviceVersionByName(String deviceName);
+
 }

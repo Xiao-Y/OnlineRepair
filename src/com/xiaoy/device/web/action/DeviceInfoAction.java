@@ -21,6 +21,9 @@ import com.xiaoy.resource.servic.LogService;
 @Controller
 public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceInfoForm>
 {
+	//保存图片的文件夹
+	private static String DEVICE_IMAGE_URL = "deviceUploadImages";
+	
 	@Resource
 	private DeviceInfoService deviceService;
 	
@@ -75,7 +78,7 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
         if (deviceForm.getImage() != null) 
         {
         	//上传图片
-        	UploadImageHelper.uploadImage(deviceForm);
+        	UploadImageHelper.uploadImage(deviceForm, DEVICE_IMAGE_URL);
         	logService.saveLog(request, "【设备管理】--【设备信息管理】", "添加“"+ deviceForm.getDeviceName()+"”图片");
         }
         if(!StringUtils.isEmpty(deviceForm.getNewFileName()))
@@ -122,7 +125,7 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 		{	if (deviceForm.getImage() != null)
 			{
 				//上传图片
-				UploadImageHelper.uploadImage(deviceForm);
+				UploadImageHelper.uploadImage(deviceForm, DEVICE_IMAGE_URL);
 				logService.saveLog(request, "【设备管理】--【设备信息管理】", "修改“"+ deviceForm.getDeviceName()+"”图片");
 	        }
 			deviceForm.setDevicePicUrl(UploadImageHelper.PICURL);

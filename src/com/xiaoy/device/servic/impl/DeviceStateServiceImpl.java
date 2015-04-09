@@ -7,8 +7,11 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xiaoy.base.entites.DeviceInfo;
 import com.xiaoy.base.entites.DeviceState;
 import com.xiaoy.base.util.DateHelper;
 import com.xiaoy.device.dao.DeviceStateDao;
@@ -32,7 +35,7 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 	public List<DeviceStateForm> findDeviceStateConditionWithPage(
 			DeviceStateForm deviceStateForm) {
 		List<DeviceState> list = deviceStateDao.findDeviceStateConditionWithPage(deviceStateForm);
-		List<DeviceStateForm> formList = this.DeviceStateVoToPoList(list);
+		List<DeviceStateForm> formList = this.deviceStateVoToPoList(list);
 		return formList;
 	}
 
@@ -41,7 +44,7 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 	 * @param list	VO
 	 * @return	List &ltDeviceStateForm&gt	PO集合
 	 */
-	private List<DeviceStateForm> DeviceStateVoToPoList(List<DeviceState> list) {
+	private List<DeviceStateForm> deviceStateVoToPoList(List<DeviceState> list) {
 		List<DeviceStateForm> formList = null;
 		if(list != null && list.size() > 0){
 			formList = new ArrayList<DeviceStateForm>();
@@ -84,6 +87,38 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 	public int countDeviceStateByCondition(DeviceStateForm deviceStateForm) {
 		int count = deviceStateDao.countDeviceStateByCondition(deviceStateForm);
 		return count;
+	}
+
+	@Override
+	@Transactional(readOnly=false, isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
+	public void deviceStateSave(DeviceStateForm deviceStateForm)
+	{
+		DeviceState entity = this.deviceStatePoToVo(deviceStateForm);
+		deviceStateDao.saveObject(entity);;
+	}
+
+	/**
+	 * 设备信息PO转换成VO
+	 * @param deviceStateForm	PO对象
+	 * @return	DeviceState	VO对象
+	 */
+	private DeviceState deviceStatePoToVo(DeviceStateForm deviceStateForm)
+	{
+		DeviceState deviceState = new DeviceState();
+		deviceState.setAreaCode(deviceStateForm.getAreaCode());
+		
+		DeviceInfo deviceInfo = new DeviceInfo();
+		deviceInfo.setDeviceTypeUuid(deviceStateForm.getDeviceTypeUuid());
+		deviceState.setDeviceInfo(deviceInfo);
+		
+		deviceState.setDevicePicUrl(deviceStateForm.getDevicePicUrl());
+		deviceState.setInstallationSiteCode(deviceStateForm.getInstallationSiteCode());
+		deviceState.setInstallationTime(!StringUtils.isEmpty(deviceStateForm.getInstallationTime()) ? DateHelper.stringConverDate(deviceStateForm.getInstallationTime()) : null);
+		deviceState.setLastTime(!StringUtils.isEmpty(deviceStateForm.getLastTime()) ? DateHelper.stringConverDate(deviceStateForm.getLastTime()) : null);
+		deviceState.setNextTime(!StringUtils.isEmpty(deviceStateForm.getNextTime()) ? DateHelper.stringConverDate(deviceStateForm.getNextTime()) : null);
+		deviceState.setStateCode(deviceStateForm.getStateCode());
+		
+		return deviceState;
 	}
 
 }

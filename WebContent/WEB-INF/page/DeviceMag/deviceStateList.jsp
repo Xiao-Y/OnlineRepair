@@ -23,13 +23,13 @@
 	//清除查询条件
 	$().ready(function(){
 		$("#BT_Reset").click(function(){
-			$("#area").val("");
+			$("#areaCode").val("");
+			$("#installationSiteCode").val("");
 			$("#deviceName").val("");
 			$("#version").val("");
-			$("#producer").val("");
-			$("#installationDate").val("");
-			$("#rank").val("");
-			$("#state").val("");
+			$("#installationTime").val("");
+			$("#stateCode").val("");
+			$("#form1").submit();
 		});
 	});
 	
@@ -74,7 +74,11 @@
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				设备名：</td>
 				<td class="ta_01" >
-					<s:textfield id="deviceName" name="deviceName" size="21"/>
+					<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
+					  listKey="deviceName" listValue="deviceName"
+					  headerKey="" headerValue="------请选择------"
+					  cssStyle="width:140px" onchange="changeDevice();" data-rule-required="true"
+					/>
 				</td>
 			</tr>
 			<tr>
@@ -114,7 +118,7 @@
 		             </table>
 	                 </td>
 				<td class="ta_01" align="right">
-				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="button" value="查询" name="BT_Find" >&nbsp;&nbsp;
+				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="button" value="查询" name="BT_Find" onclick="findDeviceSatae();">&nbsp;&nbsp;
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_Reset" >&nbsp;&nbsp;
 					<input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="添加设备" name="BT_Add" onclick="link('${pageContext.request.contextPath }/DeviceMag/deviceStateAction_toDeviceStateAdd.action')">
 				</td>
@@ -150,7 +154,7 @@
 										<s:property value="%{#list.areaName}"/>
 									</td>
 									<td style="height:22px" align="center" width="15%">
-										<s:property value="%{#list.installationSiteCode}"/>
+										<s:property value="%{#list.installationSiteName}"/>
 									</td>
 									<td style="height:22px" align="center" width="15%">
 										<input type="hidden" id="123">
@@ -165,7 +169,14 @@
 										<s:property value="%{#list.installationTime}"/>
 									</td>									
 									<td style="height:22px" align="center" width="10%">
-										<s:property value="%{#list.stateCode}"/>
+										<s:if test="%{#list.stateCode == 1}">
+											<s:property value="%{#list.stateName}"/>
+										</s:if>
+										<s:else><!-- 运行异常，红色显示。可以查看异常情况 -->
+											<font color="#FF0000">
+												<s:property value="%{#list.stateName}"/>
+											</font>
+										</s:else>
 									</td>
 									<td align="center" style="HEIGHT: 22px" align="center" width="5%">																	
 									   <a href="${pageContext.request.contextPath }/page/DeviceMag/deviceStateEdit.jsp">

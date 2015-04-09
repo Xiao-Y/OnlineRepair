@@ -26,6 +26,10 @@ import com.xiaoy.resource.web.form.DictionaryForm;
 @Controller
 public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceStateForm>
 {
+	
+	//保存图片的文件夹
+	private static String DEVICE_IMAGE_URL = "deviceStateUploadImages";
+	
 	/**
 	 * 注入日志
 	 */
@@ -86,9 +90,6 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 	{
 		//向页面上发送类型数据
 		this.sendPageData();
-		//获取所有设备的名称
-		List<DeviceInfoForm> list = deviceInfoService.findDeviceName();
-		request.setAttribute("list", list);
 		logService.saveLog(request, "【设备管理】--【设备信息管理】", "进入设备添加");
 		return "toDeviceStateAdd";
 	}
@@ -108,10 +109,6 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 		}
 	}
 	
-	public String deviceStateSave(){
-		return "success";
-	}
-	
 	/**
 	 * 向页面上发送类型数据
 	 */
@@ -121,29 +118,32 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 		List<DictionaryForm> area = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.AREA_NAME);
 		List<DictionaryForm> installationSite = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.INSTALLATION_SITE_NAME);
 		List<DictionaryForm> state = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.STATE_NAME);
+		//获取所有设备的名称
+		List<DeviceInfoForm> deviceName = deviceInfoService.findDeviceName();
+		request.setAttribute("deviceName", deviceName);
 		request.setAttribute("area", area);
 		request.setAttribute("installationSite", installationSite);
 		request.setAttribute("state", state);
 	}
 	
 	/**
-	 * 保存设备信息
+	 * 保存设备状态信息
 	 * @return
 	 */
-	public String deviceSave()
+	public String deviceStateSave()
 	{
         if (deviceStateForm.getImage() != null) 
         {
         	//上传图片
-        	UploadImageHelper.uploadImage(deviceStateForm);
-        	//logService.saveLog(request, "【设备管理】--【设备信息管理】", "添加“"+ deviceStateForm.getDeviceName()+"”图片");
+        	UploadImageHelper.uploadImage(deviceStateForm, DEVICE_IMAGE_URL);
+        	logService.saveLog(request, "【设备管理】--【查询设备状态管理】", "添加“"+ deviceStateForm.getDeviceName()+"”图片");
         }
         if(!StringUtils.isEmpty(deviceStateForm.getNewFileName()))
         {
         	deviceStateForm.setDevicePicUrl(UploadImageHelper.PICURL);
         }
-		//deviceService.deviceSave(deviceForm);
-		logService.saveLog(request, "【设备管理】--【设备信息管理】", "完成添加设备");
+        deviceStateService.deviceStateSave(deviceStateForm);
+		logService.saveLog(request, "【设备管理】--【查询设备状态管理】", "完成添加设备状态");
 		return "success";
 	}
 	

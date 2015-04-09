@@ -11,16 +11,13 @@ import com.xiaoy.base.web.form.BaseForm;
 
 public class UploadImageHelper {
 	
-	//保存图片的文件夹
-	private static String DEVICE_IMAGE_URL = "deviceUploadImages";
-	
 	public static String  PICURL;
 	
 	/**
 	 * 上传图片
 	 * @param baseForm
 	 */
-	public static void uploadImage(BaseForm baseForm)
+	public static void uploadImage(BaseForm baseForm,String DEVICE_IMAGE_URL)
 	{
 		//获取图上的后缀名
     	int index = baseForm.getImageFileName().indexOf(".");

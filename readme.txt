@@ -199,6 +199,14 @@ pub.css		公有的样式
 	⑦出现乱码：
 		解决方法：
 		修改form的提交方式为method="post"
+		
+	⑧时间查询出现错误：
+		解决方法：
+		and e.installationTime = timestamp(:installationTime)加上timestamp格式化。
+		
+		select timestamp('2008-08-08');                         -- 2008-08-08 00:00:00
+		select timestamp('2008-08-08 08:00:00', '01:01:01');    -- 2008-08-08 09:01:01
+		select timestamp('2008-08-08 08:00:00', '10 01:01:01'); -- 2008-08-18 09:01:01 
 	
 	
 	

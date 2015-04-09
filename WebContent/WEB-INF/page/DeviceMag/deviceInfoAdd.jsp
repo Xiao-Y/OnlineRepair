@@ -13,7 +13,6 @@
     }
 </script>
 
-
 </head>
 <body>
 <form enctype="multipart/form-data" name="Form1" method="post" id="Form1" class="form-validate" action="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceSave.action">
@@ -24,7 +23,6 @@
 				<font face="宋体" size="2"><strong>添加设备</strong></font>
 			</td>
 		</tr>
-		
 	    <tr>
 	       <td align="right" bgColor="#f5fafe" class="ta_01" style="width: 20%">设备名：<font color="#FF0000">*</font></td>
 	       <td class="ta_01" bgColor="#ffffff" style="width: 30%">
@@ -32,7 +30,7 @@
 	       </td>
 	       <td align="right" bgColor="#f5fafe" class="ta_01" style="width: 20%">型号：<font color="#FF0000">*</font></td>
 	       <td class="ta_01" bgColor="#ffffff" style="width: 30%">
-	       		<s:textfield name="version" id="version" maxlength="25" size="20" data-rule-required="true" data-rule-storeDomain="true"/>
+	       		<s:textfield name="version" id="version" maxlength="25" size="20" data-rule-required="true" data-rule-loginname="true"/>
 	       </td>
 	    </tr>
 	    

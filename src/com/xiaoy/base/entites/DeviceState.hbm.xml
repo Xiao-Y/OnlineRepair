@@ -30,7 +30,7 @@
             <column name="DEVICE_PIC_URL" />
         </property>
         
-        <many-to-one name="deviceInfo" class="com.xiaoy.base.entites.DeviceInfo" column="deviceTypeUuid"/>
+        <many-to-one name="deviceInfo" class="com.xiaoy.base.entites.DeviceInfo" column="DEVICETYPE_UUID"/>
         
     </class>
 </hibernate-mapping>

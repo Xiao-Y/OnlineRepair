@@ -60,32 +60,32 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 			paramsMapValue = new HashMap<String, Object>();
 			
 			if(!StringUtils.isEmpty(deviceStateForm.getAreaCode())){
-				hqlWhere.append(" and d.areaCode = :areaCode");
+				hqlWhere.append(" and e.areaCode = :areaCode");
 				paramsMapValue.put("areaCode", deviceStateForm.getAreaCode());
 			}
 			
 			if(!StringUtils.isEmpty(deviceStateForm.getInstallationSiteCode())){
-				hqlWhere.append(" and d.installationSiteCode = :installationSiteCode");
+				hqlWhere.append(" and e.installationSiteCode = :installationSiteCode");
 				paramsMapValue.put("installationSiteCode", deviceStateForm.getInstallationSiteCode());
 			}
 			
 			if(!StringUtils.isEmpty(deviceStateForm.getDeviceName())){
-				hqlWhere.append(" and d.deviceInfo.deviceName like :deviceName");
+				hqlWhere.append(" and e.deviceInfo.deviceName like :deviceName");
 				paramsMapValue.put("deviceName", "%" + deviceStateForm.getDeviceName() + "%");
 			}
 			
 			if(!StringUtils.isEmpty(deviceStateForm.getVersion())){
-				hqlWhere.append(" and d.deviceInfo.version like :version");
+				hqlWhere.append(" and e.deviceInfo.version like :version");
 				paramsMapValue.put("version", "%" + deviceStateForm.getVersion() + "%");
 			}
 			
 			if(!StringUtils.isEmpty(deviceStateForm.getInstallationTime())){
-				hqlWhere.append(" and d.installationTime = :installationTime");
+				hqlWhere.append(" and e.installationTime = timestamp(:installationTime)");
 				paramsMapValue.put("installationTime", deviceStateForm.getInstallationTime());
 			}
 			
 			if(!StringUtils.isEmpty(deviceStateForm.getStateCode())){
-				hqlWhere.append(" and d.stateCode = :stateCode");
+				hqlWhere.append(" and e.stateCode = :stateCode");
 				paramsMapValue.put("stateCode", deviceStateForm.getStateCode());
 			}
 			
@@ -99,7 +99,7 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 	@SuppressWarnings({ "unchecked"})
 	private List<DeviceState> findCollectionByConditionWithPage(DeviceStateForm deviceStateForm,String hqlWhere,
 			Map<String, Object> paramsMapValue) {
-		StringBuffer hql = new StringBuffer("from DeviceState d left join fetch d.deviceInfo where 1 = 1 ");
+		StringBuffer hql = new StringBuffer("from DeviceState e left join fetch e.deviceInfo where 1 = 1 ");
 
 		hql.append(hqlWhere);
 
@@ -143,7 +143,7 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 				{
 					query.setParameterList(entry.getKey(),
 							(Collection) entry.getValue());
-				} else
+				}else
 				{
 					query.setParameter(entry.getKey(), entry.getValue());
 				}

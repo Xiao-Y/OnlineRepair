@@ -21,4 +21,10 @@ public interface DeviceStateService {
 	 */
 	int countDeviceStateByCondition(DeviceStateForm deviceStateForm);
 
+	/**
+	 * 保存设备状态信息
+	 * @param deviceStateForm	设备状态信息
+	 */
+	void deviceStateSave(DeviceStateForm deviceStateForm);
+
 }

@@ -344,9 +344,15 @@ function changeDevice(){
 		   $.each(data,function(i){
 			   html = html + '<option value="'+ data[i].deviceTypeUuid +'" >'+ data[i].version + '</option>';
 		   });
-		   $("#version").html(html);
+		   $("#deviceTypeUuid").html(html);
 	   },dataType);
 	}
+
+//查看设备状态--条件查询
+function findDeviceSatae(){
+	$("#form1").attr("action","${pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceStateList.action");
+	$("#form1").submit();
+}
 
 //设备管理=====================end
 

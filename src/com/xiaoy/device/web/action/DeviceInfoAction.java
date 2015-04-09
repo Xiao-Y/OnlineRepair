@@ -55,6 +55,9 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 		List<DeviceInfoForm> list = deviceService.findDeviceInfoByCondition(deviceForm);
 		deviceForm.setRecordCount(deviceService.countDeviceInfoByCondition(deviceForm));
 		request.setAttribute("deviceList", list);
+		//获取所有设备的名称
+		List<DeviceInfoForm> deviceName = deviceService.findDeviceName();
+		request.setAttribute("deviceName", deviceName);
 		logService.saveLog(request, "【设备管理】--【设备信息管理】", "查看设备列表");
 		return "deviceInfoList";
 	}

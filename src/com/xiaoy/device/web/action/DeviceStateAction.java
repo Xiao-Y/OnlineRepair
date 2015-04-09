@@ -90,7 +90,7 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 	{
 		//向页面上发送类型数据
 		this.sendPageData();
-		logService.saveLog(request, "【设备管理】--【设备信息管理】", "进入设备添加");
+		logService.saveLog(request, "【设备管理】--【设备信息管理】", "进入设备添加页面");
 		return "toDeviceStateAdd";
 	}
 
@@ -114,16 +114,19 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 	 */
 	private void sendPageData()
 	{
-		//数据类型发送到页面
+		//区域
 		List<DictionaryForm> area = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.AREA_NAME);
+		request.setAttribute("area", area);
+		//安装位置
 		List<DictionaryForm> installationSite = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.INSTALLATION_SITE_NAME);
+		request.setAttribute("installationSite", installationSite);
+		//运行状态
 		List<DictionaryForm> state = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.STATE_NAME);
+		request.setAttribute("state", state);
 		//获取所有设备的名称
 		List<DeviceInfoForm> deviceName = deviceInfoService.findDeviceName();
 		request.setAttribute("deviceName", deviceName);
-		request.setAttribute("area", area);
-		request.setAttribute("installationSite", installationSite);
-		request.setAttribute("state", state);
+		
 	}
 	
 	/**

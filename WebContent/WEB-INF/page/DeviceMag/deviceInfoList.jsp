@@ -48,7 +48,11 @@
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				设备名：</td>
 				<td class="ta_01" >
-					<s:textfield name="deviceName" id="deviceName" size="21"/>
+					<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
+					  listKey="deviceName" listValue="deviceName"
+					  headerKey="" headerValue="------请选择------"
+					  cssStyle="width:140px" onchange="changeDevice();" data-rule-required="true"
+					/>
 				</td>
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				型号：</td>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -14,16 +15,28 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xiaoy.base.entites.DeviceInfo;
 import com.xiaoy.base.entites.DeviceState;
 import com.xiaoy.base.util.DateHelper;
+import com.xiaoy.base.util.UploadImageHelper;
 import com.xiaoy.device.dao.DeviceStateDao;
 import com.xiaoy.device.servic.DeviceStateService;
 import com.xiaoy.device.web.form.DeviceStateForm;
 import com.xiaoy.resource.dao.DictionaryDao;
+import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.web.form.DictionaryForm;
 
 @Service
 @Transactional(readOnly=true)
 public class DeviceStateServiceImpl implements DeviceStateService {
 
+	private final static String MENU_MODEL = "【设备管理】--【查询设备状态】";
+	//保存图片的文件夹
+	private static String DEVICE_IMAGE_URL = "deviceStateUploadImages";
+	
+	/**
+	 * 注入日志
+	 */
+	@Resource
+	private LogService logService;
+	
 	@Resource
 	private DeviceStateDao deviceStateDao;
 	
@@ -32,13 +45,68 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 	private DictionaryDao dictionaryDao;
 	
 	@Override
-	public List<DeviceStateForm> findDeviceStateConditionWithPage(
-			DeviceStateForm deviceStateForm) {
+	public List<DeviceStateForm> findDeviceStateConditionWithPage(DeviceStateForm deviceStateForm) {
 		List<DeviceState> list = deviceStateDao.findDeviceStateConditionWithPage(deviceStateForm);
 		List<DeviceStateForm> formList = this.deviceStateVoToPoList(list);
 		return formList;
 	}
 
+	@Override
+	public DeviceStateForm findDeviceStateByUuid(String deviceStateUuid) {
+		DeviceState deviceState = deviceStateDao.findObjectById(deviceStateUuid);
+		DeviceStateForm df = new DeviceStateForm();
+		this.deviceStateVoToPo(deviceState, df);
+		return df;
+	}
+	
+
+	@Override
+	public int countDeviceStateByCondition(DeviceStateForm deviceStateForm) {
+		int count = deviceStateDao.countDeviceStateByCondition(deviceStateForm);
+		return count;
+	}
+
+	@Override
+	@Transactional(readOnly=false, isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
+	public void deviceStateSave(DeviceStateForm deviceStateForm, HttpServletRequest request)
+	{
+		if (deviceStateForm.getImage() != null) 
+        {
+        	//上传图片
+        	UploadImageHelper.uploadImage(deviceStateForm, DEVICE_IMAGE_URL);
+        	logService.saveLog(request, MENU_MODEL, "添加“"+ deviceStateForm.getDeviceName()+"”图片");
+        }
+        if(!StringUtils.isEmpty(deviceStateForm.getNewFileName()))
+        {
+        	deviceStateForm.setDevicePicUrl(UploadImageHelper.PICURL);
+        }
+		DeviceState entity = this.deviceStatePoToVo(deviceStateForm);
+		deviceStateDao.saveObject(entity);;
+	}
+
+	@Override
+	@Transactional(readOnly=false, isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
+	public void deviceStateUpdate(DeviceStateForm deviceStateForm, HttpServletRequest request) {
+		if(deviceStateForm != null){
+			//如果修改了图片，取新图片的信息
+			if(!StringUtils.isEmpty(deviceStateForm.getImageFileName()))
+			{	if (deviceStateForm.getImage() != null)
+				{
+					//上传图片
+					UploadImageHelper.uploadImage(deviceStateForm,DEVICE_IMAGE_URL);
+					logService.saveLog(request, MENU_MODEL, "修改“"+ deviceStateForm.getDeviceName()+"”图片");
+		        }
+			deviceStateForm.setDevicePicUrl(UploadImageHelper.PICURL);
+			}else//如果没有修改图片，取原图片的路径
+			{
+				String devicePicUrl = request.getParameter("oldUrl");
+				deviceStateForm.setDevicePicUrl(devicePicUrl);
+			}
+			DeviceState entity = this.deviceStatePoToVo(deviceStateForm);
+			deviceStateDao.updateObject(entity);
+		}
+	}
+	
 	/**
 	 * 将设备信息的PO转换成VO
 	 * @param list	VO
@@ -50,51 +118,45 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 			formList = new ArrayList<DeviceStateForm>();
 			for(DeviceState ds : list){
 				DeviceStateForm df = new DeviceStateForm();
-				
-				df.setAreaCode(ds.getAreaCode());
-				if(!StringUtils.isEmpty(ds.getAreaCode())){
-					df.setAreaName(dictionaryDao.findDDLName(ds.getAreaCode(), DictionaryForm.AREA_NAME));
-				}else{
-					df.setAreaName("");
-				}
-				df.setInstallationSiteCode(ds.getInstallationSiteCode());
-				if(!StringUtils.isEmpty(ds.getInstallationSiteCode())){
-					df.setInstallationSiteName(dictionaryDao.findDDLName(ds.getInstallationSiteCode(), DictionaryForm.INSTALLATION_SITE_NAME));
-				}else{
-					df.setInstallationSiteName("");
-				}
-				df.setStateCode(ds.getStateCode());
-				if(!StringUtils.isEmpty(ds.getStateCode())){
-					df.setStateName(dictionaryDao.findDDLName(ds.getStateCode(), DictionaryForm.STATE_NAME));
-				}
-				df.setDevicePicUrl(ds.getDevicePicUrl());
-				df.setDeviceStateUuid(ds.getDeviceStateUuid());
-				
-				df.setDeviceTypeUuid(ds.getDeviceInfo().getDeviceTypeUuid());
-				df.setDeviceName(ds.getDeviceInfo().getDeviceName());
-				df.setVersion(ds.getDeviceInfo().getVersion());
-				
-				df.setInstallationTime(ds.getInstallationTime() != null ? DateHelper.dateConverString(ds.getInstallationTime()) : "");
-				df.setLastTime(ds.getLastTime() != null ? DateHelper.dateConverString(ds.getLastTime()) : "");
-				df.setNextTime(ds.getNextTime() != null ? DateHelper.dateConverString(ds.getNextTime()) : "");
+				this.deviceStateVoToPo(ds,df);
 				formList.add(df);
 			}
 		}
 		return formList;
 	}
 
-	@Override
-	public int countDeviceStateByCondition(DeviceStateForm deviceStateForm) {
-		int count = deviceStateDao.countDeviceStateByCondition(deviceStateForm);
-		return count;
-	}
-
-	@Override
-	@Transactional(readOnly=false, isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
-	public void deviceStateSave(DeviceStateForm deviceStateForm)
-	{
-		DeviceState entity = this.deviceStatePoToVo(deviceStateForm);
-		deviceStateDao.saveObject(entity);;
+	/**
+	 *	设备状态信息Vo转Po对象
+	 * @param ds	VO对象
+	 * @param df	PO对象
+	 */
+	private void deviceStateVoToPo(DeviceState ds, DeviceStateForm df) {
+		df.setAreaCode(ds.getAreaCode());
+		if(!StringUtils.isEmpty(ds.getAreaCode())){
+			df.setAreaName(dictionaryDao.findDDLName(ds.getAreaCode(), DictionaryForm.AREA_NAME));
+		}else{
+			df.setAreaName("");
+		}
+		df.setInstallationSiteCode(ds.getInstallationSiteCode());
+		if(!StringUtils.isEmpty(ds.getInstallationSiteCode())){
+			df.setInstallationSiteName(dictionaryDao.findDDLName(ds.getInstallationSiteCode(), DictionaryForm.INSTALLATION_SITE_NAME));
+		}else{
+			df.setInstallationSiteName("");
+		}
+		df.setStateCode(ds.getStateCode());
+		if(!StringUtils.isEmpty(ds.getStateCode())){
+			df.setStateName(dictionaryDao.findDDLName(ds.getStateCode(), DictionaryForm.STATE_NAME));
+		}
+		df.setDevicePicUrl(ds.getDevicePicUrl());
+		df.setDeviceStateUuid(ds.getDeviceStateUuid());
+		df.setDeviceTypeUuid(ds.getDeviceInfo().getDeviceTypeUuid());
+		df.setDeviceName(ds.getDeviceInfo().getDeviceName());
+		df.setVersion(ds.getDeviceInfo().getVersion());
+		df.setRemark(ds.getRemark());
+		
+		df.setInstallationTime(ds.getInstallationTime() != null ? DateHelper.dateConverString(ds.getInstallationTime()) : "");
+		df.setLastTime(ds.getLastTime() != null ? DateHelper.dateConverString(ds.getLastTime()) : "");
+		df.setNextTime(ds.getNextTime() != null ? DateHelper.dateConverString(ds.getNextTime()) : "");
 	}
 
 	/**
@@ -105,9 +167,10 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 	private DeviceState deviceStatePoToVo(DeviceStateForm deviceStateForm)
 	{
 		DeviceState deviceState = new DeviceState();
+		deviceState.setDeviceStateUuid(deviceStateForm.getDeviceTypeUuid());
 		deviceState.setAreaCode(deviceStateForm.getAreaCode());
 		
-		DeviceInfo deviceInfo = new DeviceInfo();
+		DeviceInfo deviceInfo = deviceState.getDeviceInfo();
 		deviceInfo.setDeviceTypeUuid(deviceStateForm.getDeviceTypeUuid());
 		deviceState.setDeviceInfo(deviceInfo);
 		
@@ -117,8 +180,20 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 		deviceState.setLastTime(!StringUtils.isEmpty(deviceStateForm.getLastTime()) ? DateHelper.stringConverDate(deviceStateForm.getLastTime()) : null);
 		deviceState.setNextTime(!StringUtils.isEmpty(deviceStateForm.getNextTime()) ? DateHelper.stringConverDate(deviceStateForm.getNextTime()) : null);
 		deviceState.setStateCode(deviceStateForm.getStateCode());
+		deviceState.setRemark(deviceStateForm.getRemark());
 		
 		return deviceState;
 	}
 
+	@Override
+	@Transactional(isolation=Isolation.DEFAULT,readOnly=false, propagation=Propagation.REQUIRED)
+	public void deviceStateDeleteByUuid(String deviceStateUuid) {
+		deviceStateDao.deleteObjectByid(deviceStateUuid);
+	}
+
+	@Override
+	@Transactional(readOnly=false, isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
+	public void deviceStateDeleteByIds(String[] ids) {
+		deviceStateDao.deviceStateDeleteByIds(ids);
+	}
 }

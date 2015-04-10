@@ -7,12 +7,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.action.BaseAction;
-import com.xiaoy.base.util.UploadImageHelper;
 import com.xiaoy.device.servic.DeviceInfoService;
 import com.xiaoy.device.web.form.DeviceInfoForm;
 import com.xiaoy.resource.servic.LogService;
@@ -21,8 +19,7 @@ import com.xiaoy.resource.servic.LogService;
 @Controller
 public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceInfoForm>
 {
-	//保存图片的文件夹
-	private static String DEVICE_IMAGE_URL = "deviceUploadImages";
+	private final static String MENU_MODEL = "【设备管理】--【设备信息管理】";
 	
 	@Resource
 	private DeviceInfoService deviceService;
@@ -58,7 +55,7 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 		//获取所有设备的名称
 		List<DeviceInfoForm> deviceName = deviceService.findDeviceName();
 		request.setAttribute("deviceName", deviceName);
-		logService.saveLog(request, "【设备管理】--【设备信息管理】", "查看设备列表");
+		logService.saveLog(request, MENU_MODEL, "查看设备列表");
 		return "deviceInfoList";
 	}
 	
@@ -68,7 +65,7 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 	 */
 	public String toDeviceAdd()
 	{
-		logService.saveLog(request, "【设备管理】--【设备信息管理】", "进入设备添加");
+		logService.saveLog(request, MENU_MODEL, "进入设备添加");
 		return "toDeviceAdd";
 	}
 	
@@ -78,18 +75,8 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 	 */
 	public String deviceSave()
 	{
-        if (deviceForm.getImage() != null) 
-        {
-        	//上传图片
-        	UploadImageHelper.uploadImage(deviceForm, DEVICE_IMAGE_URL);
-        	logService.saveLog(request, "【设备管理】--【设备信息管理】", "添加“"+ deviceForm.getDeviceName()+"”图片");
-        }
-        if(!StringUtils.isEmpty(deviceForm.getNewFileName()))
-        {
-        	deviceForm.setDevicePicUrl(UploadImageHelper.PICURL);
-        }
-		deviceService.deviceSave(deviceForm);
-		logService.saveLog(request, "【设备管理】--【设备信息管理】", "完成添加设备");
+		deviceService.deviceSave(deviceForm,request);
+		logService.saveLog(request, MENU_MODEL, "完成添加设备");
 		return "success";
 	}
 	
@@ -101,7 +88,7 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 	{
 		deviceForm = deviceService.getfindDeviceByUuid(deviceForm.getDeviceTypeUuid());
 		request.setAttribute("device", deviceForm);
-		logService.saveLog(request, "【设备管理】--【设备信息管理】", "查看“"+ deviceForm.getDeviceName()+"”设备");
+		logService.saveLog(request, MENU_MODEL, "查看“"+ deviceForm.getDeviceName()+"”设备");
 		return "deviceView";
 	}
 
@@ -113,7 +100,7 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 	{
 		deviceForm = deviceService.getfindDeviceByUuid(deviceForm.getDeviceTypeUuid());
 		request.setAttribute("device", deviceForm);
-		logService.saveLog(request, "【设备管理】--【设备信息管理】", "进入“"+ deviceForm.getDeviceName()+"”编辑");
+		logService.saveLog(request, MENU_MODEL, "进入“"+ deviceForm.getDeviceName()+"”编辑");
 		return "deviceEdit";
 	}
 	
@@ -123,22 +110,8 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 	 */
 	public String deviceUpdate()
 	{
-		//如果修改了图片，取新图片的信息
-		if(!StringUtils.isEmpty(deviceForm.getImageFileName()))
-		{	if (deviceForm.getImage() != null)
-			{
-				//上传图片
-				UploadImageHelper.uploadImage(deviceForm, DEVICE_IMAGE_URL);
-				logService.saveLog(request, "【设备管理】--【设备信息管理】", "修改“"+ deviceForm.getDeviceName()+"”图片");
-	        }
-			deviceForm.setDevicePicUrl(UploadImageHelper.PICURL);
-		}else//如果没有修改图片，取原图片的路径
-		{
-			String devicePicUrl = request.getParameter("oldUrl");
-			deviceForm.setDevicePicUrl(devicePicUrl);
-		}
-		deviceService.deviceUpdate(deviceForm);
-		logService.saveLog(request, "【设备管理】--【设备信息管理】", "更改“"+ deviceForm.getDeviceName()+"”设备");
+		deviceService.deviceUpdate(deviceForm,request);
+		logService.saveLog(request, MENU_MODEL, "更改“"+ deviceForm.getDeviceName()+"”设备");
 		return "success";
 	}
 	
@@ -157,7 +130,7 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
 			e.printStackTrace();
 		}
-		logService.saveLog(request, "【设备管理】--【设备信息管理】", "删除“"+ deviceForm.getDeviceName()+"”设备");
+		logService.saveLog(request, MENU_MODEL, "删除“"+ deviceForm.getDeviceName()+"”设备");
 		return "ajax-success";
 	}
 	
@@ -167,7 +140,7 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 		if(ids != null && ids.length > 0){
 			for(int i = 0; i < ids.length; i++){
 				DeviceInfoForm deviceForm = deviceService.getfindDeviceByUuid(ids[i]); 
-				logService.saveLog(request, "【设备管理】--【设备信息管理】", "批量删除“"+ deviceForm.getDeviceName()+"”设备");
+				logService.saveLog(request, MENU_MODEL, "批量删除“"+ deviceForm.getDeviceName()+"”设备");
 			}
 			deviceService.deviceDeleteByIds(ids);
 		}

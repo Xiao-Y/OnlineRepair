@@ -21,32 +21,32 @@
 	    <tr>
 	       <td align="right" bgColor="#f5fafe" class="ta_01" width="20%">设备名：</td>
 	       <td class="ta_01" bgColor="#ffffff" width="30%">
-	       		<input name="deviceName" id="deviceName" maxlength="25" size="20" value="${device.deviceName }" readonly ="true">
+	       		<input name="deviceName" id="deviceName" maxlength="25" size="20" value="${device.deviceName }" readonly ="readonly">
 	       </td>
 	       <td width="18%" align="right" bgColor="#f5fafe" class="ta_01" width="20%">型号：</td>
 	       <td class="ta_01" bgColor="#ffffff" width="30%">
-	       		<input name="version" id="version" maxlength="25" size="20" value="${device.version}" readonly ="true">
+	       		<input name="version" id="version" maxlength="25" size="20" value="${device.version}" readonly ="readonly">
 	       </td>
 	    </tr>
 	    
 		<tr>
 			<td align="right" bgColor="#f5fafe" class="ta_01" width="20%">生产商：</td>
 	       	<td class="ta_01" bgColor="#ffffff" width="30%">
-	       		<input name="producerName" id="producerName" maxlength="25" size="20" value="${device.producerName }" readonly ="true">
+	       		<input name="producerName" id="producerName" maxlength="25" size="20" value="${device.producerName }" readonly ="readonly">
 	       	</td>
 	       	<td align="right" bgColor="#f5fafe" class="ta_01" width="20%">生产商联系方式：</td>
 	       	<td class="ta_01" bgColor="#ffffff" width="30%">
-	       		<input name="producerPhone" id="producerPhone" maxlength="25" size="20" value="${device.producerPhone}" readonly ="true">
+	       		<input name="producerPhone" id="producerPhone" maxlength="25" size="20" value="${device.producerPhone}" readonly ="readonly">
 	       	</td>
 		</tr>
 		<tr>
 			<td align="right" bgColor="#f5fafe" class="ta_01" width="20%">设备价格：</td>
 			<td class="ta_01" bgColor="#ffffff" width="30%">
-				<input name="devicePrice" id="devicePrice" maxlength="25" size="20" value="${device.devicePrice }" readonly ="true">
+				<input name="devicePrice" id="devicePrice" maxlength="25" size="20" value="${device.devicePrice }" readonly ="readonly">
 			</td>
 			<td align="right" bgColor="#f5fafe" class="ta_01" width="20%">设备数量：</td>
 			<td class="ta_01" bgColor="#ffffff" width="30%">
-				<input name="deviceAmount" id="deviceAmount" maxlength="25" size="20" value="${device.deviceAmount }" readonly ="true">
+				<input name="deviceAmount" id="deviceAmount" maxlength="25" size="20" value="${device.deviceAmount }" readonly ="readonly">
 			</td>
 		</tr>
 
@@ -59,7 +59,7 @@
 		<tr>
 			<td class="ta_01" align="right" bgcolor="#f5fafe">备注：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
-				<textarea name="remark" id="remark" style="width:95%" rows="4" cols="52" readonly ="true">${device.remark }</textarea>
+				<textarea name="remark" id="remark" style="width:95%" rows="4" cols="52" readonly ="readonly">${device.remark }</textarea>
 			</td>
 		</tr>
 		

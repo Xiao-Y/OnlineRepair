@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -12,17 +13,26 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoy.base.entites.DeviceInfo;
+import com.xiaoy.base.util.UploadImageHelper;
 import com.xiaoy.device.dao.DeviceInfoDao;
 import com.xiaoy.device.servic.DeviceInfoService;
 import com.xiaoy.device.web.form.DeviceInfoForm;
+import com.xiaoy.resource.servic.LogService;
 
 @Service
 @Transactional(readOnly=true)
 public class DeviceInfoServiceImpl implements DeviceInfoService
 {
-
+	private final static String MENU_MODEL = "【设备管理】--【设备信息管理】";
+	//保存图片的文件夹
+	private static String DEVICE_IMAGE_URL = "deviceUploadImages";
+	
 	@Resource
 	private DeviceInfoDao deviceDao;
+	
+	//注入日志
+	@Resource
+	private LogService logService;
 	
 	@Override
 	public List<DeviceInfoForm> findDeviceInfoByCondition(DeviceInfoForm deviceForm)
@@ -37,9 +47,8 @@ public class DeviceInfoServiceImpl implements DeviceInfoService
 		List<DeviceInfoForm> listForm = new ArrayList<DeviceInfoForm>();
 		for(DeviceInfo d : list)
 		{
-			DeviceInfoForm form = new DeviceInfoForm();
 			//设备的Vo对象转换成Po对象
-			form = this.DeviceVoToPo(form, d);
+			DeviceInfoForm form = this.deviceVoToPo(d);
 			listForm.add(form);
 		}
 			
@@ -55,11 +64,20 @@ public class DeviceInfoServiceImpl implements DeviceInfoService
 
 	@Override
 	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
-	public void deviceSave(DeviceInfoForm deviceForm)
+	public void deviceSave(DeviceInfoForm deviceForm, HttpServletRequest request)
 	{
-		DeviceInfo entity = new DeviceInfo();
-		//设备的Po对象转换成Vo对象
-		entity = this.DeviceFormPoToVo(deviceForm, entity);
+		if (deviceForm.getImage() != null) 
+        {
+        	//上传图片
+        	UploadImageHelper.uploadImage(deviceForm, DEVICE_IMAGE_URL);
+        	logService.saveLog(request, MENU_MODEL, "添加“"+ deviceForm.getDeviceName()+"”图片");
+        }
+        if(!StringUtils.isEmpty(deviceForm.getNewFileName()))
+        {
+        	deviceForm.setDevicePicUrl(UploadImageHelper.PICURL);
+        }
+        //设备的Po对象转换成Vo对象
+		DeviceInfo entity = this.deviceFormPoToVo(deviceForm);
 		deviceDao.saveObject(entity);
 	}
 
@@ -68,18 +86,30 @@ public class DeviceInfoServiceImpl implements DeviceInfoService
 		
 		DeviceInfo device = deviceDao.findObjectById(deviceTypeUuid);
 		
-		DeviceInfoForm deviceForm = new DeviceInfoForm();
 		//设备的Po对象转换成Vo对象
-		deviceForm = this.DeviceVoToPo(deviceForm, device);
+		DeviceInfoForm deviceForm = this.deviceVoToPo(device);
 		return deviceForm;
 	}
 
 	@Override
 	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
-	public void deviceUpdate(DeviceInfoForm deviceForm) {
-		DeviceInfo entity = new DeviceInfo();
+	public void deviceUpdate(DeviceInfoForm deviceForm, HttpServletRequest request) {
+		//如果修改了图片，取新图片的信息
+		if(!StringUtils.isEmpty(deviceForm.getImageFileName()))
+		{	if (deviceForm.getImage() != null)
+			{
+				//上传图片
+				UploadImageHelper.uploadImage(deviceForm, DEVICE_IMAGE_URL);
+				logService.saveLog(request, MENU_MODEL, "修改“"+ deviceForm.getDeviceName()+"”图片");
+	        }
+			deviceForm.setDevicePicUrl(UploadImageHelper.PICURL);
+		}else//如果没有修改图片，取原图片的路径
+		{
+			String devicePicUrl = request.getParameter("oldUrl");
+			deviceForm.setDevicePicUrl(devicePicUrl);
+		}
 		//设备的Po对象转换成Vo对象
-		entity = this.DeviceFormPoToVo(deviceForm, entity);
+		DeviceInfo entity = this.deviceFormPoToVo(deviceForm);
 		deviceDao.updateObject(entity);
 	}
 	
@@ -114,8 +144,9 @@ public class DeviceInfoServiceImpl implements DeviceInfoService
 	 * @param d	Vo对象
 	 * @return	DeviceForm Po对象
 	 */
-	private DeviceInfoForm DeviceVoToPo(DeviceInfoForm form, DeviceInfo d)
+	private DeviceInfoForm deviceVoToPo(DeviceInfo d)
 	{
+		DeviceInfoForm form = new DeviceInfoForm();
 		form.setDeviceTypeUuid(d.getDeviceTypeUuid());
 		form.setDeviceAmount(d.getDeviceAmount().toString());
 		form.setDeviceName(d.getDeviceName());
@@ -135,8 +166,9 @@ public class DeviceInfoServiceImpl implements DeviceInfoService
 	 * @param entity	Vo对象
 	 * @return	Device	Vo对象
 	 */
-	private DeviceInfo DeviceFormPoToVo(DeviceInfoForm deviceForm, DeviceInfo entity)
+	private DeviceInfo deviceFormPoToVo(DeviceInfoForm deviceForm)
 	{
+		DeviceInfo entity = new DeviceInfo();
 		entity.setDeviceTypeUuid(deviceForm.getDeviceTypeUuid());
 		entity.setDeviceAmount(!StringUtils.isEmpty(deviceForm.getDeviceAmount()) ? Integer.parseInt(deviceForm.getDeviceAmount()) : 0);
 		entity.setDeviceName(deviceForm.getDeviceName());

@@ -20,6 +20,8 @@ import com.xiaoy.resource.web.form.NoticeForm;
 public class NoticeAction extends BaseAction implements ModelDriven<NoticeForm>
 {
 
+	private final static String MENU_MODEL = "【公告管理】";
+	
 	@Resource
 	private NoticeService noticeService;
 
@@ -50,7 +52,7 @@ public class NoticeAction extends BaseAction implements ModelDriven<NoticeForm>
 	{
 		List<NoticeForm> list = noticeService.getNoticeList();
 		request.setAttribute("commonList", list);
-		logService.saveLog(request, "【公告管理】", "查看公告列表");
+		logService.saveLog(request, MENU_MODEL, "查看公告列表");
 		return "noticeIndex";
 	}
 
@@ -62,7 +64,7 @@ public class NoticeAction extends BaseAction implements ModelDriven<NoticeForm>
 	public String saveNotice()
 	{
 		noticeService.saveNotice(noticeForm);
-		logService.saveLog(request, "【公告管理】", "添加公告信息");
+		logService.saveLog(request, MENU_MODEL, "添加公告信息");
 		return "saveNotice";
 	}
 
@@ -83,7 +85,7 @@ public class NoticeAction extends BaseAction implements ModelDriven<NoticeForm>
 			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
 			e.printStackTrace();
 		}
-		logService.saveLog(request, "【公告管理】", "删除公告信息");
+		logService.saveLog(request, MENU_MODEL, "删除公告信息");
 		return "ajax-success";
 	}
 

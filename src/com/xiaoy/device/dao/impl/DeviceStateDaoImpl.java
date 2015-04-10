@@ -1,5 +1,6 @@
 package com.xiaoy.device.dao.impl;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -150,32 +151,18 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 			}
 		}
 	}
+
+	@Override
+	public void deviceStateDeleteByIds(String[] ids) {
+		String hqlWhere = "";
+		Map<String, Object> paramsMapValue = null;
+		if(ids != null && ids.length > 0){
+			List<String> list = Arrays.asList(ids);
+			paramsMapValue = new HashMap<String, Object>();
+			hqlWhere = " and deviceStateUuid in(:deviceStateUuid)";
+			paramsMapValue.put("deviceStateUuid", list);
+			super.deleteObjectByCollectionIds(hqlWhere, paramsMapValue);
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

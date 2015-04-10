@@ -15,9 +15,9 @@ public class DeviceState {
 	private String areaCode;
 	/* 安装位置id */
 	private String installationSiteCode;
-	
+
 	/* 一种类型设备对应多种状态（因为有多个设备） */
-	private DeviceInfo deviceInfo;
+	private DeviceInfo deviceInfo = new DeviceInfo();
 	/* 上次检修日期 */
 	private Date lastTime;
 	/* 下次检修日期 */
@@ -28,6 +28,16 @@ public class DeviceState {
 	private String stateCode;
 	/* 设备图片URL */
 	private String devicePicUrl;
+	/* 备注 */
+	private String remark;
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 	public String getDeviceStateUuid() {
 		return deviceStateUuid;

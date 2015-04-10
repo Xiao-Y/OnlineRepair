@@ -20,6 +20,8 @@ import com.xiaoy.resource.web.form.DictionaryForm;
 public class DictionaryAction extends BaseAction implements ModelDriven<DictionaryForm>
 {
 
+	private final static String MENU_MODEL = "【数据字典】";
+	
 	@Resource
 	private DictionaryService dictionaryService;
 	
@@ -64,7 +66,7 @@ public class DictionaryAction extends BaseAction implements ModelDriven<Dictiona
 		String keyWord = dictionaryForm.getKeyWord();
 		List<DictionaryForm> list = dictionaryService.findDictionaryListByKeyWord(keyWord);
 		request.setAttribute("systemList", list);
-		logService.saveLog(request, "【数据字典】", "编辑数据字典");
+		logService.saveLog(request, MENU_MODEL, "编辑数据字典");
 		return "dictionaryEdit";
 	}
 
@@ -75,7 +77,7 @@ public class DictionaryAction extends BaseAction implements ModelDriven<Dictiona
 	public String dictionarySave()
 	{
 		dictionaryService.saveDictionary(dictionaryForm);
-		logService.saveLog(request, "【数据字典】", "修改-添加数据字典");
+		logService.saveLog(request, MENU_MODEL, "修改-添加数据字典");
 		return "dictionarySave";
 	}
 	
@@ -97,7 +99,7 @@ public class DictionaryAction extends BaseAction implements ModelDriven<Dictiona
 		{
 			e.printStackTrace();
 		}
-		logService.saveLog(request, "【数据字典】", "删除数据字典");
+		logService.saveLog(request, MENU_MODEL, "删除数据字典");
 		return "ajax-success";
 	}
 }

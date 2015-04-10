@@ -33,12 +33,22 @@ public class DeviceStateForm  extends BaseForm {
 	private String stateName;
 	/* 设备图片URL */
 	private String devicePicUrl;
+	/*备注*/
+	private String remark;
 	
 	/* 设备名*/
 	private String deviceName;
 	
 	/* 设备型号*/
 	private String version;
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 	public String getVersion() {
 		return version;

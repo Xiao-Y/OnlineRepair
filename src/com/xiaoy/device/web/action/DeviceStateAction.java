@@ -1,5 +1,6 @@
 package com.xiaoy.device.web.action;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -11,9 +12,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 
 import com.google.gson.Gson;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.action.BaseAction;
-import com.xiaoy.base.util.UploadImageHelper;
 import com.xiaoy.device.servic.DeviceInfoService;
 import com.xiaoy.device.servic.DeviceStateService;
 import com.xiaoy.device.web.form.DeviceInfoForm;
@@ -22,14 +23,16 @@ import com.xiaoy.resource.servic.DictionaryService;
 import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.web.form.DictionaryForm;
 
+/**
+ * 设备状态信息处理类
+ * @author XiaoY
+ * @date 2015年4月10日
+ */
 @SuppressWarnings("serial")
 @Controller
 public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceStateForm>
 {
-	
-	//保存图片的文件夹
-	private static String DEVICE_IMAGE_URL = "deviceStateUploadImages";
-	
+	private final static String MENU_MODEL = "【设备管理】--【查询设备状态】";
 	/**
 	 * 注入日志
 	 */
@@ -78,7 +81,7 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 		request.setAttribute("formList", list);
 		//向页面上发送类型数据
 		this.sendPageData();
-		logService.saveLog(request, "【设备管理】--【查询设备状态】", "查看状态列表");
+		logService.saveLog(request, MENU_MODEL, "查看状态列表");
 		return "deviceStateList";
 	}
 
@@ -90,7 +93,7 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 	{
 		//向页面上发送类型数据
 		this.sendPageData();
-		logService.saveLog(request, "【设备管理】--【设备信息管理】", "进入设备添加页面");
+		logService.saveLog(request, MENU_MODEL, "进入设备状态添加页面");
 		return "toDeviceStateAdd";
 	}
 
@@ -135,18 +138,8 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 	 */
 	public String deviceStateSave()
 	{
-        if (deviceStateForm.getImage() != null) 
-        {
-        	//上传图片
-        	UploadImageHelper.uploadImage(deviceStateForm, DEVICE_IMAGE_URL);
-        	logService.saveLog(request, "【设备管理】--【查询设备状态管理】", "添加“"+ deviceStateForm.getDeviceName()+"”图片");
-        }
-        if(!StringUtils.isEmpty(deviceStateForm.getNewFileName()))
-        {
-        	deviceStateForm.setDevicePicUrl(UploadImageHelper.PICURL);
-        }
-        deviceStateService.deviceStateSave(deviceStateForm);
-		logService.saveLog(request, "【设备管理】--【查询设备状态管理】", "完成添加设备状态");
+        deviceStateService.deviceStateSave(deviceStateForm, request);
+		logService.saveLog(request, MENU_MODEL, "完成添加设备状态");
 		return "success";
 	}
 	
@@ -154,80 +147,76 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 	 * 浏览设备信息
 	 * @return
 	 */
-	public String deviceView()
+	public String deviceStateView()
 	{
-		//deviceStateForm = deviceService.getfindDeviceByUuid(deviceForm.getDeviceTypeUuid());
-		//request.setAttribute("device", deviceForm);
-		///logService.saveLog(request, "【设备管理】--【设备信息管理】", "查看“"+ deviceForm.getDeviceName()+"”设备");
-		return "deviceView";
+		deviceStateForm = deviceStateService.findDeviceStateByUuid(deviceStateForm.getDeviceStateUuid());
+		ActionContext.getContext().getValueStack().push(deviceStateForm);
+		logService.saveLog(request, MENU_MODEL, "查看“"+ deviceStateForm.getDeviceName()+"”设备状态");
+		return "deviceStateView";
 	}
 
 	/**
 	 * 编辑设备信息
 	 * @return
 	 */
-	public String deviceEdit()
+	public String deviceStateEdit()
 	{
-		//deviceForm = deviceService.getfindDeviceByUuid(deviceForm.getDeviceTypeUuid());
-		//request.setAttribute("device", deviceForm);
-		//logService.saveLog(request, "【设备管理】--【设备信息管理】", "进入“"+ deviceForm.getDeviceName()+"”编辑");
-		return "deviceEdit";
+		deviceStateForm = deviceStateService.findDeviceStateByUuid(deviceStateForm.getDeviceStateUuid());
+		ActionContext.getContext().getValueStack().push(deviceStateForm);
+		//向页面上发送类型数据
+		this.sendPageData();
+		logService.saveLog(request, MENU_MODEL, "进入“"+ deviceStateForm.getDeviceName()+"”编辑");
+		return "deviceStateEdit";
 	}
 	
 	/**
 	 * 更新设备信息
 	 * @return
 	 */
-	public String deviceUpdate()
+	public String deviceStateUpdate()
 	{
-//		//如果修改了图片，取新图片的信息
-//		if(!StringUtils.isEmpty(deviceForm.getImageFileName()))
-//		{	if (deviceForm.getImage() != null)
-//			{
-//				//上传图片
-//				UploadImageHelper.uploadImage(deviceForm);
-//				logService.saveLog(request, "【设备管理】--【设备信息管理】", "修改“"+ deviceForm.getDeviceName()+"”图片");
-//	        }
-//			deviceForm.setDevicePicUrl(UploadImageHelper.PICURL);
-//		}else//如果没有修改图片，取原图片的路径
-//		{
-//			String devicePicUrl = request.getParameter("oldUrl");
-//			deviceForm.setDevicePicUrl(devicePicUrl);
-//		}
-//		deviceService.deviceUpdate(deviceForm);
-//		logService.saveLog(request, "【设备管理】--【设备信息管理】", "更改“"+ deviceForm.getDeviceName()+"”设备");
+		deviceStateService.deviceStateUpdate(deviceStateForm,request);
+		logService.saveLog(request, MENU_MODEL, "更改“"+ deviceStateForm.getDeviceName()+"”设备");
 		return "success";
 	}
 	
 	/**
-	 * 使用ajax删除设备信息
+	 * 使用ajax删除设备状态信息
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
-	public String deviceDelete() throws UnsupportedEncodingException
+	public String deviceStateDelete() throws UnsupportedEncodingException
 	{
-//		String deviceTypeUuid = (String) request.getAttribute("deviceTypeUuid");
-//		try {
-//			deviceService.deviceDeleteByUuid(deviceTypeUuid);
-//			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
-//		} catch (UnsupportedEncodingException e) {
-//			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
-//			e.printStackTrace();
-//		}
-//		logService.saveLog(request, "【设备管理】--【设备信息管理】", "删除“"+ deviceForm.getDeviceName()+"”设备");
+		String deviceStateUuid = (String) request.getAttribute("deviceStateUuid");
+		
+		try {
+			if(!StringUtils.isEmpty(deviceStateUuid)){
+				deviceStateForm = deviceStateService.findDeviceStateByUuid(deviceStateUuid);
+			}
+			logService.saveLog(request, MENU_MODEL, "删除“"+ deviceStateForm.getDeviceName()+"”设备");
+			deviceStateService.deviceStateDeleteByUuid(deviceStateUuid);
+			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
+			e.printStackTrace();
+		}
 		return "ajax-success";
 	}
 	
-	public String deviceDeletes()
+	/**
+	 * 批量删除设备状态信息
+	 * @return
+	 */
+	public String deviceStateDeletes()
 	{
-//		String[] ids = deviceForm.getIds();
-//		if(ids != null && ids.length > 0){
-//			for(int i = 0; i < ids.length; i++){
-//				DeviceInfoForm deviceForm = deviceService.getfindDeviceByUuid(ids[i]); 
-//				logService.saveLog(request, "【设备管理】--【设备信息管理】", "批量删除“"+ deviceForm.getDeviceName()+"”设备");
-//			}
-//			deviceService.deviceDeleteByIds(ids);
-//		}
+		String[] ids = deviceStateForm.getIds();
+		if(ids != null && ids.length > 0){
+			for(int i = 0; i < ids.length; i++){
+				DeviceStateForm deviceStateForm = deviceStateService.findDeviceStateByUuid(ids[i]); 
+				logService.saveLog(request, MENU_MODEL, "批量删除“"+ deviceStateForm.getDeviceName()+"”设备");
+			}
+			deviceStateService.deviceStateDeleteByIds(ids);
+		}
 		return "success";
 	}
 }

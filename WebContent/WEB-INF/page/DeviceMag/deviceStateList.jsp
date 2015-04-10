@@ -8,11 +8,6 @@
 <jsp:include page="/pub.jsp"/>
 
 <title>查询设备状态</title>
-<style type="text/css">
-* {
-	font-size: 12px;
-}
-</style>
 <script type="text/javascript">
 /**
 	//超链接在新窗口显示 
@@ -32,11 +27,6 @@
 			$("#form1").submit();
 		});
 	});
-	
-	//链接跳转
-	function link(href){
-		window.location.href=href;
-	}
 </script> 
 
 </head>
@@ -85,12 +75,12 @@
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				型号：</td>
 				<td class="ta_01" >
-					<s:textfield id="version" name="version" size="21"/>
+					<s:textfield id="version" name="version" size="18"/>
 				</td>
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="21">
 				安装日期：</td>
 				<td class="ta_01" >
-					<s:textfield cssClass="Wdate" id="installationTime" name="installationTime" size="21" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
+					<s:textfield cssClass="Wdate" id="installationTime" name="installationTime" size="18" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 				</td>
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				运行状态：</td>
@@ -120,6 +110,7 @@
 				<td class="ta_01" align="right">
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="button" value="查询" name="BT_Find" onclick="findDeviceSatae();">&nbsp;&nbsp;
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_Reset" >&nbsp;&nbsp;
+				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Del" type="button" onclick="diviceStateDeletes();" value="批量删除" name="BT_Del" >&nbsp;&nbsp;
 					<input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="添加设备" name="BT_Add" onclick="link('${pageContext.request.contextPath }/DeviceMag/deviceStateAction_toDeviceStateAdd.action')">
 				</td>
 			</tr>
@@ -146,9 +137,9 @@
 						<!-- 列表数据 begin -->
 						<s:if test="%{#request.formList != null && #request.formList.size() > 0}">
 							<s:iterator value="%{#request.formList}" var="list">
-								<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+								<tr id=${list.deviceStateUuid } onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 									<td style="HEIGHT:22px" align="center" width="5%">
-										<input type="checkbox" id="${user.userUuid }" name="ids" class="ids" value="${user.userUuid }">
+										<input type="checkbox" id="${list.deviceStateUuid }" name="ids" class="ids" value="${list.deviceStateUuid}">
 									</td>
 									<td style="height:22px" align="center" width="10%">
 										<s:property value="%{#list.areaName}"/>
@@ -158,7 +149,7 @@
 									</td>
 									<td style="height:22px" align="center" width="15%">
 										<input type="hidden" id="123">
-										<a href="${pageContext.request.contextPath }/page/DeviceMag/deviceStateView.jsp">
+										<a href="${pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceStateView.action?deviceStateUuid=${list.deviceStateUuid}">
 											<s:property value="%{#list.deviceName}"/>
 										</a>
 									</td>
@@ -179,11 +170,11 @@
 										</s:else>
 									</td>
 									<td align="center" style="HEIGHT: 22px" align="center" width="5%">																	
-									   <a href="${pageContext.request.contextPath }/page/DeviceMag/deviceStateEdit.jsp">
+									   <a href="${pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceStateEdit.action?deviceStateUuid=${list.deviceStateUuid}">
 									   <img src="${pageContext.request.contextPath }/images/edit.gif" border="0" style="cursor:hand"></a>													
 									</td>
 									<td align="center" style="HEIGHT: 22px" align="center" width="5%">
-										<a href="system/elecUserAction_delete.do?userID=" onclick="return confirm('你确定要删除  灯管 ？')">
+										<a href="javascript:deviceStateDelete('${list.deviceStateUuid}','${list.deviceName}')">
 										<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="cursor:hand"></a>												
 									</td>
 								</tr>

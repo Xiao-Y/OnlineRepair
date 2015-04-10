@@ -29,6 +29,9 @@
         <property name="devicePicUrl" type="java.lang.String">
             <column name="DEVICE_PIC_URL" />
         </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
         
         <many-to-one name="deviceInfo" class="com.xiaoy.base.entites.DeviceInfo" column="DEVICETYPE_UUID"/>
         

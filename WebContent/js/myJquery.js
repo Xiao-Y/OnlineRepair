@@ -13,6 +13,11 @@ function closeWindow() {
 	window.close();
 }
 
+//链接跳转
+function link(href){
+	window.location.href=href;
+}
+
 // 带提示的关闭当前页面
 function custom_close() {
 	if (confirm("您确定要关闭本页吗？")) {
@@ -354,6 +359,47 @@ function findDeviceSatae(){
 	$("#form1").submit();
 }
 
+
+//异步单个删除设备状态信息
+function deviceStateDelete(deviceStateUuid,deviceName){
+	var flag = confirm('你确定要删除 “'+ deviceName +'”？');
+	if(flag){
+		var url = "{pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceStateDelete.action";
+		var args = {"date":new Date,"deviceStateUuid":deviceStateUuid};
+		$.post(url,args,function(data){
+			if(data == "1"){
+				$("#" + deviceStateUuid).remove();
+			}else if(data == "0"){
+				alert("删除失败！");
+			}else{
+				alert("服务器错误，稍后再试！");
+			}
+		});
+	}
+	return;
+}
+
+//批量删除设备状态信息
+function diviceStateDeletes(){
+	var url = "{pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceStateDeletes.action";
+	var flag = false;
+	$.each($("input:checkbox"), function(i, val) {
+		if (val.checked == true) {
+			flag = confirm("确定要删除设备状态信息？");
+			return false;
+		}
+	});
+
+	if (flag == false) {
+		alert("请选择需要删除的设备状态信息");
+		return false;
+	}
+
+	if (flag) {
+		$("#form1").attr("action", url);
+		$("#form1").submit();
+	}
+}
 //设备管理=====================end
 
 //用户信息管理操作===============start

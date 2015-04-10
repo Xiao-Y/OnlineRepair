@@ -1,5 +1,8 @@
 package com.xiaoy.base.entites;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 设备信息实体类
  * 
@@ -27,6 +30,8 @@ public class DeviceInfo
 	private String devicePicUrl;
 	/* 备注 */
 	private String remark;
+	
+	Set<DeviceState> deviceState = new HashSet<DeviceState>();
 
 	public DeviceInfo() {
 	}
@@ -128,5 +133,13 @@ public class DeviceInfo
 	public void setRemark(String remark)
 	{
 		this.remark = remark;
+	}
+
+	public Set<DeviceState> getDeviceState() {
+		return deviceState;
+	}
+
+	public void setDeviceState(Set<DeviceState> deviceState) {
+		this.deviceState = deviceState;
 	}
 }

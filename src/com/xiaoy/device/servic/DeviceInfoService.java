@@ -2,6 +2,8 @@ package com.xiaoy.device.servic;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.xiaoy.device.web.form.DeviceInfoForm;
 
 public interface DeviceInfoService
@@ -25,7 +27,7 @@ public interface DeviceInfoService
 	 * 保存设备信息
 	 * @param deviceForm	设备信息
 	 */
-	void deviceSave(DeviceInfoForm deviceForm);
+	void deviceSave(DeviceInfoForm deviceForm, HttpServletRequest request);
 
 	/**
 	 * 通过设备的Uuid获取设备信息
@@ -38,7 +40,7 @@ public interface DeviceInfoService
 	 * 更新设备信息
 	 * @param deviceForm	设备信息
 	 */
-	void deviceUpdate(DeviceInfoForm deviceForm);
+	void deviceUpdate(DeviceInfoForm deviceForm, HttpServletRequest request);
 
 	/**
 	 * 根据设备的uuid删除设备信息

@@ -22,4 +22,10 @@ public interface DeviceStateDao extends Common<DeviceState> {
 	 */
 	int countDeviceStateByCondition(DeviceStateForm deviceStateForm);
 
+	/**
+	 * 通过一组设备状态uuid删除设备状态信息
+	 * @param ids	设备状态uuid
+	 */
+	void deviceStateDeleteByIds(String[] ids);
+
 }

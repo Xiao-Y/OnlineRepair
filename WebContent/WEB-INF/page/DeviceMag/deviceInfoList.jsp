@@ -48,11 +48,16 @@
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				设备名：</td>
 				<td class="ta_01" >
+					<s:if test="%{#request.deviceName != null && #request.deviceName.size() > 0}">
 					<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
 					  listKey="deviceName" listValue="deviceName"
 					  headerKey="" headerValue="------请选择------"
 					  cssStyle="width:140px" onchange="changeDevice();" data-rule-required="true"
 					/>
+					</s:if>
+					<s:else>
+						<select id="deviceName" name="deviceName"></select>
+					</s:else>
 				</td>
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				型号：</td>
@@ -131,7 +136,7 @@
 							   <img src="${pageContext.request.contextPath }/images/edit.gif" border="0" style="cursor:hand"></a>													
 							</td>
 							<td align="center" style="HEIGHT: 22px" align="center" width="10%">
-								<a href="javascript:deletesDevice('${deviceTypeUuid}','${deviceName}')">
+								<a href="javascript:deletesDevice('${device.deviceTypeUuid}','${device.deviceName}')">
 								<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="cursor:hand"></a>												
 							</td>
 						</tr>

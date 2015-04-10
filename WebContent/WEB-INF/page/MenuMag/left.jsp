@@ -3,9 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
-
+<jsp:include page="/pub.jsp"/>
+<style type="text/css">
+a {
+	color: #0A0A0A;
+	 text-decoration:none;
+}
+</style>
 <!-- 切换折叠 -->
 <script type="text/javascript">
 	$().ready(function() {

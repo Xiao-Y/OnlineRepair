@@ -87,6 +87,10 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 	@Override
 	@Transactional(readOnly=false, isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
 	public void deviceStateUpdate(DeviceStateForm deviceStateForm, HttpServletRequest request) {
+		
+		//获取原来的图片路径
+		String devicePicUrl = request.getParameter("oldUrl");
+		
 		if(deviceStateForm != null){
 			//如果修改了图片，取新图片的信息
 			if(!StringUtils.isEmpty(deviceStateForm.getImageFileName()))
@@ -94,12 +98,13 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 				{
 					//上传图片
 					UploadImageHelper.uploadImage(deviceStateForm,DEVICE_IMAGE_URL);
+					//删除原来的图片
+					UploadImageHelper.deleteImage(request, devicePicUrl);
 					logService.saveLog(request, MENU_MODEL, "修改“"+ deviceStateForm.getDeviceName()+"”图片");
 		        }
 			deviceStateForm.setDevicePicUrl(UploadImageHelper.PICURL);
 			}else//如果没有修改图片，取原图片的路径
 			{
-				String devicePicUrl = request.getParameter("oldUrl");
 				deviceStateForm.setDevicePicUrl(devicePicUrl);
 			}
 			DeviceState entity = this.deviceStatePoToVo(deviceStateForm);
@@ -167,7 +172,7 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 	private DeviceState deviceStatePoToVo(DeviceStateForm deviceStateForm)
 	{
 		DeviceState deviceState = new DeviceState();
-		deviceState.setDeviceStateUuid(deviceStateForm.getDeviceTypeUuid());
+		deviceState.setDeviceStateUuid(deviceStateForm.getDeviceStateUuid());
 		deviceState.setAreaCode(deviceStateForm.getAreaCode());
 		
 		DeviceInfo deviceInfo = deviceState.getDeviceInfo();

@@ -94,18 +94,23 @@ public class DeviceInfoServiceImpl implements DeviceInfoService
 	@Override
 	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
 	public void deviceUpdate(DeviceInfoForm deviceForm, HttpServletRequest request) {
+		
+		//获取原来的图片路径
+		String devicePicUrl = request.getParameter("oldUrl");
+		
 		//如果修改了图片，取新图片的信息
 		if(!StringUtils.isEmpty(deviceForm.getImageFileName()))
 		{	if (deviceForm.getImage() != null)
 			{
 				//上传图片
 				UploadImageHelper.uploadImage(deviceForm, DEVICE_IMAGE_URL);
+				//删除原来的图片
+				UploadImageHelper.deleteImage(request, devicePicUrl);
 				logService.saveLog(request, MENU_MODEL, "修改“"+ deviceForm.getDeviceName()+"”图片");
 	        }
 			deviceForm.setDevicePicUrl(UploadImageHelper.PICURL);
 		}else//如果没有修改图片，取原图片的路径
 		{
-			String devicePicUrl = request.getParameter("oldUrl");
 			deviceForm.setDevicePicUrl(devicePicUrl);
 		}
 		//设备的Po对象转换成Vo对象

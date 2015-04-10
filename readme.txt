@@ -212,6 +212,10 @@ pub.css		公有的样式
 		可以是一对多的时候有什么问题。
 		解决方法：
 		暂时未解决。
+		已解决：
+		deviceState.setDeviceStateUuid(deviceStateForm.getDeviceTypeUuid());
+		写错了应该为:
+		deviceState.setDeviceStateUuid(deviceStateForm.getDeviceStateUuid());
 	
 	
 	

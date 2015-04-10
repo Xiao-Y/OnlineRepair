@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
@@ -37,5 +39,19 @@ public class UploadImageHelper {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 更换图片时，根据图片路径删除图上。
+	 * @param devicePicUrl	图上路径<br/>
+	 * 格式：/deviceStateUploadImages/20150410104208.jpg
+	 */
+	public static void deleteImage(HttpServletRequest request , String devicePicUrl)
+	{
+		int index = devicePicUrl.lastIndexOf("/");
+		String name = devicePicUrl.substring(index + 1);
+		System.out.println(name);
+		File file = new File(request.getSession().getServletContext().getRealPath("/") + devicePicUrl);
+		file.delete();
 	}
 }

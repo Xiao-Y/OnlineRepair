@@ -23,7 +23,7 @@
 				<tr>
 					<td class="ta_01" align="right" width="35%">类型列表：</td>
 					<td class="ta_01" align="left" width="30%">
-					<s:select list="%{#request.systemList}" id="keyWord" name="keyWord" cssClass="bg" cssStyle="width: 180px" onchange="changetype()"
+					<s:select list="%{#request.systemList}" id="keyWord" name="keyWord" cssClass="bg" cssStyle="width: 176px" onchange="changetype()"
 								listKey="%{keyWord}" listValue="%{keyWord}"
 								headerKey="jerrynew" headerValue="添加新类型名称"
 						>
@@ -33,7 +33,9 @@
 				</tr>
 				<tr>
 					<td class="ta_01" align="right" width="35%" id="newtypename">类型名称：</td>
-					<td class="ta_01" align="left" width="30%" height=20 id="newddlText"><s:textfield name="keywordname" maxlength="25" size="24"/></td>
+					<td class="ta_01" align="left" width="30%" height=20 id="newddlText">
+						<s:textfield name="keywordname" maxlength="25" size="23"/>
+					</td>
 					<td class="ta_01" align="right" width="35%"></td>
 				</tr>
 

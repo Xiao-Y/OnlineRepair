@@ -12,7 +12,7 @@
 <body>
 	<form name="Form1" method="post">
 		<br>
-	    <table cellSpacing="1" cellPadding="5" width="580" align="center" bgColor="#eeeeee" style="border:1px solid #8ba7e3" border="0">
+	    <table cellSpacing="1" cellPadding="5" width="700px" align="center" bgColor="#eeeeee" style="border:1px solid #8ba7e3" border="0">
 			<tr>
 				<td class="ta_01" align="center" colSpan="4" background="${pageContext.request.contextPath }/images/b-info.gif">
 					<font face="宋体" size="2"><strong>查看用户信息</strong></font>
@@ -52,13 +52,13 @@
 			<tr>
 			    <td align="right" bgColor="#f5fafe" class="ta_01">地址：</td>
 				<td class="ta_01" bgColor="#ffffff" colSpan="3">
-					<s:textarea name="address" id="address" cssStyle="width:95%" rows="3" cols="52"/>
+					<s:textarea name="address" id="address" cssStyle="width:85%" rows="3" cols="52"/>
 				</td>
 			</tr>
 			<tr>
 				<td class="ta_01" align="right" bgcolor="#f5fafe">备注：</td>
 				<td class="ta_01" bgcolor="#ffffff" colspan="3">
-					<s:textarea name="remark" id="remark" cssStyle="width:95%" rows="4" cols="52"/>
+					<s:textarea name="remark" id="remark" cssStyle="width:85%" rows="4" cols="52"/>
 				</td>
 			</tr>
 			

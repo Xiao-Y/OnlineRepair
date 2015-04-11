@@ -19,6 +19,9 @@ public class LogForm extends BaseForm
 	/* 用于删除的id集合*/
 	private String[] logId;
 	
+	//自定义分页大小（每页显示的条数）
+	private Integer pageSize = 15;
+	
 	public String getLogID()
 	{
 		return logID;
@@ -77,5 +80,15 @@ public class LogForm extends BaseForm
 	public void setLogId(String[] logId)
 	{
 		this.logId = logId;
+	}
+
+	public Integer getPageSize()
+	{
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize)
+	{
+		this.pageSize = pageSize;
 	}
 }

@@ -6,17 +6,10 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <jsp:include page="/pub.jsp"/>
 <title>修改设备状态信息</title>
-<script>
+<script type="text/javascript">
    window.onload = function () { 
         new uploadPreview({ UpBtn: "image", DivShow: "imgdiv", ImgShow: "imgShow" });
-    }
-   
-   function deviceStateUpdate(){
-  		if($("#image").val() == ""){
-  			$("#Form1").attr("enctype","");
-  		}
-  		Form1.submit();
-  }
+    };
 </script>
 
 </head>
@@ -30,7 +23,7 @@
 			</td>
 		</tr>
 	    <tr>
-	       <td align="center" bgColor="#f5fafe" class="ta_01">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域：<font color="#FF0000">*</font></td>
+	       <td align="right" bgColor="#f5fafe" class="ta_01">区域：<font color="#FF0000">*</font></td>
 	       <td class="ta_01" bgColor="#ffffff">
 	       		<s:select list="%{#request.area}" id="areaCode" name="areaCode"
 					  listKey="ddlCode" listValue="ddlName"
@@ -58,28 +51,32 @@
 	       	</td>
 			<td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">型号：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" style="width: 30%" bgColor="#ffffff">
-	       		<!-- 查看的是型号，但保存的却是设备的uuid -->
-	       		<select id="deviceTypeUuid" name="deviceTypeUuid" style="width: 140px" data-rule-required="true"></select>
+	       		<div id="v">
+		       		<s:select list="%{#request.version}" id="deviceTypeUuid" name="deviceTypeUuid"
+					  listKey="deviceTypeUuid" listValue="version"
+					  cssStyle="width:140px" data-rule-required="true"
+					/>
+	       		</div>
 	      	</td>
 			
 		</tr>
 		<tr>
-			<td align="center" bgColor="#f5fafe" class="ta_01">上次检修日期：<font color="#FF0000">*</font></td>
+			<td align="right" bgColor="#f5fafe" class="ta_01">上次检修日期：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff">
 				<s:textfield id="lastTime" name="lastTime" cssClass="Wdate" size="20"  data-rule-required="true" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 	       	</td>
-		    <td align="center" bgColor="#f5fafe" class="ta_01">下次检修日期：</td>
+		    <td align="right" bgColor="#f5fafe" class="ta_01">下次检修日期：<font color="#FF0000">*</font></td>
 			<td class="ta_01" bgColor="#ffffff">
 				<s:textfield id="nextTime" name="nextTime" cssClass="Wdate" size="20"  data-rule-required="true" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 			</td>
 		</tr>
 		
 		<tr>
-			<td align="center" bgColor="#f5fafe" class="ta_01">安装日期：</td>
+			<td align="right" bgColor="#f5fafe" class="ta_01">安装日期：<font color="#FF0000">*</font></td>
 			<td class="ta_01" bgColor="#ffffff">
 				<s:textfield id="installationTime" name="installationTime" cssClass="Wdate" size="20"  data-rule-required="true" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 			</td>
-			<td align="center" bgColor="#f5fafe" class="ta_01">运行状态：</td>
+			<td align="right" bgColor="#f5fafe" class="ta_01">运行状态：</td>
 			<td class="ta_01" bgColor="#ffffff">
 				<s:select list="%{#request.state}" id="stateCode" name="stateCode"
 				  listKey="ddlCode" listValue="ddlName"
@@ -89,26 +86,26 @@
 		</tr>
 		
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe">设备图片：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe">设备图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
 				<img alt="设备图片" src="${pageContext.request.contextPath }${devicePicUrl}" width="500px" height="300px">
 				<input type="hidden" value="${devicePicUrl}" id="oldUrl" name="oldUrl"/>
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe">修改故障图片：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe">修改故障图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
 				<s:file id="image" name="image"/>
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe">修改后故障图片：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe">修改后故障图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
 				<div id="imgdiv"><img id="imgShow" width="500px" height="300px"/></div>
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe">备注：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
 				<s:textarea name="remark" id="remark" style="width:95%" rows="4" cols="52"/>
 			</td>

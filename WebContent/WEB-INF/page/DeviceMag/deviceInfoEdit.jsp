@@ -7,17 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>编辑设备信息</title>
-<script>
+<script type="text/javascript">
    window.onload = function () { 
         new uploadPreview({ UpBtn: "image", DivShow: "imgdiv", ImgShow: "imgShow" });
     }
-   
-   function update(){
-   		if($("#image").val() == ""){
-   			$("#Form1").attr("enctype","");
-   		}
-   		$("#Form1").submit();
-   }
 </script>
 
 
@@ -35,59 +28,58 @@
 	    <tr>
 	       <td align="right" bgColor="#f5fafe" class="ta_01" width="20%">设备名：<font color="#FF0000">*</font></td>
 	       <td class="ta_01" bgColor="#ffffff" width="30%">
-	       		<input type="hidden" name="deviceTypeUuid" id="deviceTypeUuid" value="${device.deviceTypeUuid }">
-	       		<input name="deviceName" id="deviceName" maxlength="25" size="20" value="${device.deviceName }"  data-rule-required="true">
+	       		<s:textfield name="deviceName" id="deviceName" maxlength="25" size="20" data-rule-required="true"/>
 	       </td>
 	       <td width="18%" align="right" bgColor="#f5fafe" class="ta_01" width="20%">型号：<font color="#FF0000">*</font></td>
 	       <td class="ta_01" bgColor="#ffffff" width="30%">
-	       		<input name="version" id="version" maxlength="25" size="20" value="${device.version}"  data-rule-storeDomain="true" data-rule-required="true">
+	       		<s:textfield name="version" id="version" maxlength="25" size="20" data-rule-storeDomain="true" data-rule-required="true"/>
 	       </td>
 	    </tr>
 	    
 		<tr>
 			<td align="right" bgColor="#f5fafe" class="ta_01" width="20%">生产商：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff" width="30%">
-	       		<input name="producerName" id="producerName" maxlength="25" size="20" value="${device.producerName }"  data-rule-required="true"> 
+	       		<s:textfield name="producerName" id="producerName" maxlength="25" size="20" data-rule-required="true"/>
 	       	</td>
 	       	<td align="right" bgColor="#f5fafe" class="ta_01" width="20%">生产商联系方式：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff" width="30%">
-	       		<input name="producerPhone" id="producerPhone" maxlength="25" size="20" value="${device.producerPhone}"  data-rule-required="true">
+	       		<s:textfield name="producerPhone" id="producerPhone" maxlength="25" size="20" data-rule-required="true"/>
 	       	</td>
 		</tr>
 		<tr>
 			<td align="right" bgColor="#f5fafe" class="ta_01" width="20%">设备价格：<font color="#FF0000">*</font></td>
 			<td class="ta_01" bgColor="#ffffff" width="30%">
-				<input name="devicePrice" id="devicePrice" maxlength="25" size="20" value="${device.devicePrice }"  data-rule-required="true">
+				<s:textfield name="devicePrice" id="devicePrice" maxlength="25" size="20" data-rule-required="true"/>
 			</td>
 			<td align="right" bgColor="#f5fafe" class="ta_01" width="20%">设备数量：<font color="#FF0000">*</font></td>
 			<td class="ta_01" bgColor="#ffffff" width="30%">
-				<input name="deviceAmount" id="deviceAmount" maxlength="25" size="20" value="${device.deviceAmount }" data-rule-required="true">
+				<s:textfield name="deviceAmount" id="deviceAmount" maxlength="25" size="20" data-rule-required="true"/>
 			</td>
 		</tr>
 		
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe">设备图片：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe">设备图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
-				<img alt="设备图片" src="${pageContext.request.contextPath }${device.devicePicUrl}" width="500px" height="300px">
-				<input type="hidden" value="${device.devicePicUrl}" id="oldUrl" name="oldUrl"/>
+				<img alt="设备图片" src="${pageContext.request.contextPath }${devicePicUrl}" width="500px" height="300px">
+				<input type="hidden" value="${devicePicUrl}" id="oldUrl" name="oldUrl"/>
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe">修改故障图片：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe">修改故障图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
 				<s:file id="image" name="image"/>
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe">修改后故障图片：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe">修改后故障图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
 				<div id="imgdiv"><img id="imgShow" width="500px" height="300px"/></div>
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="center" bgcolor="#f5fafe">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe">备注：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
-				<textarea name="remark" id="remark" style="width:95%" rows="4" cols="52">${device.remark }</textarea>
+				<s:textarea name="remark" id="remark" cssStyle="width:95%" rows="4" cols="52"/>
 			</td>
 		</tr>
 		
@@ -96,10 +88,11 @@
 		</tr>
 		<tr>
 			<td class="ta_01" style="WIDTH: 100%" align="center" bgColor="#f5fafe" colSpan="4">
-			<input type="button" id="BT_Submit" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55" onclick="update()">
-			<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
-			<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="返回"  name="Reset1"  onClick="history.back()">
+				<input type="submit" id="BT_Submit" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55">
+				<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+				<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="返回"  name="Reset1"  onClick="history.back()">
 			</td>
+			<s:hidden name="deviceTypeUuid" id="deviceTypeUuid"/>
 		</tr>
 		<tr align="right">
 			<td>温馨提示： <font color="#FF0000">* 为必填项</font></td>

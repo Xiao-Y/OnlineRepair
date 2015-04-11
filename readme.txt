@@ -83,12 +83,14 @@ pub.css		公有的样式
 		2.添加pgaeTag.tld文件到WEB-INF下
 		3.添加分页对象BaseForm,需要分页的页面都要继承BaseForm.java
 		
-		Action、service中传入父类Form,dao中调用父类的findCollectionByConditionWithPage和countByCollection。
-		一个是查询分页的数据，一个是查询总记录数的
-		Action中将分页后的数据放入到request中，将总记录数放入到当前父类的Form的setRecordCount中。
+		4.Action、service中传入父类Form,dao中调用父类的findCollectionByConditionWithPage和countByCollection。
+			一个是查询分页的数据，一个是查询总记录数的
+			Action中将分页后的数据放入到request中，将总记录数放入到当前父类的Form的setRecordCount中。
 		
-		页面上使用：
-		<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action"/>
+		5.页面上使用：
+			<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action"/>
+		
+		注意：可以在继承BaseForm的文件中添加private Integer pageSize = 15;自定义分页大小
 	
 	②jqueryValidate使用方法：
 		1.引入js及css
@@ -103,6 +105,8 @@ pub.css		公有的样式
 			com.validate.expand.js中可以添加自定义的方法，使用请参照其它方法;
 			com.validate.js用于显示错误信息
 			jquery.validate.message_cn.js将英文信息修改为中文
+			
+		现已修改为公有的。导入<jsp:include page="/pub.jsp"/>就行了
 		
 	③My97DatePicker	日历使用方法：
 		1.引入<script type="text/javascript" src="${pageContext.request.contextPath }/js/My97DatePicker/WdatePicker.js"></script>
@@ -125,13 +129,19 @@ pub.css		公有的样式
 			ImgShow中的名字要与显示图片中的img中的id相同
 			
 	⑤使用Struts2标签：
-		可以使用ActionContext.getContext().getValueStack().push(userForm);进行页面数据的显示
+		当使用strus2标签显示数据时，可以使用ActionContext.getContext().getValueStack().push(userForm);进行页面数据的显示
 		
 	⑥上传图片方法的使用：
 		1.xxForm需要继承BaseForm 上传的文件id和name为image不能改变。
 		2.程序中调用com.xiaoy.base.util.UploadImageHelper中的uploadImage(BaseForm)方法
 		3.Action中UploadImageHelper.uploadImage(xxForm);
 		4.设备图片保存路径UploadImageHelper.PICURL
+		
+		注意：在更新的时候需要删除原来的图片。
+			//删除原来的图片
+			UploadImageHelper.deleteImage(request, devicePicUrl);
+			request:当前的request，为了取得服务器上的路径。
+			devicePiceUrl:为数据库中保存的图片路径。格式：/deviceStateUploadImages/20150410104208.jpg
 	
 	⑦使用谷歌的Gson.jar将集合转换成json：
 		1.Gson gson = new Gson();

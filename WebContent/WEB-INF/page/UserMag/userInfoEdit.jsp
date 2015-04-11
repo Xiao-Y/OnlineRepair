@@ -59,13 +59,13 @@
 			<tr>
 			    <td align="right" bgColor="#f5fafe" class="ta_01" width="15%">地址：</td>
 				<td class="ta_01" bgColor="#ffffff" colSpan="3" width="85%">
-					<s:textarea name="address" id="address" cssStyle="width:95%" rows="3" cols="52"/>
+					<s:textarea name="address" id="address" cssStyle="width:82%" rows="3" cols="52"/>
 				</td>
 			</tr>
 			<tr>
 				<td class="ta_01" align="right" bgcolor="#f5fafe" width="15%">备注：</td>
 				<td class="ta_01" bgcolor="#ffffff" colspan="3" width="85%">
-					<s:textarea name="remark" id="remark" cssStyle="width:95%" rows="4" cols="52"/>
+					<s:textarea name="remark" id="remark" cssStyle="width:82%" rows="4" cols="52"/>
 				</td>
 			</tr>
 			

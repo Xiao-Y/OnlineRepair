@@ -165,6 +165,9 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 		ActionContext.getContext().getValueStack().push(deviceStateForm);
 		//向页面上发送类型数据
 		this.sendPageData();
+		//设备型号和设备uuid
+		List<DeviceInfoForm> list = deviceInfoService.findDeviceVersionByName(deviceStateForm.getDeviceName());
+		request.setAttribute("version", list);
 		logService.saveLog(request, MENU_MODEL, "进入“"+ deviceStateForm.getDeviceName()+"”编辑");
 		return "deviceStateEdit";
 	}

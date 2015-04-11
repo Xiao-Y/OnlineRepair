@@ -142,7 +142,7 @@ function deletes() {
 function changetype() {
 	
 	if($("#keyWord").val() == "jerrynew"){
-		var textStr = "<input type=\"text\" name=\"keywordname\" maxlength=\"50\" size=\"24\"> ";
+		var textStr = "<input type=\"text\" name=\"keywordname\" maxlength=\"50\" size=\"23\"> ";
 		$("#newtypename").html("类型名称：");
 		$("#newddlText").html(textStr);
 		
@@ -340,18 +340,26 @@ function deviceDelete(){
 
 //异步加载设备型号
 function changeDevice(){
-	   var deviceName = $("#deviceName").val();
-	   var url = "${pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceVersion.action";
-	   var dataType = "JSON";
-	   var data = {"date":new Date,"deviceName":deviceName};
-	   $.post(url,data,function(data){
-		   var html = '';
-		   $.each(data,function(i){
-			   html = html + '<option value="'+ data[i].deviceTypeUuid +'" >'+ data[i].version + '</option>';
-		   });
-		   $("#deviceTypeUuid").html(html);
-	   },dataType);
-	}
+	
+	$("#deviceTypeUuid").remove();
+	
+	var deviceName = $("#deviceName").val();
+	var url = "${pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceVersion.action";
+	var dataType = "JSON";
+	var data = {"date":new Date,"deviceName":deviceName};
+	
+	$.post(url,data,function(data){
+		var html = '<select id="deviceTypeUuid" name="deviceTypeUuid" style="width: 140px" data-rule-required="true">';
+		
+		$.each(data,function(i){
+			html = html + '<option value="'+ data[i].deviceTypeUuid +'" >'+ data[i].version + '</option>';
+		});
+		
+		html = html + "</select>";
+		
+		$("#v").html(html);
+	},dataType);
+}
 
 //查看设备状态--条件查询
 function findDeviceSatae(){

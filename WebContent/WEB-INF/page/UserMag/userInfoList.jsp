@@ -106,6 +106,7 @@
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
 						<tr style="font-weight:bold;font-size:12pt;height:25px;background-color:#afd1f3">
+							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</td>
 							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">
 								<input type="checkbox" id="checkbox" name="checkbox" onclick="quanxuan();">
 							</td>
@@ -120,8 +121,11 @@
 						
 						<!-- 列表数据 begin -->
 						<s:if test="%{#request.users != null && #request.users.size() > 0}">
-							<s:iterator value="%{#request.users}" var="user">
+							<s:iterator value="%{#request.users}" var="user" status="u">
 								<tr id="<s:property value="%{#user.userUuid}"/>" onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+									<td style="HEIGHT:22px" align="center" width="5%">
+										<s:property value="%{#u.getIndex() + 1}"/>
+									</td>
 									<td style="HEIGHT:22px" align="center" width="5%">
 										<input type="checkbox" id="${user.userUuid }" name="ids" class="ids" value="${user.userUuid }">
 									</td>

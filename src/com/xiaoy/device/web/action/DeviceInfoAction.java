@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.action.BaseAction;
 import com.xiaoy.device.servic.DeviceInfoService;
@@ -87,7 +88,7 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 	public String deviceView()
 	{
 		deviceForm = deviceService.getfindDeviceByUuid(deviceForm.getDeviceTypeUuid());
-		request.setAttribute("device", deviceForm);
+		ActionContext.getContext().getValueStack().push(deviceForm);
 		logService.saveLog(request, MENU_MODEL, "查看“"+ deviceForm.getDeviceName()+"”设备");
 		return "deviceView";
 	}
@@ -99,7 +100,7 @@ public class DeviceInfoAction extends BaseAction implements ModelDriven<DeviceIn
 	public String deviceEdit()
 	{
 		deviceForm = deviceService.getfindDeviceByUuid(deviceForm.getDeviceTypeUuid());
-		request.setAttribute("device", deviceForm);
+		ActionContext.getContext().getValueStack().push(deviceForm);
 		logService.saveLog(request, MENU_MODEL, "进入“"+ deviceForm.getDeviceName()+"”编辑");
 		return "deviceEdit";
 	}

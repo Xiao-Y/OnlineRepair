@@ -18,20 +18,21 @@
 		<TR height=10><td></td><td></td></TR>
 		
 		<tr>
-			<td class="ta_01" align="right" bgcolor="#f5fafe" width="15%">公告标题：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe" width="30%">公告标题：</td>
 			<td class="ta_01" bgcolor="#ffffff" style="word-break: break-all">
 				<input id="noticeTit" name="noticeTit" data-rule-required="true" style="width: 500px; height: 25px; padding: 1;FONT-FAMILY: 宋体; FONT-SIZE: 9pt" maxlength="20">
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="right" bgcolor="#f5fafe" width="15%">公告内容：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe" width="30%">公告内容：</td>
 			<td class="ta_01" bgcolor="#ffffff" style="word-break: break-all">
 			<textarea id="notice" name="notice" data-rule-required="true" style="width: 500px; height: 160px; padding: 1;FONT-FAMILY: 宋体; FONT-SIZE: 9pt" onkeydown="if(event.keyCode==13)addEnter('notice');"></textarea>
 			</td>
 		</tr>
         <tr>
-			<td class="ta_01" style="width: 100%" align="center" bgcolor="#f5fafe" colspan="2">
-			<input type="button" name="BT_Submit" value="保存" onclick="checkchar()" id="BT_Submit" style="font-size:12px; color:black; height=20;width=50">
+        	<td></td>
+			<td class="ta_01" style="width: 100%" align="center" bgcolor="#f5fafe">
+				<input type="button" name="BT_Submit" value="保存" onclick="checkchar()" id="BT_Submit" style="font-size:12px; color:black; height=20;width=50">
 			</td>
 		</tr>
 	</table>
@@ -85,6 +86,7 @@
 						<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="DataGrid1"
 							style="BORDER-RIGHT:gray 1px solid; BORDER-TOP:gray 1px solid; BORDER-LEFT:gray 1px solid; WIDTH:100%; WORD-BREAK:break-all; BORDER-BOTTOM:gray 1px solid; BORDER-COLLAPSE:collapse; BACKGROUND-COLOR:#f5fafe; WORD-WRAP:break-word">
 							<tr style="FONT-WEIGHT:bold;FONT-SIZE:12pt;HEIGHT:25px;BACKGROUND-COLOR:#afd1f3">
+								<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</td>
 								<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">
 									<input type="checkbox" id="checkbox" name="checkbox" onclick="quanxuan();">
 								</td>
@@ -94,8 +96,11 @@
 								<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">公告人</td>
 							</tr>
 							<s:if test="#request.commonList != null">
-								<s:iterator value="%{#request.commonList}" var="common">
+								<s:iterator value="%{#request.commonList}" var="common" status="st">
 									<tr id="noticeIndex" onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+										<td style="HEIGHT:22px" align="center" width="5%">
+											<s:property value="%{#st.getIndex() + 1}"/>
+										</td>
 										<td style="HEIGHT:22px" align="center" width="5%">
 											<input type="checkbox" id="${common.noticeUuid}" name="ids" class="ids">
 										</td>

@@ -1,6 +1,8 @@
 package com.xiaoy.base.entites;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 用户信息实体类<br/>
@@ -31,6 +33,9 @@ public class User {
 	private String password;
 	/* 注册时间 */
 	private Date registerTime;
+	
+	/* 持有申报信息的集合 */
+	private Set<Reporting> reporting = new HashSet<Reporting>();
 	
 	public String getUserUuid() {
 		return userUuid;
@@ -110,5 +115,15 @@ public class User {
 
 	public void setRegisterTime(Date registerTime) {
 		this.registerTime = registerTime;
+	}
+
+	public Set<Reporting> getReporting()
+	{
+		return reporting;
+	}
+
+	public void setReporting(Set<Reporting> reporting)
+	{
+		this.reporting = reporting;
 	}
 }

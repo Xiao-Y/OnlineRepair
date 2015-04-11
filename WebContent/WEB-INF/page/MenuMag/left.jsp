@@ -130,12 +130,12 @@ a {
 					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/ReportingMag/reportingBugInfo.jsp' target="main">申报故障</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/ReportingMag/reportingAction_reportingBugInfoAdd.action' target="main">申报故障</a>
 							</td>
 						</tr>
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/ReportingMag/reportingBugInfoList.jsp' target="main">故障信息列表</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/ReportingMag/reportingAction_reportingBugInfoList.action' target="main">故障信息列表</a>
 							</td>
 						</tr>
 					</table>

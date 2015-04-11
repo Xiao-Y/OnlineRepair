@@ -108,7 +108,7 @@
 		</TR>
 		<tr>
 			<td class="ta_01" style="WIDTH: 100%" align="center" bgColor="#f5fafe" colSpan="4">
-			<input type="submit" name="BT_Submit" value="保存" style="font-size:12px; color:black; height=22;width=55">
+			<input type="button" name="BT_Submit" value="保存" onclick="checkTime();" style="font-size:12px; color:black; height=22;width=55">
 			<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
 			<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="返回"  name="Reset1"  onClick="history.back()">
 			</td>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-11 23:25:40 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xiaoy.base.entites.Reporting" table="REPORTING">
+        <id name="reportingUuid" type="java.lang.String">
+            <column name="REPORTING_UUID" />
+            <generator class="uuid" />
+        </id>
+        <property name="reportingPhone" type="java.lang.String">
+            <column name="REPORTING_PHONE" />
+        </property>
+        <property name="orderTime" type="java.util.Date">
+            <column name="ORDER_TIME" />
+        </property>
+        <property name="priorCode" type="java.lang.String">
+            <column name="PRIOR_CODE" />
+        </property>
+        <property name="devicePicUrl" type="java.lang.String">
+            <column name="DEVICE_PIC_URL" />
+        </property>
+        <property name="account" type="java.lang.String">
+            <column name="ACCOUNT" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+        <property name="reportingTime" type="java.util.Date">
+            <column name="REPORTING_TIME" />
+        </property>
+        <many-to-one name="user" class="com.xiaoy.base.entites.User" fetch="join">
+            <column name="USER_UUID" />
+        </many-to-one>
+        <many-to-one name="deviceState" class="com.xiaoy.base.entites.DeviceState" fetch="join">
+            <column name="DEVICE_STATE_UUID" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

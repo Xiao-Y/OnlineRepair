@@ -50,9 +50,9 @@
 				<td class="ta_01" bgColor="#ffffff" width="35%">
 					<s:textfield name="phone" id="phone" maxlength="11" size="11" cssStyle="width: 134px" data-rule-required="true" data-rule-mobilezh="true"/>
 				</td>
-				<td align="right" bgColor="#f5fafe" class="ta_01" width="15%">密码：<font color="#FF0000">*</font></td>
+				<td align="right" bgColor="#f5fafe" class="ta_01" width="15%">密码：</td>
 				<td class="ta_01" bgColor="#ffffff" width="35%">
-					<s:password name="password" id="password" maxlength="20" size="20" cssStyle="width: 134px" data-rule-required="true"/>
+					<s:password name="password" id="password" maxlength="20" size="20" cssStyle="width: 134px"/>
 				</td>
 			</tr>
 			<tr>
@@ -78,7 +78,7 @@
 				</td>
 			</tr>
 			<tr align="left">
-				<td colspan="4">温馨提示： <font color="#FF0000">* 为必填项</font></td>
+				<td colspan="4">温馨提示： <font color="#FF0000">* 为必填项。密码若不填写，则为初始密码123456</font></td>
 			</tr>
 		</table>　
 	</form>

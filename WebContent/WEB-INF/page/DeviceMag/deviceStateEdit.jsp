@@ -10,6 +10,7 @@
    window.onload = function () { 
         new uploadPreview({ UpBtn: "image", DivShow: "imgdiv", ImgShow: "imgShow" });
     };
+    
 </script>
 
 </head>
@@ -67,7 +68,7 @@
 	       	</td>
 		    <td align="right" bgColor="#f5fafe" class="ta_01">下次检修日期：<font color="#FF0000">*</font></td>
 			<td class="ta_01" bgColor="#ffffff">
-				<s:textfield id="nextTime" name="nextTime" cssClass="Wdate" size="20"  data-rule-required="true" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
+				<s:textfield id="nextTime" name="nextTime" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})" cssClass="Wdate" size="20"  data-rule-required="true" style="width: 137px"/>
 			</td>
 		</tr>
 		
@@ -116,7 +117,7 @@
 		</TR>
 		<tr>
 			<td class="ta_01" style="WIDTH: 100%" align="center" bgColor="#f5fafe" colSpan="4">
-				<input type="submit" id="button" name="button" value="保存"  style="font-size:12px; color:black; height=22;width=55">
+				<input type="button" id="button" name="button" value="保存" onclick="checkTime();"  style="font-size:12px; color:black; height=22;width=55">
 				<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
 				<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="返回"  name="Reset1"  onClick="history.back()">
 				<s:hidden name="deviceStateUuid" id="deviceStateUuid"/>

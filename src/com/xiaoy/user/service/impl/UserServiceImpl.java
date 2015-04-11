@@ -141,7 +141,13 @@ public class UserServiceImpl implements UserService
 		user.setAddress(userForm.getAddress());
 		user.setMaintainTypeCode(userForm.getMaintainTypeCode());
 		user.setName(userForm.getName());
-		user.setPassword(userForm.getPassword());
+		if(!StringUtils.isEmpty(userForm.getPassword()))
+		{
+			user.setPassword(userForm.getPassword());
+		}else
+		{
+			user.setPassword("123456");
+		}
 		user.setPhone(userForm.getPhone());
 		if(!StringUtils.isEmpty(userForm.getUserUuid()))
 		{

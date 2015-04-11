@@ -32,11 +32,9 @@
 		<property name="remark" type="java.lang.String">
 			<column name="REMARK" />
 		</property>
-		
 		<set name="deviceState" inverse="true" cascade="delete">
-	        <key column="DEVICETYPE_UUID"/>
-	        <one-to-many  class="com.xiaoy.base.entites.DeviceState"/>
-        </set>
-		
+			<key column="DEVICETYPE_UUID" />
+			<one-to-many class="com.xiaoy.base.entites.DeviceState" />
+		</set>
 	</class>
 </hibernate-mapping>

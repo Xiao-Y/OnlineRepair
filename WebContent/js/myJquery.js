@@ -408,6 +408,27 @@ function diviceStateDeletes(){
 		$("#form1").submit();
 	}
 }
+
+//检查设备状态添加和修改时的时间并提交表单
+function checkTime(){
+	var lastTime = $("#lastTime").val();
+	var nextTime = $("#nextTime").val();
+	var installationTime = $("#installationTime").val();
+	if(lastTime != "" && nextTime != "" && installationTime != ""){
+		if(nextTime <= lastTime){
+			alert("下次检修时间要在上次检修时间之后");
+			return;
+		}
+		
+		if(installationTime > lastTime){
+			alert("安装时间要在检修时间之前");
+			return;
+		}
+		
+		Form1.submit();
+	}
+}
+
 //设备管理=====================end
 
 //用户信息管理操作===============start

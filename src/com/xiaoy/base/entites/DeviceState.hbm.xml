@@ -3,37 +3,41 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2015-4-8 14:55:32 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.xiaoy.base.entites.DeviceState" table="DEVICESTATE">
-        <id name="deviceStateUuid" type="java.lang.String">
-            <column name="DEVICE_STATE_UUID" />
-            <generator class="uuid" />
-        </id>
-        <property name="areaCode" type="java.lang.String">
-            <column name="AREA_CODE" />
-        </property>
-        <property name="installationSiteCode" type="java.lang.String">
-            <column name="INSTALLATION_SITE_CODE" />
-        </property>
-        <property name="lastTime" type="java.util.Date">
-            <column name="LAST_TIME" />
-        </property>
-        <property name="nextTime" type="java.util.Date">
-            <column name="NEXT_TIME" />
-        </property>
-        <property name="installationTime" type="java.util.Date">
-            <column name="INSTALLATION_TIME" />
-        </property>
-        <property name="stateCode" type="java.lang.String">
-            <column name="STATE_CODE" />
-        </property>
-        <property name="devicePicUrl" type="java.lang.String">
-            <column name="DEVICE_PIC_URL" />
-        </property>
-        <property name="remark" type="java.lang.String">
-            <column name="REMARK" />
-        </property>
-        
-        <many-to-one name="deviceInfo" class="com.xiaoy.base.entites.DeviceInfo" column="DEVICETYPE_UUID"/>
-        
-    </class>
+	<class name="com.xiaoy.base.entites.DeviceState" table="DEVICESTATE">
+		<id name="deviceStateUuid" type="java.lang.String">
+			<column name="DEVICE_STATE_UUID" />
+			<generator class="uuid" />
+		</id>
+		<property name="areaCode" type="java.lang.String">
+			<column name="AREA_CODE" />
+		</property>
+		<property name="installationSiteCode" type="java.lang.String">
+			<column name="INSTALLATION_SITE_CODE" />
+		</property>
+		<property name="lastTime" type="java.util.Date">
+			<column name="LAST_TIME" />
+		</property>
+		<property name="nextTime" type="java.util.Date">
+			<column name="NEXT_TIME" />
+		</property>
+		<property name="installationTime" type="java.util.Date">
+			<column name="INSTALLATION_TIME" />
+		</property>
+		<property name="stateCode" type="java.lang.String">
+			<column name="STATE_CODE" />
+		</property>
+		<property name="devicePicUrl" type="java.lang.String">
+			<column name="DEVICE_PIC_URL" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="REMARK" />
+		</property>
+		
+		<many-to-one name="deviceInfo" class="com.xiaoy.base.entites.DeviceInfo" column="DEVICETYPE_UUID" />
+		
+		<set name="reporting" inverse="true" cascade="delete">
+			<key column="DEVICE_STATE_UUID" />
+			<one-to-many class="com.xiaoy.base.entites.Reporting" />
+		</set>
+	</class>
 </hibernate-mapping>

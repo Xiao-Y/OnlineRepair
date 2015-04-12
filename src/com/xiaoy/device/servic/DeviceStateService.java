@@ -54,4 +54,34 @@ public interface DeviceStateService {
 	 */
 	void deviceStateDeleteByIds(String[] ids);
 
+	/**
+	 * 在设备状态表中查询出现设备的区域
+	 * @return	List &ltDeviceStateForm&gt
+	 */
+	List<DeviceStateForm> findDeviceArea();
+
+	/**
+	 * 在设备状态表中通过区域找到所有不重复的安装位置
+	 * @param areaCode	区域code
+	 * @return	List &ltDeviceStateForm&gt
+	 */
+	List<DeviceStateForm> findInstallationSiteByArea(String areaCode);
+
+	/**
+	 * 通过区域和安置位置在设备状态信息表中查询出现所有的设备名
+	 * @param areaCode	区域
+	 * @param installationSiteCode	安置位置
+	 * @return	List &ltDeviceStateForm&gt	含有设备名的设备状态PO
+	 */
+	List<DeviceStateForm> findDeviceNameByinstallationSite(String areaCode,String installationSiteCode);
+
+	/**
+	 * 通过区域和安置位置和设备名，在设备状态信息表中查询出现所有的设备型号
+	 * @param areaCode	区域
+	 * @param installationSiteCode	安置位置
+	 * @param deviceName	设备名
+	 * @return	List &ltDeviceStateForm&gt 含有设备型号的设备状态PO对象
+	 */
+	List<DeviceStateForm> findVersionBydeviceNamee(String areaCode,String installationSiteCode, String deviceName);
+
 }

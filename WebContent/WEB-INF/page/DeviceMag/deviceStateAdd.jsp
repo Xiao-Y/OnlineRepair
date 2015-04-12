@@ -55,7 +55,7 @@
 			<td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">型号：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" style="width: 30%" bgColor="#ffffff">
 	       		<!-- 查看的是型号，但保存的却是设备的uuid -->
-	       		<select id="deviceTypeUuid" name="deviceTypeUuid" style="width: 140px"></select>
+	       		<div id="v"></div>
 	      	</td>
 			
 		</tr>

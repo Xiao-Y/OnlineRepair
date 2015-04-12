@@ -1,5 +1,6 @@
 package com.xiaoy.device.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.xiaoy.base.dao.impl.CommonImpl;
+import com.xiaoy.base.entites.DeviceInfo;
 import com.xiaoy.base.entites.DeviceState;
 import com.xiaoy.device.dao.DeviceStateDao;
 import com.xiaoy.device.web.form.DeviceStateForm;
@@ -163,6 +165,98 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 			paramsMapValue.put("deviceStateUuid", list);
 			super.deleteObjectByCollectionIds(hqlWhere, paramsMapValue);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DeviceState> findDeviceStateArea()
+	{
+		List<DeviceState> list = null;
+		String hql = "select distinct areaCode from DeviceState";
+		Query query = this.getSession().createQuery(hql);
+		List<Object[]> areaCodes = query.list();
+		if(areaCodes != null){
+			list = new ArrayList<DeviceState>();
+			for(Object o : areaCodes){
+				DeviceState deviceState = new DeviceState();
+				deviceState.setAreaCode((String)o);
+				list.add(deviceState);
+			}
+		}
+		return list;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<DeviceState> findInstallationSiteByArea(String areaCode)
+	{
+		List<DeviceState> list = null;
+		String hql = "select distinct installationSiteCode from DeviceState where areaCode = :areaCode";
+		Query query = this.getSession().createQuery(hql).setString("areaCode", areaCode);
+		List<Object[]> installationSiteCodes = query.list();
+		if(installationSiteCodes != null){
+			list = new ArrayList<DeviceState>();
+			for(Object o : installationSiteCodes){
+				DeviceState deviceState = new DeviceState();
+				deviceState.setInstallationSiteCode((String)o);
+				list.add(deviceState);
+			}
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DeviceState> findDeviceNameByinstallationSite(String areaCode,String installationSiteCode)
+	{
+		List<DeviceState> list = null;
+		String sql = "select distinct d.device_Name from deviceState e,deviceInfo d where 1 = 1  and e.area_Code = :areaCode and e.installation_Site_Code = :installationSiteCode and e.deviceType_Uuid = d.deviceType_Uuid";
+		
+		Query query = this.getSession().createSQLQuery(sql);
+		query.setString("areaCode", areaCode);
+		query.setString("installationSiteCode", installationSiteCode);
+		
+		List<Object[]> deviceNames = query.list();
+		if(deviceNames != null){
+			list = new ArrayList<DeviceState>();
+			for(Object o : deviceNames){
+				DeviceState deviceState = new DeviceState();
+				DeviceInfo deviceInfo = new DeviceInfo();
+				deviceInfo.setDeviceName((String)o);
+				deviceState.setDeviceInfo(deviceInfo);
+				list.add(deviceState);
+			}
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DeviceState> findVersionBydeviceNamee(String areaCode, String installationSiteCode, String deviceName)
+	{
+		List<DeviceState> list = null;
+		String sql = "select e.device_State_Uuid, d.version from deviceState e,deviceInfo d where 1 = 1  and e.area_Code = :areaCode and e.installation_Site_Code = :installationSiteCode and device_name = :deviceName and e.deviceType_Uuid = d.deviceType_Uuid";
+		
+		Query query = this.getSession().createSQLQuery(sql);
+		query.setString("areaCode", areaCode);
+		query.setString("installationSiteCode", installationSiteCode);
+		query.setString("deviceName", deviceName);
+		
+		List<Object[]> versions = query.list();
+		if(versions != null){
+			list = new ArrayList<DeviceState>();
+			for(Object[] o : versions){
+				DeviceState deviceState = new DeviceState();
+				deviceState.setDeviceStateUuid((String)o[0]);
+				
+				DeviceInfo deviceInfo = new DeviceInfo();
+				deviceInfo.setVersion((String)o[1]);
+				deviceState.setDeviceInfo(deviceInfo);
+				
+				list.add(deviceState);
+			}
+		}
+		return list;
 	}
 }
 

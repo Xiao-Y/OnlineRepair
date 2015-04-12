@@ -25,6 +25,16 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
 	
 	protected HttpServletResponse response = null;
 	
+	/**
+	 * 执行成功
+	 */
+	protected static final String SUCCESS = "1";
+	
+	/**
+	 * 执行失败
+	 */
+	protected static final String FAIL = "0";
+	
 	@Override
 	public void setServletResponse(HttpServletResponse response)
 	{

@@ -27,6 +27,11 @@ public class DictionaryForm
 	 * 安装位置
 	 */
 	public static final String INSTALLATION_SITE_NAME = "安装位置";
+
+	/**
+	 * 优先级别
+	 */
+	public static final String PRIOR = "优先级别";
 	
 	/* 字典id */
 	private String seqID;

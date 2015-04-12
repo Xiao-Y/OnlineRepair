@@ -481,4 +481,87 @@ function userFind(){
 
 //用户信息管理操作===============end
 
+//申报管理======================start
+//当区域改变时，安装位置动态加载   
+function changeDeviceStateArea(){
+
+	$("#installationSiteCode").remove();
+	$("#deviceName").remove();
+	$("#version").remove();
+	
+	var areaCode = $("#areaCode").val();
+	if(areaCode != ""){
+		var url = "${pageContext.request.contextPath }/ReportingMag/reportingAction_deviceInstallationSiteByArea.action";
+		var dataType = "JSON";
+		var args = {"date":new Date,"areaCode":areaCode};
+		
+		$.post(url,args,function(data){
+			var html = '<select id="installationSiteCode" name="installationSiteCode" onchange="changeDeviceStateDeviceName();" style="width: 140px" data-rule-required="true">';
+			html = html + "<option value=''>------请选择------</option>";
+			$.each(data,function(i){
+				html = html + '<option value="'+ data[i].installationSiteCode +'" >'+ data[i].installationSiteName + '</option>';
+			});
+			
+			html = html + "</select>";
+			
+			$("#installationSiteDiv").html(html);
+		},dataType);
+	}
+}
+
+	//当安置改变时，动态加载设备名
+function changeDeviceStateDeviceName(){
+   $("#deviceName").remove();
+   $("#version").remove();
+   
+	var areaCode = $("#areaCode").val();
+	var installationSiteCode = $("#installationSiteCode").val();
+	
+	if(areaCode != "" && installationSiteCode != ""){
+		var url = "${pageContext.request.contextPath }/ReportingMag/reportingAction_deviceNameByinstallationSite.action";
+		var dataType = "JSON";
+		var args = {"date":new Date,"areaCode":areaCode,"installationSiteCode":installationSiteCode};
+		
+		$.post(url,args,function(data){
+			var html = '<select id="deviceName" name="deviceName" onchange="changeDeviceStateVersion();" style="width: 140px" data-rule-required="true">';
+			html = html + "<option value=''>------请选择------</option>";
+			$.each(data,function(i){
+				html = html + '<option value="'+ data[i].deviceName +'" >'+ data[i].deviceName + '</option>';
+			});
+			
+			html = html + "</select>";
+			
+			$("#deviceNameDiv").html(html);
+		},dataType);
+	}
+}
+	
+//当设备改变时，动态加载设备型号
+function changeDeviceStateVersion(){
+   $("#version").remove();
+	
+	var areaCode = $("#areaCode").val();
+	var installationSiteCode = $("#installationSiteCode").val();
+	var deviceName = $("#deviceName").val();
+	
+	if(areaCode != "" && installationSiteCode != "" && deviceName != ""){
+		var url = "${pageContext.request.contextPath }/ReportingMag/reportingAction_versionBydeviceName.action";
+		var dataType = "JSON";
+		var args = {"date":new Date,"areaCode":areaCode,"installationSiteCode":installationSiteCode,"deviceName":deviceName};
+		
+		$.post(url,args,function(data){
+			var html = '<select id="deviceStateUuid" name="deviceStateUuid" style="width: 140px" data-rule-required="true">';
+			html = html + "<option value=''>------请选择------</option>";
+			$.each(data,function(i){
+				html = html + '<option value="'+ data[i].deviceStateUuid +'" >'+ data[i].version + '</option>';
+			});
+			
+			html = html + "</select>";
+			
+			$("#versionDiv").html(html);
+		},dataType);
+	}
+}
+//申报管理======================end
+
 

@@ -201,4 +201,132 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 	public void deviceStateDeleteByIds(String[] ids) {
 		deviceStateDao.deviceStateDeleteByIds(ids);
 	}
+
+	@Override
+	public List<DeviceStateForm> findDeviceArea()
+	{
+		List<DeviceState> list = deviceStateDao.findDeviceStateArea();
+		//查询出来的含有不重复区域的VO转换成PO对象
+		return this.deviceStateAreaVoToPoList(list);
+	}
+
+	/**
+	 * 查询出来的含有不重复区域的VO转换成PO对象
+	 * @param list	含有不重复区域的VO
+	 * @return	List &ltDeviceStateForm&gt	含有不重复区域的PO
+	 */
+	private List<DeviceStateForm> deviceStateAreaVoToPoList(List<DeviceState> list)
+	{
+		List<DeviceStateForm> formList = null;
+		if(list != null && list.size() > 0){
+			formList = new ArrayList<DeviceStateForm>();
+			for(DeviceState ds : list){
+				DeviceStateForm df = new DeviceStateForm();
+				df.setAreaCode(ds.getAreaCode());
+				if(!StringUtils.isEmpty(ds.getAreaCode())){
+					df.setAreaName(dictionaryDao.findDDLName(ds.getAreaCode(), DictionaryForm.AREA_NAME));
+				}else{
+					df.setAreaName("");
+				}
+				formList.add(df);
+			}
+		}
+		return formList;
+	}
+
+	@Override
+	public List<DeviceStateForm> findInstallationSiteByArea(String areaCode)
+	{
+		List<DeviceState> list = deviceStateDao.findInstallationSiteByArea(areaCode);
+		//查询出来的含有不重复安装位置的VO转换成PO对象
+		return this.deviceStateInstallationSiteVoToPoList(list);
+	}
+
+	/**
+	 * 查询出来的含有不重复安装位置的VO转换成PO对象
+	 * @param list	含有不重复安装位置的VO
+	 * @return	List &ltDeviceStateForm&gt	含有不重复安装位置的PO
+	 */
+	private List<DeviceStateForm> deviceStateInstallationSiteVoToPoList(List<DeviceState> list)
+	{
+		List<DeviceStateForm> formList = null;
+		if(list != null && list.size() > 0){
+			formList = new ArrayList<DeviceStateForm>();
+			for(DeviceState ds : list){
+				DeviceStateForm df = new DeviceStateForm();
+				df.setInstallationSiteCode(ds.getInstallationSiteCode());
+				if(!StringUtils.isEmpty(ds.getInstallationSiteCode())){
+					df.setInstallationSiteName(dictionaryDao.findDDLName(ds.getInstallationSiteCode(), DictionaryForm.INSTALLATION_SITE_NAME));
+				}else{
+					df.setInstallationSiteName("");
+				}
+				formList.add(df);
+			}
+		}
+		return formList;
+	}
+
+	@Override
+	public List<DeviceStateForm> findDeviceNameByinstallationSite(String areaCode, String installationSiteCode)
+	{
+		List<DeviceState> list = deviceStateDao.findDeviceNameByinstallationSite(areaCode, installationSiteCode);
+		
+		return this.deviceStateDeviceNameVoToPoList(list);
+	}
+
+	/**
+	 * 查询出来的含有不重复设备名的VO转换成PO对象
+	 * @param list	含有不重复设备名的VO
+	 * @return	List &ltDeviceStateForm&gt	含有不重复设备名的PO
+	 */
+	private List<DeviceStateForm> deviceStateDeviceNameVoToPoList(List<DeviceState> list)
+	{
+		List<DeviceStateForm> formList = null;
+		if(list != null && list.size() > 0){
+			formList = new ArrayList<DeviceStateForm>();
+			for(DeviceState ds : list){
+				DeviceStateForm df = new DeviceStateForm();
+				if(ds.getDeviceInfo() != null && !StringUtils.isEmpty(ds.getDeviceInfo().getDeviceName())){
+					df.setDeviceName(ds.getDeviceInfo().getDeviceName());
+				}else{
+					df.setDeviceName("");
+				}
+				formList.add(df);
+			}
+		}
+		return formList;
+	}
+
+	@Override
+	public List<DeviceStateForm> findVersionBydeviceNamee(String areaCode,String installationSiteCode, String deviceName)
+	{
+		List<DeviceState> list = deviceStateDao.findVersionBydeviceNamee(areaCode, installationSiteCode, deviceName);
+		return this.deviceStateVersionVoToPoList(list);
+	}
+
+	/**
+	 * 将含有设备状态uuid和设备型号的VO对象转为PO对象
+	 * @param list	含有设备状态uuid和设备型号的VO
+	 * @return	List &ltDeviceStateForm&gt	含有设备状态uuid和设备型号的PO
+	 */
+	private List<DeviceStateForm> deviceStateVersionVoToPoList(List<DeviceState> list)
+	{
+		List<DeviceStateForm> formList = null;
+		if(list != null && list.size() > 0){
+			formList = new ArrayList<DeviceStateForm>();
+			for(DeviceState ds : list){
+				DeviceStateForm df = new DeviceStateForm();
+				df.setDeviceStateUuid(ds.getDeviceStateUuid());
+				
+				if(ds.getDeviceInfo() != null && !StringUtils.isEmpty(ds.getDeviceInfo().getVersion())){
+					df.setVersion(ds.getDeviceInfo().getVersion());
+				}else{
+					df.setVersion("");
+				}
+				
+				formList.add(df);
+			}
+		}
+		return formList;
+	}
 }

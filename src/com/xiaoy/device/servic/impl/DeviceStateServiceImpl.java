@@ -329,4 +329,15 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 		}
 		return formList;
 	}
+
+	@Override
+	public Boolean findDeviceStateCondition(DeviceStateForm form)
+	{
+		Integer count = deviceStateDao.findDeviceStateCondition(form);
+		if(count > 0)
+		{
+			return true;
+		}
+		return false;
+	}
 }

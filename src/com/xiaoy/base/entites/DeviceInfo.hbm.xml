@@ -32,6 +32,9 @@
 		<property name="remark" type="java.lang.String">
 			<column name="REMARK" />
 		</property>
+		<property name="creatTime" type="java.util.Date">
+			<column name="CREAT_TIME" />
+		</property>
 		<set name="deviceState" inverse="true" cascade="delete">
 			<key column="DEVICETYPE_UUID" />
 			<one-to-many class="com.xiaoy.base.entites.DeviceState" />

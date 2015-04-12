@@ -357,7 +357,7 @@ function changeDevice(){
 		
 		html = html + "</select>";
 		
-		$("#v").html(html);
+		$("#versionDiv").html(html);
 	},dataType);
 }
 
@@ -414,6 +414,7 @@ function checkTime(){
 	var lastTime = $("#lastTime").val();
 	var nextTime = $("#nextTime").val();
 	var installationTime = $("#installationTime").val();
+	
 	if(lastTime != "" && nextTime != "" && installationTime != ""){
 		if(nextTime <= lastTime){
 			alert("下次检修时间要在上次检修时间之后");
@@ -429,6 +430,28 @@ function checkTime(){
 	}
 }
 
+//检查设备是否已经安装
+function checkDevice(){
+	var areaCode = $("#areaCode").val();
+	var installationSiteCode = $("#installationSiteCode").val();
+	var deviceTypeUuid = $("#deviceTypeUuid").val();
+	 
+	var url = "{pageContext.request.contextPath }/DeviceMag/deviceStateAction_checkDevice";
+	var args = {"date":new Date,"areaCode":areaCode,"installationSiteCode":installationSiteCode,"deviceTypeUuid":deviceTypeUuid};
+	$.ajax({
+		url:url,
+		data:args,
+		success:function(data){
+			if(data == "1"){
+				checkTime();
+			}else if(data == "0"){
+				alert("该设备状态已存在！");
+			}else{
+				alert("服务器错误，稍后再试！");
+			}
+		}
+	});
+}
 //设备管理=====================end
 
 //用户信息管理操作===============start
@@ -560,6 +583,21 @@ function changeDeviceStateVersion(){
 			
 			$("#versionDiv").html(html);
 		},dataType);
+	}
+}
+
+//保存申报信息
+function reportingBugInfoSave(){
+	
+	$("#Form1").validate();
+	
+	if($("#Form1").valid()){
+		var f = confirm("保存成功，等待审核。是否继续添加申报信息？");
+		if(f){
+			//继续添加
+			$("#flag").val("1");
+		}
+		Form1.submit();
 	}
 }
 //申报管理======================end

@@ -1,5 +1,6 @@
 package com.xiaoy.base.entites;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,6 +32,9 @@ public class DeviceInfo
 	/* 备注 */
 	private String remark;
 	
+	/*创建时间*/
+	private Date creatTime;
+	
 	Set<DeviceState> deviceState = new HashSet<DeviceState>();
 
 	public DeviceInfo() {
@@ -43,6 +47,16 @@ public class DeviceInfo
 	public DeviceInfo(String deviceTypeUuid, String version) {
 		this.deviceTypeUuid = deviceTypeUuid;
 		this.version = version;
+	}
+
+	public Date getCreatTime()
+	{
+		return creatTime;
+	}
+
+	public void setCreatTime(Date creatTime)
+	{
+		this.creatTime = creatTime;
 	}
 
 	public String getDeviceTypeUuid()

@@ -55,23 +55,23 @@
 			<td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">型号：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" style="width: 30%" bgColor="#ffffff">
 	       		<!-- 查看的是型号，但保存的却是设备的uuid -->
-	       		<div id="v"></div>
+	       		<div id="versionDiv"></div>
 	      	</td>
 			
 		</tr>
 		<tr>
-			<td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">上次检修日期：</td>
+			<td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">上次检修日期：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" style="width: 30%" bgColor="#ffffff">
 				<s:textfield id="lastTime" name="lastTime" cssClass="Wdate" size="20"  data-rule-required="true" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 	       	</td>
-		    <td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">下次检修日期：</td>
+		    <td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">下次检修日期：<font color="#FF0000">*</font></td>
 			<td class="ta_01" style="width: 30%" bgColor="#ffffff">
 				<s:textfield id="nextTime" name="nextTime" cssClass="Wdate" size="20"  data-rule-required="true" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 			</td>
 		</tr>
 		
 		<tr>
-			<td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">安装日期：</td>
+			<td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">安装日期：<font color="#FF0000">*</font></td>
 			<td class="ta_01" style="width: 30%" bgColor="#ffffff">
 				<s:textfield id="installationTime" name="installationTime" cssClass="Wdate" size="20"  data-rule-required="true" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 			</td>
@@ -108,9 +108,9 @@
 		</TR>
 		<tr>
 			<td class="ta_01" style="WIDTH: 100%" align="center" bgColor="#f5fafe" colSpan="4">
-			<input type="button" name="BT_Submit" value="保存" onclick="checkTime();" style="font-size:12px; color:black; height=22;width=55">
-			<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
-			<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="返回"  name="Reset1"  onClick="history.back()">
+				<input type="button" name="BT_Submit" value="保存" onclick="checkDevice();" style="font-size:12px; color:black; height=22;width=55">
+				<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+				<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="返回"  name="Reset1"  onClick="history.back()">
 			</td>
 		</tr>
 		<tr align="right">

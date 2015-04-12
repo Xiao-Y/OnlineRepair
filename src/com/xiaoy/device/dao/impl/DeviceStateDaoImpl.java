@@ -92,6 +92,8 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 				paramsMapValue.put("stateCode", deviceStateForm.getStateCode());
 			}
 			
+			hqlWhere.append(" order by  e.installationTime desc");
+			
 			map = new HashMap<String, Object>();
 			map.put("hqlWhere", hqlWhere.toString());
 			map.put("paramsMapValue", paramsMapValue);
@@ -257,6 +259,19 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public Integer findDeviceStateCondition(DeviceStateForm form)
+	{
+		String sql = "select count(*) from DEVICESTATE where AREA_CODE = :areaCode and INSTALLATION_SITE_CODE = :installationSiteCode and DEVICETYPE_UUID = :deviceTypeUuid";
+		Query query = this.getSession().createSQLQuery(sql);
+		query.setString("areaCode", form.getAreaCode());
+		query.setString("installationSiteCode", form.getInstallationSiteCode());
+		query.setString("deviceTypeUuid", form.getDeviceTypeUuid());
+		
+		String i = query.uniqueResult().toString();
+		return Integer.parseInt(i);
 	}
 }
 

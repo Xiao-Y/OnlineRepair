@@ -11,20 +11,6 @@
    window.onload = function () { 
         new uploadPreview({ UpBtn: "image", DivShow: "imgdiv", ImgShow: "imgShow" });
     }
-   
-function reportingBugInfoSave(){
-	
-	$("#Form1").validate();
-	
-	if($("#Form1").valid()){
-		var f = confirm("保存成功，等待审核。是否继续添加申报信息？");
-		if(f){
-			//继续添加
-			$("#flag").val("1");
-		}
-		Form1.submit();
-	}
-}
 </script>
 
 </head>

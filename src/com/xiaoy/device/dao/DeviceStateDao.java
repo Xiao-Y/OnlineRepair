@@ -58,4 +58,11 @@ public interface DeviceStateDao extends Common<DeviceState> {
 	 */
 	List<DeviceState> findVersionBydeviceNamee(String areaCode,String installationSiteCode, String deviceName);
 
+	/**
+	 * 根据区域、安装位置、设备信息uuid查询设备状态信息是否存在
+	 * @param form	含有区域code、安装位置code、设备信息uuid
+	 * @return	Integer 存在的个数
+	 */
+	Integer findDeviceStateCondition(DeviceStateForm form);
+
 }

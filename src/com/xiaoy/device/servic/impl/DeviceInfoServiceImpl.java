@@ -1,6 +1,7 @@
 package com.xiaoy.device.servic.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoy.base.entites.DeviceInfo;
+import com.xiaoy.base.util.DateHelper;
 import com.xiaoy.base.util.UploadImageHelper;
 import com.xiaoy.device.dao.DeviceInfoDao;
 import com.xiaoy.device.servic.DeviceInfoService;
@@ -162,6 +164,7 @@ public class DeviceInfoServiceImpl implements DeviceInfoService
 		form.setProducerPhone(d.getProducerPhone());
 		form.setVersion(d.getVersion());
 		form.setRemark(d.getRemark());
+		form.setCreatTime(d.getCreatTime() != null ? DateHelper.dateConverString(d.getCreatTime()) : "");
 		return form;
 	}
 	
@@ -184,7 +187,7 @@ public class DeviceInfoServiceImpl implements DeviceInfoService
 		entity.setProducerPhone(deviceForm.getProducerPhone());
 		entity.setVersion(deviceForm.getVersion());
 		entity.setRemark(deviceForm.getRemark());
-		
+		entity.setCreatTime(new Date());
 		return entity;
 	}
 }

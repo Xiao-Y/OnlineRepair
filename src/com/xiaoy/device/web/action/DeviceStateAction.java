@@ -222,4 +222,31 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 		}
 		return "success";
 	}
+	
+	/**
+	 * 根据区域、安装位置、设备信息uuid查询设备状态信息是否存在
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	public String checkDevice() throws UnsupportedEncodingException
+	{
+		String areaCode = request.getParameter("areaCode");
+		String installationSiteCode = request.getParameter("installationSiteCode");
+		String deviceTypeUuid = request.getParameter("deviceTypeUuid");
+		DeviceStateForm form = new DeviceStateForm();
+		form.setAreaCode(areaCode);
+		form.setInstallationSiteCode(installationSiteCode);
+		form.setDeviceTypeUuid(deviceTypeUuid);
+		
+		Boolean flag = deviceStateService.findDeviceStateCondition(form);
+		if(flag){//已经存在，返回0
+			inputStream = new ByteArrayInputStream(DeviceStateAction.FAIL.getBytes("UTF-8"));
+		}
+		else
+		{//不存在，返回1
+			inputStream = new ByteArrayInputStream(DeviceStateAction.SUCCESS.getBytes("UTF-8"));
+		}
+		return "ajax-success";
+	}
+	
 }

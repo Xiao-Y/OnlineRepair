@@ -91,6 +91,8 @@ public class DeviceInfoDaoImpl extends CommonImpl<DeviceInfo> implements DeviceI
 				paramsMapValue.put("producerName", "%" + deviceForm.getProducerName() + "%");
 			}
 			
+			hqlWhere.append(" order by creatTime desc");
+			
 			map = new HashMap<String, Object>();
 			map.put("hqlWhere", hqlWhere);
 			map.put("paramsMapValue", paramsMapValue);

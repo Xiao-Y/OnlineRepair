@@ -12,8 +12,15 @@ public interface ReportingDao extends Common<Reporting>
 	/**
 	 * 带分页的，根据条件查询出现故障申报信息
 	 * @param reportingForm	查询条件
-	 * @return	List &ltReporting&gt
+	 * @return	List &ltObject[]&gt
 	 */
-	List<Reporting> findReportingBugInfoList(ReportingForm reportingForm);
+	List<Object[]> findReportingBugInfoList(ReportingForm reportingForm);
+
+	/**
+	 * 根据条件查询统计出现数据总量
+	 * @param reportingForm	查询条件
+	 * @return	int 数据总量
+	 */
+	int countReportingBugInfo(ReportingForm reportingForm);
 
 }

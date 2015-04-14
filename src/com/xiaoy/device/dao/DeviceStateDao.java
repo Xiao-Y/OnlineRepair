@@ -56,7 +56,7 @@ public interface DeviceStateDao extends Common<DeviceState> {
 	 * @param deviceName	设备名
 	 * @return	List &ltDeviceStateForm&gt 含有设备型号的设备状态PO对象
 	 */
-	List<DeviceState> findVersionBydeviceNamee(String areaCode,String installationSiteCode, String deviceName);
+	List<DeviceState> findVersionBydeviceName(String areaCode,String installationSiteCode, String deviceName);
 
 	/**
 	 * 根据区域、安装位置、设备信息uuid查询设备状态信息是否存在

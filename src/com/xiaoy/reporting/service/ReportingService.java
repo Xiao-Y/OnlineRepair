@@ -16,10 +16,17 @@ public interface ReportingService
 	void reportingBugInfoSave(ReportingForm reportingForm, HttpServletRequest request);
 
 	/**
-	 * 根据条件查询出现申报信息列表
+	 * 根据条件查询出申报信息列表
 	 * @param reportingForm	查询条件
 	 * @return	List &ltReportingForm&gt
 	 */
 	List<ReportingForm> findReportingBugInfoList(ReportingForm reportingForm);
+
+	/**
+	 * 根据条件查询统计出现数据总量
+	 * @param reportingForm	查询条件
+	 * @return	int 数据总量
+	 */
+	int countReportingBugInfo(ReportingForm reportingForm);
 
 }

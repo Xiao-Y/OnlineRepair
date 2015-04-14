@@ -193,8 +193,17 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 	public List<DeviceState> findInstallationSiteByArea(String areaCode)
 	{
 		List<DeviceState> list = null;
-		String hql = "select distinct installationSiteCode from DeviceState where areaCode = :areaCode";
-		Query query = this.getSession().createQuery(hql).setString("areaCode", areaCode);
+		String hql = "select distinct installationSiteCode from DeviceState where 1 = 1";
+		if(!StringUtils.isEmpty(areaCode))
+		{
+			hql = hql + " and areaCode = :areaCode ";
+		}
+		Query query = this.getSession().createQuery(hql);
+		if(!StringUtils.isEmpty(areaCode))
+		{
+			query.setString("areaCode", areaCode);
+		}
+		
 		List<Object[]> installationSiteCodes = query.list();
 		if(installationSiteCodes != null){
 			list = new ArrayList<DeviceState>();
@@ -212,11 +221,24 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 	public List<DeviceState> findDeviceNameByinstallationSite(String areaCode,String installationSiteCode)
 	{
 		List<DeviceState> list = null;
-		String sql = "select distinct d.device_Name from deviceState e,deviceInfo d where 1 = 1  and e.area_Code = :areaCode and e.installation_Site_Code = :installationSiteCode and e.deviceType_Uuid = d.deviceType_Uuid";
-		
-		Query query = this.getSession().createSQLQuery(sql);
-		query.setString("areaCode", areaCode);
-		query.setString("installationSiteCode", installationSiteCode);
+		StringBuffer sql = new StringBuffer("select distinct d.device_Name from deviceState e,deviceInfo d where 1 = 1 and e.deviceType_Uuid = d.deviceType_Uuid ");
+		if(!StringUtils.isEmpty(areaCode))
+		{
+			sql.append("and e.area_Code = :areaCode ");
+		}
+		if(!StringUtils.isEmpty(installationSiteCode))
+		{
+			sql.append(" and e.installation_Site_Code = :installationSiteCode ");
+		}
+		Query query = this.getSession().createSQLQuery(sql.toString());
+		if(!StringUtils.isEmpty(areaCode))
+		{
+			query.setString("areaCode", areaCode);
+		}
+		if(!StringUtils.isEmpty(installationSiteCode))
+		{
+			query.setString("installationSiteCode", installationSiteCode);
+		}
 		
 		List<Object[]> deviceNames = query.list();
 		if(deviceNames != null){
@@ -234,15 +256,37 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<DeviceState> findVersionBydeviceNamee(String areaCode, String installationSiteCode, String deviceName)
-	{
+	public List<DeviceState> findVersionBydeviceName(String areaCode, String installationSiteCode, String deviceName)
+	{// and e.area_Code = :areaCode and e.installation_Site_Code = :installationSiteCode  
 		List<DeviceState> list = null;
-		String sql = "select e.device_State_Uuid, d.version from deviceState e,deviceInfo d where 1 = 1  and e.area_Code = :areaCode and e.installation_Site_Code = :installationSiteCode and device_name = :deviceName and e.deviceType_Uuid = d.deviceType_Uuid";
+		StringBuffer sql = new StringBuffer("select e.device_State_Uuid, d.version from deviceState e,deviceInfo d where 1 = 1 and e.deviceType_Uuid = d.deviceType_Uuid");
+		if(!StringUtils.isEmpty(areaCode))
+		{
+			sql.append("and e.area_Code = :areaCode ");
+		}
+		if(!StringUtils.isEmpty(installationSiteCode))
+		{
+			sql.append(" and e.installation_Site_Code = :installationSiteCode ");
+		}
+		if(!StringUtils.isEmpty(deviceName))
+		{
+			sql.append(" and device_name = :deviceName ");
+		}
 		
-		Query query = this.getSession().createSQLQuery(sql);
-		query.setString("areaCode", areaCode);
-		query.setString("installationSiteCode", installationSiteCode);
-		query.setString("deviceName", deviceName);
+		Query query = this.getSession().createSQLQuery(sql.toString());
+		
+		if(!StringUtils.isEmpty(areaCode))
+		{
+			query.setString("areaCode", areaCode);
+		}
+		if(!StringUtils.isEmpty(installationSiteCode))
+		{
+			query.setString("installationSiteCode", installationSiteCode);
+		}
+		if(!StringUtils.isEmpty(deviceName))
+		{
+			query.setString("deviceName", deviceName);
+		}
 		
 		List<Object[]> versions = query.list();
 		if(versions != null){
@@ -265,10 +309,20 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 	public Integer findDeviceStateCondition(DeviceStateForm form)
 	{
 		String sql = "select count(*) from DEVICESTATE where AREA_CODE = :areaCode and INSTALLATION_SITE_CODE = :installationSiteCode and DEVICETYPE_UUID = :deviceTypeUuid";
+		//更新操作的时候，先检查除他以外的还有没有有相同的。添加操作时，直接查检所有的
+		if(!StringUtils.isEmpty(form.getDeviceStateUuid()))
+		{
+			sql = sql + " and DEVICE_STATE_UUID <> :deviceStateUuid";
+		}
 		Query query = this.getSession().createSQLQuery(sql);
+		
 		query.setString("areaCode", form.getAreaCode());
 		query.setString("installationSiteCode", form.getInstallationSiteCode());
 		query.setString("deviceTypeUuid", form.getDeviceTypeUuid());
+		if(!StringUtils.isEmpty(form.getDeviceStateUuid()))
+		{
+			query.setString("deviceStateUuid", form.getDeviceStateUuid());
+		}
 		
 		String i = query.uniqueResult().toString();
 		return Integer.parseInt(i);

@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 
 import com.google.gson.Gson;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.action.BaseAction;
 import com.xiaoy.device.servic.DeviceStateService;
@@ -67,6 +68,9 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 	public String reportingBugInfoList()
 	{
 		List<ReportingForm> list = reportingService.findReportingBugInfoList(reportingForm);
+		int recordCount = reportingService.countReportingBugInfo(reportingForm);
+		reportingForm.setRecordCount(recordCount);
+		ActionContext.getContext().getValueStack().push(list);
 		return "reportingBugInfoList";
 	}
 	
@@ -180,8 +184,16 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 	 */
 	public String reportingBugInfoEdit()
 	{
-		//发送数据到页面
+		//发送数据到页面,区域和优先级
 		this.sendDataPage();
+		//发送安装位置到页面
+		List<DeviceStateForm> installationSite = deviceStateService.findInstallationSiteByArea("");
+		request.setAttribute("installationSite",installationSite);
+		List<DeviceStateForm> deviceName = deviceStateService.findDeviceNameByinstallationSite("", "");
+		request.setAttribute("deviceName", deviceName);
+		List<DeviceStateForm> version = deviceStateService.findVersionBydeviceNamee("", "", "");
+		request.setAttribute("version", version);
+		
 		logService.saveLog(request, MENU_MODEL, "进入编辑申报故障");
 		return "reportingBugInfoEdit";
 	}

@@ -435,9 +435,10 @@ function checkDevice(){
 	var areaCode = $("#areaCode").val();
 	var installationSiteCode = $("#installationSiteCode").val();
 	var deviceTypeUuid = $("#deviceTypeUuid").val();
+	var deviceStateUuid = $("input[name='deviceStateUuid']").val();
 	 
 	var url = "{pageContext.request.contextPath }/DeviceMag/deviceStateAction_checkDevice";
-	var args = {"date":new Date,"areaCode":areaCode,"installationSiteCode":installationSiteCode,"deviceTypeUuid":deviceTypeUuid};
+	var args = {"date":new Date,"areaCode":areaCode,"installationSiteCode":installationSiteCode,"deviceTypeUuid":deviceTypeUuid,"deviceStateUuid":deviceStateUuid};
 	$.ajax({
 		url:url,
 		data:args,

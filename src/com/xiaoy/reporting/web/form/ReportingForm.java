@@ -33,6 +33,91 @@ public class ReportingForm extends BaseForm
 	/* 设备名 */
 	private String deviceName;
 
+	/* 安装位置id */
+	private String installationSiteCode;
+	/* 评价状态 */
+	private String evaluateStatCode;
+	/* 申报人 */
+	private String name;
+	/* 维护的类别 */
+	private String maintainTypeCode;
+	/* 维护状态 */
+	private String maintainStatCode;
+	/*区域code*/
+	private String areaCode;
+	/*审核状态*/
+	private String auditStatCode;
+	
+	public String getAuditStatCode()
+	{
+		return auditStatCode;
+	}
+
+	public void setAuditStatCode(String auditStatCode)
+	{
+		this.auditStatCode = auditStatCode;
+	}
+
+	public String getAreaCode()
+	{
+		return areaCode;
+	}
+
+	public void setAreaCode(String areaCode)
+	{
+		this.areaCode = areaCode;
+	}
+
+	public String getMaintainStatCode()
+	{
+		return maintainStatCode;
+	}
+
+	public void setMaintainStatCode(String maintainStatCode)
+	{
+		this.maintainStatCode = maintainStatCode;
+	}
+
+	public String getInstallationSiteCode()
+	{
+		return installationSiteCode;
+	}
+
+	public void setInstallationSiteCode(String installationSiteCode)
+	{
+		this.installationSiteCode = installationSiteCode;
+	}
+
+	public String getEvaluateStatCode()
+	{
+		return evaluateStatCode;
+	}
+
+	public void setEvaluateStatCode(String evaluateStatCode)
+	{
+		this.evaluateStatCode = evaluateStatCode;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public String getMaintainTypeCode()
+	{
+		return maintainTypeCode;
+	}
+
+	public void setMaintainTypeCode(String maintainTypeCode)
+	{
+		this.maintainTypeCode = maintainTypeCode;
+	}
+
 	public String getDeviceName()
 	{
 		return deviceName;

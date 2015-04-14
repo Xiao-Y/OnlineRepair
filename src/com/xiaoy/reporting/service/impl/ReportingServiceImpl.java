@@ -1,5 +1,6 @@
 package com.xiaoy.reporting.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -106,9 +107,9 @@ public class ReportingServiceImpl implements ReportingService
 	@Override
 	public List<ReportingForm> findReportingBugInfoList(ReportingForm reportingForm) {
 		
-		List<Reporting> form = reportingDao.findReportingBugInfoList(reportingForm);
+		List<Object[]> object = reportingDao.findReportingBugInfoList(reportingForm);
 		
-		return this.reportingBugInfoVoToPoList(form);
+		return this.reportingBugInfoVoToPoList(object);
 	}
 
 	/**
@@ -116,9 +117,36 @@ public class ReportingServiceImpl implements ReportingService
 	 * @param form
 	 * @return
 	 */
-	private List<ReportingForm> reportingBugInfoVoToPoList(List<Reporting> form) {
-		// TODO Auto-generated method stub
-		return null;
+	private List<ReportingForm> reportingBugInfoVoToPoList(List<Object[]> object) {
+		List<ReportingForm> form = null;
+		if(object != null && object.size() > 0)
+		{
+			form = new ArrayList<ReportingForm>();
+			
+			for(Object[] o : object)
+			{
+				ReportingForm r = new ReportingForm();
+				r.setAreaCode((String)o[0]);
+				r.setInstallationSiteCode((String)o[1]);
+				r.setDeviceName((String)o[2]);
+				r.setName((String)o[3]);
+				r.setReportingPhone((String)o[4]);
+				r.setReportingTime((String)o[5]);
+				r.setMaintainStatCode((String)o[6]);
+				r.setEvaluateStatCode((String)o[7]);
+				r.setAuditStatCode((String)o[8]);
+				r.setMaintainTypeCode((String)o[9]);
+				
+				form.add(r);
+			}
+		}
+		return form;
 	}
-	
+
+	@Override
+	public int countReportingBugInfo(ReportingForm reportingForm)
+	{
+		int count = reportingDao.countReportingBugInfo(reportingForm);
+		return count;
+	}
 }

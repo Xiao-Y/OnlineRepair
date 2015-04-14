@@ -52,7 +52,7 @@
 	       	</td>
 			<td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">型号：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" style="width: 30%" bgColor="#ffffff">
-	       		<div id="v">
+	       		<div id="versionDiv">
 		       		<s:select list="%{#request.version}" id="deviceTypeUuid" name="deviceTypeUuid"
 					  listKey="deviceTypeUuid" listValue="version"
 					  cssStyle="width:140px" data-rule-required="true"

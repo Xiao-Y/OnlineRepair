@@ -233,10 +233,13 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 		String areaCode = request.getParameter("areaCode");
 		String installationSiteCode = request.getParameter("installationSiteCode");
 		String deviceTypeUuid = request.getParameter("deviceTypeUuid");
+		String deviceStateUuid = request.getParameter("deviceStateUuid");
+		
 		DeviceStateForm form = new DeviceStateForm();
 		form.setAreaCode(areaCode);
 		form.setInstallationSiteCode(installationSiteCode);
 		form.setDeviceTypeUuid(deviceTypeUuid);
+		form.setDeviceStateUuid(deviceStateUuid);
 		
 		Boolean flag = deviceStateService.findDeviceStateCondition(form);
 		if(flag){//已经存在，返回0

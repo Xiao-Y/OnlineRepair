@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/myJquery.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/uploadPreview/uploadPreview.js"></script>
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
+<jsp:include page="/pub.jsp"/>
 
 <title>编辑故障信息</title>
 <script>
@@ -29,54 +26,48 @@
 	    <tr>
 	       <td align="center" bgColor="#f5fafe" class="ta_01">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff">
-				<select id="area" name="area" style="width: 138px">
-					<option>------请选择------</option>				
-					<option>教室</option>				
-					<option selected="selected">寝室</option>				
-					<option>机房</option>				
-				</select>
+				<s:select list="%{#request.area}" id="areaCode" name="areaCode"
+					  listKey="areaCode" listValue="areaName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px"  data-rule-required="true"
+					  onchange="changeDeviceStateArea();"
+				/>
 			</td>
-			
-	       <td align="center" bgColor="#f5fafe" class="ta_01">设&nbsp;&nbsp;备&nbsp;&nbsp;名：<font color="#FF0000">*</font></td>
-	       <td class="ta_01" bgColor="#ffffff">
-	       		<select id="deviceName" name="deviceName" style="width: 138px">
-					<option>------请选择------</option>				
-					<option>计算机</option>				
-					<option selected="selected">灯管</option>				
-					<option>空调</option>				
-					<option>电视</option>				
-					<option>风扇</option>				
-					<option>桌子</option>				
-				</select>
-	       </td>
+			<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">安装位置：<font color="#FF0000">*</font></td>
+	       	<td class="ta_01" bgColor="#ffffff">
+	       		<div id="installationSiteDiv">
+	       			<s:select list="%{#request.installationSite}" id="installationSiteCode" name="installationSiteCode"
+					  listKey="installationSiteCode" listValue="installationSiteName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px"  data-rule-required="true"
+					  onchange="changeDeviceStateDeviceName();"
+					/>
+	       		</div>
+	       	</td>
 	    </tr>
 	    
 		<tr>
-			<td align="center" bgColor="#f5fafe" class="ta_01">型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：<font color="#FF0000">*</font></td>
-	       	<td class="ta_01" bgColor="#ffffff">
-	       		<select id="version" name="version" style="width: 138px">
-					<option>------请选择------</option>				
-					<option>A232</option>				
-					<option>DE34</option>				
-					<option selected="selected">23HY</option>				
-					<option>8UY6</option>				
-					<option>CCDG</option>				
-					<option>MMHH</option>				
-				</select>
-	      	</td>
-	      	
-			<td align="center" bgColor="#f5fafe" class="ta_01">安装位置：<font color="#FF0000">*</font></td>
-	       	<td class="ta_01" bgColor="#ffffff">
-	       		<select id="installationSite" name="installationSite" style="width: 138px">
-					<option>------请选择------</option>				
-					<option>A4049</option>				
-					<option>B3098</option>				
-					<option selected="selected">D6732</option>				
-					<option>A1234</option>				
-					<option>R6742</option>				
-					<option>T7787</option>				
-				</select>
+			<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">设备名：<font color="#FF0000">*</font></td>
+	       	<td class="ta_01" bgColor="#ffffff" height="21">
+	       	<div id="deviceNameDiv">
+	       		<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
+					  listKey="deviceName" listValue="deviceName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px"  data-rule-required="true"
+					  onchange="changeDeviceStateVersion();"
+					/>
+	       	</div>
 	       	</td>
+			<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">型号：<font color="#FF0000">*</font></td>
+	       	<td class="ta_01" bgColor="#ffffff">
+	       		<div id="versionDiv">
+	       			<s:select list="%{#request.version}" id="deviceStateUuid" name="deviceStateUuid"
+					  listKey="deviceStateUuid" listValue="version"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px"  data-rule-required="true"
+					/>
+	       		</div>
+	      	</td>
 		</tr>
 		<tr>
 		    <td align="center" bgColor="#f5fafe" class="ta_01">申报人联系方式：</td>

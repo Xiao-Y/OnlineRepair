@@ -300,7 +300,7 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 	@Override
 	public List<DeviceStateForm> findVersionBydeviceNamee(String areaCode,String installationSiteCode, String deviceName)
 	{
-		List<DeviceState> list = deviceStateDao.findVersionBydeviceNamee(areaCode, installationSiteCode, deviceName);
+		List<DeviceState> list = deviceStateDao.findVersionBydeviceName(areaCode, installationSiteCode, deviceName);
 		return this.deviceStateVersionVoToPoList(list);
 	}
 

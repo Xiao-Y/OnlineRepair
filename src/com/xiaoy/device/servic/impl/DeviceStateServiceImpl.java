@@ -29,7 +29,7 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 
 	private final static String MENU_MODEL = "【设备管理】--【查询设备状态】";
 	//保存图片的文件夹
-	private static String DEVICE_IMAGE_URL = "deviceStateUploadImages";
+	private static String DEVICE_IMAGE_URL = "upload/deviceStateUploadImages";
 	
 	/**
 	 * 注入日志

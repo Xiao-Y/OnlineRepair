@@ -27,7 +27,7 @@ import com.xiaoy.resource.web.form.DictionaryForm;
 public class ReportingAction extends BaseAction implements ModelDriven<ReportingForm>
 {
 	
-	private final static String MENU_MODEL = "【设备管理】--【查询设备状态】";
+	private final static String MENU_MODEL = "【设备管理】--【申报故障设备】";
 	
 	//设备状态信息
 	@Resource
@@ -66,6 +66,7 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 	 */
 	public String reportingBugInfoList()
 	{
+		List<ReportingForm> list = reportingService.findReportingBugInfoList(reportingForm);
 		return "reportingBugInfoList";
 	}
 	
@@ -86,9 +87,10 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 	 */
 	private void sendDataPage()
 	{
-		//在设备状态表中查询出现设备的区域
+		//在设备状态表中查询出设备的区域
 		List<DeviceStateForm> area = deviceStateService.findDeviceArea();
 		request.setAttribute("area", area);
+		//在数据字典中查询出优先级别
 		List<DictionaryForm> priorCodes = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.PRIOR);
 		request.setAttribute("priorCodes", priorCodes);
 	}
@@ -178,11 +180,16 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 	 */
 	public String reportingBugInfoEdit()
 	{
+		//发送数据到页面
+		this.sendDataPage();
+		logService.saveLog(request, MENU_MODEL, "进入编辑申报故障");
 		return "reportingBugInfoEdit";
 	}
 	
 	/**
 	 * 保存设备申报信息
+	 * 1.保存设备申报信息
+	 * 2.添加申报故障审核信息
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */

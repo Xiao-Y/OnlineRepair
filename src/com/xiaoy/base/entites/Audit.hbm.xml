@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 14:49:13 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xiaoy.base.entites.Audit" table="AUDIT">
+        <id name="auditUuid" type="java.lang.String">
+            <column name="AUDIT_UUID" />
+            <generator class="uuid" />
+        </id>
+        <property name="auditStatCode" type="java.lang.String">
+            <column name="AUDIT_STAT_CODE" />
+        </property>
+        <property name="auditTime" type="java.util.Date">
+            <column name="AUDIT_TIME" />
+        </property>
+        <property name="maintainStatCode" type="java.lang.String">
+            <column name="MAINTAIN_STAT_CODE" />
+        </property>
+        <property name="finishTime" type="java.util.Date">
+            <column name="FINISH_TIME" />
+        </property>
+        <property name="failAccount" type="java.lang.String">
+            <column name="FAIL_ACCOUNT" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+        <property name="reportingUuid" type="java.lang.String">
+            <column name="REPORTING_UUID" />
+        </property>
+        <property name="maintainUuid" type="java.lang.String">
+            <column name="MAINTAIN_UUID" />
+        </property>
+        <property name="userUuid" type="java.lang.String">
+            <column name="USER_UUID" />
+        </property>
+    </class>
+</hibernate-mapping>

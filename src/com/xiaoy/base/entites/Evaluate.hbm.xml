@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 15:09:11 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xiaoy.base.entites.Evaluate" table="EVALUATE">
+        <id name="evaluateUuid" type="java.lang.String">
+            <column name="EVALUATEUUID" />
+            <generator class="uuid" />
+        </id>
+        <property name="evaluateStatCode" type="java.lang.String">
+            <column name="EVALUATE_STAT_CODE" />
+        </property>
+        <property name="evaluateTime" type="java.util.Date">
+            <column name="EVALUATE_TIME" />
+        </property>
+        <property name="rankCode" type="java.lang.String">
+            <column name="RANK_CODE" />
+        </property>
+        <property name="userUuid" type="java.lang.String">
+            <column name="USER_UUID" />
+        </property>
+        <property name="reportingUuid" type="java.lang.String">
+            <column name="REPORTING_UUID" />
+        </property>
+    </class>
+</hibernate-mapping>

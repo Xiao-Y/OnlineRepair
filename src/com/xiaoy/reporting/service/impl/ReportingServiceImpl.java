@@ -1,6 +1,7 @@
 package com.xiaoy.reporting.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xiaoy.audit.service.AuditService;
 import com.xiaoy.base.entites.DeviceState;
 import com.xiaoy.base.entites.Reporting;
 import com.xiaoy.base.entites.User;
@@ -23,13 +25,13 @@ import com.xiaoy.resource.servic.LogService;
 
 @Service
 @Transactional(readOnly=true)
-public class ReportingImpl implements ReportingService
+public class ReportingServiceImpl implements ReportingService
 {
 
 	/**
 	 * 故障设备图片
 	 */
-	private static final String REPORTING_IMAGE_URL = "reportingUploadImages";
+	private static final String REPORTING_IMAGE_URL = "upload/reportingUploadImages";
 	
 	private static final String MENU_MODEL = "【申报故障管理】--【申报故障】";
 	
@@ -37,9 +39,18 @@ public class ReportingImpl implements ReportingService
 	@Resource
 	private LogService logService;
 	
+	//故障审核
+	@Resource
+	private AuditService auditService;
+	
 	@Resource
 	private ReportingDao reportingDao;
 	
+	/**
+	 * 分为两步：<br/>
+	 * 1.保存故障申报信息<br/>
+	 * 2.添加故障审核信息<br/>
+	 */
 	@Override
 	@Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED,readOnly=false)
 	public void reportingBugInfoSave(ReportingForm reportingForm, HttpServletRequest request)
@@ -55,7 +66,10 @@ public class ReportingImpl implements ReportingService
         	reportingForm.setDevicePicUrl(UploadImageHelper.PICURL);
         }
 		Reporting entity = this.reportingBugInfoPoToVo(reportingForm);
-		reportingDao.saveObject(entity);;
+		//保存设备申报信息
+		reportingDao.saveObject(entity);
+		//添加故障审核信息
+		auditService.saveAudit(entity);
 	}
 
 	/**
@@ -87,6 +101,24 @@ public class ReportingImpl implements ReportingService
 		entity.setUser(user);
 		
 		return entity;
+	}
+
+	@Override
+	public List<ReportingForm> findReportingBugInfoList(ReportingForm reportingForm) {
+		
+		List<Reporting> form = reportingDao.findReportingBugInfoList(reportingForm);
+		
+		return this.reportingBugInfoVoToPoList(form);
+	}
+
+	/**
+	 * 故障申报信息集合VO对象转换为PO对象
+	 * @param form
+	 * @return
+	 */
+	private List<ReportingForm> reportingBugInfoVoToPoList(List<Reporting> form) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

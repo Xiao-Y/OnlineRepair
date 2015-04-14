@@ -35,5 +35,9 @@
         <many-to-one name="deviceState" class="com.xiaoy.base.entites.DeviceState" fetch="join">
             <column name="DEVICE_STATE_UUID" />
         </many-to-one>
+        <!-- 
+        <one-to-one name="auditUuid" class="com.xiaoy.base.entites.Audit"/>
+        <one-to-one name="auditUuids" property-ref="reportings" class="com.xiaoy.base.entites.Audit"/>
+         -->
     </class>
 </hibernate-mapping>

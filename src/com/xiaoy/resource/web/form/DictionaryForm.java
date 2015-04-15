@@ -33,6 +33,21 @@ public class DictionaryForm
 	 */
 	public static final String PRIOR = "优先级别";
 	
+	/**
+	 * 维护状态
+	 */
+	public static final String MAINTAIN_STAT = "维护状态";
+	
+	/**
+	 * 评价状态
+	 */
+	public static final String EVALUATE_STAT = "评价状态";
+	
+	/**
+	 * 审核状态
+	 */
+	public static final String AUDIT_STAT = "审核状态";
+	
 	/* 字典id */
 	private String seqID;
 	/* 查询关键字 */

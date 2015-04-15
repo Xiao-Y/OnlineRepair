@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.xiaoy.base.action.BaseAction;
+import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.servic.NoticeService;
 import com.xiaoy.resource.web.form.NoticeForm;

@@ -228,4 +228,14 @@ public class UserServiceImpl implements UserService
 		}
 		return formList;
 	}
+
+	@Override
+	public UserForm findUser(UserForm userForm)
+	{
+		User user = userDao.findUser(userForm);
+		if(user != null){
+			return this.userVoToPo(userForm, user);
+		}
+		return null;
+	}
 }

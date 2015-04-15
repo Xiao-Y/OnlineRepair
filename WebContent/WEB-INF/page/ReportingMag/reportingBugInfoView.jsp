@@ -54,7 +54,7 @@
 			<td class="ta_01" bgColor="#ffffff">
 				<input class="" type="text" size="20" id="maintainType" name="maintainType" value="电工" disabled="disabled">
 			</td>
-		    <td align="center" bgColor="#f5fafe" class="ta_01">申报人联系方式：</td>
+		    <td align="center" bgColor="#f5fafe" class="ta_01">申报人手机号：</td>
 			<td class="ta_01" bgColor="#ffffff">
 				<input class="" type="text" size="20" id="phone" name="phone"  value="12322133234" disabled="disabled">
 			</td>

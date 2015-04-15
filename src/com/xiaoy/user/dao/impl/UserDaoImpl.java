@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.xiaoy.base.dao.impl.CommonImpl;
 import com.xiaoy.base.entites.User;
 import com.xiaoy.user.dao.UserDao;
+import com.xiaoy.user.web.form.UserForm;
 
 @Repository
 public class UserDaoImpl extends CommonImpl<User> implements UserDao
@@ -27,5 +29,16 @@ public class UserDaoImpl extends CommonImpl<User> implements UserDao
 			paramsMapValue.put("userUuid", list);
 		}
 		super.deleteObjectByCollectionIds(hqlWhere, paramsMapValue);
+	}
+
+	@Override
+	public User findUser(UserForm userForm)
+	{
+		String hql = "from User where 1 = 1 and loginName = :loginName and password = :password";
+		Query query = this.getSession().createQuery(hql)
+				.setString("loginName", userForm.getLoginName())
+				.setString("password", userForm.getPassword());
+		User user = (User) query.uniqueResult();
+		return user;
 	}
 }

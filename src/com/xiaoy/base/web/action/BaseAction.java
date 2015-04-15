@@ -1,4 +1,4 @@
-package com.xiaoy.base.action;
+package com.xiaoy.base.web.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

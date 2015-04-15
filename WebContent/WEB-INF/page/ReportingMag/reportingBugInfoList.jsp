@@ -44,66 +44,67 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				设备名：</td>
-				<td class="ta_01" >
-					<input name="loginName" id="loginName" size="21">
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">区域：</td>
+	       		<td class="ta_01" bgColor="#ffffff">
+		       		<s:select list="%{#request.area}" id="areaCode" name="areaCode"
+						  listKey="areaCode" listValue="areaName"
+						  headerKey="" headerValue="---请选择---"
+						  cssStyle="width:140px"
+					/>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				安装位置：</td>
-				<td class="ta_01" >
-					<select id="role" name="role" style="width: 140px">
-						<option>------请选择------</option>				
-						<option>教室</option>				
-						<option>机房</option>				
-						<option>寝室</option>				
-					</select>
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">安装位置：</td>
+				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+					<s:select list="%{#request.installationSite}" id="installationSiteCode" name="installationSiteCode"
+					  listKey="installationSiteCode" listValue="installationSiteName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px"
+					/>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				维护状态：</td>
-				<td class="ta_01" >
-					<select id="role" name="role" style="width: 140px">
-						<option>------请选择------</option>				
-						<option>已完成</option>				
-						<option>待完成</option>				
-					</select>
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">设备名：</td>
+				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+					<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
+					  listKey="deviceName" listValue="deviceName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px"
+					/>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				评价状态：</td>
-				<td class="ta_01" >
-					<select id="role" name="role" style="width: 140px">
-						<option>------请选择------</option>				
-						<option>已评价</option>				
-						<option>待评价</option>				
-					</select>
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">维护状态：</td>
+				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+					<s:select list="%{#request.maintainStat}" id="maintainStatCode" name="maintainStatCode"
+					  listKey="ddlCode" listValue="ddlName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px"
+					/>
 				</td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				申报人：</td>
-				<td class="ta_01" >
-					<input name="loginName" id="loginName" size="21">
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">评价状态：</td>
+				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+					<s:select list="%{#request.evaluateStat}" id="evaluateStatCode" name="evaluateStatCode"
+					  listKey="ddlCode" listValue="ddlName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px"
+					/>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				审核状态：</td>
-				<td class="ta_01" >
-					<select id="maintainType" name="maintainType" style="width: 140px">
-						<option>------请选择------</option>				
-						<option>待审核</option>				
-						<option>已通过</option>				
-						<option>未通过</option>				
-					</select>
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">申报人：</td>
+				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+					<s:textfield name="name" id="name" size="21" cssStyle="width:134px"/>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				维护类别：</td>
-				<td class="ta_01" >
-					<select id="maintainType" name="maintainType" style="width: 140px">
-						<option>------请选择------</option>				
-						<option>电工</option>				
-						<option>水工</option>				
-						<option>泥工</option>				
-						<option>木工</option>				
-					</select>
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">审核状态：</td>
+				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+					<s:select list="%{#request.auditStat}" id="auditStatCode" name="auditStatCode"
+					  listKey="ddlCode" listValue="ddlName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px"
+					/>
+				</td>
+				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">维护类别：</td>
+				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+					<s:select list="%{#request.maintainType}" id="maintainTypeCode" name="maintainTypeCode"
+					  listKey="ddlCode" listValue="ddlName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px"
+					/>
 				</td>
 			</tr>
 	    </table>	
@@ -140,7 +141,7 @@
 							<td align="center" width="7%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</td>
 						    <td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备名</td>
 							<td align="center" width="6%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人</td>
-							<td align="center" width="12%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人联系方式</td>
+							<td align="center" width="12%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人手机号</td>
 							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报时间</td>
 							<td align="center" width="6%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护状态</td>
 							<td align="center" width="6%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">评价状态</td>

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -17,6 +18,7 @@ import com.xiaoy.base.util.DateHelper;
 import com.xiaoy.resource.dao.LogDao;
 import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.web.form.LogForm;
+import com.xiaoy.user.web.form.UserForm;
 
 @Service
 @Transactional(readOnly = true)
@@ -29,11 +31,16 @@ public class LogServiceImpl implements LogService
 	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
 	public void saveLog(HttpServletRequest request, String model, String details)
 	{
+		HttpSession session = request.getSession();
+		UserForm userInfo = (UserForm) session.getAttribute("userInfo");
 		Log elecLog = new Log();
 		elecLog.setIpAddress(request.getRemoteAddr());//远程IP地址
 		//ElecUser elecUser = (ElecUser) request.getSession().getAttribute("globle_user");
 		//登陆人
-		elecLog.setOpeName("");
+		if(userInfo != null)
+		{
+			elecLog.setOpeName(userInfo.getLoginName());
+		}
 		elecLog.setOpeTime(new Date());
 		//elecLog.setDetails(model + "用户名：【"+ elecUser.getUserName() +"】"+ details);
 		elecLog.setDetails(model + "--"+ details);

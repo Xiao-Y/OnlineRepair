@@ -50,4 +50,11 @@ public interface UserService
 	 * @param ids	用户uuid数组
 	 */
 	public void userDeletes(String[] ids);
+
+	/**
+	 * 根据登陆名和密码查询出用户信息
+	 * @param userForm	登陆名和密码
+	 * @return	用户信息的PO对象
+	 */
+	public UserForm findUser(UserForm userForm);
 }

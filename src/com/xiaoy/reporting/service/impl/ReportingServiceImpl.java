@@ -96,9 +96,7 @@ public class ReportingServiceImpl implements ReportingService
 		entity.setReportingUuid(reportingForm.getReportingUuid());
 		
 		User user = new User();
-		//TODO
-		//user.setUserUuid(reportingForm.getUserUuid());
-		user.setUserUuid("40283f824c8e0f10014c8e10a0020000");
+		user.setUserUuid(reportingForm.getUserUuid());
 		entity.setUser(user);
 		
 		return entity;

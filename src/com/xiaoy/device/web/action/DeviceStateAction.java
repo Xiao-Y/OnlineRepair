@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
-import com.xiaoy.base.action.BaseAction;
+import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.device.servic.DeviceInfoService;
 import com.xiaoy.device.servic.DeviceStateService;
 import com.xiaoy.device.web.form.DeviceInfoForm;

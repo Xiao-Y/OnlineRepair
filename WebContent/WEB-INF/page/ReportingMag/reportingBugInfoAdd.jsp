@@ -66,7 +66,7 @@
 	      	</td>
 		</tr>
 		<tr>
-		    <td align="right" width="20%" bgColor="#f5fafe" class="ta_01">申报人联系方式：<font color="#FF0000">*</font></td>
+		    <td align="right" width="20%" bgColor="#f5fafe" class="ta_01">申报人手机号：<font color="#FF0000">*</font></td>
 			<td class="ta_01" bgColor="#ffffff">
 				<input class="" type="text" size="20" id="reportingPhone" name="reportingPhone" data-rule-required="true">
 			</td>

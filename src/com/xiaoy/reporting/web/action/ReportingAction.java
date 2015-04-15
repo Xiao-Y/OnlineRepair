@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Controller;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
-import com.xiaoy.base.action.BaseAction;
+import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.device.servic.DeviceStateService;
 import com.xiaoy.device.web.form.DeviceStateForm;
 import com.xiaoy.reporting.service.ReportingService;
@@ -22,6 +23,7 @@ import com.xiaoy.reporting.web.form.ReportingForm;
 import com.xiaoy.resource.servic.DictionaryService;
 import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.web.form.DictionaryForm;
+import com.xiaoy.user.web.form.UserForm;
 
 @Controller
 @SuppressWarnings("serial")
@@ -67,6 +69,30 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 	 */
 	public String reportingBugInfoList()
 	{
+		//在设备状态表中查询出设备的区域
+		List<DeviceStateForm> area = deviceStateService.findDeviceArea();
+		request.setAttribute("area", area);
+		//发送安装位置到页面
+		List<DeviceStateForm> installationSite = deviceStateService.findInstallationSiteByArea("");
+		request.setAttribute("installationSite",installationSite);
+		//设备名
+		List<DeviceStateForm> deviceName = deviceStateService.findDeviceNameByinstallationSite("", "");
+		request.setAttribute("deviceName", deviceName);
+		//维护状态
+		List<DictionaryForm> maintainStat = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.MAINTAIN_STAT);
+		request.setAttribute("maintainStat", maintainStat);
+		//评论状态
+		List<DictionaryForm> evaluateStat = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.EVALUATE_STAT);
+		request.setAttribute("evaluateStat", evaluateStat);
+		//评论状态
+		List<DictionaryForm> auditStat = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.AUDIT_STAT);
+		request.setAttribute("auditStat", auditStat);
+		//评论状态
+		List<DictionaryForm> maintainType = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.MAINTAIN_TYPE_NAME);
+		request.setAttribute("maintainType", maintainType);
+		
+		//TODO
+		//当是管理员时，不添加用户uuid。否则添加用户uuid，查询出现当前用户的申报信息
 		List<ReportingForm> list = reportingService.findReportingBugInfoList(reportingForm);
 		int recordCount = reportingService.countReportingBugInfo(reportingForm);
 		reportingForm.setRecordCount(recordCount);
@@ -207,6 +233,12 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 	 */
 	public String reportingBugInfoSave() throws UnsupportedEncodingException
 	{
+		HttpSession session = request.getSession();
+		UserForm userInfo = (UserForm) session.getAttribute("userInfo");
+		if(userInfo != null)
+		{
+			reportingForm.setUserUuid(userInfo.getUserUuid());
+		}
 		String flag = reportingForm.getFlag();
 		reportingService.reportingBugInfoSave(reportingForm, request);
 		logService.saveLog(request, MENU_MODEL, "保存申报故障信息");

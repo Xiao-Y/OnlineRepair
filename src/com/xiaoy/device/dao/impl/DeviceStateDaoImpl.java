@@ -259,10 +259,10 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 	public List<DeviceState> findVersionBydeviceName(String areaCode, String installationSiteCode, String deviceName)
 	{// and e.area_Code = :areaCode and e.installation_Site_Code = :installationSiteCode  
 		List<DeviceState> list = null;
-		StringBuffer sql = new StringBuffer("select e.device_State_Uuid, d.version from deviceState e,deviceInfo d where 1 = 1 and e.deviceType_Uuid = d.deviceType_Uuid");
+		StringBuffer sql = new StringBuffer("select e.device_State_Uuid, d.version from deviceState e,deviceInfo d where 1 = 1 and e.deviceType_Uuid = d.deviceType_Uuid ");
 		if(!StringUtils.isEmpty(areaCode))
 		{
-			sql.append("and e.area_Code = :areaCode ");
+			sql.append(" and e.area_Code = :areaCode ");
 		}
 		if(!StringUtils.isEmpty(installationSiteCode))
 		{

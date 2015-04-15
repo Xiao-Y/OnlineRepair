@@ -1,0 +1,92 @@
+@CHARSET "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0
+}
+
+body {
+	overflow: hidden;
+}
+
+.login {
+	width: 100%;
+	min-height: 100%;
+	position: relative;
+}
+
+.login img {
+	width: 100%;
+}
+
+h1 {
+	color: #fff;
+	font: 40px/50px "Microsoft yahei";
+	position: absolute;
+	top: 95px;
+	left: 130px;
+}
+
+.loginbox {
+	position: absolute;
+	top: 315px;
+	left: 50%;
+	margin-left: -255px;
+	width: 510px;
+	height: 220px;
+	padding: 40px 0 0 0;
+	overflow: hidden;
+	background: url(../images/loginbox.png) no-repeat;
+}
+
+.loginbox p {
+	width: 280px;
+	margin: 10px auto;
+	height: 25px;
+	padding: 0 0 0 20px
+}
+
+.loginbox p label {
+	float: left;
+	line-height: 20px;
+	color: #a1daf9;
+	font-size: 12px;
+	width: 50px
+}
+
+.loginbox p input {
+	float: left;
+	height: 20px;
+	line-height: 20px;
+	padding: 0 5px;
+	width: 140px
+}
+
+.loginbox p input:focus {
+	box-shadow: 0 0 5px #ddd
+}
+
+.loginbox p .loginbtn {
+	display: inline-block;
+	vertical-align: middle;
+	width: 75px;
+	height: 35px;
+	overflow: hidden;
+	background: url(../images/loginbtn.png) no-repeat;
+	line-height: 35px;
+	text-align: center;
+	text-decoration: none;
+	color: #fff;
+	font-size: 13px;
+	font-family: "simsun";
+	margin: 10px 50px 0 0
+}
+
+.loginbox p .loginbtn:hover {
+	background: #1e638c;
+	border-radius: 7px
+}
+
+.loginbox .center {
+	text-align: center;
+}

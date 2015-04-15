@@ -6,13 +6,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
-import com.xiaoy.base.action.BaseAction;
+import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.resource.servic.DictionaryService;
 import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.web.form.DictionaryForm;
@@ -117,8 +118,12 @@ public class UserAction extends BaseAction implements ModelDriven<UserForm>
 	 */
 	public String userInfo()
 	{
-		//TODO 暂时的用户uuid，
-		userForm = userService.findUserByUuid("40283f824c8e0f10014c8e10a0020000");
+		HttpSession session = request.getSession();
+		UserForm userInfo = (UserForm) session.getAttribute("userInfo");
+		if(userInfo != null)
+		{
+			userForm = userService.findUserByUuid(userInfo.getUserUuid());
+		}
 		//标识为用户个人信息
 		userForm.setFalg("1");
 		ActionContext.getContext().getValueStack().push(userForm);

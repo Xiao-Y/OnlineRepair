@@ -601,6 +601,14 @@ function reportingBugInfoSave(){
 		Form1.submit();
 	}
 }
+
+//申报列表查询
+//查询用户信息
+function reportingBugInfoFind(){
+	$("#form1").attr("action", "${pageContext.request.contextPath}/ReportingMag/reportingAction_reportingBugInfoList.action");
+	$("#form1").submit();
+}
+
 //申报管理======================end
 
 

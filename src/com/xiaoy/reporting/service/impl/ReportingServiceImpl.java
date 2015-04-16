@@ -147,11 +147,11 @@ public class ReportingServiceImpl implements ReportingService
 				//当维护状态为0时则“未维护”
 				r.setMaintainStatCode((String)o[6]);
 				if(o[6] != null){
-					if(o[6].equals("0")){
-						r.setMaintainStatName("未维护");
-					}else{
-						r.setMaintainStatName(dictionaryDao.findDDLName((String)o[6], DictionaryForm.MAINTAIN_STAT));
-					}
+//					if(o[6].equals("0")){
+//						r.setMaintainStatName("未维护");
+//					}else{
+					r.setMaintainStatName(dictionaryDao.findDDLName((String)o[6], DictionaryForm.MAINTAIN_STAT));
+//					}
 				}
 //				//当评价状态为0时则“未评价”
 //				r.setEvaluateStatCode((String)o[7]);
@@ -165,17 +165,20 @@ public class ReportingServiceImpl implements ReportingService
 				//当审核状态为0时则“待审核”
 				r.setAuditStatCode((String)o[7]);
 				if(o[7] != null){
-					if(o[7].equals("0")){
-						r.setAuditStatName("待审核");
-					}else {
-						r.setAuditStatName(dictionaryDao.findDDLName((String)o[7], DictionaryForm.AUDIT_STAT));
-					}
+//					if(o[7].equals("0")){
+//						r.setAuditStatName("待审核");
+//					}else {
+					r.setAuditStatName(dictionaryDao.findDDLName((String)o[7], DictionaryForm.AUDIT_STAT));
+//					}
 				}
 				
 				r.setMaintainTypeCode((String)o[8]);
 				if(o[8] != null){
 					r.setMaintainTypeName(dictionaryDao.findDDLName((String)o[8], DictionaryForm.MAINTAIN_TYPE_NAME));
 				}
+				r.setReportingUuid((String)o[9]);
+				r.setDeviceTypeUuid((String)o[10]);
+				r.setUserUuid((String)o[11]);
 				form.add(r);
 			}
 		}

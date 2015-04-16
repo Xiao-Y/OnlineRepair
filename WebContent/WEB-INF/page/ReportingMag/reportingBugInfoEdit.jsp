@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<jsp:include page="/pub.jsp"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<jsp:include page="/pub.jsp"/>
 
 <title>编辑故障信息</title>
 <script>
@@ -17,14 +17,14 @@
 <body>
 <form name="Form1" method="post">
 	<br>
-    <table cellSpacing="1" cellPadding="5" width="580" align="center" bgColor="#eeeeee" style="border:1px solid #8ba7e3" border="0">
+    <table cellSpacing="1" cellPadding="5" width="880" align="center" bgColor="#eeeeee" style="border:1px solid #8ba7e3" border="0">
 		<tr>
 			<td class="ta_01" align="center" colSpan="4" background="${pageContext.request.contextPath }/images/b-info.gif">
 				<font face="宋体" size="2"><strong>编辑故障信息</strong></font>
 			</td>
 		</tr>
 	    <tr>
-	       <td align="center" bgColor="#f5fafe" class="ta_01">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域：<font color="#FF0000">*</font></td>
+	       <td align="right" bgColor="#f5fafe" class="ta_01">区域：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff">
 	       		<s:if test="%{#request.area != null && #request.area.size() > 0}">
 					<s:select list="%{#request.area}" id="areaCode" name="areaCode"

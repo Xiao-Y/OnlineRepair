@@ -18,10 +18,15 @@
 	//清除查询条件
 	$().ready(function(){
 		$("#BT_Reset").click(function(){
+			$("#areaCode").val("");
+			$("#installationSiteCode").val("");
 			$("#deviceName").val("");
-			$("#version").val("");
-			$("#producer").val("");
-			$("#rank").val("");
+			$("#maintainStatCode").val("");
+			$("#name").val("");
+			$("#auditStatCode").val("");
+			$("#maintainTypeCode").val("");
+			
+			$("#form1").submit();
 		});
 	});
 	
@@ -29,12 +34,16 @@
 	function link(href){
 		window.location.href=href;
 	}
+	
+	function deleteReportingBugInfo(deviceName, reportingUuid, maintainStatCode){
+		alert(deviceName +" "+ reportingUuid +" "+ maintainStatCode);
+	}
 </script> 
 
 </head>
 <body>
 	<!-- 查询输入start -->
-	<form action="">
+	<form action="" id="form1" name="form1" method="post">
 		<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
 			<tr>
 				<td class="ta_01" colspan=9 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
@@ -81,6 +90,8 @@
 						/>
 					</s:if>
 				</td>
+			</tr>
+			<tr>
 				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">维护状态：</td>
 				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
 					<s:if test="%{#request.maintainStat != null && #request.maintainStat.size() > 0}">
@@ -94,8 +105,6 @@
 						<select id="" name="" style="width:140px"></select>
 					</s:else>
 				</td>
-			</tr>
-			<tr>
 				<%--
 				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">评价状态：</td>
 				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
@@ -128,6 +137,7 @@
 						<select id="" name="" style="width:140px"></select>
 					</s:else>
 				</td>
+				<%--
 				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">维护类别：</td>
 				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
 					<s:if test="%{#request.maintainType != null && #request.maintainType.size() > 0}">
@@ -141,13 +151,12 @@
 						<select id="" name="" style="width:140px"></select>
 					</s:else>
 				</td>
+				 --%>
 			</tr>
 	    </table>	
-	</form>
 	<!-- 查询输入end -->
 	
 	<!-- 执行查询begin -->
-	<form action="" id="form2" name="form2">
 		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
 			<tr height=10><td></td></TR>			
 			<tr>
@@ -161,9 +170,9 @@
 	            </td>
 				<td class="ta_01" align="right">
 					
-				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="button" value="查询" name="BT_Find" >&nbsp;&nbsp;
+				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="button" onclick="reportingBugInfoFind();" value="查询" name="BT_Find" >&nbsp;&nbsp;
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_Reset" >&nbsp;&nbsp;
-					<input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="添加申报信息" name="BT_Add" onclick="openWindow('${pageContext.request.contextPath }/page/ReportingMag/reportingBugInfo.jsp')">
+					<input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="添加申报信息" name="BT_Add" onclick="link('${pageContext.request.contextPath }/ReportingMag/reportingAction_reportingBugInfoAdd.action')">
 				</td>
 			</tr>
 			<tr>
@@ -172,6 +181,9 @@
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
 						<tr style="font-weight:bold;font-size:12pt;height:25px;background-color:#afd1f3">
+							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">
+								<input type="checkbox" id="checkbox" name="checkbox" onclick="quanxuan();">
+							</td>
 						    <td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</td>
 						    <td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">区域</td>
 							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</td>
@@ -184,7 +196,7 @@
 							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">评价状态</td>
 							 -->
 							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">审核状态</td>
-							<td align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">编辑</td>
+							<td align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">查看</td>
 							<td align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">删除</td>
 						</tr>
 						<!-- 列表标题 end -->
@@ -192,7 +204,10 @@
 						<!-- 列表数据 begin -->
 						<s:if test="%{#request.reportingBugInfoList != null && #request.reportingBugInfoList.size() > 0}">
 							<s:iterator value="%{#request.reportingBugInfoList}" var="reportingBugInfo" status="u">
-								<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+								<tr id='<s:property value="%{#reportingBugInfo.reportingUuid}"/>' onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+									<td style="HEIGHT:22px" align="center" width="5%">
+										<input type="checkbox" id="${reportingBugInfo.reportingUuid }" name="ids" class="ids" value="${reportingBugInfo.reportingUuid }">
+									</td>
 									<td style="HEIGHT:22px" align="center" width="5%">
 										<s:property value="%{#u.getIndex() + 1}"/>
 									</td>
@@ -203,12 +218,12 @@
 										<s:property value="%{#reportingBugInfo.installationSiteName}"/>
 									</td>
 									<td style="height:22px" align="center" width="10%">
-										<a href="${pageContext.request.contextPath }/page/ReportingMag/reportingBugInfoView.jsp">
+										<a href="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceView.action?deviceTypeUuid=${reportingBugInfo.deviceTypeUuid}">
 											<s:property value="%{#reportingBugInfo.deviceName}"/>
 										</a>
 									</td>
 									<td style="height:22px" align="center" width="10%">
-										<a href="${pageContext.request.contextPath }/page/UserMag/userInfoView.jsp">
+										<a href="${pageContext.request.contextPath }/UserMag/userAction_userView.action?userUuid=<s:property value="%{#reportingBugInfo.userUuid}"/>">
 											<s:property value="%{#reportingBugInfo.name}"/>
 										</a>
 									</td>									
@@ -219,7 +234,12 @@
 										<s:property value="%{#reportingBugInfo.reportingTime}"/>
 									</td>									
 									<td style="height:22px" align="center" width="10%">
-										<s:property value="%{#reportingBugInfo.maintainStatName}"/>
+										<s:if test="%{#reportingBugInfo.maintainStatCode == 0}">
+											--
+										</s:if>
+										<s:else>
+											<s:property value="%{#reportingBugInfo.maintainStatName}"/>
+										</s:else>
 									</td>
 									<%--
 									<td style="height:22px" align="center" width="10%">
@@ -232,11 +252,11 @@
 										<s:property value="%{#reportingBugInfo.auditStatName}"/>
 									</td>
 									<td align="center" style="HEIGHT: 22px" align="center" width="5%">																	
-									   <a href="${pageContext.request.contextPath }/page/ReportingMag/reportingBugInfoEdit.jsp">
-									   <img src="${pageContext.request.contextPath }/images/edit.gif" border="0" style="cursor:hand"></a>													
+									   <a href="${pageContext.request.contextPath }/ReportingMag/reportingAction_reportingBugInfoView.action?reportingUuid=<s:property value="%{#reportingBugInfo.reportingUuid}"/>">
+									   <img src="${pageContext.request.contextPath }/images/view.png" width="20px" height="20px" border="0" style="cursor:hand"></a>													
 									</td>
 									<td align="center" style="HEIGHT: 22px" align="center" width="5%">
-										<a href="system/elecUserAction_delete.do?userID=" onclick="return confirm('你确定要删除  XiaoY ？')">
+										<a href="javascript:deleteReportingBugInfo('${reportingBugInfo.deviceName }','${reportingBugInfo.reportingUuid }','${reportingBugInfo.maintainStatCode }');">
 										<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="cursor:hand"></a>												
 									</td>
 								</tr>

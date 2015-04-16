@@ -28,8 +28,7 @@ public class AuditServiceImpl implements AuditService {
 
 	/**
 	 * 从申报故障信息类中获取申报uuid和用户uuid.
-	 * 设定审核状态为待审核，维护状态为未维护。其它的为空。
-	 * 由于审核状态和维护状态都是由数据字典提供，故不能确定。所有使用默认值0来替代。
+	 * 固定系统审核状为1时表示待审核。维护状态为0时表示，还未审核。
 	 * @param reporting
 	 * @return
 	 */
@@ -37,8 +36,10 @@ public class AuditServiceImpl implements AuditService {
 		Audit entity = new Audit();
 		entity.setReportingUuid(reporting.getReportingUuid());
 		entity.setUserUuid(reporting.getUser().getUserUuid());
+		
 		entity.setMaintainStatCode("0");
-		entity.setAuditStatCode("0");
+		entity.setAuditStatCode("1");
+		
 		return entity;
 	}
 

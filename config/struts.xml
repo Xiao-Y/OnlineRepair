@@ -130,6 +130,7 @@
 			<result name="reportingBugInfoList">/WEB-INF/page/ReportingMag/reportingBugInfoList.jsp</result>
 			<result name="reportingBugInfoAdd">/WEB-INF/page/ReportingMag/reportingBugInfoAdd.jsp</result>
 			<result name="reportingBugInfoEdit">/WEB-INF/page/ReportingMag/reportingBugInfoEdit.jsp</result>
+			<result name="reportingBugInfoView">/WEB-INF/page/ReportingMag/reportingBugInfoView.jsp</result>
 			
 			<result name="success" type="redirectAction">
 				<param name="actionName">reportingAction_reportingBugInfoList</param>

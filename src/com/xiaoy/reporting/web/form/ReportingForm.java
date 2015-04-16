@@ -1,5 +1,7 @@
 package com.xiaoy.reporting.web.form;
 
+import java.util.Date;
+
 import com.xiaoy.base.web.form.BaseForm;
 
 public class ReportingForm extends BaseForm {
@@ -19,24 +21,18 @@ public class ReportingForm extends BaseForm {
 	private String remark;
 	/* 申请时间 */
 	private String reportingTime;
-
 	/* 设备状态的uuid */
 	private String deviceStateUuid;
-
 	/* 用户的uuid */
 	private String userUuid;
-
 	/* 标识量：为1时继续添加申报信息 */
 	private String flag;
-
 	/* 设备名 */
 	private String deviceName;
-
 	/* 安装位置id */
 	private String installationSiteCode;
 	/* 安装位置名 */
 	private String installationSiteName;
-
 	/* 评价状态 */
 	private String evaluateStatCode;
 	/* 评价状态名 */
@@ -51,6 +47,10 @@ public class ReportingForm extends BaseForm {
 	private String maintainStatCode;
 	/* 维护状态名 */
 	private String maintainStatName;
+	/*维护人员*/
+	private String maintainName;
+	/*维护人员手机号*/
+	private String maintainPhone;
 	/* 区域code */
 	private String areaCode;
 	/* 区域名字 */
@@ -61,6 +61,20 @@ public class ReportingForm extends BaseForm {
 	private String auditStatName;
 	/* 登陆名 */
 	private String loginName;
+	/* 设备信息uuid */
+	private String deviceTypeUuid;
+	/* 审核时间 */
+	private Date auditTime;
+
+	public Date getAuditTime()
+	{
+		return auditTime;
+	}
+
+	public void setAuditTime(Date auditTime)
+	{
+		this.auditTime = auditTime;
+	}
 
 	public String getInstallationSiteName() {
 		return installationSiteName;
@@ -136,6 +150,26 @@ public class ReportingForm extends BaseForm {
 
 	public String getMaintainStatCode() {
 		return maintainStatCode;
+	}
+
+	public String getMaintainName()
+	{
+		return maintainName;
+	}
+
+	public String getMaintainPhone()
+	{
+		return maintainPhone;
+	}
+
+	public void setMaintainPhone(String maintainPhone)
+	{
+		this.maintainPhone = maintainPhone;
+	}
+
+	public void setMaintainName(String maintainName)
+	{
+		this.maintainName = maintainName;
 	}
 
 	public void setMaintainStatCode(String maintainStatCode) {
@@ -268,5 +302,15 @@ public class ReportingForm extends BaseForm {
 
 	public void setReportingTime(String reportingTime) {
 		this.reportingTime = reportingTime;
+	}
+
+	public String getDeviceTypeUuid()
+	{
+		return deviceTypeUuid;
+	}
+
+	public void setDeviceTypeUuid(String deviceTypeUuid)
+	{
+		this.deviceTypeUuid = deviceTypeUuid;
 	}
 }

@@ -80,15 +80,15 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 		//维护状态
 		List<DictionaryForm> maintainStat = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.MAINTAIN_STAT);
 		request.setAttribute("maintainStat", maintainStat);
-		//评论状态
-		List<DictionaryForm> evaluateStat = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.EVALUATE_STAT);
-		request.setAttribute("evaluateStat", evaluateStat);
-		//评论状态
+//		//评论状态
+//		List<DictionaryForm> evaluateStat = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.EVALUATE_STAT);
+//		request.setAttribute("evaluateStat", evaluateStat);
+		//审核状态
 		List<DictionaryForm> auditStat = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.AUDIT_STAT);
 		request.setAttribute("auditStat", auditStat);
-		//评论状态
-		List<DictionaryForm> maintainType = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.MAINTAIN_TYPE_NAME);
-		request.setAttribute("maintainType", maintainType);
+//		//维护类型
+//		List<DictionaryForm> maintainType = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.MAINTAIN_TYPE_NAME);
+//		request.setAttribute("maintainType", maintainType);
 		
 		//TODO
 		//当是管理员时，不添加用户uuid。否则添加用户uuid，查询出现当前用户的申报信息
@@ -205,24 +205,30 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 		return "ajax-success";
 	}
 	
-	/**
-	 * 申报故障编辑页面
-	 * @return
-	 */
-	public String reportingBugInfoEdit()
+//	/**
+//	 * 申报故障编辑页面
+//	 * @return
+//	 */
+//	public String reportingBugInfoEdit()
+//	{
+//		//发送数据到页面,区域和优先级
+//		this.sendDataPage();
+//		//发送安装位置到页面
+//		List<DeviceStateForm> installationSite = deviceStateService.findInstallationSiteByArea("");
+//		request.setAttribute("installationSite",installationSite);
+//		List<DeviceStateForm> deviceName = deviceStateService.findDeviceNameByinstallationSite("", "");
+//		request.setAttribute("deviceName", deviceName);
+//		List<DeviceStateForm> version = deviceStateService.findVersionBydeviceNamee("", "", "");
+//		request.setAttribute("version", version);
+//		
+//		logService.saveLog(request, MENU_MODEL, "进入编辑申报故障");
+//		return "reportingBugInfoEdit";
+//	}
+	
+	public String reportingBugInfoView()
 	{
-		//发送数据到页面,区域和优先级
-		this.sendDataPage();
-		//发送安装位置到页面
-		List<DeviceStateForm> installationSite = deviceStateService.findInstallationSiteByArea("");
-		request.setAttribute("installationSite",installationSite);
-		List<DeviceStateForm> deviceName = deviceStateService.findDeviceNameByinstallationSite("", "");
-		request.setAttribute("deviceName", deviceName);
-		List<DeviceStateForm> version = deviceStateService.findVersionBydeviceNamee("", "", "");
-		request.setAttribute("version", version);
 		
-		logService.saveLog(request, MENU_MODEL, "进入编辑申报故障");
-		return "reportingBugInfoEdit";
+		return "reportingBugInfoView";
 	}
 	
 	/**

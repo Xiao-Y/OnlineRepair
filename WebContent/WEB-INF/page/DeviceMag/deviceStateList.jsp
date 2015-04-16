@@ -140,10 +140,10 @@
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
 						<tr style="font-weight:bold;font-size:12pt;height:25px;background-color:#afd1f3">
-						  	<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</td>
 							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">
 								<input type="checkbox" id="checkbox" name="checkbox" onclick="quanxuan();">
 							</td>
+						  	<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</td>
 						  	<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">区域</td>
 						  	<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</td>
 						  	<td align="center" width="15%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备名</td>
@@ -160,10 +160,10 @@
 							<s:iterator value="%{#request.formList}" var="list" status="st">
 								<tr id=${list.deviceStateUuid } onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 									<td style="HEIGHT:22px" align="center" width="5%">
-										<s:property value="%{#st.getIndex() + 1}"/>
+										<input type="checkbox" id="${list.deviceStateUuid }" name="ids" class="ids" value="${list.deviceStateUuid}">
 									</td>
 									<td style="HEIGHT:22px" align="center" width="5%">
-										<input type="checkbox" id="${list.deviceStateUuid }" name="ids" class="ids" value="${list.deviceStateUuid}">
+										<s:property value="%{#st.getIndex() + 1}"/>
 									</td>
 									<td style="height:22px" align="center" width="10%">
 										<s:property value="%{#list.areaName}"/>

@@ -22,10 +22,12 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 	@SuppressWarnings("unchecked")
 	public List<Object[]> findReportingBugInfoList(ReportingForm reportingForm) {
 		String hqlWhere = "";
-		if(!StringUtils.isEmpty((String)this.getHqlMap(reportingForm).get("hqlWhere"))){
-			hqlWhere = (String)this.getHqlMap(reportingForm).get("hqlWhere");
+		Map<String, Object> map = this.getHqlMap(reportingForm);
+		String str = (String)map.get("hqlWhere");
+		if(!StringUtils.isEmpty(str)){
+			hqlWhere = str;
 		}
-		Map<String, Object> paramsMapValue = (Map<String, Object>) this.getHqlMap(reportingForm).get("paramsMapValue");
+		Map<String, Object> paramsMapValue = (Map<String, Object>) map.get("paramsMapValue");
 		List<Object[]> list = this.findCollectionByConditionWithPage(reportingForm, hqlWhere, paramsMapValue);
 		return list;
 	}
@@ -77,23 +79,23 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 				hqlWhere.append(" and u.MAINTAIN_TYPE_CODE = :maintainTypeCode");
 				map.put("maintainTypeCode", reportingForm.getMaintainTypeCode());
 			}
-			if(!StringUtils.isEmpty(reportingForm.getMaintainTypeCode()))
+			if(!StringUtils.isEmpty(reportingForm.getAreaCode()))
 			{
 				hqlWhere.append(" and d.AREA_CODE = :areaCode");
 				map.put("areaCode", reportingForm.getAreaCode());
 			}
 			
 			hqlMap = new HashMap<String, Object>();
-			hqlMap.put("hqlWhere", hqlWhere);
+			hqlMap.put("hqlWhere", hqlWhere.toString());
 			hqlMap.put("paramsMapValue", map);
 		}
-		return map;
+		return hqlMap;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Object[]> findCollectionByConditionWithPage(ReportingForm reportingForm,String hqlWhere, Map<String, Object> paramsMapValue) {
 //		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,e.EVALUATE_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE ");
-		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE ");
+		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE,r.REPORTING_UUID,di.DEVICETYPE_UUID,u.USER_UUID ");
 		//hql.append(" from audit a,devicestate d,evaluate e,reporting r,deviceinfo di,user u ");
 		hql.append(" from audit a,devicestate d,reporting r,deviceinfo di,user u ");
 		hql.append(" where a.REPORTING_UUID = r.REPORTING_UUID ");

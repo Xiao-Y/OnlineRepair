@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>404错误-Page Not Found</title>
+<link href="${pageContext.request.contextPath }/css/errStyle.css" rel="stylesheet">
 </head>
 <body>
 	<div class="error_wrap">

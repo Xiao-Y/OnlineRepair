@@ -39,6 +39,13 @@ public class MenuAction extends BaseAction
 		return inputStream;
 	}
 	
+	/**
+	 * 使用异步验证用户登陆合法性。<br/>
+	 * 如果合法，将用户信息存放到Session中key为userInfo,value为UserForm
+	 * 如果不合法，返回0，由于ajax提示登陆不合法。
+	 * @return	ajax-success
+	 * @throws UnsupportedEncodingException
+	 */
 	public String login() throws UnsupportedEncodingException
 	{
 		String loginName = request.getParameter("logingName");

@@ -26,37 +26,57 @@
 	    <tr>
 	       <td align="right" bgColor="#f5fafe" class="ta_01">区域：<font color="#FF0000">*</font></td>
 	       <td class="ta_01" bgColor="#ffffff">
-	       		<s:select list="%{#request.area}" id="areaCode" name="areaCode"
-					  listKey="ddlCode" listValue="ddlName"
-					  headerKey="" headerValue="---请选择---"
-					  cssStyle="width:140px"  data-rule-required="true"
-				/>
+	       		<s:if test="%{#request.area != null && #request.area.size() > 0}">
+		       		<s:select list="%{#request.area}" id="areaCode" name="areaCode"
+						  listKey="ddlCode" listValue="ddlName"
+						  headerKey="" headerValue="---请选择---"
+						  cssStyle="width:140px"  data-rule-required="true"
+					/>
+	       		</s:if>
+	       		<s:else>
+					<select id="" name="" style="width:140px"></select>
+				</s:else>
 	       </td>
 	       <td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">安装位置：<font color="#FF0000">*</font></td>
 	       <td class="ta_01" style="width: 30%" bgColor="#ffffff">
-	      		<s:select list="%{#request.installationSite}" id="installationSiteCode" name="installationSiteCode"
-				  listKey="ddlCode" listValue="ddlName"
-				  headerKey="" headerValue="---请选择---"
-				  cssStyle="width:140px"  data-rule-required="true"
-				/>
+	       		<s:if test="%{#request.installationSite != null && #request.installationSite.size() > 0}">
+		      		<s:select list="%{#request.installationSite}" id="installationSiteCode" name="installationSiteCode"
+					  listKey="ddlCode" listValue="ddlName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px"  data-rule-required="true"
+					/>
+				</s:if>
+				<s:else>
+					<select id="" name="" style="width:140px"></select>
+				</s:else>
 	       </td>
 	    </tr>
 	    <tr>
 			<td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">设备名：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" style="width: 30%" bgColor="#ffffff">
-	       		<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
-				  listKey="deviceName" listValue="deviceName"
-				  headerKey="" headerValue="---请选择---"
-				  cssStyle="width:140px" onchange="changeDevice();" data-rule-required="true"
-				/>
+	       		<s:if test="%{#request.deviceName != null && #request.deviceName.size() > 0}">
+		       		<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
+					  listKey="deviceName" listValue="deviceName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px" onchange="changeDevice();" data-rule-required="true"
+					/>
+				</s:if>
+				<s:else>
+					<select id="" name="" style="width:140px"></select>
+				</s:else>
 	       	</td>
 			<td align="right" style="width: 20%" bgColor="#f5fafe" class="ta_01">型号：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" style="width: 30%" bgColor="#ffffff">
 	       		<div id="versionDiv">
-		       		<s:select list="%{#request.version}" id="deviceTypeUuid" name="deviceTypeUuid"
-					  listKey="deviceTypeUuid" listValue="version"
-					  cssStyle="width:140px" data-rule-required="true"
-					/>
+	       			<s:if test="%{#request.version != null && #request.version.size() > 0}">
+			       		<s:select list="%{#request.version}" id="deviceTypeUuid" name="deviceTypeUuid"
+						  listKey="deviceTypeUuid" listValue="version"
+						  cssStyle="width:140px" data-rule-required="true"
+						/>
+					</s:if>
+					<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 	       		</div>
 	      	</td>
 			
@@ -79,10 +99,15 @@
 			</td>
 			<td align="right" bgColor="#f5fafe" class="ta_01">运行状态：</td>
 			<td class="ta_01" bgColor="#ffffff">
-				<s:select list="%{#request.state}" id="stateCode" name="stateCode"
-				  listKey="ddlCode" listValue="ddlName"
-				  cssStyle="width:140px"
-				/>
+				<s:if test="%{#request.state != null && #request.state.size() > 0}">
+					<s:select list="%{#request.state}" id="stateCode" name="stateCode"
+					  listKey="ddlCode" listValue="ddlName"
+					  cssStyle="width:140px"
+					/>
+				</s:if>
+				<s:else>
+					<select id="" name="" style="width:140px"></select>
+				</s:else>
 			</td>
 		</tr>
 		

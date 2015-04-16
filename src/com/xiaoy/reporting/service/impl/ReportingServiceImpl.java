@@ -22,7 +22,9 @@ import com.xiaoy.base.util.UploadImageHelper;
 import com.xiaoy.reporting.dao.ReportingDao;
 import com.xiaoy.reporting.service.ReportingService;
 import com.xiaoy.reporting.web.form.ReportingForm;
+import com.xiaoy.resource.dao.DictionaryDao;
 import com.xiaoy.resource.servic.LogService;
+import com.xiaoy.resource.web.form.DictionaryForm;
 
 @Service
 @Transactional(readOnly=true)
@@ -43,6 +45,10 @@ public class ReportingServiceImpl implements ReportingService
 	//故障审核
 	@Resource
 	private AuditService auditService;
+	
+	//数据字典
+	@Resource
+	private DictionaryDao dictionaryDao;
 	
 	@Resource
 	private ReportingDao reportingDao;
@@ -125,16 +131,51 @@ public class ReportingServiceImpl implements ReportingService
 			{
 				ReportingForm r = new ReportingForm();
 				r.setAreaCode((String)o[0]);
+				if(o[0] != null){
+					r.setAreaName(dictionaryDao.findDDLName((String)o[0], DictionaryForm.AREA_NAME));
+				}
 				r.setInstallationSiteCode((String)o[1]);
+				if(o[1] != null){
+					r.setInstallationSiteName(dictionaryDao.findDDLName((String)o[1], DictionaryForm.INSTALLATION_SITE_NAME));
+				}
 				r.setDeviceName((String)o[2]);
 				r.setName((String)o[3]);
 				r.setReportingPhone((String)o[4]);
-				r.setReportingTime((String)o[5]);
-				r.setMaintainStatCode((String)o[6]);
-				r.setEvaluateStatCode((String)o[7]);
-				r.setAuditStatCode((String)o[8]);
-				r.setMaintainTypeCode((String)o[9]);
+				r.setReportingTime(o[5] != null ? DateHelper.dateConverString((Date)o[5]) : "");
 				
+				//以下3个是由于初始化的时候系统添加的
+				//当维护状态为0时则“未维护”
+				r.setMaintainStatCode((String)o[6]);
+				if(o[6] != null){
+					if(o[6].equals("0")){
+						r.setMaintainStatName("未维护");
+					}else{
+						r.setMaintainStatName(dictionaryDao.findDDLName((String)o[6], DictionaryForm.MAINTAIN_STAT));
+					}
+				}
+//				//当评价状态为0时则“未评价”
+//				r.setEvaluateStatCode((String)o[7]);
+//				if(o[7] != null){
+//					if(o[7].equals("0")){
+//						r.setEvaluateStatName("未评价");
+//					}else{
+//						r.setEvaluateStatName(dictionaryDao.findDDLName((String)o[7], DictionaryForm.EVALUATE_STAT));
+//					}
+//				}
+				//当审核状态为0时则“待审核”
+				r.setAuditStatCode((String)o[7]);
+				if(o[7] != null){
+					if(o[7].equals("0")){
+						r.setAuditStatName("待审核");
+					}else {
+						r.setAuditStatName(dictionaryDao.findDDLName((String)o[7], DictionaryForm.AUDIT_STAT));
+					}
+				}
+				
+				r.setMaintainTypeCode((String)o[8]);
+				if(o[8] != null){
+					r.setMaintainTypeName(dictionaryDao.findDDLName((String)o[8], DictionaryForm.MAINTAIN_TYPE_NAME));
+				}
 				form.add(r);
 			}
 		}

@@ -49,11 +49,11 @@
 				设备名：</td>
 				<td class="ta_01" >
 					<s:if test="%{#request.deviceName != null && #request.deviceName.size() > 0}">
-					<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
-					  listKey="deviceName" listValue="deviceName"
-					  headerKey="" headerValue="------请选择------"
-					  cssStyle="width:140px" onchange="changeDevice();" data-rule-required="true"
-					/>
+						<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
+						  listKey="deviceName" listValue="deviceName"
+						  headerKey="" headerValue="------请选择------"
+						  cssStyle="width:140px" onchange="changeDevice();" data-rule-required="true"
+						/>
 					</s:if>
 					<s:else>
 						<select id="deviceName" name="deviceName"></select>

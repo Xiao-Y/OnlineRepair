@@ -2,8 +2,7 @@ package com.xiaoy.reporting.web.form;
 
 import com.xiaoy.base.web.form.BaseForm;
 
-public class ReportingForm extends BaseForm
-{
+public class ReportingForm extends BaseForm {
 	/* 申报故障信息id */
 	private String reportingUuid;
 	/* 申报人联系方式 */
@@ -35,218 +34,239 @@ public class ReportingForm extends BaseForm
 
 	/* 安装位置id */
 	private String installationSiteCode;
+	/* 安装位置名 */
+	private String installationSiteName;
+
 	/* 评价状态 */
 	private String evaluateStatCode;
+	/* 评价状态名 */
+	private String evaluateStatName;
 	/* 申报人 */
 	private String name;
 	/* 维护的类别 */
 	private String maintainTypeCode;
+	/* 维护的类别名 */
+	private String maintainTypeName;
 	/* 维护状态 */
 	private String maintainStatCode;
-	/*区域code*/
+	/* 维护状态名 */
+	private String maintainStatName;
+	/* 区域code */
 	private String areaCode;
-	/*审核状态*/
+	/* 区域名字 */
+	private String areaName;
+	/* 审核状态 */
 	private String auditStatCode;
-	/*登陆名*/
+	/* 审核状态名 */
+	private String auditStatName;
+	/* 登陆名 */
 	private String loginName;
-	
-	public String getLoginName()
-	{
+
+	public String getInstallationSiteName() {
+		return installationSiteName;
+	}
+
+	public void setInstallationSiteName(String installationSiteName) {
+		this.installationSiteName = installationSiteName;
+	}
+
+	public String getEvaluateStatName() {
+		return evaluateStatName;
+	}
+
+	public void setEvaluateStatName(String evaluateStatName) {
+		this.evaluateStatName = evaluateStatName;
+	}
+
+	public String getMaintainTypeName() {
+		return maintainTypeName;
+	}
+
+	public void setMaintainTypeName(String maintainTypeName) {
+		this.maintainTypeName = maintainTypeName;
+	}
+
+	public String getMaintainStatName() {
+		return maintainStatName;
+	}
+
+	public void setMaintainStatName(String maintainStatName) {
+		this.maintainStatName = maintainStatName;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+
+	public String getAuditStatName() {
+		return auditStatName;
+	}
+
+	public void setAuditStatName(String auditStatName) {
+		this.auditStatName = auditStatName;
+	}
+
+	public String getLoginName() {
 		return loginName;
 	}
 
-	public void setLoginName(String loginName)
-	{
+	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
 
-	public String getAuditStatCode()
-	{
+	public String getAuditStatCode() {
 		return auditStatCode;
 	}
 
-	public void setAuditStatCode(String auditStatCode)
-	{
+	public void setAuditStatCode(String auditStatCode) {
 		this.auditStatCode = auditStatCode;
 	}
 
-	public String getAreaCode()
-	{
+	public String getAreaCode() {
 		return areaCode;
 	}
 
-	public void setAreaCode(String areaCode)
-	{
+	public void setAreaCode(String areaCode) {
 		this.areaCode = areaCode;
 	}
 
-	public String getMaintainStatCode()
-	{
+	public String getMaintainStatCode() {
 		return maintainStatCode;
 	}
 
-	public void setMaintainStatCode(String maintainStatCode)
-	{
+	public void setMaintainStatCode(String maintainStatCode) {
 		this.maintainStatCode = maintainStatCode;
 	}
 
-	public String getInstallationSiteCode()
-	{
+	public String getInstallationSiteCode() {
 		return installationSiteCode;
 	}
 
-	public void setInstallationSiteCode(String installationSiteCode)
-	{
+	public void setInstallationSiteCode(String installationSiteCode) {
 		this.installationSiteCode = installationSiteCode;
 	}
 
-	public String getEvaluateStatCode()
-	{
+	public String getEvaluateStatCode() {
 		return evaluateStatCode;
 	}
 
-	public void setEvaluateStatCode(String evaluateStatCode)
-	{
+	public void setEvaluateStatCode(String evaluateStatCode) {
 		this.evaluateStatCode = evaluateStatCode;
 	}
 
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
-	public void setName(String name)
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getMaintainTypeCode()
-	{
+	public String getMaintainTypeCode() {
 		return maintainTypeCode;
 	}
 
-	public void setMaintainTypeCode(String maintainTypeCode)
-	{
+	public void setMaintainTypeCode(String maintainTypeCode) {
 		this.maintainTypeCode = maintainTypeCode;
 	}
 
-	public String getDeviceName()
-	{
+	public String getDeviceName() {
 		return deviceName;
 	}
 
-	public void setDeviceName(String deviceName)
-	{
+	public void setDeviceName(String deviceName) {
 		this.deviceName = deviceName;
 	}
 
-	public String getFlag()
-	{
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(String flag)
-	{
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
 
-	public String getUserUuid()
-	{
+	public String getUserUuid() {
 		return userUuid;
 	}
 
-	public void setUserUuid(String userUuid)
-	{
+	public void setUserUuid(String userUuid) {
 		this.userUuid = userUuid;
 	}
 
-	public String getDeviceStateUuid()
-	{
+	public String getDeviceStateUuid() {
 		return deviceStateUuid;
 	}
 
-	public void setDeviceStateUuid(String deviceStateUuid)
-	{
+	public void setDeviceStateUuid(String deviceStateUuid) {
 		this.deviceStateUuid = deviceStateUuid;
 	}
 
-	public String getReportingUuid()
-	{
+	public String getReportingUuid() {
 		return reportingUuid;
 	}
 
-	public void setReportingUuid(String reportingUuid)
-	{
+	public void setReportingUuid(String reportingUuid) {
 		this.reportingUuid = reportingUuid;
 	}
 
-	public String getReportingPhone()
-	{
+	public String getReportingPhone() {
 		return reportingPhone;
 	}
 
-	public void setReportingPhone(String reportingPhone)
-	{
+	public void setReportingPhone(String reportingPhone) {
 		this.reportingPhone = reportingPhone;
 	}
 
-	public String getOrderTime()
-	{
+	public String getOrderTime() {
 		return orderTime;
 	}
 
-	public void setOrderTime(String orderTime)
-	{
+	public void setOrderTime(String orderTime) {
 		this.orderTime = orderTime;
 	}
 
-	public String getPriorCode()
-	{
+	public String getPriorCode() {
 		return priorCode;
 	}
 
-	public void setPriorCode(String priorCode)
-	{
+	public void setPriorCode(String priorCode) {
 		this.priorCode = priorCode;
 	}
 
-	public String getDevicePicUrl()
-	{
+	public String getDevicePicUrl() {
 		return devicePicUrl;
 	}
 
-	public void setDevicePicUrl(String devicePicUrl)
-	{
+	public void setDevicePicUrl(String devicePicUrl) {
 		this.devicePicUrl = devicePicUrl;
 	}
 
-	public String getAccount()
-	{
+	public String getAccount() {
 		return account;
 	}
 
-	public void setAccount(String account)
-	{
+	public void setAccount(String account) {
 		this.account = account;
 	}
 
-	public String getRemark()
-	{
+	public String getRemark() {
 		return remark;
 	}
 
-	public void setRemark(String remark)
-	{
+	public void setRemark(String remark) {
 		this.remark = remark;
 	}
 
-	public String getReportingTime()
-	{
+	public String getReportingTime() {
 		return reportingTime;
 	}
 
-	public void setReportingTime(String reportingTime)
-	{
+	public void setReportingTime(String reportingTime) {
 		this.reportingTime = reportingTime;
 	}
 }

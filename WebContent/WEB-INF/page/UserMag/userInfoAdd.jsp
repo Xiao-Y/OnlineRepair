@@ -32,17 +32,27 @@
 			<tr>
 				<td align="right" bgColor="#f5fafe" class="ta_01" width="15%">性别：<font color="#FF0000">*</font></td>
 		       	<td class="ta_01" bgColor="#ffffff" width="35%">
-		       		<s:select list="%{#request.sex}" id="sexCode" name="sexCode"
-						  listKey="ddlCode" listValue="ddlName"
-						  cssStyle="width:140px"
-					/>
+		       		<s:if test="%{#request.sex != null && #request.sex.size() > 0}">
+			       		<s:select list="%{#request.sex}" id="sexCode" name="sexCode"
+							  listKey="ddlCode" listValue="ddlName"
+							  cssStyle="width:140px"
+						/>
+		       		</s:if>
+		       		<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 		       	</td>
 		       	<td align="right" bgColor="#f5fafe" class="ta_01" width="15%">维护类别：<font color="#FF0000">*</font></td>
 		       	<td class="ta_01" bgColor="#ffffff" width="35%">
-					<s:select list="%{#request.maintainType}" id="maintainTypeCode" name="maintainTypeCode"
-						  listKey="ddlCode" listValue="ddlName"
-						  cssStyle="width:140px"
-					/>
+		       		<s:if test="%{#request.maintainType != null && #request.maintainType.size() > 0}">
+						<s:select list="%{#request.maintainType}" id="maintainTypeCode" name="maintainTypeCode"
+							  listKey="ddlCode" listValue="ddlName"
+							  cssStyle="width:140px"
+						/>
+					</s:if>
+					<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 		       	</td>
 			</tr>
 			<tr>

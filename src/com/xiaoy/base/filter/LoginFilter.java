@@ -42,7 +42,8 @@ public class LoginFilter implements Filter
 		list.add("/images/loginbg.jpg");
 		list.add("/images/loginbox.png");
 		list.add("/images/loginbtn.png");
-		list.add("/login.html");
+		list.add("/js/login.js");
+		list.add("/login.jsp");
 		list.add("/MenuMag/menuAction_login.action");
 	}
 

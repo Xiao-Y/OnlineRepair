@@ -62,20 +62,30 @@
 				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
 				性别：</td>
 				<td class="ta_01" >
-					<s:select list="%{#request.sex}" id="sexCode" name="sexCode"
-						  listKey="ddlCode" listValue="ddlName"
-						  headerKey="" headerValue="------请选择------"
-						  cssStyle="width:140px"
-					/>
+					<s:if test="%{#request.sex != null && #request.sex.size() > 0}">
+						<s:select list="%{#request.sex}" id="sexCode" name="sexCode"
+							  listKey="ddlCode" listValue="ddlName"
+							  headerKey="" headerValue="------请选择------"
+							  cssStyle="width:140px"
+						/>
+					</s:if>
+					<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 				</td>
 				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
 				维护类别：</td>
 				<td class="ta_01" >
-					<s:select list="%{#request.maintainType}" id="maintainTypeCode" name="maintainTypeCode"
-						  listKey="ddlCode" listValue="ddlName"
-						  headerKey="" headerValue="------请选择------"
-						  cssStyle="width:140px"
-					/>
+					<s:if test="%{#request.maintainType != null && #request.maintainType.size() > 0}">
+						<s:select list="%{#request.maintainType}" id="maintainTypeCode" name="maintainTypeCode"
+							  listKey="ddlCode" listValue="ddlName"
+							  headerKey="" headerValue="------请选择------"
+							  cssStyle="width:140px"
+						/>
+					</s:if>
+					<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 				</td>
 			</tr>
 	    </table>	

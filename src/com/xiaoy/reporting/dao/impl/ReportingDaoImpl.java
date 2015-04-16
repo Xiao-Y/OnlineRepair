@@ -57,11 +57,11 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 				hqlWhere.append(" and a.MAINTAIN_STAT_CODE = :maintainStatCode ");
 				map.put("maintainStatCode", reportingForm.getMaintainStatCode());
 			}
-			if(!StringUtils.isEmpty(reportingForm.getEvaluateStatCode()))
-			{
-				hqlWhere.append(" and e.EVALUATE_STAT_CODE = :evaluateStatCode ");
-				map.put("evaluateStatCode", reportingForm.getEvaluateStatCode());
-			}
+//			if(!StringUtils.isEmpty(reportingForm.getEvaluateStatCode()))
+//			{
+//				hqlWhere.append(" and e.EVALUATE_STAT_CODE = :evaluateStatCode ");
+//				map.put("evaluateStatCode", reportingForm.getEvaluateStatCode());
+//			}
 			if(!StringUtils.isEmpty(reportingForm.getName()))
 			{
 				hqlWhere.append(" and u.NAME like :name");
@@ -92,10 +92,12 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 	
 	@SuppressWarnings("unchecked")
 	public List<Object[]> findCollectionByConditionWithPage(ReportingForm reportingForm,String hqlWhere, Map<String, Object> paramsMapValue) {
-		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,e.EVALUATE_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE ");
-		hql.append(" from audit a,devicestate d,evaluate e,reporting r,deviceinfo di,user u ");
+//		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,e.EVALUATE_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE ");
+		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE ");
+		//hql.append(" from audit a,devicestate d,evaluate e,reporting r,deviceinfo di,user u ");
+		hql.append(" from audit a,devicestate d,reporting r,deviceinfo di,user u ");
 		hql.append(" where a.REPORTING_UUID = r.REPORTING_UUID ");
-		hql.append(" and r.REPORTING_UUID = e.REPORTING_UUID ");
+		//hql.append(" and r.REPORTING_UUID = e.REPORTING_UUID ");
 		hql.append(" and d.DEVICE_STATE_UUID = r.DEVICE_STATE_UUID ");
 		hql.append(" and d.DEVICETYPE_UUID = di.DEVICETYPE_UUID ");
 		hql.append(" and u.USER_UUID = r.USER_UUID ");
@@ -169,9 +171,10 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 	public Integer countByCollection(String hqlWhere,Map<String, Object> paramsMapValue)
 	{
 		StringBuffer sql = new StringBuffer("SELECT COUNT(*) ");
-		sql.append(" from audit a,devicestate d,evaluate e,reporting r,deviceinfo di,user u ");
+//		sql.append(" from audit a,devicestate d,evaluate e,reporting r,deviceinfo di,user u ");
+		sql.append(" from audit a,devicestate d,reporting r,deviceinfo di,user u ");
 		sql.append(" where a.REPORTING_UUID = r.REPORTING_UUID ");
-		sql.append(" and r.REPORTING_UUID = e.REPORTING_UUID ");
+		//sql.append(" and r.REPORTING_UUID = e.REPORTING_UUID ");
 		sql.append(" and d.DEVICE_STATE_UUID = r.DEVICE_STATE_UUID ");
 		sql.append(" and d.DEVICETYPE_UUID = di.DEVICETYPE_UUID ");
 		sql.append(" and u.USER_UUID = r.USER_UUID ");

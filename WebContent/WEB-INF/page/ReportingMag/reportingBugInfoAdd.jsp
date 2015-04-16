@@ -26,13 +26,17 @@
 	    <tr>
 	       	<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">区域：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff" width="30%">
-	       		<s:select list="%{#request.area}" id="areaCode" name="areaCode"
-					  listKey="areaCode" listValue="areaName"
-					  headerKey="" headerValue="---请选择---"
-					  cssStyle="width:140px"  data-rule-required="true"
-					  onchange="changeDeviceStateArea();"
-				/>
-				
+	       		<s:if test="%{#request.area != null && #request.area.size() > 0}">
+		       		<s:select list="%{#request.area}" id="areaCode" name="areaCode"
+						  listKey="areaCode" listValue="areaName"
+						  headerKey="" headerValue="---请选择---"
+						  cssStyle="width:140px"  data-rule-required="true"
+						  onchange="changeDeviceStateArea();"
+					/>
+	       		</s:if>
+				<s:else>
+					<select id="" name="" style="width:140px"></select>
+				</s:else>
 	       	</td>
 	       	<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">安装位置：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff">
@@ -68,7 +72,7 @@
 		<tr>
 		    <td align="right" width="20%" bgColor="#f5fafe" class="ta_01">申报人手机号：<font color="#FF0000">*</font></td>
 			<td class="ta_01" bgColor="#ffffff">
-				<input class="" type="text" size="18" id="reportingPhone" name="reportingPhone" data-rule-required="true">
+				<s:textfield maxlength="11" size="18" id="reportingPhone" name="reportingPhone" data-rule-required="true" data-rule-mobilezh="true"/>
 			</td>
 			<td align="right" bgColor="#f5fafe" class="ta_01">预约日期：</td>
 			<td class="ta_01" bgColor="#ffffff">
@@ -79,11 +83,16 @@
 		<tr>
 			<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">优先级别：</td>
 			<td class="ta_01" bgColor="#ffffff">
-	       		<s:select list="%{#request.priorCodes}" id="priorCode" name="priorCode"
-				  listKey="ddlCode" listValue="ddlName"
-				  headerKey="" headerValue="---请选择---"
-				  cssStyle="width:140px" data-rule-required="true"
-				/>
+				<s:if test="%{#request.priorCodes != null && #request.priorCodes.size() > 0}">
+		       		<s:select list="%{#request.priorCodes}" id="priorCode" name="priorCode"
+					  listKey="ddlCode" listValue="ddlName"
+					  headerKey="" headerValue="---请选择---"
+					  cssStyle="width:140px" data-rule-required="true"
+					/>
+				</s:if>
+				<s:else>
+					<select id="" name="" style="width:140px"></select>
+				</s:else>
 			</td>
 		</tr>
 		<tr>

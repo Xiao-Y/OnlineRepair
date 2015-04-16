@@ -46,29 +46,44 @@
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				区域：</td>
 				<td class="ta_01" >
-					<s:select list="%{#request.area}" id="areaCode" name="areaCode"
-						  listKey="ddlCode" listValue="ddlName"
-						  headerKey="" headerValue="------请选择------"
-						  cssStyle="width:140px"
-					/>
+					<s:if test="%{#request.area != null && #request.area.size() > 0}">
+						<s:select list="%{#request.area}" id="areaCode" name="areaCode"
+							  listKey="ddlCode" listValue="ddlName"
+							  headerKey="" headerValue="------请选择------"
+							  cssStyle="width:140px"
+						/>
+					</s:if>
+					<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 				</td>
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				安装位置：</td>
 				<td class="ta_01" >
-					<s:select list="%{#request.installationSite}" id="installationSiteCode" name="installationSiteCode"
-						  listKey="ddlCode" listValue="ddlName"
-						  headerKey="" headerValue="------请选择------"
-						  cssStyle="width:140px"
-					/>
+					<s:if test="%{#request.installationSite != null && #request.installationSite.size() > 0}">
+						<s:select list="%{#request.installationSite}" id="installationSiteCode" name="installationSiteCode"
+							  listKey="ddlCode" listValue="ddlName"
+							  headerKey="" headerValue="------请选择------"
+							  cssStyle="width:140px"
+						/>
+					</s:if>
+					<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 				</td>
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				设备名：</td>
 				<td class="ta_01" >
-					<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
-					  listKey="deviceName" listValue="deviceName"
-					  headerKey="" headerValue="------请选择------"
-					  cssStyle="width:140px" onchange="changeDevice();" data-rule-required="true"
-					/>
+					<s:if test="%{#request.deviceName != null && #request.deviceName.size() > 0}">
+						<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
+						  listKey="deviceName" listValue="deviceName"
+						  headerKey="" headerValue="------请选择------"
+						  cssStyle="width:140px" onchange="changeDevice();" data-rule-required="true"
+						/>
+					</s:if>
+					<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 				</td>
 			</tr>
 			<tr>
@@ -85,11 +100,16 @@
 				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
 				运行状态：</td>
 				<td class="ta_01" >
-					<s:select list="%{#request.state}" id="stateCode" name="stateCode"
-						  listKey="ddlCode" listValue="ddlName"
-						  headerKey="" headerValue="------请选择------"
-						  cssStyle="width:140px"
-					/>
+					<s:if test="%{#request.state != null && #request.state.size() > 0}">
+						<s:select list="%{#request.state}" id="stateCode" name="stateCode"
+							  listKey="ddlCode" listValue="ddlName"
+							  headerKey="" headerValue="------请选择------"
+							  cssStyle="width:140px"
+						/>
+					</s:if>
+					<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 				</td>
 			</tr>
 	    </table>	

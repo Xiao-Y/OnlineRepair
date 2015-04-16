@@ -26,22 +26,26 @@
 	    <tr>
 	       <td align="center" bgColor="#f5fafe" class="ta_01">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff">
-				<s:select list="%{#request.area}" id="areaCode" name="areaCode"
-					  listKey="areaCode" listValue="areaName"
-					  headerKey="" headerValue="---请选择---"
-					  cssStyle="width:140px"  data-rule-required="true"
-					  onchange="changeDeviceStateArea();"
-				/>
+	       		<s:if test="%{#request.area != null && #request.area.size() > 0}">
+					<s:select list="%{#request.area}" id="areaCode" name="areaCode"
+						  listKey="areaCode" listValue="areaName"
+						  headerKey="" headerValue="---请选择---"
+						  cssStyle="width:140px"  data-rule-required="true"
+						  onchange="changeDeviceStateArea();"
+					/>
+	       		</s:if>
 			</td>
 			<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">安装位置：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff">
 	       		<div id="installationSiteDiv">
-	       			<s:select list="%{#request.installationSite}" id="installationSiteCode" name="installationSiteCode"
-					  listKey="installationSiteCode" listValue="installationSiteName"
-					  headerKey="" headerValue="---请选择---"
-					  cssStyle="width:140px"  data-rule-required="true"
-					  onchange="changeDeviceStateDeviceName();"
-					/>
+	       			<s:if test="%{#request.installationSite != null && #request.installationSite.size() > 0}">
+		       			<s:select list="%{#request.installationSite}" id="installationSiteCode" name="installationSiteCode"
+						  listKey="installationSiteCode" listValue="installationSiteName"
+						  headerKey="" headerValue="---请选择---"
+						  cssStyle="width:140px"  data-rule-required="true"
+						  onchange="changeDeviceStateDeviceName();"
+						/>
+					</s:if>
 	       		</div>
 	       	</td>
 	    </tr>
@@ -50,22 +54,26 @@
 			<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">设备名：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff" height="21">
 	       	<div id="deviceNameDiv">
-	       		<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
-					  listKey="deviceName" listValue="deviceName"
-					  headerKey="" headerValue="---请选择---"
-					  cssStyle="width:140px"  data-rule-required="true"
-					  onchange="changeDeviceStateVersion();"
+	       		<s:if test="%{#request.deviceName != null && #request.deviceName.size() > 0}">
+		       		<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
+						  listKey="deviceName" listValue="deviceName"
+						  headerKey="" headerValue="---请选择---"
+						  cssStyle="width:140px"  data-rule-required="true"
+						  onchange="changeDeviceStateVersion();"
 					/>
+				</s:if>
 	       	</div>
 	       	</td>
 			<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">型号：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff">
 	       		<div id="versionDiv">
-	       			<s:select list="%{#request.version}" id="deviceStateUuid" name="deviceStateUuid"
-					  listKey="deviceStateUuid" listValue="version"
-					  headerKey="" headerValue="---请选择---"
-					  cssStyle="width:140px"  data-rule-required="true"
-					/>
+	       			<s:if test="%{#request.version != null && #request.version.size() > 0}">
+		       			<s:select list="%{#request.version}" id="deviceStateUuid" name="deviceStateUuid"
+						  listKey="deviceStateUuid" listValue="version"
+						  headerKey="" headerValue="---请选择---"
+						  cssStyle="width:140px"  data-rule-required="true"
+						/>
+					</s:if>
 	       		</div>
 	      	</td>
 		</tr>
@@ -128,10 +136,9 @@
 		</TR>
 		<tr>
 			<td class="ta_01" style="WIDTH: 100%" align="center" bgColor="#f5fafe" colSpan="4">
-			<input type="button" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55"   onClick="check_null()">
-			 <FONT face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
-			<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="关闭"  name="Reset1"  onClick="history.back();">
-				
+				<input type="button" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55"   onClick="check_null()">
+				<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+				<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="关闭"  name="Reset1"  onClick="history.back();">
 			</td>
 		</tr>
 	</table>　

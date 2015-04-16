@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 
 import com.google.gson.Gson;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.device.servic.DeviceStateService;
@@ -94,9 +93,11 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 		//TODO
 		//当是管理员时，不添加用户uuid。否则添加用户uuid，查询出现当前用户的申报信息
 		List<ReportingForm> list = reportingService.findReportingBugInfoList(reportingForm);
+		//添加分页的总记录数
 		int recordCount = reportingService.countReportingBugInfo(reportingForm);
 		reportingForm.setRecordCount(recordCount);
-		ActionContext.getContext().getValueStack().push(list);
+		
+		request.setAttribute("reportingBugInfoList", list);
 		return "reportingBugInfoList";
 	}
 	

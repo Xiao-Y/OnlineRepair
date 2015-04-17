@@ -193,4 +193,21 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 		Object count = query.uniqueResult();
 		return Integer.parseInt(count.toString());
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Object[]> findReportingBugInfoByRrUuid(String reportingUuid) {
+		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE,di.VERSION,u.PHONE,a.AUDIT_TIME,a.FINISH_TIME,r.DEVICE_PIC_URL,r.ACCOUNT,r.REMARK ");
+		hql.append(" from audit a,devicestate d,reporting r,deviceinfo di,user u ");
+		hql.append(" where r.REPORTING_UUID = a.REPORTING_UUID ");
+		hql.append(" and r.DEVICE_STATE_UUID = d.DEVICE_STATE_UUID ");
+		hql.append(" and d.DEVICETYPE_UUID = di.DEVICETYPE_UUID ");
+		hql.append(" and r.USER_UUID = u.USER_UUID ");
+		hql.append(" and r.REPORTING_UUID = :reportingUuid");
+		
+		Query query = this.getSession().createSQLQuery(hql.toString());
+		query.setParameter("reportingUuid", reportingUuid);
+		List<Object[]> obj = query.list();
+		return obj;
+	}
 }

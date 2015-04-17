@@ -191,4 +191,57 @@ public class ReportingServiceImpl implements ReportingService
 		int count = reportingDao.countReportingBugInfo(reportingForm);
 		return count;
 	}
+
+	@Override
+	public ReportingForm findReportingBugInfoByRrUuid(String reportingUuid) {
+		List<Object[]> list = reportingDao.findReportingBugInfoByRrUuid(reportingUuid);
+		return this.reportingBugInfoListToPo(list);
+	}
+
+	/**
+	 * Object对象转换成为PO对象
+	 * @param object
+	 * @return
+	 */
+	private ReportingForm reportingBugInfoListToPo(List<Object[]> object) {
+		ReportingForm r = null;
+		
+		if(object != null && object.size() > 0)
+		{
+			for(Object[] o : object)
+			{
+				r = new ReportingForm();
+				r.setAreaCode((String)o[0]);
+				if(o[0] != null){
+					r.setAreaName(dictionaryDao.findDDLName((String)o[0], DictionaryForm.AREA_NAME));
+				}
+				r.setInstallationSiteCode((String)o[1]);
+				if(o[1] != null){
+					r.setInstallationSiteName(dictionaryDao.findDDLName((String)o[1], DictionaryForm.INSTALLATION_SITE_NAME));
+				}
+				r.setDeviceName((String)o[2]);
+				r.setName((String)o[3]);
+				r.setReportingPhone((String)o[4]);
+				r.setReportingTime(o[5] != null ? DateHelper.dateConverString((Date)o[5]) : "");
+				
+				r.setMaintainStatCode((String)o[6]);
+				if(o[6] != null){
+					r.setMaintainStatName(dictionaryDao.findDDLName((String)o[6], DictionaryForm.MAINTAIN_STAT));
+				}
+				//当审核状态为0时则“待审核”
+				r.setAuditStatCode((String)o[7]);
+				if(o[7] != null){
+					r.setAuditStatName(dictionaryDao.findDDLName((String)o[7], DictionaryForm.AUDIT_STAT));
+				}
+				
+				r.setMaintainTypeCode((String)o[8]);
+				if(o[8] != null){
+					r.setMaintainTypeName(dictionaryDao.findDDLName((String)o[8], DictionaryForm.MAINTAIN_TYPE_NAME));
+				}
+				
+				r.set
+			}
+		}
+		return r;
+	}
 }

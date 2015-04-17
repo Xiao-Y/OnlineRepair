@@ -29,4 +29,11 @@ public interface ReportingService
 	 */
 	int countReportingBugInfo(ReportingForm reportingForm);
 
+	/**
+	 * 通过申报信息的uuid查询出现申报信息及相关信息
+	 * @param reportingUuid
+	 * @return	ReportingForm
+	 */
+	ReportingForm findReportingBugInfoByRrUuid(String reportingUuid);
+
 }

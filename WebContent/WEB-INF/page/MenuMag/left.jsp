@@ -56,7 +56,7 @@ a {
 		<tr>
 			<td vAlign="top" bgColor="#F6F6F6" height="100%">
 				<!-- 设备管理 begin -->
-				<div class="qx" id="deviceMagParent">
+				<div class="qx" id="deviceMagParent" style="cursor:pointer;">
 					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
@@ -85,7 +85,7 @@ a {
 				<!-- 设备管理 end -->
 				
 				<!-- 用户管理 begin -->
-				<div class="qx" id="userMagParent">
+				<div class="qx" id="userMagParent" style="cursor:pointer;">
 					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
@@ -114,7 +114,7 @@ a {
 				<!-- 用户管理 end -->
 				
 				<!-- 申报故障管理 begin-->
-				<div class="qx" id="reportingMagParent">
+				<div class="qx" id="reportingMagParent" style="cursor:pointer;">
 					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
@@ -143,7 +143,7 @@ a {
 				<!-- 申报故障管理 end-->
 				
 				<!-- 故障申报审核 begin -->
-				<div class="qx" id="auditMagParent">
+				<div class="qx" id="auditMagParent" style="cursor:pointer;">
 					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
@@ -177,7 +177,7 @@ a {
 				<!-- 故障申报审核 end  -->
 				
 				<!-- 评价留言管理 begin -->
-				<div class="qx" id="evaluateMagParent">
+				<div class="qx" id="evaluateMagParent" style="cursor:pointer;">
 					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
@@ -206,7 +206,7 @@ a {
 				<!-- 评价留言管理 end -->
 				
 				<!-- 权限管理 begin -->
-				<div class="qx" id="authorityMagParent">
+				<div class="qx" id="authorityMagParent" style="cursor:pointer;">
 					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
@@ -230,7 +230,7 @@ a {
 				<!-- 权限管理 end -->
 				
 				<!-- 资源管理 begin -->
-				<div class="qx" id="resourceMagParent">
+				<div class="qx" id="resourceMagParent" style="cursor:pointer;">
 					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
@@ -264,7 +264,7 @@ a {
 				<!-- 资源管理end -->
 				
 				<!-- 统计管理 beging -->
-				<div class="qx" id="countMagParent">
+				<div class="qx" id="countMagParent" style="cursor:pointer;">
 					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">

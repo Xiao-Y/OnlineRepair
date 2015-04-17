@@ -23,22 +23,20 @@
 	       <td class="ta_01" bgColor="#ffffff">
 				<s:textfield id="areaName" name="areaName" size="20" readonly="true"/>
 			</td>
-			
-	       <td align="right" bgColor="#f5fafe" class="ta_01">设备名：</td>
-	        <td class="ta_01" bgColor="#ffffff">
-				<s:textfield id="deviceName" name="deviceName" size="20" readonly="true"/>
+			<td align="right" bgColor="#f5fafe" class="ta_01">安装位置：</td>
+			<td class="ta_01" bgColor="#ffffff">
+				<s:textfield id="installationSiteName" name="installationSiteName" size="20" readonly="true"/>
 			</td>
 	    </tr>
 	    
 		<tr>
+			<td align="right" bgColor="#f5fafe" class="ta_01">设备名：</td>
+	        <td class="ta_01" bgColor="#ffffff">
+				<s:textfield id="deviceName" name="deviceName" size="20" readonly="true"/>
+			</td>
 			<td align="right" bgColor="#f5fafe" class="ta_01">型号：</td>
 			 <td class="ta_01" bgColor="#ffffff">
 				<s:textfield id="version" name="version" size="20" readonly="true"/>
-			</td>
-			
-			<td align="right" bgColor="#f5fafe" class="ta_01">安装位置：</td>
-			<td class="ta_01" bgColor="#ffffff">
-				<s:textfield id="installationSiteName" name="installationSiteName" size="20" readonly="true"/>
 			</td>
 		</tr>
 		<tr>

@@ -23,4 +23,11 @@ public interface ReportingDao extends Common<Reporting>
 	 */
 	int countReportingBugInfo(ReportingForm reportingForm);
 
+	/**
+	 * 通过申报信息的uuid查询出现申报信息及相关信息
+	 * @param reportingUuid
+	 * @return	List &ltObject[]&gt
+	 */
+	List<Object[]> findReportingBugInfoByRrUuid(String reportingUuid);
+
 }

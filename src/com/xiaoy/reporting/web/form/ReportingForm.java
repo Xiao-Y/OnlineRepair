@@ -65,6 +65,10 @@ public class ReportingForm extends BaseForm {
 	private String deviceTypeUuid;
 	/* 审核时间 */
 	private Date auditTime;
+	/*设备型号*/
+	private String version;
+	/**/
+	private String phone;
 
 	public Date getAuditTime()
 	{

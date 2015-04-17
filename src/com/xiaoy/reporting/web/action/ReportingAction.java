@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 
 import com.google.gson.Gson;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.device.servic.DeviceStateService;
@@ -227,7 +228,8 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 	
 	public String reportingBugInfoView()
 	{
-		
+		reportingForm = reportingService.findReportingBugInfoByRrUuid(reportingForm.getReportingUuid());
+		ActionContext.getContext().getValueStack().push(reportingForm);
 		return "reportingBugInfoView";
 	}
 	

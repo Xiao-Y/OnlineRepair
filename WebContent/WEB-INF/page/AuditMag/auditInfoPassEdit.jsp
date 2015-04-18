@@ -61,7 +61,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="center" bgColor="#f5fafe" class="ta_01">希望处理日期：</td>
+			<td align="center" bgColor="#f5fafe" class="ta_01">预约日期：</td>
 			<td class="ta_01" bgColor="#ffffff">
 				<input class="Wdate" type="text" size="20" value="2013-12-23" disabled="disabled">
 			</td>

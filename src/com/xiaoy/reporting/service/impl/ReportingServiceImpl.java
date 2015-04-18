@@ -13,7 +13,10 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xiaoy.audit.service.AuditService;
+import com.xiaoy.Evaluate.dao.EvaluateDao;
+import com.xiaoy.audit.dao.AuditDao;
+import com.xiaoy.audit.service.impl.AuditServiceImpl;
+import com.xiaoy.base.entites.Audit;
 import com.xiaoy.base.entites.DeviceState;
 import com.xiaoy.base.entites.Reporting;
 import com.xiaoy.base.entites.User;
@@ -25,12 +28,12 @@ import com.xiaoy.reporting.web.form.ReportingForm;
 import com.xiaoy.resource.dao.DictionaryDao;
 import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.web.form.DictionaryForm;
+import com.xiaoy.user.dao.UserDao;
 
 @Service
 @Transactional(readOnly=true)
 public class ReportingServiceImpl implements ReportingService
 {
-
 	/**
 	 * 故障设备图片
 	 */
@@ -42,13 +45,24 @@ public class ReportingServiceImpl implements ReportingService
 	@Resource
 	private LogService logService;
 	
+//	//故障审核
+//	@Resource
+//	private AuditService auditService;
 	//故障审核
 	@Resource
-	private AuditService auditService;
+	private AuditDao auditDao;
+	
+	//评价信息
+	@Resource
+	private EvaluateDao evaluateDao;
 	
 	//数据字典
 	@Resource
 	private DictionaryDao dictionaryDao;
+	
+	//用户信息
+	@Resource
+	private UserDao userDao; 
 	
 	@Resource
 	private ReportingDao reportingDao;
@@ -75,8 +89,11 @@ public class ReportingServiceImpl implements ReportingService
 		Reporting entity = this.reportingBugInfoPoToVo(reportingForm);
 		//保存设备申报信息
 		reportingDao.saveObject(entity);
+		logService.saveLog(request, MENU_MODEL, "添加故障设备");
 		//添加故障审核信息
-		auditService.saveAudit(entity);
+		Audit audit = this.reportingToAudit(entity);
+		auditDao.saveObject(audit);
+		logService.saveLog(request, AuditServiceImpl.MENU_MODEL, "添加“"+ reportingForm.getDeviceName() +"”故障审核");
 	}
 
 	/**
@@ -108,6 +125,25 @@ public class ReportingServiceImpl implements ReportingService
 		return entity;
 	}
 
+	/**
+	 * 从申报故障信息类中获取申报uuid和用户uuid.
+	 * 固定系统审核状为1时表示待审核。维护状态为0时表示，还未审核。
+	 * @param reporting
+	 * @return
+	 */
+	private Audit reportingToAudit(Reporting reporting) {
+		Audit entity = new Audit();
+		entity.setReportingUuid(reporting.getReportingUuid());
+		entity.setUserUuid(reporting.getUser().getUserUuid());
+		
+		//1表示未维护
+		entity.setMaintainStatCode("1");
+		//1表示未处理
+		entity.setAuditStatCode("1");
+		
+		return entity;
+	}
+	
 	@Override
 	public List<ReportingForm> findReportingBugInfoList(ReportingForm reportingForm) {
 		
@@ -179,6 +215,7 @@ public class ReportingServiceImpl implements ReportingService
 				r.setReportingUuid((String)o[9]);
 				r.setDeviceTypeUuid((String)o[10]);
 				r.setUserUuid((String)o[11]);
+				r.setAuditUuid((String)o[12]);
 				form.add(r);
 			}
 		}
@@ -227,21 +264,78 @@ public class ReportingServiceImpl implements ReportingService
 				r.setMaintainStatCode((String)o[6]);
 				if(o[6] != null){
 					r.setMaintainStatName(dictionaryDao.findDDLName((String)o[6], DictionaryForm.MAINTAIN_STAT));
+				}else
+				{
+					r.setMaintainStatName("");
 				}
-				//当审核状态为0时则“待审核”
 				r.setAuditStatCode((String)o[7]);
 				if(o[7] != null){
 					r.setAuditStatName(dictionaryDao.findDDLName((String)o[7], DictionaryForm.AUDIT_STAT));
 				}
 				
-				r.setMaintainTypeCode((String)o[8]);
-				if(o[8] != null){
-					r.setMaintainTypeName(dictionaryDao.findDDLName((String)o[8], DictionaryForm.MAINTAIN_TYPE_NAME));
-				}
+//				r.setMaintainTypeCode((String)o[8]);
+//				if(o[8] != null){
+//					r.setMaintainTypeName(dictionaryDao.findDDLName((String)o[8], DictionaryForm.MAINTAIN_TYPE_NAME));
+//				}else
+//				{
+//					r.setMaintainTypeName("");
+//				}
 				
-				r.set
+				r.setVersion((String)o[9]);
+				r.setAuditTime(o[10] != null ? DateHelper.dateConverString((Date)o[10]) : "");
+				r.setFinishTime(o[11] != null ? DateHelper.dateConverString((Date)o[11]) : "");
+				r.setDevicePicUrl((String)o[12]);
+				r.setAccount((String)o[13]);
+				r.setRemark((String)o[14]);
+				if(o[15] != null)
+				{
+					User user = userDao.findObjectById((String)o[15]);
+					r.setMaintainUserName(user.getName());
+					r.setMaintainPhone(user.getPhone());
+					r.setMaintainTypeName(dictionaryDao.findDDLName((String)o[8], DictionaryForm.MAINTAIN_TYPE_NAME));
+				}else{
+					r.setMaintainUserName("");
+					r.setMaintainTypeName("");
+					r.setMaintainPhone("");
+				}
+//				r.setMaintainUuid((String)o[15]);
 			}
 		}
 		return r;
+	}
+
+	/**
+	 * 1、待审核的。只用删除申报信息。<br/>
+	 * 2、审核通过。删除审核通过的申报信息，将会删除审核信息和评价信息<br/>
+	 * 3、审核未通过。删除审核未通过的申报信息，将会删除审核信息<br/>
+	 */
+	@Override
+	@Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED,readOnly=false)
+	public void deleteReportingBugInfo(String reportingUuid, String auditStatCode, String auditUuid)
+	{
+		//待审核的。只用删除申报信息。
+		if(auditStatCode.equals("1"))
+		{
+			//删除申报信息
+			reportingDao.deleteObjectByid(reportingUuid);
+		}
+		//审核通过。删除审核通过的申报信息，将会删除审核信息和评价信息
+		else if(auditStatCode.equals("2"))
+		{
+			//删除审核信息
+			auditDao.deleteObjectByid(auditUuid);
+			//删除评价信息
+			reportingDao.deleteAuditByReportingUuid(reportingUuid);
+			//删除申报信息
+			reportingDao.deleteObjectByid(reportingUuid);
+		}
+		//审核未通过。删除审核未通过的申报信息，将会删除审核信息<br/>
+		else if(auditStatCode.equals("3"))
+		{
+			//删除审核信息
+			auditDao.deleteObjectByid(auditUuid);
+			//删除申报信息
+			reportingDao.deleteObjectByid(reportingUuid);
+		}
 	}
 }

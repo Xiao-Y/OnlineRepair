@@ -40,10 +40,10 @@
 </script> 
 
 </head>
-<body>
+<body style="background-color: #F5FAFE">
 	<!-- 查询输入start -->
 	<form action="">
-		<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
+		<table cellspacing="1" cellpadding="0" width="100%" align="center" bgcolor="#f5fafe" border="0">
 			<tr>
 				<td class="ta_01" colspan=9 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
 					<font face="宋体" size="2"><strong>评价信息列表</strong></font>
@@ -95,7 +95,7 @@
 	
 	<!-- 执行查询begin -->
 	<form action="">
-		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
+		<table cellSpacing="1" cellPadding="0" width="100%" align="center" bgColor="#f5fafe" border="0">
 			<tr height=10><td></td></TR>			
 			<tr>
 			  	<td>

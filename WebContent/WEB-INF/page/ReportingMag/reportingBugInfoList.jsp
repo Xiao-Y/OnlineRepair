@@ -34,17 +34,13 @@
 	function link(href){
 		window.location.href=href;
 	}
-	
-	function deleteReportingBugInfo(deviceName, reportingUuid, maintainStatCode){
-		alert(deviceName +" "+ reportingUuid +" "+ maintainStatCode);
-	}
 </script> 
 
 </head>
-<body>
+<body style="background-color: #F5FAFE">
 	<!-- 查询输入start -->
 	<form action="" id="form1" name="form1" method="post">
-		<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
+		<table cellspacing="1" cellpadding="0" width="100%" align="center"  border="0">
 			<tr>
 				<td class="ta_01" colspan=9 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
 					<font face="宋体" size="2"><strong>所有故障信息列表</strong></font>
@@ -54,8 +50,8 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">区域：</td>
-	       		<td class="ta_01" bgColor="#ffffff">
+				<td class="ta_01" align="right"  height="22">区域：</td>
+	       		<td class="ta_01">
 	       			<s:if test="%{#request.area != null && #request.area.size() > 0}">
 			       		<s:select list="%{#request.area}" id="areaCode" name="areaCode"
 							  listKey="areaCode" listValue="areaName"
@@ -67,8 +63,8 @@
 						<select id="" name="" style="width:140px"></select>
 					</s:else>
 				</td>
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">安装位置：</td>
-				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right"  height="22">安装位置：</td>
+				<td class="ta_01" align="left"  height="22">
 					<s:if test="%{#request.installationSite != null && #request.installationSite.size() > 0}">
 						<s:select list="%{#request.installationSite}" id="installationSiteCode" name="installationSiteCode"
 						  listKey="installationSiteCode" listValue="installationSiteName"
@@ -80,8 +76,8 @@
 						<select id="" name="" style="width:140px"></select>
 					</s:else>
 				</td>
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">设备名：</td>
-				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right"  height="22">设备名：</td>
+				<td class="ta_01" align="left"  height="22">
 					<s:if test="%{#request.deviceName != null && #request.deviceName.size() > 0}">
 						<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
 						  listKey="deviceName" listValue="deviceName"
@@ -92,8 +88,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">维护状态：</td>
-				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right"  height="22">维护状态：</td>
+				<td class="ta_01" align="left"  height="22">
 					<s:if test="%{#request.maintainStat != null && #request.maintainStat.size() > 0}">
 						<s:select list="%{#request.maintainStat}" id="maintainStatCode" name="maintainStatCode"
 						  listKey="ddlCode" listValue="ddlName"
@@ -106,8 +102,8 @@
 					</s:else>
 				</td>
 				<%--
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">评价状态：</td>
-				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right"  height="22">评价状态：</td>
+				<td class="ta_01" align="left"  height="22">
 					<s:if test="%{#request.evaluateStat != null && #request.evaluateStat.size() > 0}">
 						<s:select list="%{#request.evaluateStat}" id="evaluateStatCode" name="evaluateStatCode"
 						  listKey="ddlCode" listValue="ddlName"
@@ -120,12 +116,12 @@
 					</s:else>
 				</td>
 				 --%>
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">申报人：</td>
-				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right"  height="22">申报人：</td>
+				<td class="ta_01" align="left"  height="22">
 					<s:textfield name="name" id="name" size="21" cssStyle="width:134px"/>
 				</td>
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">审核状态：</td>
-				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right"  height="22">审核状态：</td>
+				<td class="ta_01" align="left"  height="22">
 					<s:if test="%{#request.auditStat != null && #request.auditStat.size() > 0}">
 						<s:select list="%{#request.auditStat}" id="auditStatCode" name="auditStatCode"
 						  listKey="ddlCode" listValue="ddlName"
@@ -138,8 +134,8 @@
 					</s:else>
 				</td>
 				<%--
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">维护类别：</td>
-				<td class="ta_01" align="left" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right"  height="22">维护类别：</td>
+				<td class="ta_01" align="left"  height="22">
 					<s:if test="%{#request.maintainType != null && #request.maintainType.size() > 0}">
 						<s:select list="%{#request.maintainType}" id="maintainTypeCode" name="maintainTypeCode"
 						  listKey="ddlCode" listValue="ddlName"
@@ -157,7 +153,7 @@
 	<!-- 查询输入end -->
 	
 	<!-- 执行查询begin -->
-		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
+		<table cellSpacing="1" cellPadding="0" width="100%" align="center"  border="0">
 			<tr height=10><td></td></TR>			
 			<tr>
 			  	<td>
@@ -176,7 +172,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgColor="#f5fafe" colspan="5">			
+				<td class="ta_01" align="center"  colspan="5">			
 					<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="DataGrid1"
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
@@ -204,7 +200,7 @@
 						<!-- 列表数据 begin -->
 						<s:if test="%{#request.reportingBugInfoList != null && #request.reportingBugInfoList.size() > 0}">
 							<s:iterator value="%{#request.reportingBugInfoList}" var="reportingBugInfo" status="u">
-								<tr id='<s:property value="%{#reportingBugInfo.reportingUuid}"/>' onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+								<tr id='<s:property value="%{#reportingBugInfo.reportingUuid}"/>' onmouseover="this.style.backgroundColor = '#D4E3E5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 									<td style="HEIGHT:22px" align="center" width="5%">
 										<input type="checkbox" id="${reportingBugInfo.reportingUuid }" name="ids" class="ids" value="${reportingBugInfo.reportingUuid }">
 									</td>
@@ -234,12 +230,7 @@
 										<s:property value="%{#reportingBugInfo.reportingTime}"/>
 									</td>									
 									<td style="height:22px" align="center" width="10%">
-										<s:if test="%{#reportingBugInfo.maintainStatCode == 0}">
-											--
-										</s:if>
-										<s:else>
-											<s:property value="%{#reportingBugInfo.maintainStatName}"/>
-										</s:else>
+										<s:property value="%{#reportingBugInfo.maintainStatName}"/>
 									</td>
 									<%--
 									<td style="height:22px" align="center" width="10%">
@@ -256,7 +247,7 @@
 									   <img src="${pageContext.request.contextPath }/images/view.png" width="20px" height="20px" border="0" style="cursor:hand"></a>													
 									</td>
 									<td align="center" style="HEIGHT: 22px" align="center" width="5%">
-										<a href="javascript:deleteReportingBugInfo('${reportingBugInfo.deviceName }','${reportingBugInfo.reportingUuid }','${reportingBugInfo.maintainStatCode }');">
+										<a href="javascript:deleteReportingBugInfo('${reportingBugInfo.deviceName }','${reportingBugInfo.reportingUuid }','${reportingBugInfo.auditStatCode }','${reportingBugInfo.auditUuid }');">
 										<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="cursor:hand"></a>												
 									</td>
 								</tr>

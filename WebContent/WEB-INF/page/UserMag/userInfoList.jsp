@@ -34,10 +34,10 @@
 </script> 
 
 </head>
-<body>
+<body style="background-color: #F5FAFE">
 	<!-- 查询输入start -->
 	<form action="" id="form1" name="form1" method="post">
-		<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
+		<table cellspacing="1" cellpadding="0" width="100%" align="center" border="0">
 			<tr>
 				<td class="ta_01" colspan=6 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
 					<font face="宋体" size="2"><strong>用户信息管理</strong></font>
@@ -47,19 +47,19 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right" height="22">
 				登陆名：</td>
 				<td class="ta_01" >
 					<s:textfield name="loginName" id="loginName" size="18" maxlength="21"/>
 				</td>
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right" height="22">
 				姓名：</td>
 				<td class="ta_01" >
 					<s:textfield name="name" id="name" size="18" maxLength="21"/>
 				</td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right" height="22">
 				性别：</td>
 				<td class="ta_01" >
 					<s:if test="%{#request.sex != null && #request.sex.size() > 0}">
@@ -73,7 +73,7 @@
 						<select id="" name="" style="width:140px"></select>
 					</s:else>
 				</td>
-				<td class="ta_01" align="right" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="right" height="22">
 				维护类别：</td>
 				<td class="ta_01" >
 					<s:if test="%{#request.maintainType != null && #request.maintainType.size() > 0}">
@@ -92,7 +92,7 @@
 	<!-- 查询输入end -->
 	
 	<!-- 执行查询begin -->
-		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
+		<table cellSpacing="1" cellPadding="0" width="100%" align="center" border="0">
 			<tr height=10><td></td></TR>			
 			<tr>
 			  	<td>
@@ -111,7 +111,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgColor="#f5fafe" colspan="5">			
+				<td class="ta_01" align="center" colspan="5">			
 					<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="DataGrid1"
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->

@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import com.xiaoy.audit.dao.AuditDao;
 import com.xiaoy.base.dao.impl.CommonImpl;
 import com.xiaoy.base.entites.Reporting;
 import com.xiaoy.reporting.dao.ReportingDao;
@@ -18,6 +21,10 @@ import com.xiaoy.reporting.web.form.ReportingForm;
 public class ReportingDaoImpl extends CommonImpl<Reporting> implements ReportingDao
 {
 
+	//审核信息
+	@Resource
+	private AuditDao auditDao;
+	
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> findReportingBugInfoList(ReportingForm reportingForm) {
@@ -95,7 +102,7 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 	@SuppressWarnings("unchecked")
 	public List<Object[]> findCollectionByConditionWithPage(ReportingForm reportingForm,String hqlWhere, Map<String, Object> paramsMapValue) {
 //		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,e.EVALUATE_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE ");
-		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE,r.REPORTING_UUID,di.DEVICETYPE_UUID,u.USER_UUID ");
+		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE,r.REPORTING_UUID,di.DEVICETYPE_UUID,u.USER_UUID,a.AUDIT_UUID ");
 		//hql.append(" from audit a,devicestate d,evaluate e,reporting r,deviceinfo di,user u ");
 		hql.append(" from audit a,devicestate d,reporting r,deviceinfo di,user u ");
 		hql.append(" where a.REPORTING_UUID = r.REPORTING_UUID ");
@@ -104,7 +111,7 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 		hql.append(" and d.DEVICETYPE_UUID = di.DEVICETYPE_UUID ");
 		hql.append(" and u.USER_UUID = r.USER_UUID ");
 		hql.append(hqlWhere);
-		hql.append(" ORDER BY r.REPORTING_TIME ");
+		hql.append(" ORDER BY r.REPORTING_TIME DESC");
 		
 		Query query = this.getSession().createSQLQuery(hql.toString());
 		//从第几条记录开始
@@ -197,7 +204,7 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Object[]> findReportingBugInfoByRrUuid(String reportingUuid) {
-		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE,di.VERSION,u.PHONE,a.AUDIT_TIME,a.FINISH_TIME,r.DEVICE_PIC_URL,r.ACCOUNT,r.REMARK ");
+		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,a.AUDIT_STAT_CODE,u.MAINTAIN_TYPE_CODE,di.VERSION,a.AUDIT_TIME,a.FINISH_TIME,r.DEVICE_PIC_URL,r.ACCOUNT,r.REMARK,a.MAINTAIN_UUID ");
 		hql.append(" from audit a,devicestate d,reporting r,deviceinfo di,user u ");
 		hql.append(" where r.REPORTING_UUID = a.REPORTING_UUID ");
 		hql.append(" and r.DEVICE_STATE_UUID = d.DEVICE_STATE_UUID ");
@@ -209,5 +216,14 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 		query.setParameter("reportingUuid", reportingUuid);
 		List<Object[]> obj = query.list();
 		return obj;
+	}
+
+	@Override
+	public void deleteAuditByReportingUuid(String reportingUuid)
+	{
+		String hqlWhere = " and reportingUuid = :reportingUuid";
+		Map<String, Object> paramsMapValue = new HashMap<String, Object>();
+		paramsMapValue.put("reportingUuid", reportingUuid);
+		auditDao.deleteObjectByCollectionIds(hqlWhere, paramsMapValue);
 	}
 }

@@ -6,15 +6,10 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="x" uri="http://www.xiaoy.com/pageTag/core"%>
 <jsp:include page="/pub.jsp"/>
-
+<link href="${pageContext.request.contextPath }/css/pageTag.css" rel="stylesheet" type="text/css"/>
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
 <title>查询设备状态</title>
 <script type="text/javascript">
-/**
-	//超链接在新窗口显示 
-	$(document).ready(function(){
-		$("a").attr("target", "_blank");
-	});
-	*/
 	//清除查询条件
 	$().ready(function(){
 		$("#BT_Reset").click(function(){
@@ -30,10 +25,10 @@
 </script> 
 
 </head>
-<body>
+<body style="background-color: #F5FAFE">
 	<!-- 查询输入start -->
 	<form action="" id="form1" name="form1" method="post">
-		<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
+		<table cellspacing="1" cellpadding="0" width="100%" align="center" border="0">
 			<tr>
 				<td class="ta_01" colspan=6 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
 					<font face="宋体" size="2"><strong>查询设备状态</strong></font>
@@ -43,7 +38,7 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="center" height="22">
 				区域：</td>
 				<td class="ta_01" >
 					<s:if test="%{#request.area != null && #request.area.size() > 0}">
@@ -57,7 +52,7 @@
 						<select id="" name="" style="width:140px"></select>
 					</s:else>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="center" height="22">
 				安装位置：</td>
 				<td class="ta_01" >
 					<s:if test="%{#request.installationSite != null && #request.installationSite.size() > 0}">
@@ -71,7 +66,7 @@
 						<select id="" name="" style="width:140px"></select>
 					</s:else>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="center" height="22">
 				设备名：</td>
 				<td class="ta_01" >
 					<s:if test="%{#request.deviceName != null && #request.deviceName.size() > 0}">
@@ -87,17 +82,17 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="center" height="22">
 				型号：</td>
 				<td class="ta_01" >
 					<s:textfield id="version" name="version" size="18"/>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="21">
+				<td class="ta_01" align="center" height="21">
 				安装日期：</td>
 				<td class="ta_01" >
 					<s:textfield cssClass="Wdate" id="installationTime" name="installationTime" size="18" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
+				<td class="ta_01" align="center" height="22">
 				运行状态：</td>
 				<td class="ta_01" >
 					<s:if test="%{#request.state != null && #request.state.size() > 0}">
@@ -116,7 +111,7 @@
 	<!-- 查询输入end -->
 	
 	<!-- 执行查询begin -->
-		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
+		<table cellSpacing="1" cellPadding="0" width="100%" align="center" border="0">
 			<tr height=10><td></td></TR>			
 			<tr>
 			  	<td>
@@ -135,7 +130,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgColor="#f5fafe" colspan="5">			
+				<td class="ta_01" align="center" colspan="5">			
 					<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="DataGrid1"
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->

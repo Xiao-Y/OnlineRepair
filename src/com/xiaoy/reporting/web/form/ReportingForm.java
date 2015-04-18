@@ -1,10 +1,9 @@
 package com.xiaoy.reporting.web.form;
 
-import java.util.Date;
-
 import com.xiaoy.base.web.form.BaseForm;
 
-public class ReportingForm extends BaseForm {
+public class ReportingForm extends BaseForm
+{
 	/* 申报故障信息id */
 	private String reportingUuid;
 	/* 申报人联系方式 */
@@ -13,7 +12,7 @@ public class ReportingForm extends BaseForm {
 	private String orderTime;
 	/* 优先级别id */
 	private String priorCode;
-	/* 设备图片URL */
+	/* 故障设备图片URL */
 	private String devicePicUrl;
 	/* 故障原因 */
 	private String account;
@@ -47,9 +46,9 @@ public class ReportingForm extends BaseForm {
 	private String maintainStatCode;
 	/* 维护状态名 */
 	private String maintainStatName;
-	/*维护人员*/
+	/* 维护人员 */
 	private String maintainName;
-	/*维护人员手机号*/
+	/* 维护人员手机号 */
 	private String maintainPhone;
 	/* 区域code */
 	private String areaCode;
@@ -64,95 +63,140 @@ public class ReportingForm extends BaseForm {
 	/* 设备信息uuid */
 	private String deviceTypeUuid;
 	/* 审核时间 */
-	private Date auditTime;
-	/*设备型号*/
+	private String auditTime;
+	/* 设备型号 */
 	private String version;
-	/**/
-	private String phone;
+	/* 完成时间 */
+	private String finishTime;
+	/* 维护人员Uuid */
+	private String maintainUuid;
+	/* 维护人员姓名 */
+	private String maintainUserName;
+	/*申报信息的uuid*/
+	private String auditUuid;
 
-	public Date getAuditTime()
+	public String getAuditUuid()
+	{
+		return auditUuid;
+	}
+
+	public void setAuditUuid(String auditUuid)
+	{
+		this.auditUuid = auditUuid;
+	}
+
+	public String getMaintainUserName()
+	{
+		return maintainUserName;
+	}
+
+	public void setMaintainUserName(String maintainUserName)
+	{
+		this.maintainUserName = maintainUserName;
+	}
+
+	public String getAuditTime()
 	{
 		return auditTime;
 	}
 
-	public void setAuditTime(Date auditTime)
+	public void setAuditTime(String auditTime)
 	{
 		this.auditTime = auditTime;
 	}
 
-	public String getInstallationSiteName() {
+	public String getInstallationSiteName()
+	{
 		return installationSiteName;
 	}
 
-	public void setInstallationSiteName(String installationSiteName) {
+	public void setInstallationSiteName(String installationSiteName)
+	{
 		this.installationSiteName = installationSiteName;
 	}
 
-	public String getEvaluateStatName() {
+	public String getEvaluateStatName()
+	{
 		return evaluateStatName;
 	}
 
-	public void setEvaluateStatName(String evaluateStatName) {
+	public void setEvaluateStatName(String evaluateStatName)
+	{
 		this.evaluateStatName = evaluateStatName;
 	}
 
-	public String getMaintainTypeName() {
+	public String getMaintainTypeName()
+	{
 		return maintainTypeName;
 	}
 
-	public void setMaintainTypeName(String maintainTypeName) {
+	public void setMaintainTypeName(String maintainTypeName)
+	{
 		this.maintainTypeName = maintainTypeName;
 	}
 
-	public String getMaintainStatName() {
+	public String getMaintainStatName()
+	{
 		return maintainStatName;
 	}
 
-	public void setMaintainStatName(String maintainStatName) {
+	public void setMaintainStatName(String maintainStatName)
+	{
 		this.maintainStatName = maintainStatName;
 	}
 
-	public String getAreaName() {
+	public String getAreaName()
+	{
 		return areaName;
 	}
 
-	public void setAreaName(String areaName) {
+	public void setAreaName(String areaName)
+	{
 		this.areaName = areaName;
 	}
 
-	public String getAuditStatName() {
+	public String getAuditStatName()
+	{
 		return auditStatName;
 	}
 
-	public void setAuditStatName(String auditStatName) {
+	public void setAuditStatName(String auditStatName)
+	{
 		this.auditStatName = auditStatName;
 	}
 
-	public String getLoginName() {
+	public String getLoginName()
+	{
 		return loginName;
 	}
 
-	public void setLoginName(String loginName) {
+	public void setLoginName(String loginName)
+	{
 		this.loginName = loginName;
 	}
 
-	public String getAuditStatCode() {
+	public String getAuditStatCode()
+	{
 		return auditStatCode;
 	}
 
-	public void setAuditStatCode(String auditStatCode) {
+	public void setAuditStatCode(String auditStatCode)
+	{
 		this.auditStatCode = auditStatCode;
 	}
 
-	public String getAreaCode() {
+	public String getAreaCode()
+	{
 		return areaCode;
 	}
 
-	public void setAreaCode(String areaCode) {
+	public void setAreaCode(String areaCode)
+	{
 		this.areaCode = areaCode;
 	}
 
-	public String getMaintainStatCode() {
+	public String getMaintainStatCode()
+	{
 		return maintainStatCode;
 	}
 
@@ -176,135 +220,168 @@ public class ReportingForm extends BaseForm {
 		this.maintainName = maintainName;
 	}
 
-	public void setMaintainStatCode(String maintainStatCode) {
+	public void setMaintainStatCode(String maintainStatCode)
+	{
 		this.maintainStatCode = maintainStatCode;
 	}
 
-	public String getInstallationSiteCode() {
+	public String getInstallationSiteCode()
+	{
 		return installationSiteCode;
 	}
 
-	public void setInstallationSiteCode(String installationSiteCode) {
+	public void setInstallationSiteCode(String installationSiteCode)
+	{
 		this.installationSiteCode = installationSiteCode;
 	}
 
-	public String getEvaluateStatCode() {
+	public String getEvaluateStatCode()
+	{
 		return evaluateStatCode;
 	}
 
-	public void setEvaluateStatCode(String evaluateStatCode) {
+	public void setEvaluateStatCode(String evaluateStatCode)
+	{
 		this.evaluateStatCode = evaluateStatCode;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public String getMaintainTypeCode() {
+	public String getMaintainTypeCode()
+	{
 		return maintainTypeCode;
 	}
 
-	public void setMaintainTypeCode(String maintainTypeCode) {
+	public void setMaintainTypeCode(String maintainTypeCode)
+	{
 		this.maintainTypeCode = maintainTypeCode;
 	}
 
-	public String getDeviceName() {
+	public String getDeviceName()
+	{
 		return deviceName;
 	}
 
-	public void setDeviceName(String deviceName) {
+	public void setDeviceName(String deviceName)
+	{
 		this.deviceName = deviceName;
 	}
 
-	public String getFlag() {
+	public String getFlag()
+	{
 		return flag;
 	}
 
-	public void setFlag(String flag) {
+	public void setFlag(String flag)
+	{
 		this.flag = flag;
 	}
 
-	public String getUserUuid() {
+	public String getUserUuid()
+	{
 		return userUuid;
 	}
 
-	public void setUserUuid(String userUuid) {
+	public void setUserUuid(String userUuid)
+	{
 		this.userUuid = userUuid;
 	}
 
-	public String getDeviceStateUuid() {
+	public String getDeviceStateUuid()
+	{
 		return deviceStateUuid;
 	}
 
-	public void setDeviceStateUuid(String deviceStateUuid) {
+	public void setDeviceStateUuid(String deviceStateUuid)
+	{
 		this.deviceStateUuid = deviceStateUuid;
 	}
 
-	public String getReportingUuid() {
+	public String getReportingUuid()
+	{
 		return reportingUuid;
 	}
 
-	public void setReportingUuid(String reportingUuid) {
+	public void setReportingUuid(String reportingUuid)
+	{
 		this.reportingUuid = reportingUuid;
 	}
 
-	public String getReportingPhone() {
+	public String getReportingPhone()
+	{
 		return reportingPhone;
 	}
 
-	public void setReportingPhone(String reportingPhone) {
+	public void setReportingPhone(String reportingPhone)
+	{
 		this.reportingPhone = reportingPhone;
 	}
 
-	public String getOrderTime() {
+	public String getOrderTime()
+	{
 		return orderTime;
 	}
 
-	public void setOrderTime(String orderTime) {
+	public void setOrderTime(String orderTime)
+	{
 		this.orderTime = orderTime;
 	}
 
-	public String getPriorCode() {
+	public String getPriorCode()
+	{
 		return priorCode;
 	}
 
-	public void setPriorCode(String priorCode) {
+	public void setPriorCode(String priorCode)
+	{
 		this.priorCode = priorCode;
 	}
 
-	public String getDevicePicUrl() {
+	public String getDevicePicUrl()
+	{
 		return devicePicUrl;
 	}
 
-	public void setDevicePicUrl(String devicePicUrl) {
+	public void setDevicePicUrl(String devicePicUrl)
+	{
 		this.devicePicUrl = devicePicUrl;
 	}
 
-	public String getAccount() {
+	public String getAccount()
+	{
 		return account;
 	}
 
-	public void setAccount(String account) {
+	public void setAccount(String account)
+	{
 		this.account = account;
 	}
 
-	public String getRemark() {
+	public String getRemark()
+	{
 		return remark;
 	}
 
-	public void setRemark(String remark) {
+	public void setRemark(String remark)
+	{
 		this.remark = remark;
 	}
 
-	public String getReportingTime() {
+	public String getReportingTime()
+	{
 		return reportingTime;
 	}
 
-	public void setReportingTime(String reportingTime) {
+	public void setReportingTime(String reportingTime)
+	{
 		this.reportingTime = reportingTime;
 	}
 
@@ -316,5 +393,35 @@ public class ReportingForm extends BaseForm {
 	public void setDeviceTypeUuid(String deviceTypeUuid)
 	{
 		this.deviceTypeUuid = deviceTypeUuid;
+	}
+
+	public String getVersion()
+	{
+		return version;
+	}
+
+	public void setVersion(String version)
+	{
+		this.version = version;
+	}
+
+	public String getFinishTime()
+	{
+		return finishTime;
+	}
+
+	public void setFinishTime(String finishTime)
+	{
+		this.finishTime = finishTime;
+	}
+
+	public String getMaintainUuid()
+	{
+		return maintainUuid;
+	}
+
+	public void setMaintainUuid(String maintainUuid)
+	{
+		this.maintainUuid = maintainUuid;
 	}
 }

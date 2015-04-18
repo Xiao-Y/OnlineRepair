@@ -258,4 +258,29 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 		}
 		return "success";
 	}
+	
+	/**
+	 * 删除故障申报信息<br/>
+	 * 1、待审核的。只用删除申报信息。<br/>
+	 * 2、审核通过。删除审核通过的申报信息，将会删除审核信息和评价信息<br/>
+	 * 3、审核未通过。删除审核未通过的申报信息，将会删除审核信息<br/>
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public String deleteReportingBugInfo() throws UnsupportedEncodingException
+	{
+		String reportingUuid = request.getParameter("reportingUuid");
+		String auditStatCode = request.getParameter("auditStatCode");
+		String auditUuid = request.getParameter("auditUuid");
+		try
+		{
+			reportingService.deleteReportingBugInfo(reportingUuid,auditStatCode,auditUuid);
+			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
+		} catch (Exception e)
+		{
+			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
+			e.printStackTrace();
+		}
+		return "ajax-success";
+	}
 }

@@ -32,7 +32,7 @@
 	       </td>
 	       <td width="18%" align="right" bgColor="#f5fafe" class="ta_01" width="20%">型号：<font color="#FF0000">*</font></td>
 	       <td class="ta_01" bgColor="#ffffff" width="30%">
-	       		<s:textfield name="version" id="version" maxlength="25" size="20" data-rule-storeDomain="true" data-rule-required="true"/>
+	       		<s:textfield name="version" id="version" maxlength="25" size="20" data-rule-loginname="true" data-rule-required="true"/>
 	       </td>
 	    </tr>
 	    

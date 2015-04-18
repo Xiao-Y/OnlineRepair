@@ -30,4 +30,10 @@ public interface ReportingDao extends Common<Reporting>
 	 */
 	List<Object[]> findReportingBugInfoByRrUuid(String reportingUuid);
 
+	/**
+	 * 通过申报信息的uuid删除审核信息
+	 * @param reportingUuid		申报信息的uuid
+	 */
+	void deleteAuditByReportingUuid(String reportingUuid);
+
 }

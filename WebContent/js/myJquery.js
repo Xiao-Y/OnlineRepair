@@ -609,6 +609,47 @@ function reportingBugInfoFind(){
 	$("#form1").submit();
 }
 
+//异步删除申报信息
+function deleteReportingBugInfo(deviceName, reportingUuid, auditStatCode, auditUuid){
+	var flag = confirm("确定删除“" + deviceName + "”申报信息？");
+	if(flag){
+		//审核通过。删除审核通过的申报信息，将会删除审核信息和评价信息
+		if(auditStatCode == "2"){
+			var reFlag = confirm("删除审核通过的申报信息，将会删除审核信息和评价信息。是否删除？");
+			if(!reFlag){
+				return;
+			}else{
+				deleteReportingInfo(reportingUuid, auditStatCode, auditUuid);
+			}
+		//审核未通过。删除审核未通过的申报信息，将会删除审核信息
+		}else if(auditStatCode == "3"){
+			var fg = confirm("删除审核未通过的申报信息，将会删除审核信息。是否删除？");
+			if(!fg){
+				return;
+			}else{
+				deleteReportingInfo(reportingUuid, auditStatCode, auditUuid);
+			}
+		//待审核的
+		}else if(auditStatCode == "1"){
+			deleteReportingInfo(reportingUuid, auditStatCode, auditUuid);
+		}
+	}
+}
+
+//删除申报信息
+function deleteReportingInfo(reportingUuid, auditStatCode, auditUuid){
+	var url = "${pageContext.request.contextPath }/ReportingMag/reportingAction_deleteReportingBugInfo.action";
+	var args = {"date":new Date,"reportingUuid":reportingUuid,"auditStatCode":auditStatCode,"auditUuid":auditUuid};
+	$.post(url,args,function(data){
+		if(data == "1"){
+			$("#" + reportingUuid).remove();
+		}else if(data == "0"){
+			alert("删除失败");
+		}else{
+			alert("服务器错误，稍后再试！");
+		}
+	});
+}
 //申报管理======================end
 
 

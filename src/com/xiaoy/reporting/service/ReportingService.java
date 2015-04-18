@@ -36,4 +36,16 @@ public interface ReportingService
 	 */
 	ReportingForm findReportingBugInfoByRrUuid(String reportingUuid);
 
+	/**
+	 * 删除故障申报信息<br/>
+	 * 1、待审核的。只用删除申报信息。<br/>
+	 * 2、审核通过。删除审核通过的申报信息，将会删除审核信息和评价信息<br/>
+	 * 3、审核未通过。删除审核未通过的申报信息，将会删除审核信息<br/>
+	 * 
+	 * @param reportingUuid		申报信息的uuid
+	 * @param auditStatCode		审核的状态。1表示待审核，2表示已通过，3表示未通过
+	 * @param auditUuid			审核信息uuid
+	 */
+	void deleteReportingBugInfo(String reportingUuid, String auditStatCode,String auditUuid);
+
 }

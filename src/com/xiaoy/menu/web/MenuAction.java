@@ -69,6 +69,15 @@ public class MenuAction extends BaseAction
 		return "ajax-success";
 	}
 	
+	/**
+	 * 首页加载
+	 * @return
+	 */
+	public String loading()
+	{
+		return "loading";
+	}
+	
 	public String home()
 	{
 		return "home";

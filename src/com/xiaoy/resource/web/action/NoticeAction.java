@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 
@@ -14,6 +15,7 @@ import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.servic.NoticeService;
 import com.xiaoy.resource.web.form.NoticeForm;
+import com.xiaoy.user.web.form.UserForm;
 
 @SuppressWarnings("serial")
 @Controller
@@ -63,6 +65,9 @@ public class NoticeAction extends BaseAction implements ModelDriven<NoticeForm>
 	 */
 	public String saveNotice()
 	{
+		HttpSession session = request.getSession();
+		UserForm userInfo = (UserForm) session.getAttribute("userInfo");
+		noticeForm.setNoticeName(userInfo.getName());
 		noticeService.saveNotice(noticeForm);
 		logService.saveLog(request, MENU_MODEL, "添加公告信息");
 		return "saveNotice";

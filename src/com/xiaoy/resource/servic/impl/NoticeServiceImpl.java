@@ -46,7 +46,7 @@ public class NoticeServiceImpl implements NoticeService
 		entity.setNotice(noticeForm.getNotice());
 		entity.setNoticeName(noticeForm.getNoticeName());
 		entity.setNoticeTime(new Date());
-		
+		entity.setNoticeName(noticeForm.getNoticeName());
 		return entity;
 	}
 

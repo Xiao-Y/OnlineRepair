@@ -1,13 +1,20 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<jsp:include page="/pub.jsp"/>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
-<jsp:include page="/pub.jsp"/>
 <style type="text/css">
 a {
 	color: #0A0A0A;
 	 text-decoration:none;
+}
+body {
+	background-color:#F5FAFE; 	
+}
+td {
+	background-color: #F5FAFE;
 }
 </style>
 <!-- 切换折叠 -->
@@ -16,7 +23,7 @@ a {
 		//左侧菜单栏初始状为关闭
 		var open = "${pageContext.request.contextPath }/images/open.gif";
 		var add = "${pageContext.request.contextPath }/images/add.gif";
-		$(".qx_list").hide();
+		$(".qx_list").show();
 		
 		$(".qx").click(function() {
 			var id = $(this).attr("id");
@@ -54,14 +61,14 @@ a {
 	<table height="100%" width="150" border="0" cellSpacing="0" cellPadding="0">
 		<tr height="6"><td></td></tr>
 		<tr>
-			<td vAlign="top" bgColor="#F6F6F6" height="100%">
+			<td vAlign="top" height="100%">
 				<!-- 设备管理 begin -->
 				<div class="qx" id="deviceMagParent" style="cursor:pointer;">
 					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
 								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/add.gif" name="deviceMagParent" width="8" height="9" alt="" border="0" />
+									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="deviceMagParent" width="8" height="9" alt="" border="0" />
 									设备管理
 								</div>
 							</td>
@@ -90,7 +97,7 @@ a {
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
 								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/add.gif" name="userMagParent" width="8" height="9" alt="" border="0" />
+									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="userMagParent" width="8" height="9" alt="" border="0" />
 									用户信息管理
 								</div>
 							</td>
@@ -119,7 +126,7 @@ a {
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
 								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/add.gif" name="reportingMagParent" width="8" height="9" alt="" border="0" />
+									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="reportingMagParent" width="8" height="9" alt="" border="0" />
 									申报故障管理
 								</div>
 							</td>
@@ -148,7 +155,7 @@ a {
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
 								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/add.gif" name="auditMagParent" width="8" height="9" alt="" border="0" />
+									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="auditMagParent" width="8" height="9" alt="" border="0" />
 									故障申报审核
 								</div>
 							</td>
@@ -182,7 +189,7 @@ a {
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
 								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/add.gif" name="evaluateMagParent" width="8" height="9" alt="" border="0" />
+									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="evaluateMagParent" width="8" height="9" alt="" border="0" />
 									评价留言管理
 								</div>
 							</td>
@@ -211,7 +218,7 @@ a {
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
 								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/add.gif" name="authorityMagParent" width="8" height="9" alt="" border="0" />
+									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="authorityMagParent" width="8" height="9" alt="" border="0" />
 									权限管理
 								</div>
 							</td>
@@ -235,7 +242,7 @@ a {
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
 								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/add.gif" name="resourceMagParent" width="8" height="9" alt="" border="0" />
+									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="resourceMagParent" width="8" height="9" alt="" border="0" />
 									资源管理
 								</div>
 							</td>
@@ -269,7 +276,7 @@ a {
 						<tr height=25>
 							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
 								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/add.gif" name="countMagParent" width="8" height="9" alt="" border="0" />
+									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="countMagParent" width="8" height="9" alt="" border="0" />
 									统计管理
 								</div>
 							</td>

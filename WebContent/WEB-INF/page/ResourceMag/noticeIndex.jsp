@@ -6,10 +6,10 @@
 <title>公告信息编辑</title>
 </head>
 
-<body>
+<body style="background-color:#F5FAFE;">
 <s:form name="Form1" id="Form1" method="post" cssClass="form-validate" action="ResourceMa/noticeAction_saveNotice.action">
 	<br/>
-	<table id="opperate1" cellspacing="1" cellpadding="5" width="90%" align="center" bgcolor="#f5fafe" style="border:1px solid #8ba7e3" border="0">
+	<table id="opperate1" cellspacing="1" cellpadding="5" width="90%" align="center" style="border:1px solid #8ba7e3" border="0">
         <tr>
 			<td class="ta_01" colspan=2 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
 			<font face="宋体" size="2"><strong>公告信息编辑</strong></font>
@@ -18,20 +18,20 @@
 		<TR height=10><td></td><td></td></TR>
 		
 		<tr>
-			<td class="ta_01" align="right" bgcolor="#f5fafe" width="30%">公告标题：</td>
+			<td class="ta_01" align="right" width="30%">公告标题：</td>
 			<td class="ta_01" bgcolor="#ffffff" style="word-break: break-all">
 				<input id="noticeTit" name="noticeTit" data-rule-required="true" style="width: 500px; height: 25px; padding: 1;FONT-FAMILY: 宋体; FONT-SIZE: 9pt" maxlength="20">
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="right" bgcolor="#f5fafe" width="30%">公告内容：</td>
+			<td class="ta_01" align="right" width="30%">公告内容：</td>
 			<td class="ta_01" bgcolor="#ffffff" style="word-break: break-all">
 			<textarea id="notice" name="notice" data-rule-required="true" style="width: 500px; height: 160px; padding: 1;FONT-FAMILY: 宋体; FONT-SIZE: 9pt" onkeydown="if(event.keyCode==13)addEnter('notice');"></textarea>
 			</td>
 		</tr>
         <tr>
         	<td></td>
-			<td class="ta_01" style="width: 100%" align="center" bgcolor="#f5fafe">
+			<td class="ta_01" style="width: 100%" align="center">
 				<input type="button" name="BT_Submit" value="保存" onclick="checkchar()" id="BT_Submit" style="font-size:12px; color:black; height=20;width=50">
 			</td>
 		</tr>
@@ -65,7 +65,7 @@
 </s:form>
 
 <s:form name="Form2" id="Form2"  method="post">
-	<table id="opperate2" cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
+	<table id="opperate2" cellSpacing="1" cellPadding="0" width="90%" align="center" border="0">
 		<TBODY>
 			<TR height=10><td></td></TR>			
 			<tr>
@@ -82,7 +82,7 @@
                 </td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgColor="#f5fafe" colspan=3>			
+				<td class="ta_01" align="center" colspan=3>			
 						<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="DataGrid1"
 							style="BORDER-RIGHT:gray 1px solid; BORDER-TOP:gray 1px solid; BORDER-LEFT:gray 1px solid; WIDTH:100%; WORD-BREAK:break-all; BORDER-BOTTOM:gray 1px solid; BORDER-COLLAPSE:collapse; BACKGROUND-COLOR:#f5fafe; WORD-WRAP:break-word">
 							<tr style="FONT-WEIGHT:bold;FONT-SIZE:12pt;HEIGHT:25px;BACKGROUND-COLOR:#afd1f3">

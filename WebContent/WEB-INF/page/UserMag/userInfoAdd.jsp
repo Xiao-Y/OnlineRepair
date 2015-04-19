@@ -5,7 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<style type="text/css">
+body {
+	background-color:#F5FAFE; 	
+}
+td {
+	background-color: #F5FAFE;
+}
+</style>
 <title>添加用户信息</title>
 
 </head>
@@ -19,18 +26,18 @@
 				</td>
 			</tr>
 		    <tr>
-		       <td align="right" bgColor="#f5fafe" class="ta_01" width="15%">登陆名：<font color="#FF0000">*</font></td>
+		       <td align="right" class="ta_01" width="15%">登陆名：<font color="#FF0000">*</font></td>
 		       <td class="ta_01" bgColor="#ffffff" width="35%">
 		       		<s:textfield name="loginName" id="loginName" maxlength="25" size="20" cssStyle="width: 134px" data-rule-required="true"/>
 		       </td>
-		       <td width="18%" align="right" bgColor="#f5fafe" class="ta_01" width="15%">姓名：<font color="#FF0000">*</font></td>
+		       <td align="right" class="ta_01" width="15%">姓名：<font color="#FF0000">*</font></td>
 		       <td class="ta_01" bgColor="#ffffff" width="35%">
 		       		<s:textfield name="name" id="name" maxlength="20" size="20" cssStyle="width: 134px" data-rule-required="true"/>
 		       </td>
 		    </tr>
 		    
 			<tr>
-				<td align="right" bgColor="#f5fafe" class="ta_01" width="15%">性别：<font color="#FF0000">*</font></td>
+				<td align="right" class="ta_01" width="15%">性别：<font color="#FF0000">*</font></td>
 		       	<td class="ta_01" bgColor="#ffffff" width="35%">
 		       		<s:if test="%{#request.sex != null && #request.sex.size() > 0}">
 			       		<s:select list="%{#request.sex}" id="sexCode" name="sexCode"
@@ -42,7 +49,7 @@
 						<select id="" name="" style="width:140px"></select>
 					</s:else>
 		       	</td>
-		       	<td align="right" bgColor="#f5fafe" class="ta_01" width="15%">维护类别：<font color="#FF0000">*</font></td>
+		       	<td align="right" class="ta_01" width="15%">维护类别：<font color="#FF0000">*</font></td>
 		       	<td class="ta_01" bgColor="#ffffff" width="35%">
 		       		<s:if test="%{#request.maintainType != null && #request.maintainType.size() > 0}">
 						<s:select list="%{#request.maintainType}" id="maintainTypeCode" name="maintainTypeCode"
@@ -56,32 +63,32 @@
 		       	</td>
 			</tr>
 			<tr>
-			    <td align="right" bgColor="#f5fafe" class="ta_01" width="15%">联系方式：<font color="#FF0000">*</font></td>
+			    <td align="right" class="ta_01" width="15%">联系方式：<font color="#FF0000">*</font></td>
 				<td class="ta_01" bgColor="#ffffff" width="35%">
 					<s:textfield name="phone" id="phone" maxlength="11" size="11" cssStyle="width: 134px" data-rule-required="true" data-rule-mobilezh="true"/>
 				</td>
-				<td align="right" bgColor="#f5fafe" class="ta_01" width="15%">密码：</td>
+				<td align="right" class="ta_01" width="15%">密码：</td>
 				<td class="ta_01" bgColor="#ffffff" width="35%">
 					<s:password name="password" id="password" maxlength="20" size="20" cssStyle="width: 134px"/>
 				</td>
 			</tr>
 			<tr>
-				<td align="right" bgColor="#f5fafe" class="ta_01" width="15%">地址：</td>
+				<td align="right" class="ta_01" width="15%">地址：</td>
 				<td class="ta_01" bgColor="#ffffff" colSpan="3" width="35%">
-					<textarea name="address" id="address" style="width:95%" rows="3" cols="52"></textarea>
+					<textarea name="address" id="address" style="width:80%" rows="4" cols="52"></textarea>
 				</td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="right" bgcolor="#f5fafe" width="15%">备注：</td>
+				<td class="ta_01" align="right" width="15%">备注：</td>
 				<td class="ta_01" bgcolor="#ffffff" colspan="3" width="35%">
-					<textarea name="remark" id="remark" style="width:95%" rows="4" cols="52"></textarea>
+					<textarea name="remark" id="remark" style="width:80%" rows="4" cols="52"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td  align="center"  colspan="4"  class="sep1"></td>
 			</tr>
 			<tr>
-				<td class="ta_01" style="WIDTH: 100%" align="center" bgColor="#f5fafe" colSpan="4">
+				<td class="ta_01" style="WIDTH: 100%" align="center" colSpan="4">
 					<input type="submit" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55">
 					<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
 					<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="返回"  name="Reset1"  onClick="history.back()">

@@ -7,7 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>故障信息列表</title>
 <jsp:include page="/pub.jsp"/>
-
 <script type="text/javascript">
 	/**
 	//超链接在新窗口显示 
@@ -37,7 +36,7 @@
 </script> 
 
 </head>
-<body style="background-color: #F5FAFE">
+<body style="background-color:#F5FAFE;"> 
 	<!-- 查询输入start -->
 	<form action="" id="form1" name="form1" method="post">
 		<table cellspacing="1" cellpadding="0" width="100%" align="center"  border="0">
@@ -154,7 +153,7 @@
 	
 	<!-- 执行查询begin -->
 		<table cellSpacing="1" cellPadding="0" width="100%" align="center"  border="0">
-			<tr height=10><td></td></TR>			
+			<tr height=10><td></td></tr>			
 			<tr>
 			  	<td>
 	                <table style="width: 105px; height: 20px" border="0">
@@ -177,9 +176,6 @@
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
 						<tr style="font-weight:bold;font-size:12pt;height:25px;background-color:#afd1f3">
-							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">
-								<input type="checkbox" id="checkbox" name="checkbox" onclick="quanxuan();">
-							</td>
 						    <td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</td>
 						    <td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">区域</td>
 							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</td>
@@ -201,9 +197,6 @@
 						<s:if test="%{#request.reportingBugInfoList != null && #request.reportingBugInfoList.size() > 0}">
 							<s:iterator value="%{#request.reportingBugInfoList}" var="reportingBugInfo" status="u">
 								<tr id='<s:property value="%{#reportingBugInfo.reportingUuid}"/>' onmouseover="this.style.backgroundColor = '#D4E3E5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-									<td style="HEIGHT:22px" align="center" width="5%">
-										<input type="checkbox" id="${reportingBugInfo.reportingUuid }" name="ids" class="ids" value="${reportingBugInfo.reportingUuid }">
-									</td>
 									<td style="HEIGHT:22px" align="center" width="5%">
 										<s:property value="%{#u.getIndex() + 1}"/>
 									</td>

@@ -7,9 +7,9 @@
 
 </head>
 
-<body>
+<body style="background-color:#F5FAFE;">
 	<s:form name="Form1" id="Form1" method="post" cssStyle="margin: 0px;">
-		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0" id="tb">
+		<table cellSpacing="1" cellPadding="0" width="100%" align="center" bgColor="#f5fafe" border="0" id="tb">
 			<tr height=10><td></td></tr>
 			<tbody>
 				<tr>
@@ -47,7 +47,7 @@
 	</s:form>
 
 	<s:form name="Form2" id="Form2" method="post" cssStyle="margin: 0px;">
-		<table cellSpacing="1" id="tableOld" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
+		<table cellSpacing="1" id="tableOld" cellPadding="0" width="100%" align="center" bgColor="#f5fafe" border="0">
 			<tr>
 				<td>
 					<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="dictTbl" style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">

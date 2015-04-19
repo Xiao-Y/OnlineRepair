@@ -7,6 +7,14 @@
 <jsp:include page="/pub.jsp"/>
 
 <title>申报故障信息</title>
+<style type="text/css">
+body {
+	background-color:#F5FAFE; 	
+}
+td {
+	background-color: #F5FAFE;
+}
+</style>
 <script type="text/javascript">
    window.onload = function () { 
         new uploadPreview({ UpBtn: "image", DivShow: "imgdiv", ImgShow: "imgShow" });
@@ -14,7 +22,7 @@
 </script>
 
 </head>
-<body>
+<body> 
 <form name="Form1" enctype="multipart/form-data" method="post" id="Form1" name="Form1" class="form-validate" action="${pageContext.request.contextPath }/ReportingMag/reportingAction_reportingBugInfoSave.action">
 	<br>
     <table cellSpacing="1" cellPadding="5" width="880" align="center" bgColor="#eeeeee" style="border:1px solid #8ba7e3" border="0">
@@ -24,7 +32,7 @@
 			</td>
 		</tr>
 	    <tr>
-	       	<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">区域：<font color="#FF0000">*</font></td>
+	       	<td align="right" width="20%" class="ta_01">区域：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff" width="30%">
 	       		<s:if test="%{#request.area != null && #request.area.size() > 0}">
 		       		<s:select list="%{#request.area}" id="areaCode" name="areaCode"
@@ -38,7 +46,7 @@
 					<select id="" name="" style="width:140px"></select>
 				</s:else>
 	       	</td>
-	       	<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">安装位置：<font color="#FF0000">*</font></td>
+	       	<td align="right" width="20%" class="ta_01">安装位置：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff">
 	       	<div id="installationSiteDiv"></div>
 	       	<%-- 
@@ -53,7 +61,7 @@
 	    </tr>
 	    
 		<tr>
-			<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">设备名：<font color="#FF0000">*</font></td>
+			<td align="right" width="20%" class="ta_01">设备名：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff" height="21">
 	       	<div id="deviceNameDiv"></div>
 	       	<%-- 
@@ -64,24 +72,24 @@
 				/>
 	       	 --%>
 	       	</td>
-			<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">型号：<font color="#FF0000">*</font></td>
+			<td align="right" width="20%" class="ta_01">型号：<font color="#FF0000">*</font></td>
 	       	<td class="ta_01" bgColor="#ffffff">
 	       		<div id="versionDiv"></div>
 	      	</td>
 		</tr>
 		<tr>
-		    <td align="right" width="20%" bgColor="#f5fafe" class="ta_01">申报人手机号：<font color="#FF0000">*</font></td>
+		    <td align="right" width="20%" class="ta_01">申报人手机号：<font color="#FF0000">*</font></td>
 			<td class="ta_01" bgColor="#ffffff">
 				<s:textfield maxlength="11" size="18" id="reportingPhone" name="reportingPhone" data-rule-required="true" data-rule-mobilezh="true"/>
 			</td>
-			<td align="right" bgColor="#f5fafe" class="ta_01">预约日期：</td>
+			<td align="right" class="ta_01">预约日期：</td>
 			<td class="ta_01" bgColor="#ffffff">
 				<s:textfield id="orderTime" name="orderTime" cssClass="Wdate" size="20" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 			</td>
 		</tr>
 		
 		<tr>
-			<td align="right" width="20%" bgColor="#f5fafe" class="ta_01">优先级别：</td>
+			<td align="right" width="20%" class="ta_01">优先级别：</td>
 			<td class="ta_01" bgColor="#ffffff">
 				<s:if test="%{#request.priorCodes != null && #request.priorCodes.size() > 0}">
 		       		<s:select list="%{#request.priorCodes}" id="priorCode" name="priorCode"
@@ -94,29 +102,31 @@
 					<select id="" name="" style="width:140px"></select>
 				</s:else>
 			</td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
-			<td class="ta_01" width="20%" align="right" bgcolor="#f5fafe">故障设备图片：</td>
+			<td class="ta_01" width="20%" align="right">故障设备图片：</td>
 			<td class="ta_01" width="80%" bgcolor="#ffffff" colspan="3">
 				<s:file id="image" name="image"/>
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" width="20%" align="right" bgcolor="#f5fafe">上传的图片：</td>
+			<td class="ta_01" width="20%" align="right">上传的图片：</td>
 			<td class="ta_01" width="80%" bgcolor="#ffffff" colspan="3">
 				<div id="imgdiv"><img id="imgShow" width="500px" height="300px" /></div>
 			</td>
 		</tr>
 		
 		<tr>
-			<td class="ta_01" width="20%" align="right" bgcolor="#f5fafe">故障原因：</td>
+			<td class="ta_01" width="20%" align="right">故障原因：</td>
 			<td class="ta_01" width="80%" bgcolor="#ffffff" colspan="3">
 				<s:textarea name="account" id="account" style="width:95%" rows="4" cols="52"/>
 			</td>
 		</tr>
 		
 		<tr>
-			<td class="ta_01" width="20%" align="right" bgcolor="#f5fafe">备注：</td>
+			<td class="ta_01" width="20%" align="right">备注：</td>
 			<td class="ta_01" width="80%" bgcolor="#ffffff" colspan="3">
 				<s:textarea name="remark" id="remark" style="width:95%" rows="4" cols="52"/>
 			</td>
@@ -126,7 +136,7 @@
 			<td  align="center"  colSpan="4"  class="sep1"></td>
 		</tr>
 		<tr>
-			<td class="ta_01" style="WIDTH: 100%" align="center" bgColor="#f5fafe" colSpan="4">
+			<td class="ta_01" style="WIDTH: 100%" align="center" colSpan="4">
 				<input type="button" id="button" onclick="reportingBugInfoSave();" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55">
 				<s:hidden id="flag" name="flag"/>
 			</td>

@@ -3,11 +3,11 @@
 <%@ taglib prefix="x" uri="http://www.xiaoy.com/pageTag/core"%>
 <jsp:include page="/pub.jsp"/>
 <html>
-	<head>
-		<title>日志管理</title>		
-	</head>
+<head>
+<title>日志管理</title>		
+</head>
 		
-<body style="background-color: #F5FAFE">
+<body style="background-color:#F5FAFE;">
 		<form id="Form1" name="Form1" action="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action" method="post" cssStyle="margin:0px;"> 
 			<table cellspacing="1" cellpadding="0" width="100%" align="center" border="0">
 				<tr height=10><td></td></tr>

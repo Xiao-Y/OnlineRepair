@@ -1,0 +1,27 @@
+.ti div {
+	float: left;
+	width: 25%;
+	font-size: 16;
+	font-weight: bold;
+}
+
+.con {
+	overflow-y: auto;
+	height: 100px;
+}
+
+.con div {
+	float: left;
+	width: 25%;
+	margin: 0px;
+	height: 25px;
+	color: #0000FF;
+}
+
+a{
+	color: #0000FF;
+}
+
+font {
+	color: #0000FF;
+}

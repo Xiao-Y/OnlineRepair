@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,11 +31,11 @@
 
 			<iframe width="100%" height="8%" src="${pageContext.request.contextPath }/page/MenuMag/buttom.jsp" scrolling="no"></iframe>
  --%>
-	<frameset border=0 frameSpacing="0" rows="85,*"frameBorder="0" id="mainparent">
+	<frameset border=0 frameSpacing="0" rows="85,*" frameborder="no" id="mainparent">
 		<frame name=topFrame src="${pageContext.request.contextPath }/MenuMag/menuAction_top.action" noResize scrolling=no>
-		<frameset name="main" border=0 frameSpacing=0 frameBorder="0" cols=168,*>
+		<frameset border=0 frameSpacing=0 frameBorder="no" cols=168,*>
 			<frame name="leftFrame" src="${pageContext.request.contextPath }/MenuMag/menuAction_left.action" noResize scrolling="auto">
-			<frame name="main" scrolling="auto">
+			<frame name="main" scrolling="auto" src="${pageContext.request.contextPath }/MenuMag/menuAction_loading.action">
 		</frameset>
 		<%-- 
 		<frame name=topFrame src="${pageContext.request.contextPath }/page/MenuMag/buttom.jsp" noResize scrolling=no>

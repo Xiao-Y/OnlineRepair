@@ -166,7 +166,7 @@ td {
 					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/AuditMag/auditInfoWaitList.jsp' target="main">待审核</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/auditMag/AuditInfoAction_auditInfoWaitList.action' target="main">待审核</a>
 							</td>
 						</tr>
 						<tr height="25">

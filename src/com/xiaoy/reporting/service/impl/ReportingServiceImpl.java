@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xiaoy.Evaluate.dao.EvaluateDao;
 import com.xiaoy.audit.dao.AuditDao;
 import com.xiaoy.audit.service.impl.AuditServiceImpl;
 import com.xiaoy.base.entites.Audit;
@@ -22,6 +21,7 @@ import com.xiaoy.base.entites.Reporting;
 import com.xiaoy.base.entites.User;
 import com.xiaoy.base.util.DateHelper;
 import com.xiaoy.base.util.UploadImageHelper;
+import com.xiaoy.Evaluate.dao.EvaluateDao;
 import com.xiaoy.reporting.dao.ReportingDao;
 import com.xiaoy.reporting.service.ReportingService;
 import com.xiaoy.reporting.web.form.ReportingForm;
@@ -115,7 +115,8 @@ public class ReportingServiceImpl implements ReportingService
 		entity.setPriorCode(reportingForm.getPriorCode());
 		entity.setRemark(reportingForm.getRemark());
 		entity.setReportingPhone(reportingForm.getReportingPhone());
-		entity.setReportingTime(new Date());
+		String strd = DateHelper.dateConverString(new Date());
+		entity.setReportingTime(DateHelper.stringConverDate(strd));
 		entity.setReportingUuid(reportingForm.getReportingUuid());
 		
 		User user = new User();

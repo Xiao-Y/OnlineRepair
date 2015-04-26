@@ -176,7 +176,7 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 	 * @date: 2014年12月13日 下午7:52:53
 	 */
 	@SuppressWarnings("rawtypes")
-	private void settingParam(String hqlWhere, Map<String, Object> paramsMap,
+	protected void settingParam(String hqlWhere, Map<String, Object> paramsMap,
 			Query query)
 	{
 		if (!paramsMap.isEmpty() && paramsMap.size() > 0 && hqlWhere != null

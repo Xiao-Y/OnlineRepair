@@ -652,4 +652,12 @@ function deleteReportingInfo(reportingUuid, auditStatCode, auditUuid){
 }
 //申报管理======================end
 
+//审核管理====================start
+//待审核申报查询
+function auditInfoWaitSearch(){
+	$("#form1").attr("action","${pageContext.request.contextPath}/AuditMag/auditInfoAction_auditInfoWaitList.action");
+	$("#form1").submit();
+}
+//审核管理====================end
+
 

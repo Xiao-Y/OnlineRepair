@@ -7,7 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>查看设备信息</title>
-
+<style type="text/css">
+body {
+	background-color:#F5FAFE; 	
+}
+td {
+	background-color: #F5FAFE;
+}
+</style>
 </head>
 <body>
 <form name="Form1" method="post">

@@ -5,7 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<style type="text/css">
+body {
+	background-color:#F5FAFE; 	
+}
+td {
+	background-color: #F5FAFE;
+}
+</style>
 <title>查看设备状态信息</title>
 </head>
 <body>

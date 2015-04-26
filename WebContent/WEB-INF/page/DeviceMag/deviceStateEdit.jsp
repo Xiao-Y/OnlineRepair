@@ -12,7 +12,14 @@
     };
     
 </script>
-
+<style type="text/css">
+body {
+	background-color:#F5FAFE; 	
+}
+td {
+	background-color: #F5FAFE;
+}
+</style>
 </head>
 <body>
 <form enctype="multipart/form-data" class="form-validate" action="${pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceStateUpdate.action" id="Form1" name="Form1" method="post">

@@ -150,6 +150,15 @@
 		</action>
 	</package>
 
+	<!-- 审核管理======start -->
+	<package name="audit" namespace="/AuditMag" extends="struts-default">
+		<action name="auditInfoAction_*" class="com.xiaoy.audit.web.action.AuditInfoAction" method="{1}">
+			<result name="auditInfoWaitList">/WEB-INF/page/AuditMag/auditInfoWaitList.jsp</result>
+			<result name="auditInfoWaitEdit">/WEB-INF/page/AuditMag/auditInfoWaitEdit.jsp</result>
+		</action>
+	</package>
+	<!-- 审核管理======end -->
+
 	<!-- 资源管理====start -->
 	<package name="resource" namespace="/ResourceMag" extends="struts-default">
 		<!-- 公告=====start -->

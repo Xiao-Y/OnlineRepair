@@ -1,6 +1,5 @@
 package com.xiaoy.reporting.dao.impl;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,7 +121,7 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 		if (!StringUtils.isEmpty(hqlWhere) && paramsMapValue != null && paramsMapValue.size() > 0)
 		{
 			// 设置参数
-			this.settingParam(hqlWhere, paramsMapValue, query);
+			super.settingParam(hqlWhere, paramsMapValue, query);
 		}
 		
 		return query.list();
@@ -139,26 +138,26 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 	 * 
 	 * @author XiaoY
 	 * @date: 2014年12月13日 下午7:52:53
-	 */
-	@SuppressWarnings({ "rawtypes"})
-	private void settingParam(String hqlWhere, Map<String, Object> paramsMap,Query query)
-	{
-		if (!paramsMap.isEmpty() && paramsMap.size() > 0 && hqlWhere != null
-				&& hqlWhere.length() > 0)
-		{
-			for (Map.Entry<String, Object> entry : paramsMap.entrySet())
-			{
-				if (entry.getValue() instanceof Collection)
-				{
-					query.setParameterList(entry.getKey(),
-							(Collection) entry.getValue());
-				} else
-				{
-					query.setParameter(entry.getKey(), entry.getValue());
-				}
-			}
-		}
-	}
+//	 */
+//	@SuppressWarnings({ "rawtypes"})
+//	private void settingParam(String hqlWhere, Map<String, Object> paramsMap,Query query)
+//	{
+//		if (!paramsMap.isEmpty() && paramsMap.size() > 0 && hqlWhere != null
+//				&& hqlWhere.length() > 0)
+//		{
+//			for (Map.Entry<String, Object> entry : paramsMap.entrySet())
+//			{
+//				if (entry.getValue() instanceof Collection)
+//				{
+//					query.setParameterList(entry.getKey(),
+//							(Collection) entry.getValue());
+//				} else
+//				{
+//					query.setParameter(entry.getKey(), entry.getValue());
+//				}
+//			}
+//		}
+//	}
 
 	@SuppressWarnings("unchecked")
 	@Override

@@ -22,8 +22,8 @@ public class Audit {
 	private Date finishTime;
 	/* 驳回原因 */
 	private String failAccount;
-	/* 备注 */
-	private String remark;
+//	/* 备注 */
+//	private String remark;
 	/* 申报故障信息uuid */
 	private String reportingUuid;
 	/* 维护人员Uuid */
@@ -95,13 +95,13 @@ public class Audit {
 		this.failAccount = failAccount;
 	}
 
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+//	public String getRemark() {
+//		return remark;
+//	}
+//
+//	public void setRemark(String remark) {
+//		this.remark = remark;
+//	}
 
 	public String getReportingUuid() {
 		return reportingUuid;

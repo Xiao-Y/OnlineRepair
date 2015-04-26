@@ -23,9 +23,11 @@
         <property name="failAccount" type="java.lang.String">
             <column name="FAIL_ACCOUNT" />
         </property>
+        <!-- 
         <property name="remark" type="java.lang.String">
             <column name="REMARK" />
         </property>
+        -->
         <property name="reportingUuid" type="java.lang.String">
             <column name="REPORTING_UUID" />
         </property>

@@ -17,8 +17,8 @@
         <property name="rankCode" type="java.lang.String">
             <column name="RANK_CODE" />
         </property>
-        <property name="userUuid" type="java.lang.String">
-            <column name="USER_UUID" />
+        <property name="reportingUserUuid" type="java.lang.String">
+            <column name="REPORTING_USER_UUID" />
         </property>
         <property name="reportingUuid" type="java.lang.String">
             <column name="REPORTING_UUID" />

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +40,24 @@ public class UserDaoImpl extends CommonImpl<User> implements UserDao
 				.setString("loginName", userForm.getLoginName())
 				.setString("password", userForm.getPassword());
 		User user = (User) query.uniqueResult();
+		return user;
+	}
+
+	@Override
+	public List<User> findUserByMaintainTypeCode(String maintainTypeCode)
+	{
+		String hqlWhere = "";
+		Map<String, Object> paramsMapValue = null;
+		
+		if(!StringUtils.isEmpty(maintainTypeCode))
+		{
+			paramsMapValue = new HashMap<String, Object>();
+			
+			hqlWhere = " and  maintainTypeCode = :maintainTypeCode ";
+			paramsMapValue.put("maintainTypeCode", maintainTypeCode);
+		}
+		List<User> user = super.findCollectionByCondition(hqlWhere, paramsMapValue);
+		
 		return user;
 	}
 }

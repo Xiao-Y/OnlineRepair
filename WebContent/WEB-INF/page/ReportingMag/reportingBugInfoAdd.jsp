@@ -119,16 +119,16 @@ td {
 		</tr>
 		
 		<tr>
-			<td class="ta_01" width="20%" align="right">故障原因：</td>
+			<td class="ta_01" width="20%" align="right">故障原因：<font color="#FF0000">*</font></td>
 			<td class="ta_01" width="80%" bgcolor="#ffffff" colspan="3">
-				<s:textarea name="account" id="account" style="width:95%" rows="4" cols="52"/>
+				<s:textarea name="account" id="account" style="width:80%" rows="4" cols="52" data-rule-required="true"/>
 			</td>
 		</tr>
 		
 		<tr>
 			<td class="ta_01" width="20%" align="right">备注：</td>
 			<td class="ta_01" width="80%" bgcolor="#ffffff" colspan="3">
-				<s:textarea name="remark" id="remark" style="width:95%" rows="4" cols="52"/>
+				<s:textarea name="remark" id="remark" style="width:80%" rows="4" cols="52"/>
 			</td>
 		</tr>
 		

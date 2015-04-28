@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<jsp:include page="/pub.jsp"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
 <style type="text/css">
 body {
 	background-color:#F5FAFE; 	
@@ -13,6 +13,15 @@ td {
 	background-color: #F5FAFE;
 }
 </style>
+<script type="text/javascript">
+	$(function(){
+		$('#tr_failAccount').hide();
+		var auditStatCode = '${auditStatCode}';
+		if(auditStatCode == '3'){
+			$('#tr_failAccount').show();
+		}
+	});
+</script>
 <title>故障详细信息</title>
 
 </head>
@@ -57,6 +66,41 @@ td {
 			</td>
 		</tr>
 		<tr>
+			<td align="right" width="20%" class="ta_01">申报日期：</td>
+			<td class="ta_01" bgColor="#ffffff" width="30%">
+				<s:textfield id="reportingTime" name="reportingTime" size="20" readonly="true"/>
+			</td>
+			<td align="right" width="20%" class="ta_01">预约日期：</td>
+			<td class="ta_01" bgColor="#ffffff" width="30%">
+				<s:if test="%{orderTime == ''}">
+					<s:textfield id="orderTime" name="orderTime" value="暂无" size="20" readonly="true"/>
+				</s:if>
+				<s:else>
+					<s:textfield id="orderTime" name="orderTime" size="20" readonly="true"/>
+				</s:else>
+			</td>
+		</tr>
+		<tr>
+			<td align="right" width="20%" class="ta_01">审核日期：</td>
+			<td class="ta_01" bgColor="#ffffff" width="30%">
+				<s:if test="%{auditTime == ''}">
+					<s:textfield id="auditTime" name="auditTime" value="暂无" size="20" readonly="true"/>
+				</s:if>
+				<s:else>
+					<s:textfield id="auditTime" name="auditTime" size="20" readonly="true"/>
+				</s:else>
+			</td>
+			<td align="right" width="20%" class="ta_01">审核状态：</td>
+			<td class="ta_01" bgColor="#ffffff">
+				<s:if test="%{auditStatName == ''}">
+					<s:textfield id="auditStatName" name="auditStatName" value="暂无" size="20" readonly="true"/>
+				</s:if>
+				<s:else>
+					<s:textfield id="auditStatName" name="auditStatName" size="20" readonly="true"/>
+				</s:else>
+			</td>
+		</tr>
+		<tr>
 			<td align="right" width="20%" class="ta_01">维护人员：</td>
 			<td class="ta_01" bgColor="#ffffff" width="30%">
 				<s:if test="%{maintainUserName == ''}">
@@ -76,19 +120,23 @@ td {
 				</s:else>
 			</td>
 		</tr>
-		
 		<tr>
-			<td align="right" width="20%" class="ta_01">申报日期：</td>
+			<td align="right" width="20%" class="ta_01">维护类型：</td>
 			<td class="ta_01" bgColor="#ffffff" width="30%">
-				<s:textfield id="reportingTime" name="reportingTime" size="20" readonly="true"/>
-			</td>
-			<td align="right" width="20%" class="ta_01">审核日期：</td>
-			<td class="ta_01" bgColor="#ffffff" width="30%">
-				<s:if test="%{auditTime == ''}">
-					<s:textfield id="auditTime" name="auditTime" value="暂无" size="20" readonly="true"/>
+				<s:if test="%{maintainTypeName == ''}">
+					<s:textfield id="maintainTypeName" name="maintainTypeName" value="暂无" size="20" readonly="true"/>
 				</s:if>
 				<s:else>
-					<s:textfield id="auditTime" name="auditTime" size="20" readonly="true"/>
+					<s:textfield id="maintainTypeName" name="maintainTypeName" size="20" readonly="true"/>
+				</s:else>
+			</td>
+			<td align="right" width="20%" class="ta_01">维护状态：</td>
+			<td class="ta_01" bgColor="#ffffff" width="30%">
+				<s:if test="%{maintainStatName == ''}">
+					<s:textfield id="maintainStatName" name="maintainStatName" value="暂无" size="20" readonly="true"/>
+				</s:if>
+				<s:else>
+					<s:textfield id="maintainStatName" name="maintainStatName" size="20" readonly="true"/>
 				</s:else>
 			</td>
 		</tr>
@@ -102,35 +150,8 @@ td {
 					<s:textfield id="finishTime" name="finishTime" size="20" readonly="true"/>
 				</s:else>
 			</td>
-			<td align="right" width="20%" class="ta_01">审核状态：</td>
-			<td class="ta_01" bgColor="#ffffff">
-				<s:if test="%{auditStatName == ''}">
-					<s:textfield id="auditStatName" name="auditStatName" value="暂无" size="20" readonly="true"/>
-				</s:if>
-				<s:else>
-					<s:textfield id="auditStatName" name="auditStatName" size="20" readonly="true"/>
-				</s:else>
-			</td>
-		</tr>
-		<tr>
-			<td align="right" width="20%" class="ta_01">维护状态：</td>
-			<td class="ta_01" bgColor="#ffffff" width="30%">
-				<s:if test="%{maintainStatName == ''}">
-					<s:textfield id="maintainStatName" name="maintainStatName" value="暂无" size="20" readonly="true"/>
-				</s:if>
-				<s:else>
-					<s:textfield id="maintainStatName" name="maintainStatName" size="20" readonly="true"/>
-				</s:else>
-			</td>
-			<td align="right" width="20%" class="ta_01">维护类型：</td>
-			<td class="ta_01" bgColor="#ffffff" width="30%">
-				<s:if test="%{maintainTypeName == ''}">
-					<s:textfield id="maintainTypeName" name="maintainTypeName" value="暂无" size="20" readonly="true"/>
-				</s:if>
-				<s:else>
-					<s:textfield id="maintainTypeName" name="maintainTypeName" size="20" readonly="true"/>
-				</s:else>
-			</td>
+			<td></td>
+			<td></td>
 		</tr>
 		
 		<tr>
@@ -151,6 +172,12 @@ td {
 			<td class="ta_01" align="right" width="20%">备注：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
 				<s:textarea name="remark" id="remark" style="width:95%" rows="4" cols="52" readonly="true"/>
+			</td>
+		</tr>
+		<tr id="tr_failAccount">
+			<td class="ta_01" align="right" width="20%" bgcolor="#f5fafe">驳回原因：</td>
+			<td class="ta_01" bgcolor="#ffffff" colspan="3">
+				<s:textarea name="failAccount" id="failAccount" style="width:95%" rows="4" cols="52" />
 			</td>
 		</tr>
 		

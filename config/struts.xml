@@ -155,6 +155,20 @@
 		<action name="auditInfoAction_*" class="com.xiaoy.audit.web.action.AuditInfoAction" method="{1}">
 			<result name="auditInfoWaitList">/WEB-INF/page/AuditMag/auditInfoWaitList.jsp</result>
 			<result name="auditInfoWaitEdit">/WEB-INF/page/AuditMag/auditInfoWaitEdit.jsp</result>
+			<!-- 
+			<result name="auditInfoWaitView">/WEB-INF/page/AuditMag/auditInfoWaitView.jsp</result>
+			 -->
+			
+			<result name="success" type="redirectAction">
+				<param name="actionName">auditInfoAction_auditInfoWaitList</param>
+				<param name="namespace">/AuditMag</param>
+			</result>
+			
+			<result name="ajax-success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+			
 		</action>
 	</package>
 	<!-- 审核管理======end -->

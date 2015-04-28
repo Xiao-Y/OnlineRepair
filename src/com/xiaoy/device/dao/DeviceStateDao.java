@@ -65,4 +65,11 @@ public interface DeviceStateDao extends Common<DeviceState> {
 	 */
 	Integer findDeviceStateCondition(DeviceStateForm form);
 
+	/**
+	 * 修改设备运行状态
+	 * @param statException		设备运行状态
+	 * @param deviceStateUuid	设备状态的uuid
+	 */
+	void deviceStateUpdateSatae(String deviceStateUuid, String statException);
+
 }

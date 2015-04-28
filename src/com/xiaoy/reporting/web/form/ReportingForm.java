@@ -74,6 +74,18 @@ public class ReportingForm extends BaseForm
 	private String maintainUserName;
 	/*申报信息的uuid*/
 	private String auditUuid;
+	/* 驳回原因 */
+	private String failAccount;
+
+	public String getFailAccount()
+	{
+		return failAccount;
+	}
+
+	public void setFailAccount(String failAccount)
+	{
+		this.failAccount = failAccount;
+	}
 
 	public String getAuditUuid()
 	{

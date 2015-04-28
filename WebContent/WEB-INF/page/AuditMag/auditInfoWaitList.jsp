@@ -151,7 +151,7 @@
 								</a>
 							</td>
 							<td style="height:22px" align="center">
-								<a href="${pageContext.request.contextPath }/UserMag/userAction_userView.action?userUuid=<s:property value="%{#audit.userUuid}"/>">
+								<a href="${pageContext.request.contextPath }/UserMag/userAction_userView.action?userUuid=<s:property value="%{#audit.reportingUserUuid}"/>">
 									<s:property value="%{#audit.name}"/>
 								</a>
 							</td>									

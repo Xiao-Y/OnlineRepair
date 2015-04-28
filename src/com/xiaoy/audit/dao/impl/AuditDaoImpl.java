@@ -74,7 +74,7 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 	public Object[] findAuditInfoWaitByAuditUuid(AuditForm auditForm)
 	{
 		StringBuffer sql = new StringBuffer("");
-		sql.append(" SELECT de.AREA_CODE,de.INSTALLATION_SITE_CODE,d.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,d.VERSION,r.ACCOUNT,r.REMARK ");
+		sql.append(" SELECT de.AREA_CODE,de.INSTALLATION_SITE_CODE,d.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,d.VERSION,r.ACCOUNT,r.REMARK,de.DEVICETYPE_UUID,r.REPORTING_UUID,u.USER_UUID,r.DEVICE_PIC_URL ");
 		this.appendSQLWhere(sql);
 		sql.append(" and a.AUDIT_UUID = :auditUuid");
 		

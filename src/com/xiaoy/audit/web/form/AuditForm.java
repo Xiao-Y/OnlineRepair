@@ -22,9 +22,8 @@ public class AuditForm extends BaseForm
 	private String reportingUuid;
 	/* 维护人员Uuid */
 	private String maintainUuid;
-	/* 用户uuid */
-	private String userUuid;
-	
+	/* 申报用户uuid */
+	private String reportingUserUuid;
 	/* 设备名 */
 	private String deviceName;
 	/* 安装位置id */
@@ -49,6 +48,42 @@ public class AuditForm extends BaseForm
 	private String remark;
 	/* 维护的类别 */
 	private String maintainTypeCode;
+	/* 设备状态uuid */
+	private String deviceStateUuid;
+	/* 维护人员uuid */
+	private String maintainTypeUuid;
+	/* 设备状态的图片的url */
+	private String devicePicUrl;
+
+	public String getDevicePicUrl()
+	{
+		return devicePicUrl;
+	}
+
+	public void setDevicePicUrl(String devicePicUrl)
+	{
+		this.devicePicUrl = devicePicUrl;
+	}
+
+	public String getMaintainTypeUuid()
+	{
+		return maintainTypeUuid;
+	}
+
+	public void setMaintainTypeUuid(String maintainTypeUuid)
+	{
+		this.maintainTypeUuid = maintainTypeUuid;
+	}
+
+	public String getDeviceStateUuid()
+	{
+		return deviceStateUuid;
+	}
+
+	public void setDeviceStateUuid(String deviceStateUuid)
+	{
+		this.deviceStateUuid = deviceStateUuid;
+	}
 
 	public String getMaintainTypeCode()
 	{
@@ -170,14 +205,14 @@ public class AuditForm extends BaseForm
 		this.maintainUuid = maintainUuid;
 	}
 
-	public String getUserUuid()
+	public String getReportingUserUuid()
 	{
-		return userUuid;
+		return reportingUserUuid;
 	}
 
-	public void setUserUuid(String userUuid)
+	public void setReportingUserUuid(String reportingUserUuid)
 	{
-		this.userUuid = userUuid;
+		this.reportingUserUuid = reportingUserUuid;
 	}
 
 	public String getDeviceName()

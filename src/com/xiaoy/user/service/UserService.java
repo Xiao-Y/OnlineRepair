@@ -57,4 +57,11 @@ public interface UserService
 	 * @return	用户信息的PO对象
 	 */
 	public UserForm findUser(UserForm userForm);
+
+	/**
+	 * 通过维护类别查出所有的用户
+	 * @param maintainTypeCode	维护类别
+	 * @return	List&ltUserForm&gt
+	 */
+	public List<UserForm> findUserByMaintainTypeCode(String maintainTypeCode);
 }

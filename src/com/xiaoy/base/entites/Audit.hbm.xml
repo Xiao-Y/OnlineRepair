@@ -34,8 +34,8 @@
         <property name="maintainUuid" type="java.lang.String">
             <column name="MAINTAIN_UUID" />
         </property>
-        <property name="userUuid" type="java.lang.String">
-            <column name="USER_UUID" />
+        <property name="auditUserUuid" type="java.lang.String">
+            <column name="AUDIT_USER_UUID" />
         </property>
     </class>
 </hibernate-mapping>

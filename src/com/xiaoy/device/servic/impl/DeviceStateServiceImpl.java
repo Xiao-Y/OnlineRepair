@@ -340,4 +340,10 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 		}
 		return false;
 	}
+
+	@Override
+	public void deviceStateUpdateSatae(String deviceStateUuid, String statException)
+	{
+		deviceStateDao.deviceStateUpdateSatae(deviceStateUuid, statException);
+	}
 }

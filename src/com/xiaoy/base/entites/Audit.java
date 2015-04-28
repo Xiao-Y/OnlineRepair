@@ -28,15 +28,15 @@ public class Audit {
 	private String reportingUuid;
 	/* 维护人员Uuid */
 	private String maintainUuid;
-	/* 用户uuid */
-	private String userUuid;
+	/* 审核uuid */
+	private String auditUserUuid;
 
-	public String getUserUuid() {
-		return userUuid;
+	public String getAuditUserUuid() {
+		return auditUserUuid;
 	}
 
-	public void setUserUuid(String userUuid) {
-		this.userUuid = userUuid;
+	public void setAuditUserUuid(String auditUserUuid) {
+		this.auditUserUuid = auditUserUuid;
 	}
 
 	public String getMaintainUuid() {

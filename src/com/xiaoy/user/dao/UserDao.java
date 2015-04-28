@@ -1,5 +1,7 @@
 package com.xiaoy.user.dao;
 
+import java.util.List;
+
 import com.xiaoy.base.dao.Common;
 import com.xiaoy.base.entites.User;
 import com.xiaoy.user.web.form.UserForm;
@@ -19,5 +21,12 @@ public interface UserDao extends Common<User>
 	 * @return	用户信息的VO对象
 	 */
 	User findUser(UserForm userForm);
+
+	/**
+	 * 通过维护类别查出所有的用户
+	 * @param maintainTypeCode	维护类别
+	 * @return	List&ltUser&gt
+	 */
+	List<User> findUserByMaintainTypeCode(String maintainTypeCode);
 
 }

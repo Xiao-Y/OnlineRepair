@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -26,7 +27,6 @@ import com.xiaoy.user.web.form.UserForm;
 @Transactional(readOnly=true)
 public class UserServiceImpl implements UserService
 {
-
 	@Resource
 	private UserDao userDao;
 	
@@ -237,5 +237,24 @@ public class UserServiceImpl implements UserService
 			return this.userVoToPo(userForm, user);
 		}
 		return null;
+	}
+
+	@Override
+	public List<UserForm> findUserByMaintainTypeCode(String maintainTypeCode)
+	{
+		List<User> list = userDao.findUserByMaintainTypeCode(maintainTypeCode);
+		List<UserForm> formList = null;
+		if(!list.isEmpty())
+		{
+			formList = new ArrayList<UserForm>();
+			
+			for(User u : list)
+			{
+				UserForm form = new UserForm();
+				BeanUtils.copyProperties(u, form);
+				formList.add(form);
+			}
+		}
+		return formList;
 	}
 }

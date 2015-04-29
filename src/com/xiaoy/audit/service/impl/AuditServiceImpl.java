@@ -23,6 +23,7 @@ import com.xiaoy.evaluate.service.EvaluateService;
 import com.xiaoy.evaluate.web.EvaluateForm;
 import com.xiaoy.resource.dao.DictionaryDao;
 import com.xiaoy.resource.web.form.DictionaryForm;
+import com.xiaoy.user.service.UserService;
 import com.xiaoy.user.web.form.UserForm;
 
 @Service
@@ -31,16 +32,6 @@ public class AuditServiceImpl implements AuditService
 {
 
 	public static final String MENU_MODEL = "【故障申报审核】--【添加故障审核】";
-
-	/**
-	 * 设备状态为异常
-	 */
-	public static final String STAT_EXCEPTION = "2";
-
-	/**
-	 * 审核：通过
-	 */
-	public static final String AUDITSTAT_SUCCESS = "2";
 
 	@Resource
 	private AuditDao auditDao;
@@ -56,21 +47,25 @@ public class AuditServiceImpl implements AuditService
 	// 评价信息
 	@Resource
 	private EvaluateService evaluateService;
+	
+	//用户信息
+	@Resource
+	private UserService userService;
 
 	@Override
 	public List<AuditForm> findAuditInfoWaitList(AuditForm auditForm)
 	{
 		List<Object[]> list = auditDao.findAuditInfoWaitList(auditForm);
-		List<AuditForm> formList = this.auditVoToPoList(list);
+		List<AuditForm> formList = this.auditWaitVoToPoList(list);
 		return formList;
 	}
 
 	/**
-	 * 
-	 * @param list
-	 * @return
+	 * 将查询出来的待审核VO转换成PO对象
+	 * @param list	待转换的VO集合
+	 * @return	List&ltAuditForm&gt
 	 */
-	private List<AuditForm> auditVoToPoList(List<Object[]> list)
+	private List<AuditForm> auditWaitVoToPoList(List<Object[]> list)
 	{
 		List<AuditForm> formList = null;
 		if (!list.isEmpty())
@@ -114,7 +109,7 @@ public class AuditServiceImpl implements AuditService
 	public AuditForm findAuditInfoWaitByAuditUuid(AuditForm auditForm)
 	{
 		Object[] object = auditDao.findAuditInfoWaitByAuditUuid(auditForm);
-		AuditForm aForm = this.auditVoToPo(object, auditForm);
+		AuditForm aForm = this.auditWaitVoToPo(object, auditForm);
 		return aForm;
 	}
 
@@ -125,7 +120,7 @@ public class AuditServiceImpl implements AuditService
 	 *            Vo对象
 	 * @return Po对象
 	 */
-	private AuditForm auditVoToPo(Object[] o, AuditForm auditForm)
+	private AuditForm auditWaitVoToPo(Object[] o, AuditForm auditForm)
 	{
 		auditForm.setAreaCode((String) o[0]);
 		if (o[0] != null)
@@ -148,6 +143,11 @@ public class AuditServiceImpl implements AuditService
 		auditForm.setReportingUuid((String) o[10]);
 		auditForm.setReportingUserUuid((String) o[11]);
 		auditForm.setDevicePicUrl((String) o[12]);
+		auditForm.setOrderTime(o[13] != null ? DateHelper.dateConverString((Date) o[13]) : "");
+		if(o[14] != null)
+		{
+			auditForm.setPriorName(dictionaryDao.findDDLName((String) o[14], DictionaryForm.PRIOR));
+		}
 
 		return auditForm;
 	}
@@ -172,10 +172,10 @@ public class AuditServiceImpl implements AuditService
 		audit.setFailAccount(auditForm.getFailAccount());
 
 		// 当审核通过的时候，添加评价信息，修改设备状态并添加评价记录
-		if (auditStatCode.equals(AUDITSTAT_SUCCESS))
+		if (auditStatCode.equals(AuditForm.AUDITSTAT_SUCCESS))
 		{
 			// 1.修改设备状态信息为异常
-			deviceStateService.deviceStateUpdateSatae(auditForm.getDeviceStateUuid(), STAT_EXCEPTION);
+			deviceStateService.deviceStateUpdateSatae(auditForm.getDeviceStateUuid(), AuditForm.STAT_EXCEPTION);
 
 			// 2.添加评论信息
 			EvaluateForm eForm = new EvaluateForm();
@@ -185,10 +185,83 @@ public class AuditServiceImpl implements AuditService
 			evaluateService.createEvaluate(eForm);
 
 			// 当审核通过的时候添加维护人员uuid
-			audit.setMaintainUuid(auditForm.getMaintainTypeUuid());
+			audit.setMaintainUuid(auditForm.getMaintainUuid());
 		}
 
 	}
+
+	@Override
+	public List<AuditForm> findAuditInfoPassList(AuditForm auditForm)
+	{
+		List<Object[]> list = auditDao.findAuditInfoPassList(auditForm);
+		List<AuditForm> formList = this.auditPassVoToPoList(list);
+		return formList;
+	}
+
+	private List<AuditForm> auditPassVoToPoList(List<Object[]> list)
+	{
+		List<AuditForm> formList = null;
+		if (!list.isEmpty())
+		{
+			formList = new ArrayList<AuditForm>();
+			for (Object[] o : list)
+			{
+				AuditForm auditForm = new AuditForm();
+				auditForm.setAreaCode((String) o[0]);
+				if (o[0] != null)
+				{
+					auditForm.setAreaName(dictionaryDao.findDDLName((String) o[0], DictionaryForm.AREA_NAME));
+				}
+				auditForm.setInstallationSiteCode((String) o[1]);
+				if (o[1] != null)
+				{
+					auditForm.setInstallationSiteName(dictionaryDao.findDDLName((String) o[1], DictionaryForm.INSTALLATION_SITE_NAME));
+				}
+				auditForm.setDeviceName((String) o[2]);
+				auditForm.setName((String) o[3]);
+				auditForm.setReportingPhone((String) o[4]);
+				auditForm.setReportingTime(o[5] != null ? DateHelper.dateConverString((Date) o[5]) : "");
+				auditForm.setReportingUuid((String) o[6]);
+				auditForm.setReportingUserUuid((String) o[7]);
+				auditForm.setAuditUuid((String) o[8]);
+				
+				auditForm.setMaintainUuid((String) o[9]);
+				if(o[9] != null)
+				{
+					UserForm userForm = userService.findUserByUuid((String)o[9]);
+					auditForm.setMaintainName(userForm.getName());
+					auditForm.setMaintainPhone(userForm.getPhone());
+				}
+				auditForm.setAuditTime(o[10] != null ? DateHelper.dateConverString((Date) o[10]) : "");
+				formList.add(auditForm);
+			}
+		}
+
+		return formList;
+	}
+
+	@Override
+	public int countAuditInfoPass(AuditForm auditForm)
+	{
+		int count = auditDao.countAuditInfoPass(auditForm);
+		return count;
+	}
+	
+//	/**
+//	 * 对审核通过的申报转化
+//	 * 
+//	 * @param object
+//	 *            VO
+//	 * @param auditForm
+//	 *            PO
+//	 * @return AuditForm
+//	 */
+//	private AuditForm auditPassVoToPo(Object[] object, AuditForm auditForm)
+//	{
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
 
 	// @Resource
 	// private AuditDao auditDao;

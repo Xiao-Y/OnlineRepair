@@ -658,6 +658,69 @@ function auditInfoWaitSearch(){
 	$("#form1").attr("action","${pageContext.request.contextPath}/AuditMag/auditInfoAction_auditInfoWaitList.action");
 	$("#form1").submit();
 }
+
+//通过维护类别异步加载用户名
+function auditInfoWaitMaintainType(){
+	$("#userUuid").remove();
+	
+	var maintainTypeCode = $('#maintainTypeCode').val();
+	
+	var url = "${pageContext.request.contextPath}/AuditMag/auditInfoAction_auditInfoWaitUser.action";
+	var dataType = "JSON";
+	var data = {"date":new Date,"maintainTypeCode":maintainTypeCode};
+	
+	$.post(url,data,function(data){
+		var html = '<select id="maintainTypeUuid" name="maintainTypeUuid" style="width: 140px" data-rule-required="true onchange=selectPhone();">';
+		
+		$.each(data,function(i){
+			html = html + '<option value="'+ data[i].userUuid +'" >'+ data[i].name + '</option>';
+		});
+		
+		html = html + "</select>";
+		
+		$("#auditInfoWaitMaintainUserDiv").html(html);
+	},dataType);
+}
+
+//当审核状态为通过的时候显示出维护人员
+function auditStateChange(){
+	 var auditStatCode = $('input[name=auditStatCode]:checked').val();
+	  
+	 if(auditStatCode == '3'){//驳回
+		$('#maintainTypeDIV').hide();
+	 	$('#tr_failAccount').show();
+	 	$('#tr_MaintainType').hide();
+	 	$('#tr_phone').hide();
+	 }else if(auditStatCode == '2'){//通过
+		$('#maintainTypeDIV').show();
+		$('#tr_failAccount').hide();
+		$('#tr_MaintainType').show();
+		$('#tr_phone').show();
+	 }else if(auditStatCode == '1'){//待审核
+		 $('#maintainTypeDIV').hide();
+		 $('#tr_failAccount').hide();
+		 $('#tr_MaintainType').hide();
+		 $('#tr_phone').hide();
+	 }
+}
+
+//保存待审核时验证
+function auditInfoButton(){
+   $("#Form1").validate();
+	
+	if($("#Form1").valid()){
+		$("#Form1").attr('action','${pageContext.request.contextPath}/AuditMag/auditInfoAction_auditInfoWaitSave.action');
+		Form1.submit();
+	}
+}
+
+//审核通过的条件查询
+function auditInfoPassFind(){
+	$('#form1').attr('action','${pageContext.request.contextPath}/AuditMag/auditInfoAction_auditInfoPassList.action');
+	$("#form1").submit();
+}
+
+
 //审核管理====================end
 
 

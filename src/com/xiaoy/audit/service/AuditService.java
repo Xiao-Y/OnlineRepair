@@ -58,6 +58,20 @@ public interface AuditService
 	 */
 	void auditInfoWaitSave(AuditForm auditForm,HttpServletRequest request);
 
+	/**
+	 * 查询出现审核通过的故障申报
+	 * @param auditForm		查询条件
+	 * @return	List&ltAuditForm&gt
+	 */
+	List<AuditForm> findAuditInfoPassList(AuditForm auditForm);
+
+	/**
+	 * 根据条件统计出现审核通过的记录
+	 * @param auditForm		查询条件
+	 * @return	int
+	 */
+	int countAuditInfoPass(AuditForm auditForm);
+
 	// /**
 	// * 保存故障审核信息
 	// * @param entity 申报故障信息

@@ -36,14 +36,14 @@ pub.css		公有的样式
 四、ReportingMag	申报管理
 	reportingBugInfo.jsp 				申报故障信息
 	reportingBugInfoList.jsp			所有故障信息列表
-	reportingBugInfoEdit.jsp.jsp		编辑故障信息
+	//reportingBugInfoEdit.jsp.jsp		编辑故障信息
 	reportingBugInfoView.jsp.jsp		查看故障信息
 
 五、AuditMag		审核管理
 	1.通过审核的
 	auditInfoPassEdit.jsp			编辑通过审核故障信息
 	auditInfoPassList.jsp			通过审核故障信息列表
-	auditInfoPassView.jsp			查看通过审核故障信息
+	//auditInfoPassView.jsp			查看通过审核故障信息
 	
 	2.未通过审核的
 	auditInfoRefuseEdit.jsp			编辑未通过审核故障信息

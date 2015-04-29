@@ -1,49 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="x" uri="http://www.xiaoy.com/pageTag/core"%>
+<jsp:include page="/pub.jsp"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>审核通过故障信息列表</title>
 
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/myJquery.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/My97DatePicker/WdatePicker.js"></script>
-
-<style type="text/css">
-* {
-	font-size: 12px;
-}
-</style>
-
 <script type="text/javascript">
-	/**
-	//超链接在新窗口显示 
-	$(document).ready(function(){
-		$("a").attr("target", "_blank");
-	});
-	*/
 	//清除查询条件
 	$().ready(function(){
 		$("#BT_Reset").click(function(){
+			$("#areaCode").val("");
+			$("#installationSiteCode").val("");
 			$("#deviceName").val("");
-			$("#version").val("");
-			$("#producer").val("");
-			$("#rank").val("");
+			$("#name").val("");
+			$("#reportingTime").val("");
+			$("#auditTime").val("");
+			
+			auditInfoPassFind();
 		});
 	});
-	
-	//链接跳转
-	function link(href){
-		window.location.href=href;
-	}
 </script> 
 
 </head>
-<body>
+<body style="background-color:#F5FAFE;">
 	<!-- 查询输入start -->
-	<form action="">
-		<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
+	<form action="" id="form1" name="form1" method="post">
+		<table cellspacing="1" cellpadding="0" width="100%" align="center" border="0">
 			<tr>
 				<td class="ta_01" colspan=9 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
 					<font face="宋体" size="2"><strong>审核通过故障信息列表</strong></font>
@@ -53,45 +38,53 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				区域：</td>
+				<td class="ta_01" align="right" height="22">区域：</td>
 				<td class="ta_01" >
-					<select id="role" name="role" style="width: 140px">
-						<option>------请选择------</option>				
-						<option>教室</option>				
-						<option>寝室</option>				
-						<option>机房</option>				
-					</select>
+					<s:if test="%{#request.area != null && #request.area.size() > 0}">
+			       		<s:select list="%{#request.area}" id="areaCode" name="areaCode"
+							  listKey="areaCode" listValue="areaName"
+							  headerKey="" headerValue="---请选择---"
+							  cssStyle="width:140px"
+						/>
+	       			</s:if>
+	       			<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				安装位置：</td>
+				<td class="ta_01" align="right" height="22">安装位置：</td>
 				<td class="ta_01" >
-					<select id="role" name="role" style="width: 140px">
-						<option>------请选择------</option>				
-						<option>A4899</option>				
-						<option>G8760</option>				
-						<option>W6754</option>				
-					</select>
+					<s:if test="%{#request.installationSite != null && #request.installationSite.size() > 0}">
+						<s:select list="%{#request.installationSite}" id="installationSiteCode" name="installationSiteCode"
+						  listKey="installationSiteCode" listValue="installationSiteName"
+						  headerKey="" headerValue="---请选择---"
+						  cssStyle="width:140px"
+						/>
+					</s:if>
+					<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				设备名：</td>
+				<td class="ta_01" align="right" height="22">设备名：</td>
 				<td class="ta_01" >
-					<input name="loginName" id="loginName" size="21">
-				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				申报人：</td>
-				<td class="ta_01" >
-					<input name="loginName" id="loginName" size="21">
+					<s:if test="%{#request.deviceName != null && #request.deviceName.size() > 0}">
+						<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
+						  listKey="deviceName" listValue="deviceName"
+						  headerKey="" headerValue="---请选择---"
+						  cssStyle="width:140px"
+						/>
+					</s:if>
+					<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 				</td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				维护人：</td>
+				<!-- 
+				<td class="ta_01" align="right" height="22">维护人：</td>
 				<td class="ta_01" >
-					<input name="loginName" id="loginName" size="21">
+					<input name="loginName" id="loginName" size="21" >
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				维护类别：</td>
+				<td class="ta_01" align="right" height="22">维护类别：</td>
 				<td class="ta_01" >
 					<select id="maintainType" name="maintainType" style="width: 140px">
 						<option>------请选择------</option>				
@@ -101,110 +94,132 @@
 						<option>木工</option>				
 					</select>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				申报时间：</td>
+				 -->
+				<td class="ta_01" align="right" height="22">申报人：</td>
 				<td class="ta_01" >
-					<input class="Wdate" type="text" size="21" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})">
+					<s:textfield name="name" id="name" style="width:140px"/>
 				</td>
-				<td class="ta_01" align="center" bgcolor="#f5fafe" height="22">
-				审核通过时间：</td>
+				<td class="ta_01" align="right" height="22">申报时间：</td>
 				<td class="ta_01" >
-					<input class="Wdate" type="text" size="21" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})">
+					<s:textfield class="Wdate" type="text" id="reportingTime" name="reportingTime" style="width:140px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
+				</td>
+				<td class="ta_01" align="right" height="22">审核通过时间：</td>
+				<td class="ta_01" >
+					<s:textfield class="Wdate" type="text" id="auditTime" name="auditTime" style="width:140px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 				</td>
 			</tr>
 	    </table>	
-	</form>
 	<!-- 查询输入end -->
 	
 	<!-- 执行查询begin -->
-	<form action="">
-		<table cellSpacing="1" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">
+		<table cellSpacing="1" cellPadding="0" width="100%" align="center" border="0">
 			<tr height=10><td></td></TR>			
 			<tr>
 			  	<td>
-	                <table style="width: 105px; height: 20px" border="0">
+	                <table style="width: 120px; height: 20px" border="0">
 						<tr>
 							<td align="center" background="${pageContext.request.contextPath }/images/cotNavGround.gif"><img src="${pageContext.request.contextPath }/images/yin.gif" width="15"></TD>
-							<td class="DropShadow" background="${pageContext.request.contextPath }/images/cotNavGround.gif">已通过故障</TD>
+							<td class="DropShadow" background="${pageContext.request.contextPath }/images/cotNavGround.gif">已通过故障审核</TD>
 						</tr>
 		             </table>
 	            </td>
 				<td class="ta_01" align="right">
 					
-				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="button" value="查询" name="BT_Find" >&nbsp;&nbsp;
+				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" onclick="auditInfoPassFind();" type="button" value="查询" name="BT_Find" >&nbsp;&nbsp;
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_Reset" >&nbsp;&nbsp;
 				</td>
 			</tr>
 			<tr>
-				<td class="ta_01" align="center" bgColor="#f5fafe" colspan="5">			
+				<td class="ta_01" align="center" colspan="5">			
 					<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="DataGrid1"
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
 						<tr style="font-weight:bold;font-size:12pt;height:25px;background-color:#afd1f3">
-						    <td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">区域</td>
-						    <td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备名</td>
-							<td align="center" width="6%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</td>
-							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人</td>
-							<td align="center" width="12%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人联系方式</td>
-							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护人员</td>
-							<td align="center" width="12%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护人员联系方式</td>
-							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报时间</td>
-							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">审核通过时间</td>
-							<td align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">编辑</td>
-							<td align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">删除</td>
+							<th align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</th>
+						    <th align="center" width="6%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">区域</th>
+							<th align="center" width="6%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</th>
+						    <th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备名</th>
+							<th align="center" width="7%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人</th>
+							<th align="center" width="12%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人联系方式</th>
+							<th align="center" width="7%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护人员</th>
+							<th align="center" width="12%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护人员联系方式</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报时间</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">审核通过时间</th>
+							<th align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">编辑</th>
+							<!-- 
+							<th align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">删除</th>
+							 -->
 						</tr>
 						<!-- 列表标题 end -->
 						
 						<!-- 列表数据 begin -->
-						<% 
-							for(int i = 0; i < 10; i++){
-						%>
+						<s:if test="%{#request.auditList != null && #request.auditList.size() > 0}">
+						<s:iterator value="%{#request.auditList}" var="audit" status="u">
 						<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-					       <td style="height:22px" align="center" width="10%">
-								教室
+							<td style="HEIGHT:22px" align="center">
+								<s:property value="%{#u.getIndex() + 1}"/>
+							</td>
+					       <td style="height:22px" align="center">
+								<s:property value="%{#audit.areaName}"/>
 							</td>
 							
-							<td style="height:22px" align="center" width="6%">
-								A4059
+							<td style="height:22px" align="center">
+								<s:property value="%{#audit.installationSiteName}"/>
 							</td>
-							<td style="height:22px" align="center" width="10%">
-								<input type="hidden" id="123">
-								<a href="${pageContext.request.contextPath }/page/AuditMag/auditInfoPassView.jsp">多媒体</a>
+							<td style="height:22px" align="center">
+								<a href="${pageContext.request.contextPath }/ReportingMag/reportingAction_reportingBugInfoView.action?reportingUuid=<s:property value="%{#audit.reportingUuid}"/>">
+									<s:property value="%{#audit.deviceName}"/>
+								</a>
 							</td>
-							<td style="height:22px" align="center" width="5%">
-								<a href="${pageContext.request.contextPath }/page/UserMag/userInfoView.jsp">XiaoY</a>
+							<td style="height:22px" align="center">
+								<a href="${pageContext.request.contextPath }/UserMag/userAction_userView.action?userUuid=<s:property value="%{#audit.reportingUserUuid}"/>">
+									<s:property value="%{#audit.name}"/>
+								</a>
 							</td>									
-							<td style="height:22px" align="center" width="12%">
-								12345678907
+							<td style="height:22px" align="center">
+								<s:property value="%{#audit.reportingPhone}"/>
 							</td>									
-							<td style="height:22px" align="center" width="5%">
-								<a href="${pageContext.request.contextPath }/page/UserMag/userInfoView.jsp">admin</a>
+							<td style="height:22px" align="center">
+								<a href="${pageContext.request.contextPath }/UserMag/userAction_userView.action?userUuid=<s:property value="%{#audit.maintainUuid}"/>">
+									<s:property value="%{#audit.maintainName}"/>
+								</a>
 							</td>									
-							<td style="height:22px" align="center" width="12%">
-								32222333421
+							<td style="height:22px" align="center">
+								<s:property value="%{#audit.maintainPhone}"/>
 							</td>									
-							<td style="height:22px" align="center" width="6%">
-								2015-02-25
+							<td style="height:22px" align="center">
+								<s:property value="%{#audit.reportingTime}"/>
 							</td>
-							<td style="height:22px" align="center" width="10%">
-								2015-03-09
-							</td>										
-							<td align="center" style="HEIGHT: 22px" align="center" width="5%">																	
-							   <a href="${pageContext.request.contextPath }/page/AuditMag/auditInfoPassEdit.jsp">
+							<td style="height:22px" align="center">
+								<s:property value="%{#audit.auditTime}"/>
+							</td>	
+							<td align="center" style="HEIGHT: 22px" align="center">																	
+							   <a href="${pageContext.request.contextPath }/AuditMag/auditInfoAction_auditInfoPassEdit.action">
 							   <img src="${pageContext.request.contextPath }/images/edit.gif" border="0" style="cursor:hand"></a>													
 							</td>
-							<td align="center" style="HEIGHT: 22px" align="center" width="5%">
+							<!-- 
+							<td align="center" style="HEIGHT: 22px" align="center">
 								<a href="system/elecUserAction_delete.do?userID=" onclick="return confirm('你确定要删除  XiaoY ？')">
 								<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="cursor:hand"></a>												
 							</td>
+							 -->
 						</tr>
-						<%} %>
+						</s:iterator>
+						</s:if>
+						<s:else>
+							<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+								<td colspan=11 style="HEIGHT:22px" align="center" width="100%">
+									<font color="#FF0000">没有更多数据...</font>
+								</td>
+							</tr>
+						</s:else>
 						<!-- 列表数据 end -->
 					</table>		
 				</td>
 			</tr>
 		</table>
 	</form>
+	<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath}/AuditMag/auditInfoAction_auditInfoPassList.action"/>
 	<!-- 执行查询end -->
 </body>
 </html>

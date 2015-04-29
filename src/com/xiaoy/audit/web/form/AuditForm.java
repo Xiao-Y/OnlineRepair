@@ -1,27 +1,50 @@
 package com.xiaoy.audit.web.form;
 
-import java.util.Date;
-
 import com.xiaoy.base.web.form.BaseForm;
 
 public class AuditForm extends BaseForm
 {
+
+	/**
+	 * 设备状态为异常
+	 */
+	public static final String STAT_EXCEPTION = "2";
+
+	/**
+	 * 审核：待审核
+	 */
+	public static final String AUDITSTAT_WAIT = "1";
+
+	/**
+	 * 审核：通过
+	 */
+	public static final String AUDITSTAT_SUCCESS = "2";
+
+	/**
+	 * 审核：驳回
+	 */
+	public static final String AUDITSTAT_FAIL = "3";
+
 	/* 审核uuid */
 	private String auditUuid;
 	/* 审核状态 */
 	private String auditStatCode;
 	/* 审核时间 */
-	private Date auditTime;
+	private String auditTime;
 	/* 维护状态 */
 	private String maintainStatCode;
 	/* 完成时间 */
-	private Date finishTime;
+	private String finishTime;
 	/* 驳回原因 */
 	private String failAccount;
 	/* 申报故障信息uuid */
 	private String reportingUuid;
 	/* 维护人员Uuid */
 	private String maintainUuid;
+	/* 维护人员名字 */
+	private String maintainName;
+	/* 维护人员手机号 */
+	private String maintainPhone;
 	/* 申报用户uuid */
 	private String reportingUserUuid;
 	/* 设备名 */
@@ -50,10 +73,52 @@ public class AuditForm extends BaseForm
 	private String maintainTypeCode;
 	/* 设备状态uuid */
 	private String deviceStateUuid;
-	/* 维护人员uuid */
-	private String maintainTypeUuid;
 	/* 设备状态的图片的url */
 	private String devicePicUrl;
+	/* 预约日期 */
+	private String orderTime;
+	/* 优先级别Name */
+	private String priorName;
+
+	public String getOrderTime()
+	{
+		return orderTime;
+	}
+
+	public void setOrderTime(String orderTime)
+	{
+		this.orderTime = orderTime;
+	}
+
+	public String getPriorName()
+	{
+		return priorName;
+	}
+
+	public void setPriorName(String priorName)
+	{
+		this.priorName = priorName;
+	}
+
+	public String getMaintainName()
+	{
+		return maintainName;
+	}
+
+	public void setMaintainName(String maintainName)
+	{
+		this.maintainName = maintainName;
+	}
+
+	public String getMaintainPhone()
+	{
+		return maintainPhone;
+	}
+
+	public void setMaintainPhone(String maintainPhone)
+	{
+		this.maintainPhone = maintainPhone;
+	}
 
 	public String getDevicePicUrl()
 	{
@@ -63,16 +128,6 @@ public class AuditForm extends BaseForm
 	public void setDevicePicUrl(String devicePicUrl)
 	{
 		this.devicePicUrl = devicePicUrl;
-	}
-
-	public String getMaintainTypeUuid()
-	{
-		return maintainTypeUuid;
-	}
-
-	public void setMaintainTypeUuid(String maintainTypeUuid)
-	{
-		this.maintainTypeUuid = maintainTypeUuid;
 	}
 
 	public String getDeviceStateUuid()
@@ -135,12 +190,12 @@ public class AuditForm extends BaseForm
 		this.auditStatCode = auditStatCode;
 	}
 
-	public Date getAuditTime()
+	public String getAuditTime()
 	{
 		return auditTime;
 	}
 
-	public void setAuditTime(Date auditTime)
+	public void setAuditTime(String auditTime)
 	{
 		this.auditTime = auditTime;
 	}
@@ -155,12 +210,12 @@ public class AuditForm extends BaseForm
 		this.maintainStatCode = maintainStatCode;
 	}
 
-	public Date getFinishTime()
+	public String getFinishTime()
 	{
 		return finishTime;
 	}
 
-	public void setFinishTime(Date finishTime)
+	public void setFinishTime(String finishTime)
 	{
 		this.finishTime = finishTime;
 	}

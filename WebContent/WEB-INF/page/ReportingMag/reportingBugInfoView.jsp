@@ -150,34 +150,36 @@ td {
 					<s:textfield id="finishTime" name="finishTime" size="20" readonly="true"/>
 				</s:else>
 			</td>
-			<td></td>
-			<td></td>
+			<td align="right" width="20%" class="ta_01"></td>
+			<td class="ta_01" bgColor="#ffffff" width="30%"></td>
 		</tr>
 		
 		<tr>
-			<td class="ta_01" align="right" width="20%">上传的图片：</td>
+			<td class="ta_01" align="right" width="20%" bgcolor="#f5fafe">上传的图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
-				<img alt="设备图片" src="${pageContext.request.contextPath }${devicePicUrl}" width="500px" height="300px">
+				<s:if test="%{ #request.devicePicUrl != '' || %{#request.devicePicUrl != null}">
+					<img alt="设备图片" src="${pageContext.request.contextPath }${devicePicUrl}" width="500px" height="300px">
+				</s:if>
 			</td>
 		</tr>
 		
 		<tr>
 			<td class="ta_01" align="right" width="20%">故障原因：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
-				<s:textarea name="account" id="account" style="width:95%" rows="4" cols="52" readonly="true"/>
+				<s:textarea name="account" id="account" style="width:90%" rows="4" cols="52" readonly="true"/>
 			</td>
 		</tr>
 		
 		<tr>
 			<td class="ta_01" align="right" width="20%">备注：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
-				<s:textarea name="remark" id="remark" style="width:95%" rows="4" cols="52" readonly="true"/>
+				<s:textarea name="remark" id="remark" style="width:90%" rows="4" cols="52" readonly="true"/>
 			</td>
 		</tr>
 		<tr id="tr_failAccount">
 			<td class="ta_01" align="right" width="20%" bgcolor="#f5fafe">驳回原因：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
-				<s:textarea name="failAccount" id="failAccount" style="width:95%" rows="4" cols="52" />
+				<s:textarea name="failAccount" id="failAccount" style="width:90%" rows="4" cols="52" />
 			</td>
 		</tr>
 		

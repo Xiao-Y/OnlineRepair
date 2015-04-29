@@ -66,7 +66,7 @@ public class PageTag extends TagSupport
 		}
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("\r\n<div class='pagination'>\r\n");
+		sb.append("\r\n<div class='pagination' align='center'>\r\n");
 		sb.append(
 				"<form name='pageController' id='pageController' action='' method='post'> &nbsp&nbsp;")
 				.append("<input type='hidden' id='pageNo' name='pageNo' value='"

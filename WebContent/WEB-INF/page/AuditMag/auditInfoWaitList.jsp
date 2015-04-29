@@ -21,11 +21,6 @@
 			auditInfoWaitSearch();
 		});
 	});
-	
-	//链接跳转
-	function link(href){
-		window.location.href=href;
-	}
 </script> 
 
 </head>
@@ -77,6 +72,9 @@
 						  cssStyle="width:140px"
 						/>
 					</s:if>
+					<s:else>
+						<select id="" name="" style="width:140px"></select>
+					</s:else>
 				</td>
 			</tr>
 			<tr>
@@ -99,10 +97,10 @@
 			<tr height=10><td></td></TR>			
 			<tr>
 			  	<td>
-	                <table style="width: 105px; height: 20px" border="0">
+	                <table style="width: 125px; height: 20px" border="0">
 						<tr>
 							<td align="center" background="${pageContext.request.contextPath }/images/cotNavGround.gif"><img src="${pageContext.request.contextPath }/images/yin.gif" width="15"></TD>
-							<td class="DropShadow" background="${pageContext.request.contextPath }/images/cotNavGround.gif">待审核故障</TD>
+							<td class="DropShadow" background="${pageContext.request.contextPath }/images/cotNavGround.gif">待审核故障申报</TD>
 						</tr>
 		             </table>
 	            </td>
@@ -146,7 +144,7 @@
 								<s:property value="%{#audit.installationSiteName}"/>
 							</td>
 							<td style="height:22px" align="center">
-								 <a href="${pageContext.request.contextPath }/ReportingMag/reportingAction_reportingBugInfoView.action?reportingUuid=<s:property value="%{#audit.reportingUuid}"/>">
+								<a href="${pageContext.request.contextPath }/ReportingMag/reportingAction_reportingBugInfoView.action?reportingUuid=<s:property value="%{#audit.reportingUuid}"/>">
 									<s:property value="%{#audit.deviceName}"/>
 								</a>
 							</td>
@@ -158,7 +156,7 @@
 							<td style="height:22px" align="center">
 								<s:property value="%{#audit.reportingPhone}"/>
 							</td>									
-							<td style="height:22px" align="center"">
+							<td style="height:22px" align="center">
 								<s:property value="%{#audit.reportingTime}"/>
 							</td>										
 							<td align="center" style="HEIGHT: 22px" align="center">

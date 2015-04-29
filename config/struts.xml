@@ -155,12 +155,23 @@
 		<action name="auditInfoAction_*" class="com.xiaoy.audit.web.action.AuditInfoAction" method="{1}">
 			<result name="auditInfoWaitList">/WEB-INF/page/AuditMag/auditInfoWaitList.jsp</result>
 			<result name="auditInfoWaitEdit">/WEB-INF/page/AuditMag/auditInfoWaitEdit.jsp</result>
-			<!-- 
-			<result name="auditInfoWaitView">/WEB-INF/page/AuditMag/auditInfoWaitView.jsp</result>
-			 -->
 			
-			<result name="success" type="redirectAction">
+			<result name="successWait" type="redirectAction">
 				<param name="actionName">auditInfoAction_auditInfoWaitList</param>
+				<param name="namespace">/AuditMag</param>
+			</result>
+			
+			<result name="auditInfoPassList">/WEB-INF/page/AuditMag/auditInfoPassList.jsp</result>
+			<result name="auditInfoPassEdit">/WEB-INF/page/AuditMag/auditInfoPassEdit.jsp</result>
+			<result name="successPass" type="redirectAction">
+				<param name="actionName">auditInfoAction_auditInfoPassList</param>
+				<param name="namespace">/AuditMag</param>
+			</result>
+			
+			<result name="auditInfoRefuseList">/WEB-INF/page/AuditMag/auditInfoRefuseList.jsp</result>
+			<result name="auditInfoRefuseEdit">/WEB-INF/page/AuditMag/auditInfoRefuseEdit.jsp</result>
+			<result name="successRefuse" type="redirectAction">
+				<param name="actionName">auditInfoAction_auditInfoRefuseList</param>
 				<param name="namespace">/AuditMag</param>
 			</result>
 			

@@ -171,12 +171,12 @@ td {
 						</tr>
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/AuditMag/auditInfoPassList.jsp' target="main">审核通过</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/AuditMag/auditInfoAction_auditInfoPassList' target="main">审核通过</a>
 							</td>
 						</tr>
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/AuditMag/auditInfoRefuseList.jsp' target="main">审核未通过</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/AuditMag/auditInfoAction_auditInfoRefuseList' target="main">审核未通过</a>
 							</td>
 						</tr>
 					</table>

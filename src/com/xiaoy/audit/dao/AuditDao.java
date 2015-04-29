@@ -32,4 +32,18 @@ public interface AuditDao extends Common<Audit>
 	 */
 	Object[] findAuditInfoWaitByAuditUuid(AuditForm auditForm);
 
+	/**
+	 * 带分页的，条件查询出来所有符合条件的通过审核的申报
+	 * @param auditForm		查询条件
+	 * @return	List&ltObject[]&gt
+	 */
+	List<Object[]> findAuditInfoPassList(AuditForm auditForm);
+
+	/**
+	 * 根据条件查询统计出现符合条件的审核通过申报
+	 * @param auditForm		查询条件
+	 * @return	记录总数
+	 */
+	int countAuditInfoPass(AuditForm auditForm);
+
 }

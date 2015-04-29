@@ -68,7 +68,7 @@ td {
 		</tr>
 
 		<tr>
-			<td class="ta_01" align="center" width="20%" bgcolor="#f5fafe">设备图片：</td>
+			<td class="ta_01" align="right" width="20%" bgcolor="#f5fafe">设备图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
 				<img alt="设备图片" src="${pageContext.request.contextPath }${devicePicUrl}" width="500px" height="300px">
 			</td>

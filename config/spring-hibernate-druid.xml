@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+
+	<!-- 配置自动扫描 -->
+	<context:component-scan base-package="com.xiaoy" />
+	<!-- 导入properties的属性文件 -->
+	<context:property-placeholder
+		location="classpath:spring-hibernate-druid.properties" />
+
+	<!-- 配置数据源 -->
+	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+
+		<!-- druid可以通过url自动判断出Driver -->
+		<property name="driverClassName" value="${driverClass}" />
+		<property name="url" value="${jdbcUrl}" />
+		<property name="username" value="${user}" />
+		<property name="password" value="${password}" />
+
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="${initialSize}" />
+		<!-- 连接池最大使用连接数量 -->
+		<property name="maxActive" value="${maxActive}" />
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="${maxIdle}" />
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="${minIdle}" />
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="${maxWait}" />
+
+		<!-- 用来检测连接是否有效的sql，要求是一个查询语句。 如果validationQuery为null，testOnBorrow、testOnReturn、 
+			testWhileIdle都不会其作用。 -->
+		<property name="validationQuery" value="${validationQuery}" />
+		<!-- 申请连接时执行validationQuery检测连接是否有效， 做了这个配置会降低性能。 -->
+		<property name="testOnBorrow" value="false" />
+		<!-- 归还连接时执行validationQuery检测连接是否有效， 做了这个配置会降低性能 -->
+		<property name="testOnReturn" value="false" />
+		<!-- 建议配置为true，不影响性能，并且保证安全性。 申请连接的时候检测，如果空闲时间大于 timeBetweenEvictionRunsMillis， 
+			执行validationQuery检测连接是否有效。 -->
+		<property name="testWhileIdle" value="true" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+		<!-- 打开removeAbandoned功能 -->
+		<property name="removeAbandoned" value="${removeAbandoned}" />
+		<!-- 1800秒，也就是30分钟 -->
+		<property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}" />
+		<!-- 关闭abanded连接时输出错误日志 -->
+		<property name="logAbandoned" value="${logAbandoned}" />
+		<!-- 监控数据库 -->
+		<property name="filters" value="${filters}" />
+	</bean>
+
+	<!-- 配置SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- 添加数据源信息 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 添加hibernate.cfg.xml文件 -->
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+		<!-- 添加 *.hbm.xml文件 -->
+		<property name="mappingLocations" value="classpath:com/xiaoy/base/entites/*.hbm.xml"></property>
+	</bean>
+
+	<!-- 声明式事务 -->
+	<!-- 1.hibernate事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- 2.注解的形式管理事物 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>
+
+
+
+
+

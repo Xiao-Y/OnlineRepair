@@ -661,25 +661,26 @@ function auditInfoWaitSearch(){
 
 //通过维护类别异步加载用户名
 function auditInfoWaitMaintainType(){
-	$("#userUuid").remove();
+	$("#maintainUuid").remove();
 	
-	var maintainTypeCode = $('#maintainTypeCode').val();
-	
-	var url = "${pageContext.request.contextPath}/AuditMag/auditInfoAction_auditInfoWaitUser.action";
-	var dataType = "JSON";
-	var data = {"date":new Date,"maintainTypeCode":maintainTypeCode};
-	
-	$.post(url,data,function(data){
-		var html = '<select id="maintainTypeUuid" name="maintainTypeUuid" style="width: 140px" data-rule-required="true onchange=selectPhone();">';
+	var maintainTypeCode = $("#maintainTypeCode").val();
+	if(maintainTypeCode != ""){
+		var url = "${pageContext.request.contextPath}/AuditMag/auditInfoAction_auditInfoWaitUser.action";
+		var dataType = "JSON";
+		var data = {"date":new Date,"maintainTypeCode":maintainTypeCode};
 		
-		$.each(data,function(i){
-			html = html + '<option value="'+ data[i].userUuid +'" >'+ data[i].name + '</option>';
-		});
-		
-		html = html + "</select>";
-		
-		$("#auditInfoWaitMaintainUserDiv").html(html);
-	},dataType);
+		$.post(url,data,function(data){
+			var html = '<select id="maintainUuid" name="maintainUuid" style="width: 140px" data-rule-required="true">';
+			
+			$.each(data,function(i){
+				html = html + '<option value="'+ data[i].userUuid +'" >'+ data[i].name + '</option>';
+			});
+			
+			html = html + "</select>";
+			
+			$("#auditInfoWaitMaintainUserDiv").html(html);
+		},dataType);
+	}
 }
 
 //当审核状态为通过的时候显示出维护人员
@@ -690,17 +691,18 @@ function auditStateChange(){
 		$('#maintainTypeDIV').hide();
 	 	$('#tr_failAccount').show();
 	 	$('#tr_MaintainType').hide();
-	 	$('#tr_phone').hide();
+	 	$('#tr_pass_maintainStat').hide();
 	 }else if(auditStatCode == '2'){//通过
 		$('#maintainTypeDIV').show();
 		$('#tr_failAccount').hide();
 		$('#tr_MaintainType').show();
-		$('#tr_phone').show();
+		$('#tr_pass_maintainStat').show();
+		$('#maintainStatCode1').hide();
 	 }else if(auditStatCode == '1'){//待审核
 		 $('#maintainTypeDIV').hide();
 		 $('#tr_failAccount').hide();
 		 $('#tr_MaintainType').hide();
-		 $('#tr_phone').hide();
+		 $('#tr_pass_maintainStat').hide();
 	 }
 }
 
@@ -720,6 +722,15 @@ function auditInfoPassFind(){
 	$("#form1").submit();
 }
 
+//保存审核通过时验证
+function auditInfoPassButton(){
+   $("#Form1").validate();
+	
+	if($("#Form1").valid()){
+		$("#Form1").attr('action','${pageContext.request.contextPath}/AuditMag/auditInfoAction_auditInfoPassSave.action');
+		Form1.submit();
+	}
+}
 
 //审核管理====================end
 

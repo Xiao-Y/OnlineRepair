@@ -266,6 +266,11 @@ td {
 								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action' target="main">日志管理</a>
 							</td>
 						</tr>
+						<tr height="25">
+							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
+								&nbsp;&nbsp;&nbsp;&nbsp;<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/druid/index.html' target="main">数据库连接管理</a>
+							</td>
+						</tr>
 					</table>
 				</div>
 				<!-- 资源管理end -->

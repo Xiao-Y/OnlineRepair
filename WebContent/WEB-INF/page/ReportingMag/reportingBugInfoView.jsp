@@ -157,7 +157,7 @@ td {
 		<tr>
 			<td class="ta_01" align="right" width="20%" bgcolor="#f5fafe">上传的图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
-				<s:if test="%{ #request.devicePicUrl != '' || %{#request.devicePicUrl != null}">
+				<s:if test="%{ #request.devicePicUrl != '' && #request.devicePicUrl != null}">
 					<img alt="设备图片" src="${pageContext.request.contextPath }${devicePicUrl}" width="500px" height="300px">
 				</s:if>
 			</td>

@@ -4,26 +4,14 @@ import com.xiaoy.base.web.form.BaseForm;
 
 public class AuditForm extends BaseForm
 {
-
 	/**
-	 * 设备状态为异常
+	 * 【故障申报审核】--【待审核】
 	 */
-	public static final String STAT_EXCEPTION = "2";
-
+	public final static String AUDIT_WAIT = "【故障申报审核】--【待审核】";
 	/**
-	 * 审核：待审核
+	 * 【故障申报审核】--【审核通过】
 	 */
-	public static final String AUDITSTAT_WAIT = "1";
-
-	/**
-	 * 审核：通过
-	 */
-	public static final String AUDITSTAT_SUCCESS = "2";
-
-	/**
-	 * 审核：驳回
-	 */
-	public static final String AUDITSTAT_FAIL = "3";
+	public final static String AUDIT_PASS = "【故障申报审核】--【审核通过】";
 
 	/* 审核uuid */
 	private String auditUuid;
@@ -79,6 +67,18 @@ public class AuditForm extends BaseForm
 	private String orderTime;
 	/* 优先级别Name */
 	private String priorName;
+	/* 评价信息uuid */
+	private String evaluateUuid;
+
+	public String getEvaluateUuid()
+	{
+		return evaluateUuid;
+	}
+
+	public void setEvaluateUuid(String evaluateUuid)
+	{
+		this.evaluateUuid = evaluateUuid;
+	}
 
 	public String getOrderTime()
 	{

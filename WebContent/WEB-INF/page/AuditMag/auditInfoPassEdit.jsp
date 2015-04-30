@@ -6,6 +6,13 @@
 <head>
 
 <title>编辑审核通过故障信息</title>
+<script>
+	$(function(){
+		$('#tr_failAccount').hide();
+		$('#maintainStatCode1').hide();
+		$('label[for=maintainStatCode1]').hide();
+	});
+</script>
 <style type="text/css">
 	body {
 		background-color:#F5FAFE; 	
@@ -76,7 +83,7 @@
 			<td class="ta_01" bgColor="#ffffff" width="30%">
 				<s:if test="%{#request.auditStat != null && #request.auditStat.size() > 0}">
 					<s:radio list="%{#request.auditStat}" id="auditStatCode" name="auditStatCode" 
-					value="2" listKey="ddlCode" listValue="ddlName" onchange="auditStateChange();" />
+					listKey="ddlCode" listValue="ddlName" onchange="auditStateChange();" />
 				</s:if>
 			</td>
 		</tr>
@@ -88,48 +95,48 @@
 		       		<s:select list="%{#request.diList}" id="maintainTypeCode" name="maintainTypeCode"
 					  listKey="ddlCode" listValue="ddlName" onchange="auditInfoWaitMaintainType();"
 					  headerKey="" headerValue="---请选择---"
-					  cssStyle="width:140px" data-rule-required="true"
+					  cssStyle="width:153px" data-rule-required="true"
 					/>
 				</s:if>
 				<s:else>
-					<select id="" name="" style="width:140px"></select>
+					<select id="" name="" style="width:153px"></select>
 				</s:else>
 			</div>
 			</td>
 			
 			<td align="right"  width="20%" class="ta_01">维护人员：<font color="#FF0000">*</font></td>
-			<td class="ta_01" bgColor="#ffffff" width="30%">
+			<td class="ta_01" bgColor="#ffffff" width="30%" height="22px">
 				<div id="auditInfoWaitMaintainUserDiv">
-					<s:if test="%{#request.diList != null && #request.diList.size() > 0}">
-		       		<s:select list="%{#request.diList}" id="maintainTypeUuid" name="maintainTypeUuid"
-					  listKey="ddlCode" listValue="ddlName" onchange="auditInfoWaitMaintainType();"
-					  headerKey="" headerValue="---请选择---"
-					  cssStyle="width:140px" data-rule-required="true"
-					/>
-				</s:if>
-				<s:else>
-					<select id="" name="" style="width:140px"></select>
-				</s:else>
+					<s:textfield id="maintainName" name="maintainName" size="20" readonly="true"/>
 				</div>
 			</td>
 		</tr>
 		
 		<tr>
-			<td align="center" class="ta_01">审核通过日期：</td>
+			<td align="right" class="ta_01">审核通过日期：</td>
 			<td class="ta_01" bgColor="#ffffff">
-				<input class="Wdate" type="text" size="20" value="2013-12-23" disabled="disabled">
+				<s:textfield id="auditTime" name="auditTime" size="20" readonly="true"/>
 			</td>
-			<td align="center" class="ta_01">维护状态：</td>
+			<td align="right" class="ta_01">维护完成时间：</td>
 			<td class="ta_01" bgColor="#ffffff">
-				<input type="radio" name="test" value="未完成">未完成&nbsp;&nbsp;
-				<input type="radio" name="test" value="已完成" checked="checked">已完成&nbsp;&nbsp;
+				<s:if test="%{finishTime == ''}">
+					<s:textfield id="finishTime" name="finishTime" value="暂无" size="20" readonly="true"/>
+				</s:if>
+				<s:else>
+					<s:textfield id="finishTime" name="finishTime" size="20" readonly="true"/>
+				</s:else>
 			</td>
 		</tr>
-		<tr>
-			<td align="center" class="ta_01">维护完成时间：</td>
+		<tr id="tr_pass_maintainStat">
+			<td align="right" class="ta_01">维护状态：</td>
 			<td class="ta_01" bgColor="#ffffff">
-				<input type="radio" name="test" value="2013-12-23">
+				<s:if test="%{#request.maintainStat != null && #request.maintainStat.size() > 0}">
+					<s:radio list="%{#request.maintainStat}" id="maintainStatCode" name="maintainStatCode" 
+					listKey="ddlCode" listValue="ddlName"/>
+				</s:if>
 			</td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
 			<td class="ta_01" align="right" width="20%" >上传的图片：</td>
@@ -163,10 +170,14 @@
 		
 		<TR>
 			<td  align="center"  colSpan="4"  class="sep1"></td>
+			<!-- 设备状态的uuid -->
+			<s:hidden id="deviceStateUuid" name="deviceStateUuid"/>
+			<s:hidden id="auditUuid" name="auditUuid"/>
+			<s:hidden id="evaluateUuid" name="evaluateUuid"/>
 		</TR>
 		<tr>
 			<td class="ta_01" style="WIDTH: 100%" align="center" colSpan="4">
-				<input type="button" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55"   onClick="check_null()">
+				<input type="button" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55" onclick="auditInfoPassButton()">
 				<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
 				<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="关闭"  name="Reset1"  onClick="history.back()">
 			</td>

@@ -12,6 +12,7 @@ import com.xiaoy.audit.dao.AuditDao;
 import com.xiaoy.audit.web.form.AuditForm;
 import com.xiaoy.base.dao.impl.CommonImpl;
 import com.xiaoy.base.entites.Audit;
+import com.xiaoy.resource.web.form.DictionaryForm;
 
 @Repository
 public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
@@ -24,7 +25,7 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 		StringBuffer sql = new StringBuffer("");
 		sql.append(" SELECT de.AREA_CODE,de.INSTALLATION_SITE_CODE,d.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.REPORTING_UUID,u.USER_UUID,a.AUDIT_UUID ");
 		this.appendSQLWhere(sql);
-		sql.append(" and a.AUDIT_STAT_CODE= " + AuditForm.AUDITSTAT_WAIT);
+		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_WAIT);
 
 		StringBuffer hqlWhere = new StringBuffer("");
 		Map<String, Object> paramsMapValue = this.getMapWhereParam(auditForm, hqlWhere);
@@ -53,7 +54,7 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 		StringBuffer sql = new StringBuffer("");
 		sql.append(" SELECT count(*) ");
 		this.appendSQLWhere(sql);
-		sql.append(" and a.AUDIT_STAT_CODE= " + AuditForm.AUDITSTAT_WAIT);
+		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_WAIT);
 
 		StringBuffer hqlWhere = new StringBuffer("");
 		Map<String, Object> paramsMapValue = this.getMapWhereParam(auditForm, hqlWhere);
@@ -77,9 +78,9 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 	{
 		StringBuffer sql = new StringBuffer("");
 		sql.append(" SELECT de.AREA_CODE,de.INSTALLATION_SITE_CODE,d.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME, ");
-		sql.append(" d.VERSION,r.ACCOUNT,r.REMARK,de.DEVICETYPE_UUID,r.REPORTING_UUID,u.USER_UUID,r.DEVICE_PIC_URL,r.ORDER_TIME,r.PRIOR_CODE ");
+		sql.append(" d.VERSION,r.ACCOUNT,r.REMARK,de.DEVICE_STATE_UUID,r.REPORTING_UUID,u.USER_UUID,r.DEVICE_PIC_URL,r.ORDER_TIME,r.PRIOR_CODE ");
 		this.appendSQLWhere(sql);
-		sql.append(" and a.AUDIT_STAT_CODE= " + AuditForm.AUDITSTAT_WAIT);
+		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_WAIT);
 		sql.append(" and a.AUDIT_UUID = :auditUuid");
 		
 		Query query = this.getSession().createSQLQuery(sql.toString());
@@ -97,7 +98,7 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 		StringBuffer sql = new StringBuffer("");
 		sql.append(" SELECT de.AREA_CODE,de.INSTALLATION_SITE_CODE,d.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.REPORTING_UUID,u.USER_UUID,a.AUDIT_UUID,a.MAINTAIN_UUID,a.AUDIT_TIME ");
 		this.appendSQLWhere(sql);
-		sql.append(" and a.AUDIT_STAT_CODE= " + AuditForm.AUDITSTAT_SUCCESS);
+		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_SUCCESS);
 
 		StringBuffer hqlWhere = new StringBuffer("");
 		Map<String, Object> paramsMapValue = this.getMapWhereParam(auditForm, hqlWhere);
@@ -194,7 +195,7 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 		StringBuffer sql = new StringBuffer("");
 		sql.append(" SELECT count(*) ");
 		this.appendSQLWhere(sql);
-		sql.append(" and a.AUDIT_STAT_CODE= " + AuditForm.AUDITSTAT_SUCCESS);
+		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_SUCCESS);
 
 		StringBuffer hqlWhere = new StringBuffer("");
 		Map<String, Object> paramsMapValue = this.getMapWhereParam(auditForm, hqlWhere);
@@ -211,5 +212,29 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 
 		Object count = query.uniqueResult();
 		return Integer.parseInt(count.toString());
+	}
+
+	@Override
+	public Object[] findAuditInfoPassByAuditUuid(AuditForm auditForm)
+	{
+		StringBuffer sql = new StringBuffer("");
+		sql.append(" SELECT de.AREA_CODE,de.INSTALLATION_SITE_CODE,d.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME, ");
+		sql.append(" d.VERSION,r.ACCOUNT,r.REMARK,de.DEVICE_STATE_UUID,r.REPORTING_UUID,u.USER_UUID,r.DEVICE_PIC_URL, ");
+		sql.append(" r.ORDER_TIME,r.PRIOR_CODE,a.MAINTAIN_UUID,a.AUDIT_TIME,a.MAINTAIN_STAT_CODE,a.FINISH_TIME,e.EVALUATEUUID ");
+		sql.append(" from reporting r,user u,deviceinfo d,devicestate de,audit a, evaluate e ");
+		sql.append(" where a.REPORTING_UUID = r.REPORTING_UUID ");
+		sql.append(" and r.DEVICE_STATE_UUID = de.DEVICE_STATE_UUID ");
+		sql.append(" and r.USER_UUID = u.USER_UUID ");
+		sql.append(" and de.DEVICETYPE_UUID = d.DEVICETYPE_UUID ");
+		sql.append(" and r.REPORTING_UUID = e.REPORTING_UUID ");
+		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_SUCCESS);
+		sql.append(" and a.AUDIT_UUID = :auditUuid");
+		
+		Query query = this.getSession().createSQLQuery(sql.toString());
+		query.setParameter("auditUuid", auditForm.getAuditUuid());
+		
+		Object[] object = (Object[]) query.uniqueResult();
+		
+		return object;
 	}
 }

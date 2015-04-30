@@ -46,4 +46,11 @@ public interface AuditDao extends Common<Audit>
 	 */
 	int countAuditInfoPass(AuditForm auditForm);
 
+	/**
+	 * 通过审核的uuid查询出审核通过的信息及相关信息
+	 * @param auditForm		含有审核的uuid
+	 * @return	Object[]
+	 */
+	Object[] findAuditInfoPassByAuditUuid(AuditForm auditForm);
+
 }

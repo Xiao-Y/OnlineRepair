@@ -29,7 +29,7 @@
     <table cellSpacing="1" cellPadding="5" width="880" align="center" bgColor="#eeeeee" style="border:1px solid #8ba7e3" border="0">
 		<tr>
 			<td class="ta_01" align="center" colSpan="4" background="${pageContext.request.contextPath }/images/b-info.gif">
-				<font face="宋体" size="2"><strong>编辑故障信息</strong></font>
+				<font face="宋体" size="2"><strong>编辑审核故障信息</strong></font>
 			</td>
 		</tr>
 	    <tr>
@@ -90,7 +90,7 @@
 		<tr id="tr_MaintainType">
 			<td align="right"  width="20%" class="ta_01">维护类别：<font color="#FF0000">*</font></td>
 			<td class="ta_01" bgColor="#ffffff" width="30%" height="21">
-			<div id="maintainTypeDIV" style="">
+			<div id="maintainTypeDIV">
 				<s:if test="%{#request.diList != null && #request.diList.size() > 0}">
 		       		<s:select list="%{#request.diList}" id="maintainTypeCode" name="maintainTypeCode"
 					  listKey="ddlCode" listValue="ddlName" onchange="auditInfoWaitMaintainType();"

@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoy.audit.dao.AuditDao;
-import com.xiaoy.audit.service.impl.AuditServiceImpl;
+import com.xiaoy.audit.web.form.AuditForm;
 import com.xiaoy.base.entites.Audit;
 import com.xiaoy.base.entites.DeviceState;
 import com.xiaoy.base.entites.Reporting;
@@ -93,7 +93,7 @@ public class ReportingServiceImpl implements ReportingService
 		// 添加故障审核信息
 		Audit audit = this.reportingToAudit(entity);
 		auditDao.saveObject(audit);
-		logService.saveLog(request, AuditServiceImpl.MENU_MODEL, "添加“" + reportingForm.getDeviceName() + "”故障审核");
+		logService.saveLog(request,  AuditForm.AUDIT_WAIT, "添加“" + reportingForm.getDeviceName() + "”故障审核");
 	}
 
 	/**

@@ -72,6 +72,33 @@ public interface AuditService
 	 */
 	int countAuditInfoPass(AuditForm auditForm);
 
+	/**
+	 * 通过审核的uuid查询出通过的审核信息及相关信息
+	 * 
+	 * @param auditForm
+	 *            含有审核的uuid
+	 * @return AuditForm
+	 */
+	AuditForm findAuditInfoPassByAuditUuid(AuditForm auditForm);
+
+	/**
+	 * 保存修改审核通过的数据<p/>
+	 * 1.修改为待审核状态：<br/>
+	 * ①评价表：删除评价信息<br/>
+	 * ②设备状态表：修改设备状态为正常运行<br/>
+	 * ③审核表：修改维护人员的uuid、维护状态、完成时间都为空、审核状态为待审核<p/>
+	 * 
+	 * 2.修改为驳回：<br/>
+	 * ①评价表：删除评价信息<br/>
+	 * ②设备状态表：修改设备状态为正常运行<br/>
+	 * ③审核表：修改维护人员的uuid、维护状态、完成时间都为空，审核状态为驳回<p/>
+	 * 
+	 * 3.没有对审核进行修改<br/>
+	 * 审核表：修改维护人员的uuid、维护状态为未处理、完成时间为空<p/>
+	 * @return
+	 */
+	void auditInfoPassSave(AuditForm auditForm, HttpServletRequest request);
+
 	// /**
 	// * 保存故障审核信息
 	// * @param entity 申报故障信息

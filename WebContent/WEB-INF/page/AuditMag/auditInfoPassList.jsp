@@ -194,7 +194,7 @@
 								<s:property value="%{#audit.auditTime}"/>
 							</td>	
 							<td align="center" style="HEIGHT: 22px" align="center">																	
-							   <a href="${pageContext.request.contextPath }/AuditMag/auditInfoAction_auditInfoPassEdit.action">
+							   <a href="${pageContext.request.contextPath }/AuditMag/auditInfoAction_auditInfoPassEdit.action?maintainName=<s:property value="%{#audit.maintainName}"/>&auditUuid=<s:property value="%{#audit.auditUuid}"/>&deviceName=<s:property value="%{#audit.deviceName}"/>">
 							   <img src="${pageContext.request.contextPath }/images/edit.gif" border="0" style="cursor:hand"></a>													
 							</td>
 							<!-- 

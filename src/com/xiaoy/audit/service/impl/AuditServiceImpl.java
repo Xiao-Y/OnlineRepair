@@ -19,6 +19,7 @@ import com.xiaoy.audit.web.form.AuditForm;
 import com.xiaoy.base.entites.Audit;
 import com.xiaoy.base.util.DateHelper;
 import com.xiaoy.device.servic.DeviceStateService;
+import com.xiaoy.evaluate.dao.EvaluateDao;
 import com.xiaoy.evaluate.service.EvaluateService;
 import com.xiaoy.evaluate.web.EvaluateForm;
 import com.xiaoy.resource.dao.DictionaryDao;
@@ -30,8 +31,6 @@ import com.xiaoy.user.web.form.UserForm;
 @Transactional(readOnly = true)
 public class AuditServiceImpl implements AuditService
 {
-
-	public static final String MENU_MODEL = "【故障申报审核】--【添加故障审核】";
 
 	@Resource
 	private AuditDao auditDao;
@@ -47,10 +46,14 @@ public class AuditServiceImpl implements AuditService
 	// 评价信息
 	@Resource
 	private EvaluateService evaluateService;
-	
-	//用户信息
+
+	// 用户信息
 	@Resource
 	private UserService userService;
+
+	// 评价信息
+	@Resource
+	private EvaluateDao evaluateDao;
 
 	@Override
 	public List<AuditForm> findAuditInfoWaitList(AuditForm auditForm)
@@ -62,8 +65,10 @@ public class AuditServiceImpl implements AuditService
 
 	/**
 	 * 将查询出来的待审核VO转换成PO对象
-	 * @param list	待转换的VO集合
-	 * @return	List&ltAuditForm&gt
+	 * 
+	 * @param list
+	 *            待转换的VO集合
+	 * @return List&ltAuditForm&gt
 	 */
 	private List<AuditForm> auditWaitVoToPoList(List<Object[]> list)
 	{
@@ -144,11 +149,26 @@ public class AuditServiceImpl implements AuditService
 		auditForm.setReportingUserUuid((String) o[11]);
 		auditForm.setDevicePicUrl((String) o[12]);
 		auditForm.setOrderTime(o[13] != null ? DateHelper.dateConverString((Date) o[13]) : "");
-		if(o[14] != null)
+		if (o[14] != null)
 		{
 			auditForm.setPriorName(dictionaryDao.findDDLName((String) o[14], DictionaryForm.PRIOR));
 		}
 
+		if (o.length > 15)
+		{
+			if (o[15] != null)
+			{
+				UserForm userForm = userService.findUserByUuid((String) o[15]);
+				auditForm.setMaintainUuid(userForm.getUserUuid());
+				auditForm.setMaintainName(userForm.getName());
+				auditForm.setMaintainTypeCode(userForm.getMaintainTypeCode());
+			}
+
+			auditForm.setAuditTime(o[16] != null ? DateHelper.dateConverString((Date) o[16]) : "");
+			auditForm.setMaintainStatCode((String) o[17]);
+			auditForm.setFinishTime(o[18] != null ? DateHelper.dateConverString((Date) o[18]) : "");
+			auditForm.setEvaluateUuid((String) o[19]);
+		}
 		return auditForm;
 	}
 
@@ -172,10 +192,10 @@ public class AuditServiceImpl implements AuditService
 		audit.setFailAccount(auditForm.getFailAccount());
 
 		// 当审核通过的时候，添加评价信息，修改设备状态并添加评价记录
-		if (auditStatCode.equals(AuditForm.AUDITSTAT_SUCCESS))
+		if (auditStatCode.equals(DictionaryForm.AUDITSTAT_SUCCESS))
 		{
 			// 1.修改设备状态信息为异常
-			deviceStateService.deviceStateUpdateSatae(auditForm.getDeviceStateUuid(), AuditForm.STAT_EXCEPTION);
+			deviceStateService.deviceStateUpdateSatae(auditForm.getDeviceStateUuid(), DictionaryForm.DEVICE_STAT_EXCEPTION);
 
 			// 2.添加评论信息
 			EvaluateForm eForm = new EvaluateForm();
@@ -186,6 +206,8 @@ public class AuditServiceImpl implements AuditService
 
 			// 当审核通过的时候添加维护人员uuid
 			audit.setMaintainUuid(auditForm.getMaintainUuid());
+			// 当审核通过的时候修改维护状态为待维护
+			audit.setMaintainStatCode(DictionaryForm.MAINTAIN_STAT_WAIT);
 		}
 
 	}
@@ -224,11 +246,11 @@ public class AuditServiceImpl implements AuditService
 				auditForm.setReportingUuid((String) o[6]);
 				auditForm.setReportingUserUuid((String) o[7]);
 				auditForm.setAuditUuid((String) o[8]);
-				
+
 				auditForm.setMaintainUuid((String) o[9]);
-				if(o[9] != null)
+				if (o[9] != null)
 				{
-					UserForm userForm = userService.findUserByUuid((String)o[9]);
+					UserForm userForm = userService.findUserByUuid((String) o[9]);
 					auditForm.setMaintainName(userForm.getName());
 					auditForm.setMaintainPhone(userForm.getPhone());
 				}
@@ -246,50 +268,52 @@ public class AuditServiceImpl implements AuditService
 		int count = auditDao.countAuditInfoPass(auditForm);
 		return count;
 	}
-	
-//	/**
-//	 * 对审核通过的申报转化
-//	 * 
-//	 * @param object
-//	 *            VO
-//	 * @param auditForm
-//	 *            PO
-//	 * @return AuditForm
-//	 */
-//	private AuditForm auditPassVoToPo(Object[] object, AuditForm auditForm)
-//	{
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
+	@Override
+	public AuditForm findAuditInfoPassByAuditUuid(AuditForm auditForm)
+	{
+		Object[] object = auditDao.findAuditInfoPassByAuditUuid(auditForm);
+		AuditForm aForm = this.auditWaitVoToPo(object, auditForm);
+		return aForm;
+	}
 
-	// @Resource
-	// private AuditDao auditDao;
-	//
-	// @Override
-	// @Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED,readOnly=false)
-	// public void saveAudit(Reporting reporting) {
-	// Audit entity = this.reportingToAudit(reporting);
-	// auditDao.saveObject(entity);
-	// }
-	//
-	// /**
-	// * 从申报故障信息类中获取申报uuid和用户uuid.
-	// * 固定系统审核状为1时表示待审核。维护状态为0时表示，还未审核。
-	// * @param reporting
-	// * @return
-	// */
-	// private Audit reportingToAudit(Reporting reporting) {
-	// Audit entity = new Audit();
-	// entity.setReportingUuid(reporting.getReportingUuid());
-	// entity.setUserUuid(reporting.getUser().getUserUuid());
-	//
-	// //1表示未维护
-	// entity.setMaintainStatCode("1");
-	// //1表示未处理
-	// entity.setAuditStatCode("1");
-	//
-	// return entity;
-	// }
+	@Override
+	@Transactional(readOnly = false, isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
+	public void auditInfoPassSave(AuditForm auditForm, HttpServletRequest request)
+	{
+		// 审核状态
+		String auditStatCode = auditForm.getAuditStatCode();
 
+		// 审核通过的
+		if (auditStatCode.equals(DictionaryForm.AUDITSTAT_SUCCESS))
+		{
+			// 修改维护人员的uuid、维护状态为未处理、完成时间为空
+			Audit audit = auditDao.findObjectById(auditForm.getAuditUuid());
+			audit.setMaintainUuid(auditForm.getMaintainUuid());
+			// 维护状态
+			String maintainSataCode = auditForm.getMaintainStatCode();
+			audit.setMaintainStatCode(maintainSataCode);
+			if (maintainSataCode.equals(DictionaryForm.MAINTAIN_STAT_SUCCESS))
+			{
+				audit.setFinishTime(new Date());
+			} else
+			{
+				audit.setFinishTime(null);
+			}
+
+		} else
+		// 待审核和驳回
+		{
+			// ①评价表：删除评价信息
+			evaluateDao.deleteObjectByid(auditForm.getEvaluateUuid());
+			// ②设备状态表：修改设备状态为正常运行
+			deviceStateService.deviceStateUpdateSatae(auditForm.getDeviceStateUuid(), DictionaryForm.DEVICE_STAT_OK);
+			// ③修改维护人员的uuid、维护状态、完成时间都为空,修改审核状态
+			Audit audit = auditDao.findObjectById(auditForm.getAuditUuid());
+			audit.setMaintainUuid("");
+			audit.setMaintainStatCode(DictionaryForm.MAINTAIN_STAT_NO);
+			audit.setFinishTime(null);
+			audit.setAuditStatCode(auditForm.getAuditStatCode());
+		}
+	}
 }

@@ -9,9 +9,6 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.xiaoy.base.dao.impl.CommonImpl;
 import com.xiaoy.base.entites.DeviceInfo;
@@ -331,7 +328,6 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 	}
 
 	@Override
-	@Transactional(readOnly=false, isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
 	public void deviceStateUpdateSatae(String deviceStateUuid, String stateCode)
 	{
 		StringBuffer hql = new StringBuffer(" update DeviceState ");
@@ -339,8 +335,8 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 		hql.append(" where deviceStateUuid = :deviceStateUuid ");
 		
 		Query query = this.getSession().createQuery(hql.toString());
-		query.setParameter("stateCode", stateCode);
-		query.setParameter("deviceStateUuid", deviceStateUuid);
+		query.setString("stateCode", stateCode);
+		query.setString("deviceStateUuid", deviceStateUuid);
 		
 		query.executeUpdate();
 	}

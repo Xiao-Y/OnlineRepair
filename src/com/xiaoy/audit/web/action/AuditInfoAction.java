@@ -26,8 +26,6 @@ import com.xiaoy.user.web.form.UserForm;
 @SuppressWarnings("serial")
 public class AuditInfoAction extends BaseAction implements ModelDriven<AuditForm>
 {
-	public final static String AUDIT_WAIT = "【故障申报审核】--【待审核】";
-
 	@Resource
 	private AuditService auditService;
 
@@ -84,7 +82,7 @@ public class AuditInfoAction extends BaseAction implements ModelDriven<AuditForm
 
 		int countAudit = auditService.countAuditInfoWait(auditForm);
 		auditForm.setRecordCount(countAudit);
-		logService.saveLog(request, AUDIT_WAIT, "进入待审核列表");
+		logService.saveLog(request, AuditForm.AUDIT_WAIT, "进入待审核列表");
 		return "auditInfoWaitList";
 	}
 
@@ -104,7 +102,7 @@ public class AuditInfoAction extends BaseAction implements ModelDriven<AuditForm
 
 		AuditForm auForms = auditService.findAuditInfoWaitByAuditUuid(auditForm);
 		ActionContext.getContext().getValueStack().push(auForms);
-		logService.saveLog(request, AUDIT_WAIT, "修改“ " + auForms.getDeviceName() + " ”的待审核状态");
+		logService.saveLog(request, AuditForm.AUDIT_WAIT, "修改“ " + auForms.getDeviceName() + " ”的待审核状态");
 		return "auditInfoWaitEdit";
 	}
 
@@ -144,7 +142,7 @@ public class AuditInfoAction extends BaseAction implements ModelDriven<AuditForm
 	public String auditInfoWaitSave()
 	{
 		auditService.auditInfoWaitSave(auditForm, request);
-		logService.saveLog(request, AUDIT_WAIT, "保存“ " + auditForm.getDeviceName() + " ”待审核列表");
+		logService.saveLog(request, AuditForm.AUDIT_WAIT, "保存“ " + auditForm.getDeviceName() + " ”待审核信息");
 		return "successWait";
 	}
 
@@ -170,12 +168,14 @@ public class AuditInfoAction extends BaseAction implements ModelDriven<AuditForm
 
 		int countAudit = auditService.countAuditInfoPass(auditForm);
 		auditForm.setRecordCount(countAudit);
-		
+
+		logService.saveLog(request, AuditForm.AUDIT_PASS, "进入审核通过列表");
 		return "auditInfoPassList";
 	}
 
 	/**
 	 * 进入审核通过的编辑页面
+	 * 
 	 * @return
 	 */
 	public String auditInfoPassEdit()
@@ -186,14 +186,41 @@ public class AuditInfoAction extends BaseAction implements ModelDriven<AuditForm
 		// 查询出来审核状态
 		List<DictionaryForm> auditStat = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.AUDIT_STAT);
 		request.setAttribute("auditStat", auditStat);
-		//查询出用户名
-		//List<UserForm> userForm = userService.findUserByMaintainTypeCode(maintainTypeCode);
+		// 维护状态
+		List<DictionaryForm> maintainStat = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.MAINTAIN_STAT);
+		request.setAttribute("maintainStat", maintainStat);
 
-//		AuditForm auForms = auditService.findAuditInfoWaitByAuditUuid(auditForm);
-//		ActionContext.getContext().getValueStack().push(auForms);
+		auditForm = auditService.findAuditInfoPassByAuditUuid(auditForm);
+		auditForm.setAuditStatCode(DictionaryForm.AUDITSTAT_SUCCESS);
+		ActionContext.getContext().getValueStack().push(auditForm);
+		
+		logService.saveLog(request, AuditForm.AUDIT_PASS, "进入“" + auditForm.getDeviceName() + "”的审核信息编辑页");
 		return "auditInfoPassEdit";
 	}
-	
+
+	/**
+	 * 保存修改审核通过的数据<p/>
+	 * 1.修改为待审核状态：<br/>
+	 * ①评价表：删除评价信息<br/>
+	 * ②设备状态表：修改设备状态为正常运行<br/>
+	 * ③审核表：修改维护人员的uuid、维护状态、完成时间都为空、审核状态为待审核<p/>
+	 * 
+	 * 2.修改为驳回：<br/>
+	 * ①评价表：删除评价信息<br/>
+	 * ②设备状态表：修改设备状态为正常运行<br/>
+	 * ③审核表：修改维护人员的uuid、维护状态、完成时间都为空，审核状态为驳回<p/>
+	 * 
+	 * 3.没有对审核进行修改<br/>
+	 * 审核表：修改维护人员的uuid、维护状态为未处理、完成时间为空<p/>
+	 * @return
+	 */
+	public String auditInfoPassSave()
+	{
+		auditService.auditInfoPassSave(auditForm, request);
+		logService.saveLog(request, AuditForm.AUDIT_PASS, "保存“" + auditForm.getDeviceName() + "”的审核信息");
+		return "successPass";
+	}
+
 	/**
 	 * 审核未通过的列表
 	 * 

@@ -342,6 +342,7 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 	}
 
 	@Override
+	@Transactional(isolation=Isolation.DEFAULT,readOnly=false, propagation=Propagation.REQUIRED)
 	public void deviceStateUpdateSatae(String deviceStateUuid, String statException)
 	{
 		deviceStateDao.deviceStateUpdateSatae(deviceStateUuid, statException);

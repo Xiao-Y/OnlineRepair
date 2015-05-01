@@ -86,7 +86,7 @@
 				<td class="ta_01" align="right" height="22">
 				申报时间：</td>
 				<td class="ta_01">
-					<s:textfield class="Wdate" type="text" id="reportingTime" name="reportingTime" style="width:140px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
+					<s:textfield cssClass="Wdate" type="text" id="reportingTime" name="reportingTime" style="width:140px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 				</td>
 			</tr>
 	    </table>	
@@ -175,7 +175,7 @@
 						</s:if>
 						<s:else>
 							<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-								<td colspan=6 style="HEIGHT:22px" align="center" width="100%">
+								<td colspan=8 style="HEIGHT:22px" align="center" width="100%">
 									<font color="#FF0000">没有更多数据...</font>
 								</td>
 							</tr>

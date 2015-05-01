@@ -101,11 +101,11 @@
 				</td>
 				<td class="ta_01" align="right" height="22">申报时间：</td>
 				<td class="ta_01" >
-					<s:textfield class="Wdate" type="text" id="reportingTime" name="reportingTime" style="width:140px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
+					<s:textfield cssClass="Wdate" type="text" id="reportingTime" name="reportingTime" style="width:140px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 				</td>
 				<td class="ta_01" align="right" height="22">审核通过时间：</td>
 				<td class="ta_01" >
-					<s:textfield class="Wdate" type="text" id="auditTime" name="auditTime" style="width:140px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
+					<s:textfield cssClass="Wdate" type="text" id="auditTime" name="auditTime" style="width:140px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 				</td>
 			</tr>
 	    </table>	
@@ -124,7 +124,6 @@
 		             </table>
 	            </td>
 				<td class="ta_01" align="right">
-					
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" onclick="auditInfoPassFind();" type="button" value="查询" name="BT_Find" >&nbsp;&nbsp;
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_Reset" >&nbsp;&nbsp;
 				</td>

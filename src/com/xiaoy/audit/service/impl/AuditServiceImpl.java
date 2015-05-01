@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,11 +18,11 @@ import com.xiaoy.audit.dao.AuditDao;
 import com.xiaoy.audit.service.AuditService;
 import com.xiaoy.audit.web.form.AuditForm;
 import com.xiaoy.base.entites.Audit;
+import com.xiaoy.base.entites.DeviceState;
+import com.xiaoy.base.entites.Evaluate;
 import com.xiaoy.base.util.DateHelper;
-import com.xiaoy.device.servic.DeviceStateService;
+import com.xiaoy.device.dao.DeviceStateDao;
 import com.xiaoy.evaluate.dao.EvaluateDao;
-import com.xiaoy.evaluate.service.EvaluateService;
-import com.xiaoy.evaluate.web.EvaluateForm;
 import com.xiaoy.resource.dao.DictionaryDao;
 import com.xiaoy.resource.web.form.DictionaryForm;
 import com.xiaoy.user.service.UserService;
@@ -39,13 +40,9 @@ public class AuditServiceImpl implements AuditService
 	@Resource
 	private DictionaryDao dictionaryDao;
 
-	// 设备状态
+	//设置状态dao
 	@Resource
-	private DeviceStateService deviceStateService;
-
-	// 评价信息
-	@Resource
-	private EvaluateService evaluateService;
+	private DeviceStateDao deviceStateDao;
 
 	// 用户信息
 	@Resource
@@ -96,6 +93,12 @@ public class AuditServiceImpl implements AuditService
 				auditForm.setReportingUuid((String) o[6]);
 				auditForm.setReportingUserUuid((String) o[7]);
 				auditForm.setAuditUuid((String) o[8]);
+
+				// 与审核未通过的重用，多一个字段
+				if (o.length > 9)
+				{
+					auditForm.setAuditTime(o[9] != null ? DateHelper.dateConverString((Date) o[9]) : "");
+				}
 				formList.add(auditForm);
 			}
 		}
@@ -106,7 +109,7 @@ public class AuditServiceImpl implements AuditService
 	@Override
 	public int countAuditInfoWait(AuditForm auditForm)
 	{
-		int count = auditDao.countAuditInfoWait(auditForm);
+		int count = auditDao.countAuditInfo(auditForm);
 		return count;
 	}
 
@@ -114,7 +117,7 @@ public class AuditServiceImpl implements AuditService
 	public AuditForm findAuditInfoWaitByAuditUuid(AuditForm auditForm)
 	{
 		Object[] object = auditDao.findAuditInfoWaitByAuditUuid(auditForm);
-		AuditForm aForm = this.auditWaitVoToPo(object, auditForm);
+		AuditForm aForm = this.auditVoToPo(object, auditForm);
 		return aForm;
 	}
 
@@ -125,7 +128,7 @@ public class AuditServiceImpl implements AuditService
 	 *            Vo对象
 	 * @return Po对象
 	 */
-	private AuditForm auditWaitVoToPo(Object[] o, AuditForm auditForm)
+	private AuditForm auditVoToPo(Object[] o, AuditForm auditForm)
 	{
 		auditForm.setAreaCode((String) o[0]);
 		if (o[0] != null)
@@ -154,9 +157,10 @@ public class AuditServiceImpl implements AuditService
 			auditForm.setPriorName(dictionaryDao.findDDLName((String) o[14], DictionaryForm.PRIOR));
 		}
 
+		// 与审核通过的复用
 		if (o.length > 15)
 		{
-			if (o[15] != null)
+			if (!StringUtils.isEmpty((String) o[15]))
 			{
 				UserForm userForm = userService.findUserByUuid((String) o[15]);
 				auditForm.setMaintainUuid(userForm.getUserUuid());
@@ -166,8 +170,12 @@ public class AuditServiceImpl implements AuditService
 
 			auditForm.setAuditTime(o[16] != null ? DateHelper.dateConverString((Date) o[16]) : "");
 			auditForm.setMaintainStatCode((String) o[17]);
-			auditForm.setFinishTime(o[18] != null ? DateHelper.dateConverString((Date) o[18]) : "");
-			auditForm.setEvaluateUuid((String) o[19]);
+			auditForm.setFailAccount((String) o[18]);
+			auditForm.setFinishTime(o[19] != null ? DateHelper.dateConverString((Date) o[19]) : "");
+			if (o.length > 20)
+			{
+				auditForm.setEvaluateUuid((String) o[20]);
+			}
 		}
 		return auditForm;
 	}
@@ -195,14 +203,15 @@ public class AuditServiceImpl implements AuditService
 		if (auditStatCode.equals(DictionaryForm.AUDITSTAT_SUCCESS))
 		{
 			// 1.修改设备状态信息为异常
-			deviceStateService.deviceStateUpdateSatae(auditForm.getDeviceStateUuid(), DictionaryForm.DEVICE_STAT_EXCEPTION);
+			DeviceState deviceState = deviceStateDao.findObjectById(auditForm.getDeviceStateUuid());
+			deviceState.setStateCode(DictionaryForm.DEVICE_STAT_EXCEPTION);
 
 			// 2.添加评论信息
-			EvaluateForm eForm = new EvaluateForm();
-			eForm.setReportingUuid(auditForm.getReportingUuid());
-			eForm.setReportingUserUuid(auditForm.getReportingUserUuid());
+			Evaluate evaluate = new Evaluate();
+			evaluate.setReportingUuid(auditForm.getReportingUuid());
+			evaluate.setReportingUserUuid(auditForm.getReportingUserUuid());
 
-			evaluateService.createEvaluate(eForm);
+			evaluateDao.saveObject(evaluate);
 
 			// 当审核通过的时候添加维护人员uuid
 			audit.setMaintainUuid(auditForm.getMaintainUuid());
@@ -265,7 +274,7 @@ public class AuditServiceImpl implements AuditService
 	@Override
 	public int countAuditInfoPass(AuditForm auditForm)
 	{
-		int count = auditDao.countAuditInfoPass(auditForm);
+		int count = auditDao.countAuditInfo(auditForm);
 		return count;
 	}
 
@@ -273,7 +282,7 @@ public class AuditServiceImpl implements AuditService
 	public AuditForm findAuditInfoPassByAuditUuid(AuditForm auditForm)
 	{
 		Object[] object = auditDao.findAuditInfoPassByAuditUuid(auditForm);
-		AuditForm aForm = this.auditWaitVoToPo(object, auditForm);
+		AuditForm aForm = this.auditVoToPo(object, auditForm);
 		return aForm;
 	}
 
@@ -281,14 +290,19 @@ public class AuditServiceImpl implements AuditService
 	@Transactional(readOnly = false, isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 	public void auditInfoPassSave(AuditForm auditForm, HttpServletRequest request)
 	{
+		// 从session中获取登陆用户的信息
+		HttpSession session = request.getSession();
+		UserForm userInfo = (UserForm) session.getAttribute("userInfo");
+
 		// 审核状态
 		String auditStatCode = auditForm.getAuditStatCode();
+		// 修改维护人员的uuid、维护状态为未处理、完成时间为空
+		Audit audit = auditDao.findObjectById(auditForm.getAuditUuid());
+		audit.setAuditUserUuid(userInfo.getUserUuid());
 
 		// 审核通过的
 		if (auditStatCode.equals(DictionaryForm.AUDITSTAT_SUCCESS))
 		{
-			// 修改维护人员的uuid、维护状态为未处理、完成时间为空
-			Audit audit = auditDao.findObjectById(auditForm.getAuditUuid());
 			audit.setMaintainUuid(auditForm.getMaintainUuid());
 			// 维护状态
 			String maintainSataCode = auditForm.getMaintainStatCode();
@@ -301,19 +315,95 @@ public class AuditServiceImpl implements AuditService
 				audit.setFinishTime(null);
 			}
 
+			audit.setFailAccount("");
 		} else
 		// 待审核和驳回
 		{
 			// ①评价表：删除评价信息
 			evaluateDao.deleteObjectByid(auditForm.getEvaluateUuid());
 			// ②设备状态表：修改设备状态为正常运行
-			deviceStateService.deviceStateUpdateSatae(auditForm.getDeviceStateUuid(), DictionaryForm.DEVICE_STAT_OK);
+			DeviceState deviceState = deviceStateDao.findObjectById(auditForm.getDeviceStateUuid());
+			deviceState.setStateCode(DictionaryForm.DEVICE_STAT_OK);
+			
 			// ③修改维护人员的uuid、维护状态、完成时间都为空,修改审核状态
-			Audit audit = auditDao.findObjectById(auditForm.getAuditUuid());
 			audit.setMaintainUuid("");
 			audit.setMaintainStatCode(DictionaryForm.MAINTAIN_STAT_NO);
 			audit.setFinishTime(null);
 			audit.setAuditStatCode(auditForm.getAuditStatCode());
+			if (auditStatCode.equals(DictionaryForm.AUDITSTAT_FAIL))
+			{
+				audit.setFailAccount(auditForm.getFailAccount());
+			} else
+			{
+				audit.setFailAccount("");
+			}
+		}
+	}
+
+	@Override
+	public List<AuditForm> auditInfoRefuseList(AuditForm auditForm)
+	{
+		List<Object[]> auObjects = auditDao.findAuditInfoRefuseList(auditForm);
+		List<AuditForm> auList = this.auditWaitVoToPoList(auObjects);
+		return auList;
+	}
+
+	@Override
+	public int countAuditInfoRefuse(AuditForm auditForm)
+	{
+		int count = auditDao.countAuditInfo(auditForm);
+		return count;
+	}
+
+	@Override
+	public AuditForm findAuditInfoRefuseByAuditUuid(AuditForm auditForm)
+	{
+		Object[] object = auditDao.findAuditInfoRefuseByAuditUuid(auditForm);
+		AuditForm aForm = this.auditVoToPo(object, auditForm);
+		return aForm;
+	}
+
+	@Override
+	@Transactional(readOnly = false, isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
+	public void auditRefuseSave(AuditForm auditForm, HttpServletRequest request)
+	{
+		// 从session中获取登陆用户的信息
+		HttpSession session = request.getSession();
+		UserForm userInfo = (UserForm) session.getAttribute("userInfo");
+
+		// 审核状态
+		String auditStatCode = auditForm.getAuditStatCode();
+		Audit audit = auditDao.findObjectById(auditForm.getAuditUuid());
+		audit.setAuditUserUuid(userInfo.getUserUuid());
+		audit.setAuditTime(new Date());
+
+		// 审核通过的
+		if (auditStatCode.equals(DictionaryForm.AUDITSTAT_SUCCESS))
+		{
+			//修改为审核通过
+			audit.setAuditStatCode(auditStatCode);
+			// 添加评价记录
+			Evaluate evaluate = new Evaluate();
+			evaluate.setReportingUserUuid(auditForm.getReportingUserUuid());
+			evaluate.setReportingUuid(auditForm.getReportingUuid());
+			evaluateDao.saveObject(evaluate);
+			
+			//更改设备状态
+			DeviceState deviceState = deviceStateDao.findObjectById(auditForm.getDeviceStateUuid());
+			deviceState.setStateCode(DictionaryForm.DEVICE_STAT_EXCEPTION);
+
+			audit.setFailAccount("");
+			audit.setMaintainStatCode(DictionaryForm.MAINTAIN_STAT_WAIT);
+			audit.setMaintainUuid(auditForm.getMaintainUuid());
+		} else if (auditStatCode.equals(DictionaryForm.AUDITSTAT_WAIT))
+		// 待审核
+		{
+			audit.setAuditStatCode(DictionaryForm.AUDITSTAT_WAIT);
+
+		} else
+		// 驳回
+		{
+			audit.setFailAccount(auditForm.getFailAccount());
 		}
 	}
 }

@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <jsp:include page="/pub.jsp"/>
@@ -8,15 +9,12 @@
 
 <body style="background-color:#F5FAFE;">
 <s:form name="Form1" id="Form1" method="post" cssClass="form-validate" action="ResourceMa/noticeAction_saveNotice.action">
-	<br/>
 	<table id="opperate1" cellspacing="1" cellpadding="5" width="90%" align="center" style="border:1px solid #8ba7e3" border="0">
         <tr>
 			<td class="ta_01" colspan=2 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
-			<font face="宋体" size="2"><strong>公告信息编辑</strong></font>
+				<font face="宋体" size="2"><strong>公告信息编辑</strong></font>
 			</td>
 		</tr>
-		<TR height=10><td></td><td></td></TR>
-		
 		<tr>
 			<td class="ta_01" align="right" width="30%">公告标题：</td>
 			<td class="ta_01" bgcolor="#ffffff" style="word-break: break-all">

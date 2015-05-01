@@ -25,7 +25,6 @@
 		    </table>	
 			<table cellSpacing="1" cellPadding="0" width="100%" align="center" border="0">
 				<TBODY>
-					<tr height=10><td></td></tr>			
 					<tr>
 					  	<td>
 			                <TABLE style="WIDTH: 105px; HEIGHT: 20px" border="0">
@@ -46,29 +45,29 @@
 							<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="DataGrid1"
 								style="BORDER-RIGHT:gray 1px solid; BORDER-TOP:gray 1px solid; BORDER-LEFT:gray 1px solid; WIDTH:100%; WORD-BREAK:break-all; BORDER-BOTTOM:gray 1px solid; BORDER-COLLAPSE:collapse; BACKGROUND-COLOR:#f5fafe; WORD-WRAP:break-word">
 								<tr style="FONT-WEIGHT:bold;FONT-SIZE:12pt;HEIGHT:25px;BACKGROUND-COLOR:#afd1f3">
-									<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</td>
-									<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作人</td>
-									<td align="center" width="15%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">ip地址</td>
-									<td align="center" width="25%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作时间</td>
-									<td align="center" width="45%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作情况</td>
+									<th align="center" width="5%" height=20 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</th>
+									<th align="center" width="10%" height=20 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作人</th>
+									<th align="center" width="15%" height=20 background="${pageContext.request.contextPath }/images/tablehead.jpg">ip地址</th>
+									<th align="center" width="15%" height=20 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作时间</th>
+									<th align="center" width="45%" height=20 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作情况</th>
 								</tr>
 								<s:if test="%{#request.formList != null && #request.formList.size() > 0}">
 									<s:iterator value="%{#request.formList}" var="list" status="st">
 										<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-											<td style="HEIGHT:22px" align="center" width="5%">
+											<td align="center">
 												<s:property value="%{#st.getIndex() + 1}"/>
 											</td>
 											<s:hidden name="logId" id="logId" value="%{#list.logID}"/>
-											<td style="HEIGHT:22px" align="center" width="10%">
+											<td align="center">
 												<s:property value="%{#list.opeName}"/>
 											</td>
-											<td style="HEIGHT:22px" align="center" width="15%">
+											<td align="center">
 												<s:property value="%{#list.ipAddress}"/>
 											</td>
-											<td style="HEIGHT:22px" align="center" width="25%">
+											<td align="center">
 												<s:property value="%{#list.opeTime}"/>
 											</td>									
-											<td style="HEIGHT:22px" align="left" width="45%">
+											<td align="left">
 												<s:property value="%{#list.details}"/>
 											</td>
 										</tr>
@@ -76,7 +75,7 @@
 								</s:if>
 								<s:else>
 									<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-										<td colspan=4 style="HEIGHT:22px" align="center" width="100%">
+										<td colspan=4 align="center" width="100%">
 											<font color="#FF0000">没有更多数据...</font>
 										</td>
 									</tr>

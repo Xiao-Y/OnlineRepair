@@ -142,7 +142,7 @@ function deletes() {
 function changetype() {
 	
 	if($("#keyWord").val() == "jerrynew"){
-		var textStr = "<input type=\"text\" name=\"keywordname\" maxlength=\"50\" size=\"23\"> ";
+		var textStr = "<input type=\"text\" name=\"keywordname\" height=20 maxlength=\"50\" size=\"23\"> ";
 		$("#newtypename").html("类型名称：");
 		$("#newddlText").html(textStr);
 		
@@ -732,6 +732,21 @@ function auditInfoPassButton(){
 	}
 }
 
+//审核未通过的条件查询
+function auditInfoRefuseFind(){
+	$('#form1').attr('action','${pageContext.request.contextPath}/AuditMag/auditInfoAction_auditInfoRefuseList.action');
+	$("#form1").submit();
+}
+
+//保存审核未通过时验证
+function auditInfoRefuseButton(){
+   $("#Form1").validate();
+	
+	if($("#Form1").valid()){
+		$("#Form1").attr('action','${pageContext.request.contextPath}/AuditMag/auditInfoAction_auditRefuseSave.action');
+		Form1.submit();
+	}
+}
 //审核管理====================end
 
 

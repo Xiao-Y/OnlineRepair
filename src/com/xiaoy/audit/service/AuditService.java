@@ -99,10 +99,33 @@ public interface AuditService
 	 */
 	void auditInfoPassSave(AuditForm auditForm, HttpServletRequest request);
 
-	// /**
-	// * 保存故障审核信息
-	// * @param entity 申报故障信息
-	// */
-	// void saveAudit(Reporting entity);
+	/**
+	 * 根据条件查询出审核未通过的申报故障
+	 * @param auditForm		查询条件
+	 * @return List&ltAuditForm&gt
+	 */
+	List<AuditForm> auditInfoRefuseList(AuditForm auditForm);
 
+	/**
+	 * 根据条件统计出现审核未通过的记录
+	 * @param auditForm		查询条件
+	 * @return	int
+	 */
+	int countAuditInfoRefuse(AuditForm auditForm);
+
+	/**
+	 * 通过审核的uuid查询出审核未通过信息及相关信息
+	 * 
+	 * @param auditForm
+	 *            含有审核的uuid
+	 * @return AuditForm
+	 */
+	AuditForm findAuditInfoRefuseByAuditUuid(AuditForm auditForm);
+
+	/**
+	 * 保存审核未通过的修改
+	 * @param auditForm
+	 * @param request
+	 */
+	void auditRefuseSave(AuditForm auditForm, HttpServletRequest request);
 }

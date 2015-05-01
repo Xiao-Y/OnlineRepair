@@ -18,12 +18,12 @@ public interface AuditDao extends Common<Audit>
 	 */
 	List<Object[]> findAuditInfoWaitList(AuditForm auditForm);
 
-	/**
-	 * 根据条件查询统计出现符合条件的待审核申报
-	 * @param auditForm		查询条件
-	 * @return	记录总数
-	 */
-	int countAuditInfoWait(AuditForm auditForm);
+//	/**
+//	 * 根据条件查询统计出现符合条件的待审核申报
+//	 * @param auditForm		查询条件
+//	 * @return	记录总数
+//	 */
+//	int countAuditInfoWait(AuditForm auditForm);
 
 	/**
 	 * 通过审核的uuid查询出现审核信息及相关信息
@@ -40,11 +40,11 @@ public interface AuditDao extends Common<Audit>
 	List<Object[]> findAuditInfoPassList(AuditForm auditForm);
 
 	/**
-	 * 根据条件查询统计出现符合条件的审核通过申报
+	 * 根据条件查询统计出现符合条件的审核申报
 	 * @param auditForm		查询条件
 	 * @return	记录总数
 	 */
-	int countAuditInfoPass(AuditForm auditForm);
+	int countAuditInfo(AuditForm auditForm);
 
 	/**
 	 * 通过审核的uuid查询出审核通过的信息及相关信息
@@ -52,5 +52,26 @@ public interface AuditDao extends Common<Audit>
 	 * @return	Object[]
 	 */
 	Object[] findAuditInfoPassByAuditUuid(AuditForm auditForm);
+
+	/**
+	 * 根据条件查询出审核未通过的申报故障
+	 * @param auditForm		查询条件
+	 * @return	List&ltObject[]&gt
+	 */
+	List<Object[]> findAuditInfoRefuseList(AuditForm auditForm);
+
+	/**
+	 * 通过审核的uuid查询出审核未通过的信息及相关信息
+	 * @param auditForm		含有审核的uuid
+	 * @return	Object[]
+	 */
+	Object[] findAuditInfoRefuseByAuditUuid(AuditForm auditForm);
+
+//	/**
+//	 * 根据条件查询统计出符合条件的审核未通过申报
+//	 * @param auditForm		查询条件
+//	 * @return	记录总数
+//	 */
+//	int countAuditInfoRefuse(AuditForm auditForm);
 
 }

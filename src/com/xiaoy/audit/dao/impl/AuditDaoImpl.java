@@ -48,30 +48,30 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 		return list;
 	}
 
-	@Override
-	public int countAuditInfoWait(AuditForm auditForm)
-	{
-		StringBuffer sql = new StringBuffer("");
-		sql.append(" SELECT count(*) ");
-		this.appendSQLWhere(sql);
-		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_WAIT);
-
-		StringBuffer hqlWhere = new StringBuffer("");
-		Map<String, Object> paramsMapValue = this.getMapWhereParam(auditForm, hqlWhere);
-
-		sql.append(hqlWhere.toString());
-
-		Query query = this.getSession().createSQLQuery(sql.toString());
-
-		if (!StringUtils.isEmpty(hqlWhere) && paramsMapValue != null && paramsMapValue.size() > 0)
-		{
-			// 设置参数
-			super.settingParam(hqlWhere.toString(), paramsMapValue, query);
-		}
-
-		Object count = query.uniqueResult();
-		return Integer.parseInt(count.toString());
-	}
+//	@Override
+//	public int countAuditInfoWait(AuditForm auditForm)
+//	{
+//		StringBuffer sql = new StringBuffer("");
+//		sql.append(" SELECT count(*) ");
+//		this.appendSQLWhere(sql);
+//		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_WAIT);
+//
+//		StringBuffer hqlWhere = new StringBuffer("");
+//		Map<String, Object> paramsMapValue = this.getMapWhereParam(auditForm, hqlWhere);
+//
+//		sql.append(hqlWhere.toString());
+//
+//		Query query = this.getSession().createSQLQuery(sql.toString());
+//
+//		if (!StringUtils.isEmpty(hqlWhere) && paramsMapValue != null && paramsMapValue.size() > 0)
+//		{
+//			// 设置参数
+//			super.settingParam(hqlWhere.toString(), paramsMapValue, query);
+//		}
+//
+//		Object count = query.uniqueResult();
+//		return Integer.parseInt(count.toString());
+//	}
 
 	@Override
 	public Object[] findAuditInfoWaitByAuditUuid(AuditForm auditForm)
@@ -135,6 +135,88 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 		sql.append(" and de.DEVICETYPE_UUID = d.DEVICETYPE_UUID ");
 	}
 
+	@Override
+	public int countAuditInfo(AuditForm auditForm)
+	{
+		StringBuffer sql = new StringBuffer("");
+		sql.append(" SELECT count(*) ");
+		this.appendSQLWhere(sql);
+		
+		//审核状态
+		sql.append(" and a.AUDIT_STAT_CODE = :auditStatCode");
+
+		StringBuffer hqlWhere = new StringBuffer("");
+		Map<String, Object> paramsMapValue = this.getMapWhereParam(auditForm, hqlWhere);
+
+		sql.append(hqlWhere.toString());
+
+		Query query = this.getSession().createSQLQuery(sql.toString());
+		query.setString("auditStatCode", auditForm.getAuditStatCode());
+
+		if (!StringUtils.isEmpty(hqlWhere) && paramsMapValue != null && paramsMapValue.size() > 0)
+		{
+			// 设置参数
+			super.settingParam(hqlWhere.toString(), paramsMapValue, query);
+		}
+
+		Object count = query.uniqueResult();
+		return Integer.parseInt(count.toString());
+	}
+
+	@Override
+	public Object[] findAuditInfoPassByAuditUuid(AuditForm auditForm)
+	{
+		StringBuffer sql = new StringBuffer("");
+		sql.append(" SELECT de.AREA_CODE,de.INSTALLATION_SITE_CODE,d.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME, ");
+		sql.append(" d.VERSION,r.ACCOUNT,r.REMARK,de.DEVICE_STATE_UUID,r.REPORTING_UUID,u.USER_UUID,r.DEVICE_PIC_URL, ");
+		sql.append(" r.ORDER_TIME,r.PRIOR_CODE,a.MAINTAIN_UUID,a.AUDIT_TIME,a.MAINTAIN_STAT_CODE,a.FAIL_ACCOUNT,a.FINISH_TIME,e.EVALUATEUUID ");
+		sql.append(" from reporting r,user u,deviceinfo d,devicestate de,audit a, evaluate e ");
+		sql.append(" where a.REPORTING_UUID = r.REPORTING_UUID ");
+		sql.append(" and r.DEVICE_STATE_UUID = de.DEVICE_STATE_UUID ");
+		sql.append(" and r.USER_UUID = u.USER_UUID ");
+		sql.append(" and de.DEVICETYPE_UUID = d.DEVICETYPE_UUID ");
+		sql.append(" and r.REPORTING_UUID = e.REPORTING_UUID ");
+		//sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_SUCCESS);
+		sql.append(" and a.AUDIT_UUID = :auditUuid");
+		
+		Query query = this.getSession().createSQLQuery(sql.toString());
+		query.setParameter("auditUuid", auditForm.getAuditUuid());
+		
+		Object[] object = (Object[]) query.uniqueResult();
+		
+		return object;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> findAuditInfoRefuseList(AuditForm auditForm)
+	{
+		StringBuffer sql = new StringBuffer("");
+		sql.append(" SELECT de.AREA_CODE,de.INSTALLATION_SITE_CODE,d.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.REPORTING_UUID,u.USER_UUID,a.AUDIT_UUID,a.AUDIT_TIME ");
+		this.appendSQLWhere(sql);
+		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_FAIL);
+
+		StringBuffer hqlWhere = new StringBuffer("");
+		Map<String, Object> paramsMapValue = this.getMapWhereParam(auditForm, hqlWhere);
+
+		sql.append(hqlWhere.toString());
+
+		Query query = this.getSession().createSQLQuery(sql.toString());
+		// 从第几条记录开始
+		query.setFirstResult((auditForm.getPageNo() - 1) * auditForm.getPageSize());
+		// 每页显示的记录数
+		query.setMaxResults(auditForm.getPageSize());
+
+		if (!StringUtils.isEmpty(hqlWhere) && paramsMapValue != null && paramsMapValue.size() > 0)
+		{
+			// 设置参数
+			super.settingParam(hqlWhere.toString(), paramsMapValue, query);
+		}
+
+		List<Object[]> list = query.list();
+		return list;
+	}
+
 	/**
 	 * 设置条件查询语句和参数
 	 * 
@@ -190,44 +272,17 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 	}
 
 	@Override
-	public int countAuditInfoPass(AuditForm auditForm)
-	{
-		StringBuffer sql = new StringBuffer("");
-		sql.append(" SELECT count(*) ");
-		this.appendSQLWhere(sql);
-		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_SUCCESS);
-
-		StringBuffer hqlWhere = new StringBuffer("");
-		Map<String, Object> paramsMapValue = this.getMapWhereParam(auditForm, hqlWhere);
-
-		sql.append(hqlWhere.toString());
-
-		Query query = this.getSession().createSQLQuery(sql.toString());
-
-		if (!StringUtils.isEmpty(hqlWhere) && paramsMapValue != null && paramsMapValue.size() > 0)
-		{
-			// 设置参数
-			super.settingParam(hqlWhere.toString(), paramsMapValue, query);
-		}
-
-		Object count = query.uniqueResult();
-		return Integer.parseInt(count.toString());
-	}
-
-	@Override
-	public Object[] findAuditInfoPassByAuditUuid(AuditForm auditForm)
+	public Object[] findAuditInfoRefuseByAuditUuid(AuditForm auditForm)
 	{
 		StringBuffer sql = new StringBuffer("");
 		sql.append(" SELECT de.AREA_CODE,de.INSTALLATION_SITE_CODE,d.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME, ");
 		sql.append(" d.VERSION,r.ACCOUNT,r.REMARK,de.DEVICE_STATE_UUID,r.REPORTING_UUID,u.USER_UUID,r.DEVICE_PIC_URL, ");
-		sql.append(" r.ORDER_TIME,r.PRIOR_CODE,a.MAINTAIN_UUID,a.AUDIT_TIME,a.MAINTAIN_STAT_CODE,a.FINISH_TIME,e.EVALUATEUUID ");
-		sql.append(" from reporting r,user u,deviceinfo d,devicestate de,audit a, evaluate e ");
+		sql.append(" r.ORDER_TIME,r.PRIOR_CODE,a.MAINTAIN_UUID,a.AUDIT_TIME,a.MAINTAIN_STAT_CODE,a.FAIL_ACCOUNT,a.FINISH_TIME ");
+		sql.append(" from reporting r,user u,deviceinfo d,devicestate de,audit a ");
 		sql.append(" where a.REPORTING_UUID = r.REPORTING_UUID ");
 		sql.append(" and r.DEVICE_STATE_UUID = de.DEVICE_STATE_UUID ");
 		sql.append(" and r.USER_UUID = u.USER_UUID ");
 		sql.append(" and de.DEVICETYPE_UUID = d.DEVICETYPE_UUID ");
-		sql.append(" and r.REPORTING_UUID = e.REPORTING_UUID ");
-		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_SUCCESS);
 		sql.append(" and a.AUDIT_UUID = :auditUuid");
 		
 		Query query = this.getSession().createSQLQuery(sql.toString());

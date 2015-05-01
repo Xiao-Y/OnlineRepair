@@ -1,7 +1,10 @@
 package com.xiaoy.resource.servic.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 
@@ -164,5 +167,22 @@ public class DictionaryServiceImpl implements DictionaryService
 			list.add(dictionary);
 		}
 		dictionaryDao.saveObjectCollection(list);
+	}
+
+	@Override
+	public Map<String, List<DictionaryForm>> findDictionaryMapKeyWord(Map<String, String> keyWords)
+	{
+		Map<String, List<DictionaryForm>> map = null;
+		if(keyWords != null && keyWords.size() > 0)
+		{
+			map = new HashMap<String, List<DictionaryForm>>();
+			
+			for(Entry<String, String> entry : keyWords.entrySet())
+			{
+				List<DictionaryForm> list = this.findDictionaryListByKeyWord(entry.getValue());
+				map.put(entry.getKey(), list);
+			}
+		}
+		return map;
 	}
 }

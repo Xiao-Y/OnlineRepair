@@ -93,7 +93,7 @@ public class ReportingServiceImpl implements ReportingService
 		// 添加故障审核信息
 		Audit audit = this.reportingToAudit(entity);
 		auditDao.saveObject(audit);
-		logService.saveLog(request,  AuditForm.AUDIT_WAIT, "添加“" + reportingForm.getDeviceName() + "”故障审核");
+		logService.saveLog(request, AuditForm.AUDIT_WAIT, "添加“" + reportingForm.getDeviceName() + "”故障审核");
 	}
 
 	/**
@@ -174,12 +174,12 @@ public class ReportingServiceImpl implements ReportingService
 			{
 				ReportingForm r = new ReportingForm();
 				r.setAreaCode((String) o[0]);
-				if (o[0] != null)
+				if (!StringUtils.isEmpty((String) o[0]))
 				{
 					r.setAreaName(dictionaryDao.findDDLName((String) o[0], DictionaryForm.AREA_NAME));
 				}
 				r.setInstallationSiteCode((String) o[1]);
-				if (o[1] != null)
+				if (!StringUtils.isEmpty((String) o[1]))
 				{
 					r.setInstallationSiteName(dictionaryDao.findDDLName((String) o[1], DictionaryForm.INSTALLATION_SITE_NAME));
 				}
@@ -191,7 +191,7 @@ public class ReportingServiceImpl implements ReportingService
 				// 以下3个是由于初始化的时候系统添加的
 				// 当维护状态为0时则“未维护”
 				r.setMaintainStatCode((String) o[6]);
-				if (o[6] != null)
+				if (!StringUtils.isEmpty((String) o[6]))
 				{
 					// if(o[6].equals("0")){
 					// r.setMaintainStatName("未维护");
@@ -201,7 +201,7 @@ public class ReportingServiceImpl implements ReportingService
 				}
 				// //当评价状态为0时则“未评价”
 				// r.setEvaluateStatCode((String)o[7]);
-				// if(o[7] != null){
+				// if(o[7])){
 				// if(o[7].equals("0")){
 				// r.setEvaluateStatName("未评价");
 				// }else{
@@ -210,17 +210,13 @@ public class ReportingServiceImpl implements ReportingService
 				// }
 				// 当审核状态为0时则“待审核”
 				r.setAuditStatCode((String) o[7]);
-				if (o[7] != null)
+				if (!StringUtils.isEmpty((String) o[7]))
 				{
-					// if(o[7].equals("0")){
-					// r.setAuditStatName("待审核");
-					// }else {
 					r.setAuditStatName(dictionaryDao.findDDLName((String) o[7], DictionaryForm.AUDIT_STAT));
-					// }
 				}
 
 				r.setMaintainTypeCode((String) o[8]);
-				if (o[8] != null)
+				if (!StringUtils.isEmpty((String) o[8]))
 				{
 					r.setMaintainTypeName(dictionaryDao.findDDLName((String) o[8], DictionaryForm.MAINTAIN_TYPE_NAME));
 				}
@@ -264,22 +260,22 @@ public class ReportingServiceImpl implements ReportingService
 			{
 				r = new ReportingForm();
 				r.setAreaCode((String) o[0]);
-				if (o[0] != null)
+				if (!StringUtils.isEmpty((String) o[0]))
 				{
 					r.setAreaName(dictionaryDao.findDDLName((String) o[0], DictionaryForm.AREA_NAME));
 				}
 				r.setInstallationSiteCode((String) o[1]);
-				if (o[1] != null)
+				if (!StringUtils.isEmpty((String) o[1]))
 				{
 					r.setInstallationSiteName(dictionaryDao.findDDLName((String) o[1], DictionaryForm.INSTALLATION_SITE_NAME));
 				}
 				r.setDeviceName((String) o[2]);
 				r.setName((String) o[3]);
 				r.setReportingPhone((String) o[4]);
-				r.setReportingTime(o[5] != null ? DateHelper.dateConverString((Date) o[5]) : "");
+				r.setReportingTime( o[5] != null ? DateHelper.dateConverString((Date) o[5]) : "");
 
 				r.setMaintainStatCode((String) o[6]);
-				if (o[6] != null)
+				if (!StringUtils.isEmpty((String) o[6]))
 				{
 					r.setMaintainStatName(dictionaryDao.findDDLName((String) o[6], DictionaryForm.MAINTAIN_STAT));
 				} else
@@ -287,13 +283,13 @@ public class ReportingServiceImpl implements ReportingService
 					r.setMaintainStatName("");
 				}
 				r.setAuditStatCode((String) o[7]);
-				if (o[7] != null)
+				if (!StringUtils.isEmpty((String) o[7]))
 				{
 					r.setAuditStatName(dictionaryDao.findDDLName((String) o[7], DictionaryForm.AUDIT_STAT));
 				}
 
 				// r.setMaintainTypeCode((String)o[8]);
-				// if(o[8] != null){
+				// if(o[8])){
 				// r.setMaintainTypeName(dictionaryDao.findDDLName((String)o[8], DictionaryForm.MAINTAIN_TYPE_NAME));
 				// }else
 				// {
@@ -306,7 +302,7 @@ public class ReportingServiceImpl implements ReportingService
 				r.setDevicePicUrl((String) o[12]);
 				r.setAccount((String) o[13]);
 				r.setRemark((String) o[14]);
-				if (o[15] != null)
+				if (!StringUtils.isEmpty((String) o[15]))
 				{
 					User user = userDao.findObjectById((String) o[15]);
 					r.setMaintainUserName(user.getName());

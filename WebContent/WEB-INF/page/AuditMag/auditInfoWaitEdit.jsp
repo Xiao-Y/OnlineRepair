@@ -83,7 +83,7 @@
 			<td class="ta_01" bgColor="#ffffff" width="30%">
 				<s:if test="%{#request.auditStat != null && #request.auditStat.size() > 0}">
 					<s:radio list="%{#request.auditStat}" id="auditStatCode" name="auditStatCode" 
-					value="2" listKey="ddlCode" listValue="ddlName" onchange="auditStateChange();" />
+					value="2" listKey="ddlCode" listValue="ddlName" onclick="auditStateChange();" />
 				</s:if>
 			</td>
 		</tr>

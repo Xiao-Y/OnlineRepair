@@ -13,7 +13,6 @@
 		}  
 	}  
 </script>
-
 <title>设备故障申报系统</title>
 </head>
 	<!--  

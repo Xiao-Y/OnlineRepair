@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="x" uri="http://www.xiaoy.com/pageTag/core"%>
 <jsp:include page="/pub.jsp"/>
@@ -8,9 +9,8 @@
 </head>
 		
 <body style="background-color:#F5FAFE;">
-		<form id="Form1" name="Form1" action="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action" method="post" cssStyle="margin:0px;"> 
+		<form id="Form1" name="Form1" action="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action" method="post"> 
 			<table cellspacing="1" cellpadding="0" width="100%" align="center" border="0">
-				<tr height=10><td></td></tr>
 				<tr>
 					<td class="ta_01" colspan=2 align="center" background="../images/b-info.gif">
 						<font face="宋体" size="2"><strong>日志信息管理</strong></font>
@@ -23,7 +23,7 @@
 					</td>
 				</tr>
 		    </table>	
-			<table cellSpacing="1" cellPadding="0" width="90%" align="center" border="0">
+			<table cellSpacing="1" cellPadding="0" width="100%" align="center" border="0">
 				<TBODY>
 					<tr height=10><td></td></tr>			
 					<tr>

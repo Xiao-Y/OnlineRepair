@@ -20,7 +20,7 @@ public class LogForm extends BaseForm
 	private String[] logId;
 	
 	//自定义分页大小（每页显示的条数）
-	private Integer pageSize = 15;
+	private Integer pageSize = 14;
 	
 	public String getLogID()
 	{

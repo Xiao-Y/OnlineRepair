@@ -685,8 +685,8 @@ function auditInfoWaitMaintainType(){
 
 //当审核状态为通过的时候显示出维护人员
 function auditStateChange(){
+	
 	 var auditStatCode = $('input[name=auditStatCode]:checked').val();
-	  
 	 if(auditStatCode == '3'){//驳回
 		$('#maintainTypeDIV').hide();
 	 	$('#tr_failAccount').show();

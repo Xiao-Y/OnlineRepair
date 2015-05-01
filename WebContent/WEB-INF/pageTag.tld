@@ -16,7 +16,7 @@
 	<tag>
 		<description>通用分页标签</description>
 		<name>pager</name>
-		<tag-class>com.xiaoy.base.util.PageTag</tag-class>
+		<tag-class>com.xiaoy.base.util.PageTag2</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>pageNo</name>

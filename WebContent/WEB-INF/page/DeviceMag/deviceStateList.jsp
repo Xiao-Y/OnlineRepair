@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="x" uri="http://www.xiaoy.com/pageTag/core"%>
+<jsp:include page="/pub.jsp"/>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="x" uri="http://www.xiaoy.com/pageTag/core"%>
-<jsp:include page="/pub.jsp"/>
-<link href="${pageContext.request.contextPath }/css/pageTag.css" rel="stylesheet" type="text/css"/>
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
 <title>查询设备状态</title>
 <script type="text/javascript">
 	//清除查询条件

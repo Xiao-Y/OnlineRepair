@@ -12,6 +12,11 @@ public class AuditForm extends BaseForm
 	 * 【故障申报审核】--【审核通过】
 	 */
 	public final static String AUDIT_PASS = "【故障申报审核】--【审核通过】";
+	
+	/**
+	 * 【故障申报审核】--【审核通过】
+	 */
+	public final static String AUDIT_REFUSE = "【故障申报审核】--【审核未通过】";
 
 	/* 审核uuid */
 	private String auditUuid;

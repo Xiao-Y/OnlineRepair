@@ -268,6 +268,7 @@ public class AuditInfoAction extends BaseAction implements ModelDriven<AuditForm
 		int countAudit = auditService.countAuditInfoRefuse(auditForm);
 		auditForm.setRecordCount(countAudit);
 
+		logService.saveLog(request, AuditForm.AUDIT_REFUSE, "进入的审核未通过列表");
 		return "auditInfoRefuseList";
 	}
 
@@ -297,7 +298,7 @@ public class AuditInfoAction extends BaseAction implements ModelDriven<AuditForm
 		auForms.setAuditStatCode(DictionaryForm.AUDITSTAT_FAIL);
 		ActionContext.getContext().getValueStack().push(auForms);
 
-		// logService.saveLog(request, AuditForm.AUDIT_WAIT, "修改“ " + auForms.getDeviceName() + " ”的待审核状态");
+		logService.saveLog(request, AuditForm.AUDIT_REFUSE, "修改“ " + auForms.getDeviceName() + " ”的待审核状态");
 		return "auditInfoRefuseEdit";
 	}
 	
@@ -308,7 +309,7 @@ public class AuditInfoAction extends BaseAction implements ModelDriven<AuditForm
 	public String auditRefuseSave()
 	{
 		auditService.auditRefuseSave(auditForm, request);
-		//logService.saveLog(request, AuditForm.AUDIT_PASS, "保存“" + auditForm.getDeviceName() + "”的审核信息");
+		logService.saveLog(request, AuditForm.AUDIT_REFUSE, "保存“" + auditForm.getDeviceName() + "”的审核信息");
 		return "successRefuse";
 	}
 }

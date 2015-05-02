@@ -47,6 +47,21 @@ public class DictionaryForm
 	 * 审核状态
 	 */
 	public static final String AUDIT_STAT = "审核状态";
+	
+	/**
+	 * 删除标识
+	 */
+	public static final String DELETE_FLAG = "删除标识";
+	
+	/**
+	 * 真删除
+	 */
+	public static final String DELETE_FLAG_TRUE = "1";
+	
+	/**
+	 * 假删除
+	 */
+	public static final String DELETE_FLAG_false = "2";
 
 	/**
 	 * 设备状态：运行正常

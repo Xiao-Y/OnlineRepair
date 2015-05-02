@@ -1,4 +1,4 @@
-package com.xiaoy.evaluate.web;
+package com.xiaoy.evaluate.web.form;
 
 import java.util.Date;
 

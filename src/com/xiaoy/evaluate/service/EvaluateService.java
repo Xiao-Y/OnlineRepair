@@ -1,6 +1,6 @@
 package com.xiaoy.evaluate.service;
 
-import com.xiaoy.evaluate.web.EvaluateForm;
+import com.xiaoy.evaluate.web.form.EvaluateForm;
 
 public interface EvaluateService
 {

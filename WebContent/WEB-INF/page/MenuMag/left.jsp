@@ -225,7 +225,7 @@ td {
 					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/EvaluateMag/evaluateInfoList.jsp' target="main">
+								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/EvaluateMag/evaluateAction_evaluateList.action' target="main">
 									<span>我的评价</span>
 								</a>
 							</td>

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xiaoy.base.entites.Evaluate;
 import com.xiaoy.evaluate.dao.EvaluateDao;
 import com.xiaoy.evaluate.service.EvaluateService;
-import com.xiaoy.evaluate.web.EvaluateForm;
+import com.xiaoy.evaluate.web.form.EvaluateForm;
 
 @Service
 @Transactional(readOnly=true)

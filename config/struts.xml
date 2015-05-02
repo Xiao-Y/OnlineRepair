@@ -184,6 +184,15 @@
 	</package>
 	<!-- 审核管理======end -->
 
+	<!-- 评价留言管理====start -->
+	<package name="evaluate" namespace="/EvaluateMag" extends="struts-default">
+		<action name="evaluateAction_*" class="com.xiaoy.evaluate.web.action.EvaluateAction" method="{1}">
+			<result name="evaluateList">/WEB-INF/page/EvaluateMag/evaluateInfoList.jsp</result>
+		</action>
+	</package>
+	<!-- 评价留言管理====end -->
+	
+	
 	<!-- 资源管理====start -->
 	<package name="resource" namespace="/ResourceMag" extends="struts-default">
 		<!-- 公告=====start -->

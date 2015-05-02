@@ -18,9 +18,11 @@ import com.xiaoy.audit.dao.AuditDao;
 import com.xiaoy.audit.service.AuditService;
 import com.xiaoy.audit.web.form.AuditForm;
 import com.xiaoy.base.entites.Audit;
+import com.xiaoy.base.entites.DeviceInfo;
 import com.xiaoy.base.entites.DeviceState;
 import com.xiaoy.base.entites.Evaluate;
 import com.xiaoy.base.util.DateHelper;
+import com.xiaoy.device.dao.DeviceInfoDao;
 import com.xiaoy.device.dao.DeviceStateDao;
 import com.xiaoy.evaluate.dao.EvaluateDao;
 import com.xiaoy.resource.dao.DictionaryDao;
@@ -51,6 +53,10 @@ public class AuditServiceImpl implements AuditService
 	// 评价信息
 	@Resource
 	private EvaluateDao evaluateDao;
+	
+	//设备信息
+	@Resource
+	private DeviceInfoDao deviceInfoDao;
 
 	@Override
 	public List<AuditForm> findAuditInfoWaitList(AuditForm auditForm)
@@ -156,25 +162,27 @@ public class AuditServiceImpl implements AuditService
 		{
 			auditForm.setPriorName(dictionaryDao.findDDLName((String) o[14], DictionaryForm.PRIOR));
 		}
+		
+		auditForm.setDeviceTypeUuid((String)o[15]);
 
 		// 与审核通过的复用
-		if (o.length > 15)
+		if (o.length > 16)
 		{
-			if (!StringUtils.isEmpty((String) o[15]))
+			if (!StringUtils.isEmpty((String) o[16]))
 			{
-				UserForm userForm = userService.findUserByUuid((String) o[15]);
+				UserForm userForm = userService.findUserByUuid((String) o[16]);
 				auditForm.setMaintainUuid(userForm.getUserUuid());
 				auditForm.setMaintainName(userForm.getName());
 				auditForm.setMaintainTypeCode(userForm.getMaintainTypeCode());
 			}
 
-			auditForm.setAuditTime(o[16] != null ? DateHelper.dateConverString((Date) o[16]) : "");
-			auditForm.setMaintainStatCode((String) o[17]);
-			auditForm.setFailAccount((String) o[18]);
-			auditForm.setFinishTime(o[19] != null ? DateHelper.dateConverString((Date) o[19]) : "");
-			if (o.length > 20)
+			auditForm.setAuditTime(o[17] != null ? DateHelper.dateConverString((Date) o[17]) : "");
+			auditForm.setMaintainStatCode((String) o[18]);
+			auditForm.setFailAccount((String) o[19]);
+			auditForm.setFinishTime(o[20] != null ? DateHelper.dateConverString((Date) o[20]) : "");
+			if (o.length > 21)
 			{
-				auditForm.setEvaluateUuid((String) o[20]);
+				auditForm.setEvaluateUuid((String) o[21]);
 			}
 		}
 		return auditForm;
@@ -199,7 +207,7 @@ public class AuditServiceImpl implements AuditService
 		audit.setAuditStatCode(auditStatCode);
 		audit.setFailAccount(auditForm.getFailAccount());
 
-		// 当审核通过的时候，添加评价信息，修改设备状态并添加评价记录
+		// 当审核通过的时候，添加评价信息，修改设备状态并添加评价记录、修改设备信息故障次数
 		if (auditStatCode.equals(DictionaryForm.AUDITSTAT_SUCCESS))
 		{
 			// 1.修改设备状态信息为异常
@@ -210,6 +218,10 @@ public class AuditServiceImpl implements AuditService
 			Evaluate evaluate = new Evaluate();
 			evaluate.setReportingUuid(auditForm.getReportingUuid());
 			evaluate.setReportingUserUuid(auditForm.getReportingUserUuid());
+			
+			//3.修改设备信息故障
+			DeviceInfo deviceInfo = deviceInfoDao.findObjectById(auditForm.getDeviceTypeUuid());
+			deviceInfo.setDeviceNum(deviceInfo.getDeviceNum() + 1);
 
 			evaluateDao.saveObject(evaluate);
 
@@ -337,6 +349,12 @@ public class AuditServiceImpl implements AuditService
 			{
 				audit.setFailAccount("");
 			}
+			
+			//3.修改设备信息故障
+			DeviceInfo deviceInfo = deviceInfoDao.findObjectById(auditForm.getDeviceTypeUuid());
+			int i = deviceInfo.getDeviceNum();
+			deviceInfo.setDeviceNum( i == 0 ? 0 : i - 1);
+
 		}
 	}
 
@@ -395,6 +413,12 @@ public class AuditServiceImpl implements AuditService
 			audit.setFailAccount("");
 			audit.setMaintainStatCode(DictionaryForm.MAINTAIN_STAT_WAIT);
 			audit.setMaintainUuid(auditForm.getMaintainUuid());
+			
+			//3.修改设备信息故障
+			DeviceInfo deviceInfo = deviceInfoDao.findObjectById(auditForm.getDeviceTypeUuid());
+			int i = deviceInfo.getDeviceNum();
+			deviceInfo.setDeviceNum( i + 1);
+			
 		} else if (auditStatCode.equals(DictionaryForm.AUDITSTAT_WAIT))
 		// 待审核
 		{

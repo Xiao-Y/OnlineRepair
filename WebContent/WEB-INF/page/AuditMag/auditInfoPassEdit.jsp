@@ -174,6 +174,7 @@
 			<s:hidden id="deviceStateUuid" name="deviceStateUuid"/>
 			<s:hidden id="auditUuid" name="auditUuid"/>
 			<s:hidden id="evaluateUuid" name="evaluateUuid"/>
+			<s:hidden id="deviceTypeUuid" name="deviceTypeUuid"/>
 		</TR>
 		<tr>
 			<td class="ta_01" style="WIDTH: 100%" align="center" colSpan="4">

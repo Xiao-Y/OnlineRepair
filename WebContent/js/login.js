@@ -2,8 +2,8 @@
 function login(){
 		$("#msg").remove();
 		
-		var username = $("#username").val();
-		var password = $("#password").val();
+		var username = $("#sususername").val();
+		var password = $("#sususerpasd").val();
 		
 		var userEmpty = '<font id="msg" color="red" size="2px"><strong>用户名不能为空</strong></font>';
 		var passEmpty = '<font id="msg" color="red" size="2px"><strong>密码不能为空</strong></font>';
@@ -18,15 +18,20 @@ function login(){
 			$("#err").html(passEmpty);
 			return;
 		}
+		
+		$("#y_loadlogin").text("登 录 中...");
+		
 		var url = "MenuMag/menuAction_login.action";
 		var args = {"date":new Date,"logingName":username,"password":password};
 		$.post(url,args,function(data){
 			if(data == "1"){
-				window.location.href="MenuMag/menuAction_home.action"
+				location.href="MenuMag/menuAction_home.action";
 			}else if(data == "0"){
 				$("#err").html(loginErr);
+				$("#y_loadlogin").text("登 录");
 				return;
 			}else{
+				$("#y_loadlogin").text("登 录");
 				alert("服务器错误");
 			}
 		});

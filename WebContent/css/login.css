@@ -1,92 +1,92 @@
-@CHARSET "UTF-8";
+﻿/*产品全局样式*/
+body{font:12px/1.5 "Microsoft yahei","arial";color:#666;background-color:#fff;margin:0;padding:0}
+a{color:#666;}
+a:active,a:focus {text-decoration:none;color:#3498db;}
+a:hover{text-decoration:underline;color:#3498db;}
+a:active,a:focus,input,select,textarea {outline:none;}
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{line-height:1;color:#444645;font-family:"microsoft YaHei";}
+ul,ol,li {list-style-type:none;padding:0;margin:0;}
+div,a,p,b,em,i,strong,span,img,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,input{margin:0;padding:0;}
+img{border:none;vertical-align:top;}
 
-* {
-	margin: 0;
-	padding: 0
-}
+/*产品全局公用样式*/
+.fl{float:left;}
+.fr{float:right;}
+.clearfix {zoom:1;}
+.clearfix:after {content:".";display:block;height:0;visibility:hidden;clear:both;}
+.f_wryh{font-family:"microsoft YaHei";font-weight:normal;}/*设置字体为微软雅黑*/
+.y_hide{display:none;} /*设为隐藏*/
+.y_mlr5{margin:0 7px;}
+.y_plr10{padding:0 10px;}
+.y_mt10{margin-top:10px;}
+.y_mt20{margin-top:20px;}
+.y_mb10{margin-bottom:10px;}
+.y_mb20{margin-bottom:20px;}
+.y_mb30{margin-bottom:30px;}
+.text-center{text-align:center;}
+.y_over{overflow:hidden;} /*超出隐藏*/
 
-body {
-	overflow: hidden;
-}
+/*公用组件的自定义基础样式*/
+.fa{vertical-align:middle;}
+.y_label{margin-right:5px;background:#eb5e58;color: #fff;display: inline;font:12px/17px "microsoft YaHei";font-weight: normal;padding:0 0.3em;text-align: center;vertical-align: baseline;white-space: nowrap}
+button{text-transform:none;margin:0}
+.btn {padding:6px 12px;border-radius: 0px;-webkit-transition:all 0.3s ease-in-out;transition:all 0.3s ease-in-out;font-family:"microsoft YaHei";margin-bottom:0;font-weight:400;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;-moz-user-select:none;background-image:none;border:1px solid transparent;}
+.btn-block{display:block;width:100%;}
+.btn-lg, .btn-group-lg > .btn {border-radius:0px;font-size:1.5em;line-height:1.5;padding:0.55em 1.8em;}
+.btn-block{padding-left:0;padding-right:0;}
+.progress-bar{-webkit-transition:width 2s;transition:width 2s;}
+/*--- 自定义按钮 ----*/
+.btn-custom {color: #ffffff;background-color:#3498db;border-color: transparent;}/*主色调的自定义按钮 蓝色背景*/
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active,
+.btn-custom.active,
+.open .dropdown-toggle.btn-custom {color: #fff;background-color: #2980b9;border-color: transparent;}
+.btn-custom2 {color: #ffffff;background-color:#eb5e58;border-color: transparent;}/*第二色调的自定义按钮 粉红背景*/
+.btn-custom2:hover,
+.btn-custom2:focus,
+.btn-custom2:active,
+.btn-custom2.active,
+.open .dropdown-toggle.btn-custom2 {color: #fff;background-color: #d23c36;border-color: transparent;}
+/*--- 基于bootstrap的下拉框 ----*/
+.dropdown-menu {min-width:100%;padding:0;margin:0;font-size:12px;border:1px solid #eee;border-radius:0;-webkit-box-shadow:0 1px 6px rgba(0, 0, 0, 0.15);box-shadow:0 1px 6px rgba(0, 0, 0, 0.15);z-index:900;}
+/*--- 基于bootstrap的文本框 ----*/
+.form-control{border-color:#dcdcdc;-webkit-box-shadow:none;box-shadow:none;border-radius:0;height:19px;padding:7px 10px;font-size:12px;}
+.form-control:focus{border-color:#3498db;outline:0;-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);}
+select.form-control{height:33px}
+input[type="password"]{font-size:8px}
+input[type="text"]{font-size:13px}
 
-.login {
-	width: 100%;
-	min-height: 100%;
-	position: relative;
-}
+/*产品登录、注册、找回密码页面样式*/
+.bg_f5{background:#f5f5f5;}
+.w_990{width:990px;overflow:hidden;margin:0 auto;}
+.simple_footer .footer-bottom{border-top:none;}
+.y_formhelp{clear:both;display:block;color:#999;padding:5px 0;line-height:1.5}
 
-.login img {
-	width: 100%;
-}
-
-h1 {
-	color: #fff;
-	font: 40px/50px "Microsoft yahei";
-	position: absolute;
-	top: 95px;
-	left: 130px;
-}
-
-.loginbox {
-	position: absolute;
-	top: 315px;
-	left: 50%;
-	margin-left: -255px;
-	width: 510px;
-	height: 220px;
-	padding: 40px 0 0 0;
-	overflow: hidden;
-	background: url(../images/loginbox.png) no-repeat;
-}
-
-.loginbox p {
-	width: 280px;
-	margin: 10px auto;
-	height: 25px;
-	padding: 0 0 0 20px
-}
-
-.loginbox p label {
-	float: left;
-	line-height: 20px;
-	color: #a1daf9;
-	font-size: 12px;
-	width: 50px
-}
-
-.loginbox p input {
-	float: left;
-	height: 20px;
-	line-height: 20px;
-	padding: 0 5px;
-	width: 140px
-}
-
-.loginbox p input:focus {
-	box-shadow: 0 0 5px #ddd
-}
-
-.loginbox p .loginbtn {
-	display: inline-block;
-	vertical-align: middle;
-	width: 75px;
-	height: 35px;
-	overflow: hidden;
-	background: url(../images/loginbtn.png) no-repeat;
-	line-height: 35px;
-	text-align: center;
-	text-decoration: none;
-	color: #fff;
-	font-size: 13px;
-	font-family: "simsun";
-	margin: 10px 50px 0 0
-}
-
-.loginbox p .loginbtn:hover {
-	background: #1e638c;
-	border-radius: 7px
-}
-
-.loginbox .center {
-	text-align: center;
-}
+.y_logo{font-size:42px;line-height:60px;overflow:hidden;margin:50px 0 50px 0;font-weight:700;color:#3498db}
+/*登录*/
+.control-label{display:inline-block;width:100%;margin-bottom:5px;}
+.form-control{display:block;line-height:1.42857;color:#555;border:1px solid #ccc;transition:border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s}
+.form-control:focus{border-color:#3498DB;box-shadow:0px 1px 3px rgba(0, 0, 0, 0.1) inset;outline:none;}
+.y_loginbox{width:890px;margin:0 auto;overflow:hidden;padding:10px 0 40px;min-height:420px;}
+.y_loginbox .y_loginad{float:left;width:260px;overflow:hidden;min-height:1px;margin-left:100px}
+.y_loginbox .y_loginrt{float:right;width:420px;border-radius:3px;background:#fff;border:5px solid #e8e8e8;}
+.y_loginbox .y_logbox{border:1px solid #ddd;}
+.y_loginbox .y_logintab{padding:20px 0 10px;}
+.y_loginbox .y_logintab h2{font:20px "Microsoft YaHei";color:#333;padding-left:55px;}
+.y_loginbox .y_suslgbx{overflow:hidden;padding:0px 54px 40px;background:#fff;}
+.y_loginbox .y_suslgbx #sususername{background:url(../images/user.png) no-repeat 5px center;padding-left:30px;}
+.y_loginbox .y_suslgbx #sususerpasd{background:url(../images/password.png) no-repeat 5px center;padding-left:30px;}
+.y_loginbox .alert{padding:5px 10px;margin-bottom:5px;border-radius:0;}
+.y_loginbox .form-group{margin-bottom:0;padding-top:10px}
+.y_loginbox .control-label{font-weight:normal}
+.y_loginbox .form-control{width:268px;}
+.y_loginbox .y_yzmgrop .form-control{float:left;width:60px;}
+.y_loginbox .y_yzmgrop img{float:left;height:36px;margin-left:10px;}
+.y_loginbox .y_yzmgrop span{float:left;margin-left:10px;color:#999;line-height:36px;}
+.y_loginbox .y_suskjbx{padding-bottom:15px;padding-top:15px;}
+.y_loginbox .y_suskjbx label{font-weight:normal;margin-right:10px;}
+.y_loginbox .y_suskjbx label input{vertical-align:middle;margin:-2px 4px 0 1px}
+.y_copeweb{padding:15px 0 0;color:#999}
+.y_copeweb p{padding-top:6px;color:#dbdbdb;margin-left:-5px;}
+.y_copeweb a{margin:0 5px;}

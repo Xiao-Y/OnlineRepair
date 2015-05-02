@@ -34,6 +34,8 @@ public class DeviceInfo
 	
 	/*创建时间*/
 	private Date creatTime;
+	/*设备故障次数*/
+	private Integer deviceNum;
 	
 	Set<DeviceState> deviceState = new HashSet<DeviceState>();
 
@@ -47,6 +49,16 @@ public class DeviceInfo
 	public DeviceInfo(String deviceTypeUuid, String version) {
 		this.deviceTypeUuid = deviceTypeUuid;
 		this.version = version;
+	}
+
+	public Integer getDeviceNum()
+	{
+		return deviceNum;
+	}
+
+	public void setDeviceNum(Integer deviceNum)
+	{
+		this.deviceNum = deviceNum;
 	}
 
 	public Date getCreatTime()

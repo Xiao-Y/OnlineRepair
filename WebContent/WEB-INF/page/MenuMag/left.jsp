@@ -331,29 +331,29 @@ td {
 					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/CountMag/userSexCount.jsp' target="main">
+								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/CountMag/countAction_userSexCount.action' target="main">
 									<span>用户性别统计</span>
 								</a>
 							</td>
 						</tr>
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/CountMag/userTypeCount.jsp' target="main">
+								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/CountMag/countAction_userTypeCount.action' target="main">
 									<span>维护人员类别统计</span>
 								</a>
 							</td>
 						</tr>
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/CountMag/deviceBreakdownCount.jsp' target="main">
+								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/CountMag/countAction_deviceBreakdownCount.action' target="main">
 									<span>设备故障次数统计</span>
 								</a>
 							</td>
 						</tr>
 						<tr height="25">
 							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/CountMag/userEvaluateCount.jsp' target="main">
-									<span>各种评价数量统计</span>
+								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/CountMag/countAction_deviceSum.action' target="main">
+									<span>设备数量统计</span>
 								</a>
 							</td>
 						</tr>

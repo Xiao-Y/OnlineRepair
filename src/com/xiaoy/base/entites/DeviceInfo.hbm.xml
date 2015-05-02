@@ -26,6 +26,9 @@
 		<property name="deviceAmount" type="java.lang.Integer">
 			<column name="DEVICE_AMOUNT" />
 		</property>
+		<property name="deviceNum" type="java.lang.Integer">
+			<column name="DEVICE_NUM" />
+		</property>
 		<property name="devicePicUrl" type="java.lang.String">
 			<column name="DEVICEPIC_URL" />
 		</property>

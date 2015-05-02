@@ -36,12 +36,10 @@ public class LoginFilter implements Filter
 	public void init(FilterConfig arg0) throws ServletException
 	{
 		list.add("/js/jquery-1.8.0.min.js");
-		list.add("/pub.jsp");
-		list.add("/reeCss/404.jsp");
 		list.add("/css/login.css");
-		list.add("/images/loginbg.jpg");
-		list.add("/images/loginbox.png");
-		list.add("/images/loginbtn.png");
+		list.add("/images/login1.png");
+		list.add("/images/password.png");
+		list.add("/images/user.png");
 		list.add("/js/login.js");
 		list.add("/login.jsp");
 		list.add("/MenuMag/menuAction_login.action");

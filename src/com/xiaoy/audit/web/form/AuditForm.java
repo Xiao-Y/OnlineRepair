@@ -74,6 +74,8 @@ public class AuditForm extends BaseForm
 	private String priorName;
 	/* 评价信息uuid */
 	private String evaluateUuid;
+	/* 设备信息uuid */
+	private String deviceTypeUuid;
 
 	public String getEvaluateUuid()
 	{
@@ -88,6 +90,16 @@ public class AuditForm extends BaseForm
 	public String getOrderTime()
 	{
 		return orderTime;
+	}
+
+	public String getDeviceTypeUuid()
+	{
+		return deviceTypeUuid;
+	}
+
+	public void setDeviceTypeUuid(String deviceTypeUuid)
+	{
+		this.deviceTypeUuid = deviceTypeUuid;
 	}
 
 	public void setOrderTime(String orderTime)

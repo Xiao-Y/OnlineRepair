@@ -255,4 +255,12 @@
 		</action>
 	</package>
 	<!-- 权限管理=============end -->
+	<!-- 统计管理=============start -->
+	<package name="count" namespace="/CountMag" extends="struts-default">
+	<!--  角色管理 -->
+		<action name="countAction_*" class="com.xiaoy.count.web.action.CountAction" method="{1}">
+			<result name="success">/WEB-INF/page/CountMag/count.jsp</result>
+		</action>
+	</package>
+	<!-- 统计管理=============start -->
 </struts>    

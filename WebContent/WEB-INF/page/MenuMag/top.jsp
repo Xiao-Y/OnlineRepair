@@ -3,9 +3,6 @@
 <%@ page import="java.util.*"%> <%-- 获取系统时间必须导入的--%> 
 <%@ page import="java.text.*"%> <%-- 获取系统时间必须导入的--%> 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%
-	UserForm userForm = (UserForm)session.getAttribute("userInfo");
-%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,13 +10,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
-<script type="text/javascript">
-	$().ready(function(){
-		function exitsys(){
-			$.session.clear();
-		}
-	});
-</script>
 </head>
 <body>
 	<form id=Form1 name=Form1 method=post>
@@ -57,7 +47,7 @@
 				<td width="16%" height="19" bgcolor="#0965CA">
 					<table cellSpacing="2" height="19" cellPadding="0" width="100%" border="0">
 						<tr>
-							<td valign="top"><b><font color="#FFFFFF">欢迎您!&nbsp;&nbsp;&nbsp;${userForm.name }</font></b>
+							<td valign="top"><b><font color="#FFFFFF">欢迎您!&nbsp;&nbsp;&nbsp;${userInfo.name } </font></b>
 							</td>
 						</tr>
 					</table>
@@ -75,7 +65,7 @@
 									<font color="#FFFFFF"><b>重新登录</b></font>
 								</a> 
 								<font color="#FFFFFF"><b>|</b></font>
-								<a href="javascript:exitsys()" target="_top"> 
+								<a href="javascript:parent.exitsys()" target="_top"> 
 									<font color="#FFFFFF"><b>退出系统</b></font>
 								</a>
 							</td>

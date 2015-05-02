@@ -178,6 +178,7 @@
 			<s:hidden id="auditUuid" name="auditUuid"/>
 			<s:hidden id="reportingUuid" name="reportingUuid"/>
 			<s:hidden id="reportingUserUuid" name="reportingUserUuid"/>
+			<s:hidden id="deviceTypeUuid" name="deviceTypeUuid"/>
 		</TR>
 		<tr>
 			<td class="ta_01" style="WIDTH: 100%" align="center" colSpan="4">

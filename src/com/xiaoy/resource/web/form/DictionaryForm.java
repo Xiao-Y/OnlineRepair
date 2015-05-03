@@ -2,6 +2,11 @@ package com.xiaoy.resource.web.form;
 
 public class DictionaryForm
 {
+	
+	/**
+	 * 角色类型
+	 */
+	public static final String ROLE_TYPE = "角色类型";
 
 	/**
 	 * 维护类别

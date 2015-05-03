@@ -67,7 +67,7 @@ public class RoleAction extends BaseAction implements ModelDriven<RoleForm>
 	public String home()
 	{
 		//获取所有的角色类型
-		List<DictionaryForm> systemList = dictionaryService.findDictionaryListByKeyWord("角色类型");
+		List<DictionaryForm> systemList = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.ROLE_TYPE);
 		request.setAttribute("systemList", systemList);
 		//从Function.xml中读取权限集合
 		List<XmlObject> xmlList = roleService.readXml();

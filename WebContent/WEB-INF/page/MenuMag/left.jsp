@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <jsp:include page="/pub.jsp"/>
 <html>
@@ -69,297 +70,38 @@ td {
 		<tr height="1"><td></td></tr>
 		<tr>
 			<td vAlign="top" height="100%">
-				<!-- 设备管理 begin -->
-				<div class="qx" id="deviceMagParent" style="cursor:pointer;">
-					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
-						<tr height=25>
-							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
-								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="deviceMagParent" width="8" height="9" alt="" border="0" />
-									设备管理
-								</div>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="qx_list" id="deviceMagChild">
-					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceInfoList.action' target="main">
-									<span>设备信息管理</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/DeviceMag/deviceStateAction_deviceStateList.action' target="main">
-									<span>查询设备状态</span>
-								</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<!-- 设备管理 end -->
 				
-				<!-- 用户管理 begin -->
-				<div class="qx" id="userMagParent" style="cursor:pointer;">
-					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
-						<tr height=25>
-							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
-								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="userMagParent" width="8" height="9" alt="" border="0" />
-									用户信息管理
-								</div>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="qx_list" id="userMagChild">
-					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/UserMag/userAction_userInfo.action' target="main">
-									<span>个人信息</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/UserMag/userAction_userIndex.action' target="main">
-									<span>用户信息</span>
-								</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<!-- 用户管理 end -->
+				<s:iterator value="%{#request.list}" var="me">
+					<!-- 父级菜单 -->
+					<div class="qx" id='${me.code}Parent' style="cursor:pointer;">
+						<table cellSpacing="0" cellPadding="0" width="100%" border="0">
+							<tr height=25>
+								<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
+									<div class="img">
+										&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="${me.code}Parent" width="8" height="9" alt="" border="0" />
+										<s:property value="%{#me.codeName}"/>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					
+					<!-- 子级菜单 -->
+					<div class="qx_list" id="${me.code}Child">
+						<table cellSpacing="0" cellPadding="0" width="99%" border="0">
+							<s:iterator value="%{#me.menus}" var="m">
+								<tr height="25">
+									<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
+										<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }${m.url}' target="main">
+											<span><s:property value="%{#m.codeName}"/></span>
+										</a>
+									</td>
+								</tr>
+							</s:iterator>
+						</table>
+					</div>
+				</s:iterator>
 				
-				<!-- 申报故障管理 begin-->
-				<div class="qx" id="reportingMagParent" style="cursor:pointer;">
-					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
-						<tr height=25>
-							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
-								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="reportingMagParent" width="8" height="9" alt="" border="0" />
-									申报故障管理
-								</div>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="qx_list" id="reportingMagChild">
-					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/ReportingMag/reportingAction_reportingBugInfoAdd.action' target="main">
-									<span>申报故障</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/ReportingMag/reportingAction_reportingBugInfoList.action' target="main">
-									<span>故障信息列表</span>
-								</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<!-- 申报故障管理 end-->
-				
-				<!-- 故障申报审核 begin -->
-				<div class="qx" id="auditMagParent" style="cursor:pointer;">
-					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
-						<tr height=25>
-							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
-								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="auditMagParent" width="8" height="9" alt="" border="0" />
-									故障申报审核
-								</div>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="qx_list" id="auditMagChild">
-					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/AuditMag/auditInfoAction_auditInfoWaitList.action' target="main">
-									<span>待审核</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/AuditMag/auditInfoAction_auditInfoPassList' target="main">
-									<span>审核通过</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/AuditMag/auditInfoAction_auditInfoRefuseList' target="main">
-									<span>审核未通过</span>
-								</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<!-- 故障申报审核 end  -->
-				
-				<!-- 评价留言管理 begin -->
-				<div class="qx" id="evaluateMagParent" style="cursor:pointer;">
-					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
-						<tr height=25>
-							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
-								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="evaluateMagParent" width="8" height="9" alt="" border="0" />
-									评价留言管理
-								</div>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="qx_list" id="evaluaterMagChild">
-					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/EvaluateMag/evaluateAction_evaluateList.action' target="main">
-									<span>我的评价</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/page/EvaluateMag/evaluateInfo' target="main">
-									<span>留言管理</span>
-								</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<!-- 评价留言管理 end -->
-				
-				<!-- 权限管理 begin -->
-				<div class="qx" id="authorityMagParent" style="cursor:pointer;">
-					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
-						<tr height=25>
-							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
-								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="authorityMagParent" width="8" height="9" alt="" border="0" />
-									权限管理
-								</div>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="qx_list" id="authorityMagChild">
-					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/AuthorityMag/roleAction_home.action' target="main">
-									<span>角色权限管理</span>
-								</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<!-- 权限管理 end -->
-				
-				<!-- 资源管理 begin -->
-				<div class="qx" id="resourceMagParent" style="cursor:pointer;">
-					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
-						<tr height=25>
-							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
-								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="resourceMagParent" width="8" height="9" alt="" border="0" />
-									资源管理
-								</div>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="qx_list" id="resourceMagChild">
-					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/ResourceMag/noticeAction_noticeIndex.action' target="main">
-									<span>发布公告</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/ResourceMag/dictionaryAction_dictionaryIndex.action' target="main">
-									<span>数据字典</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action' target="main">
-									<span>日志管理</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/druid/index.html' target="main">
-									<span>数据库连接管理</span>
-								</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<!-- 资源管理end -->
-				
-				<!-- 统计管理 beging -->
-				<div class="qx" id="countMagParent" style="cursor:pointer;">
-					<table cellSpacing="0" cellPadding="0" width="100%" border="0">
-						<tr height=25>
-							<td align="left" background="${pageContext.request.contextPath }/images/b-info.gif"  vAlign="middle">
-								<div class="img">
-									&nbsp;<img src="${pageContext.request.contextPath }/images/open.gif" name="countMagParent" width="8" height="9" alt="" border="0" />
-									统计管理
-								</div>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="qx_list" id="countMagChild">
-					<table cellSpacing="0" cellPadding="0" width="99%" border="0">
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/CountMag/countAction_userSexCount.action' target="main">
-									<span>用户性别统计</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/CountMag/countAction_userTypeCount.action' target="main">
-									<span>维护人员类别统计</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/CountMag/countAction_deviceBreakdownCount.action' target="main">
-									<span>设备故障次数统计</span>
-								</a>
-							</td>
-						</tr>
-						<tr height="25">
-							<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
-								<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }/CountMag/countAction_deviceSum.action' target="main">
-									<span>设备数量统计</span>
-								</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<!-- 统计管理 end -->
 			</td>
 		</tr>
 		<tr height="60"><td></td></tr>

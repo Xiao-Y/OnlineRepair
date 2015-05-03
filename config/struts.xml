@@ -238,6 +238,12 @@
 			</result>
 		</action>
 		<!-- 日志管理======end -->
+		
+		<!-- 初始化菜单===========start -->
+		<action name="menuInitAction_*" class="com.xiaoy.resource.web.action.MenuInitAction" method="{1}">
+			<result name="success">/WEB-INF/page/ResourceMag/logIndex.jsp</result>
+		</action>
+		<!-- 初始化菜单===========end -->
 
 	</package>
 	<!-- 资源管理====end -->

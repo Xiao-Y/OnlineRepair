@@ -86,6 +86,8 @@ public interface Common<T>{
 	 */
 	public void saveObjectCollection(Collection<T> entities);
 	
+	public void saveOrUpdate(T t);
+	
 	/**
 	 * 通过id查询一个对象
 	 * @param id	任意类型

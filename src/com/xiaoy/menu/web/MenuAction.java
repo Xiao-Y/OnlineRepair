@@ -3,13 +3,19 @@ package com.xiaoy.menu.web;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Collections;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 
+import com.opensymphony.xwork2.ModelDriven;
+import com.xiaoy.base.entites.Menu;
+import com.xiaoy.base.util.ComparatorMenu;
 import com.xiaoy.base.web.action.BaseAction;
+import com.xiaoy.menu.service.MenuService;
 import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.user.service.UserService;
 import com.xiaoy.user.web.form.UserForm;
@@ -24,13 +30,25 @@ import com.xiaoy.user.web.form.UserForm;
  */
 @SuppressWarnings("serial")
 @Controller
-public class MenuAction extends BaseAction
+public class MenuAction extends BaseAction implements ModelDriven<Menu>
 {
+	
+	Menu menu = new Menu();
+	
+	@Override
+	public Menu getModel()
+	{
+		return menu;
+	}
+	
 	@Resource
 	private UserService userService;
 	
 	@Resource
 	private LogService logService;
+	
+	@Resource
+	private MenuService menuService;
 	
 	private InputStream inputStream;
 	
@@ -90,6 +108,13 @@ public class MenuAction extends BaseAction
 	
 	public String left()
 	{
+		List<Menu> list = menuService.findParentMenuAll();
+		
+		//对菜单排序
+		ComparatorMenu cm = new ComparatorMenu();
+		Collections.sort(list, cm);
+		
+		request.setAttribute("list", list);
 		return "left";
 	}
 	

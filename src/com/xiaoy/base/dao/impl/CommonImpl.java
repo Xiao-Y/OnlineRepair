@@ -157,10 +157,15 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 		{
 			for (T t : entities)
 			{
-				this.getSession().save(t);
+				this.getSession().saveOrUpdate(t);
 			}
 		}
 
+	}
+	
+	public void saveOrUpdate(T t)
+	{
+		this.getSession().saveOrUpdate(t);
 	}
 
 	/**

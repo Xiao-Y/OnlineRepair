@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-3 12:59:16 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.xiaoy.base.entites.Menu" table="MENU">
+		<id name="code" type="java.lang.String">
+			<column name="CODE" />
+			<generator class="assigned" />
+		</id>
+		<property name="codeName" type="java.lang.String">
+			<column name="CODE_NAME" />
+		</property>
+		<property name="orderMenu" type="java.lang.String">
+			<column name="ORDER_MENU" />
+		</property>
+		<property name="url" type="java.lang.String">
+			<column name="URL" />
+		</property>
+		
+		<!-- 
+		<property name="parentCode" type="java.lang.String">
+			<column name="PARENT_CODE" />
+		</property>
+		 -->
+		 
+		<many-to-one name="menu" class="com.xiaoy.base.entites.Menu" fetch="join">
+			<column name="PARENT_CODE" />
+		</many-to-one>
+		<set name="menus" table="MENU" inverse="true" lazy="false" order-by="orderMenu">
+			<key>
+				<column name="PARENT_CODE" />
+			</key>
+			<one-to-many class="com.xiaoy.base.entites.Menu" />
+		</set>
+	</class>
+</hibernate-mapping>

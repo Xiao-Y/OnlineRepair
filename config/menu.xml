@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus>
+	<menu>
+		<code>deviceMag</code>
+		<codeName>设备管理</codeName>
+		<order>01</order>
+		<url></url>
+		<parentCode></parentCode>
+	</menu>
+
+	<menu>
+		<code>deviceInfoList</code>
+		<codeName>设备信息管理</codeName>
+		<order>011</order>
+		<url>/DeviceMag/deviceAction_deviceInfoList.action</url>
+		<parentCode>deviceMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>deviceStateList</code>
+		<codeName>设备状态管理</codeName>
+		<order>012</order>
+		<url>/DeviceMag/deviceStateAction_deviceStateList.action</url>
+		<parentCode>deviceMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>userMag</code>
+		<codeName>用户信息管理</codeName>
+		<order>02</order>
+		<url></url>
+		<parentCode></parentCode>
+	</menu>
+
+	<menu>
+		<code>userInfoEdit</code>
+		<codeName>个人信息管理</codeName>
+		<order>021</order>
+		<url>/UserMag/userAction_userInfo.action</url>
+		<parentCode>userMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>userInfoList</code>
+		<codeName>用户信息管理</codeName>
+		<order>022</order>
+		<url>/UserMag/userAction_userIndex.action</url>
+		<parentCode>userMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>reportingMag</code>
+		<codeName>申报故障管理</codeName>
+		<order>03</order>
+		<url></url>
+		<parentCode></parentCode>
+	</menu>
+
+	<menu>
+		<code>reportingBugInfoAdd</code>
+		<codeName>添加申报故障</codeName>
+		<order>031</order>
+		<url>/ReportingMag/reportingAction_reportingBugInfoAdd.action</url>
+		<parentCode>reportingMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>reportingBugInfoList</code>
+		<codeName>故障信息列表</codeName>
+		<order>032</order>
+		<url>/ReportingMag/reportingAction_reportingBugInfoList.action</url>
+		<parentCode>reportingMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>auditMag</code>
+		<codeName>故障审核管理</codeName>
+		<order>04</order>
+		<url></url>
+		<parentCode></parentCode>
+	</menu>
+
+	<menu>
+		<code>auditInfoWaitList</code>
+		<codeName>等待审核列表</codeName>
+		<order>041</order>
+		<url>/AuditMag/auditInfoAction_auditInfoWaitList.action</url>
+		<parentCode>auditMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>auditInfoPassList</code>
+		<codeName>审核通过列表</codeName>
+		<order>042</order>
+		<url>/AuditMag/auditInfoAction_auditInfoPassList.action</url>
+		<parentCode>auditMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>auditInfoRefuseList</code>
+		<codeName>审核驳回列表</codeName>
+		<order>043</order>
+		<url>/AuditMag/auditInfoAction_auditInfoRefuseList.action</url>
+		<parentCode>auditMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>evaluateMag</code>
+		<codeName>评价留言管理</codeName>
+		<order>05</order>
+		<url></url>
+		<parentCode></parentCode>
+	</menu>
+
+	<menu>
+		<code>evaluateInfoList</code>
+		<codeName>我的评价</codeName>
+		<order>051</order>
+		<url>/EvaluateMag/evaluateAction_evaluateList.action</url>
+		<parentCode>evaluateMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>evaluateInfoEdit</code>
+		<codeName>留言管理</codeName>
+		<order>052</order>
+		<url></url>
+		<parentCode>evaluateMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>authorityMag</code>
+		<codeName>权限管理</codeName>
+		<order>06</order>
+		<url></url>
+		<parentCode></parentCode>
+	</menu>
+
+	<menu>
+		<code>roleIndex</code>
+		<codeName>角色权限管理</codeName>
+		<order>061</order>
+		<url>/AuthorityMag/roleAction_home.action</url>
+		<parentCode>authorityMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>resourceMag</code>
+		<codeName>资源管理</codeName>
+		<order>07</order>
+		<url></url>
+		<parentCode></parentCode>
+	</menu>
+
+	<menu>
+		<code>noticeIndex</code>
+		<codeName>发布公告</codeName>
+		<order>071</order>
+		<url>/ResourceMag/noticeAction_noticeIndex.action</url>
+		<parentCode>resourceMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>dictionaryIndex</code>
+		<codeName>数据字典</codeName>
+		<order>072</order>
+		<url>/ResourceMag/dictionaryAction_dictionaryIndex.action</url>
+		<parentCode>resourceMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>logIndex</code>
+		<codeName>日志管理</codeName>
+		<order>073</order>
+		<url>/ResourceMag/logAction_logIndex.action</url>
+		<parentCode>resourceMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>menuInit</code>
+		<codeName>初始化菜单</codeName>
+		<order>074</order>
+		<url>/ResourceMag/menuInitAction_menuInit.action</url>
+		<parentCode>resourceMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>dataBaseMeg</code>
+		<codeName>数据库连接管理</codeName>
+		<order>075</order>
+		<url>/druid/index.html</url>
+		<parentCode>resourceMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>countMag</code>
+		<codeName>统计管理</codeName>
+		<order>08</order>
+		<url></url>
+		<parentCode></parentCode>
+	</menu>
+
+	<menu>
+		<code>userSexCount</code>
+		<codeName>用户性别统计</codeName>
+		<order>081</order>
+		<url>/CountMag/countAction_userSexCount.action</url>
+		<parentCode>countMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>userTypeCount</code>
+		<codeName>用户的维护类型</codeName>
+		<order>082</order>
+		<url>/CountMag/countAction_userTypeCount.action</url>
+		<parentCode>countMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>deviceBreakdownCount</code>
+		<codeName>设备故障次数统计</codeName>
+		<order>083</order>
+		<url>/CountMag/countAction_deviceBreakdownCount.action</url>
+		<parentCode>countMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>deviceSum</code>
+		<codeName>设备数量统计</codeName>
+		<order>084</order>
+		<url>/CountMag/countAction_deviceSum.action</url>
+		<parentCode>countMag</parentCode>
+	</menu>
+</menus>
+
+
+
+
+
+
+
+
+
+
+

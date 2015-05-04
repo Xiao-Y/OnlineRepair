@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- code 为唯一主键 codeName 为菜单名 order 所在顺序 url 访问路径 parentCode 父级主键 -->
+
 <menus>
 	<menu>
 		<code>deviceMag</code>
@@ -177,22 +179,6 @@
 	</menu>
 
 	<menu>
-		<code>menuInit</code>
-		<codeName>初始化菜单</codeName>
-		<order>074</order>
-		<url>/ResourceMag/menuInitAction_menuInit.action</url>
-		<parentCode>resourceMag</parentCode>
-	</menu>
-
-	<menu>
-		<code>dataBaseMeg</code>
-		<codeName>数据库连接管理</codeName>
-		<order>075</order>
-		<url>/druid/index.html</url>
-		<parentCode>resourceMag</parentCode>
-	</menu>
-
-	<menu>
 		<code>countMag</code>
 		<codeName>统计管理</codeName>
 		<order>08</order>
@@ -230,6 +216,41 @@
 		<order>084</order>
 		<url>/CountMag/countAction_deviceSum.action</url>
 		<parentCode>countMag</parentCode>
+	</menu>
+
+
+	<!-- 可以在系统管理的的update配置来true和false来决定是否更新系统数据 -->
+	<menu>
+		<code>systemMag</code>
+		<codeName>系统管理</codeName>
+		<order>09</order>
+		<url></url>
+		<parentCode></parentCode>
+		<update>true</update>
+	</menu>
+
+	<menu>
+		<code>menuInit</code>
+		<codeName>初始化菜单</codeName>
+		<order>091</order>
+		<url>/ResourceMag/menuInitAction_menuInit.action</url>
+		<parentCode>systemMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>dictionaryInit</code>
+		<codeName>初始化数据字典</codeName>
+		<order>092</order>
+		<url>/ResourceMag/dictionaryAction_dictionaryInit.action</url>
+		<parentCode>systemMag</parentCode>
+	</menu>
+
+	<menu>
+		<code>dataBaseMeg</code>
+		<codeName>数据库连接管理</codeName>
+		<order>093</order>
+		<url>/druid/index.html</url>
+		<parentCode>systemMag</parentCode>
 	</menu>
 </menus>
 

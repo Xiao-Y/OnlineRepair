@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.xiaoy.base.entites.Dictionary;
+import com.xiaoy.base.util.ReadDictionaryXml;
 import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.resource.servic.DictionaryService;
 import com.xiaoy.resource.servic.LogService;
@@ -101,5 +103,18 @@ public class DictionaryAction extends BaseAction implements ModelDriven<Dictiona
 		}
 		logService.saveLog(request, MENU_MODEL, "删除数据字典");
 		return "ajax-success";
+	}
+	
+	/**
+	 * 初始化数据字典
+	 * @return
+	 */
+	public String dictionaryInit()
+	{
+		ReadDictionaryXml read = new ReadDictionaryXml();
+		List<Dictionary> list = read.readXML();
+		dictionaryService.dictionaryInit(list);
+		logService.saveLog(request, "【系统管理】-【初始化数据字典】", "初始化数据字典");
+		return "success";
 	}
 }

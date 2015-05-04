@@ -47,6 +47,11 @@ public interface Common<T>{
 	public void deleteObjectByid(Serializable id);
 	
 	/**
+	 * 删除所有
+	 */
+	public void deleteAll();
+	
+	/**
 	 * 通过一个集合删除多个对象,可以通过hqlWhere添加删除条件，paramMapValue设置删除参数
 	 * 
 	 * @param hqlWhere 查询条件

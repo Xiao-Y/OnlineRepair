@@ -3,6 +3,7 @@ package com.xiaoy.resource.servic;
 import java.util.List;
 import java.util.Map;
 
+import com.xiaoy.base.entites.Dictionary;
 import com.xiaoy.resource.web.form.DictionaryForm;
 
 public interface DictionaryService
@@ -68,4 +69,12 @@ public interface DictionaryService
 	 * @return Map&ltString, List&ltDictionaryForm&gt&gt
 	 */
 	public Map<String, List<DictionaryForm>> findDictionaryMapKeyWord(Map<String, String> keyWords);
+
+	/**
+	 * 初始化数据字典<p>
+	 * 1、删除数据字典中的所有数据<br/>
+	 * 2、添加初始化数据<br/>
+	 * @param list
+	 */
+	public void dictionaryInit(List<Dictionary> list);
 }

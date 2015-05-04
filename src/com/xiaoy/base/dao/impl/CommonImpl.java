@@ -200,4 +200,11 @@ public class CommonImpl<T> extends BaseDao implements Common<T>
 			}
 		}
 	}
+
+	@Override
+	public void deleteAll()
+	{
+		String hql = " delete from " + entityClass.getSimpleName();
+		this.getSession().createQuery(hql).executeUpdate();
+	}
 }

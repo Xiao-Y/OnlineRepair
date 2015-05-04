@@ -18,12 +18,12 @@ import com.xiaoy.base.entites.Menu;
 
 public class ReadMenuXml
 {
+	
+	Boolean flag = true;
+	
 	@SuppressWarnings("unchecked")
 	public List<Menu> readXML()
 	{
-//		ClassLoader classLoader = getClass().getClassLoader();
-//		File file = new File(classLoader.getResource("menu.xml").getFile());
-		
 		ServletContext servletContext = ServletActionContext.getServletContext();
 		String realPath = servletContext.getRealPath("/WEB-INF/classes/menu.xml");
 		File file = new File(realPath);
@@ -43,17 +43,27 @@ public class ReadMenuXml
 				Element e = iter.next();
 				
 				String code = e.elementTextTrim("code");
-				if(code.equals("resourceMag") || code.equals("menuInit"))
+				String parentCode = e.elementTextTrim("parentCode");
+				
+				//可以在系统管理的的update配置来true和false来决定是否更新系统数据
+				if(code.equals("systemMag"))
 				{
-					continue;
+					flag = Boolean.parseBoolean(e.elementTextTrim("update"));
 				}
-					
+				
+				if(code.equals("systemMag") || parentCode.equals("systemMag"))
+				{
+					if(!flag)
+					{
+						continue;
+					}
+				}
+				
 				menu.setCode(code);
 				menu.setCodeName(e.elementTextTrim("codeName"));
 				menu.setOrderMenu(e.elementTextTrim("order"));
 				menu.setUrl(e.elementTextTrim("url"));
 				
-				String parentCode = e.elementTextTrim("parentCode");
 				if(!StringUtils.isEmpty(parentCode))
 				{
 					Menu m = new Menu();

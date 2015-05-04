@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- keyword 为查询关键字 ddlcode 为标识号 ddlcode 为标识的名称 -->
+<dictionary>
+	<root>
+		<keyword>角色类型</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>系统管理员</ddlname>
+	</root>
+
+	<root>
+		<keyword>角色类型</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>高级管理员</ddlname>
+	</root>
+
+	<root>
+		<keyword>角色类型</keyword>
+		<ddlcode>3</ddlcode>
+		<ddlname>业务用户</ddlname>
+	</root>
+
+	<root>
+		<keyword>角色类型</keyword>
+		<ddlcode>4</ddlcode>
+		<ddlname>普通用户</ddlname>
+	</root>
+
+	<root>
+		<keyword>性别</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>男</ddlname>
+	</root>
+
+	<root>
+		<keyword>性别</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>女</ddlname>
+	</root>
+
+	<root>
+		<keyword>性别</keyword>
+		<ddlcode>3</ddlcode>
+		<ddlname>保密</ddlname>
+	</root>
+
+	<root>
+		<keyword>运行状态</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>运行正常</ddlname>
+	</root>
+
+	<root>
+		<keyword>运行状态</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>运行异常</ddlname>
+	</root>
+
+	<root>
+		<keyword>优先级别</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>高</ddlname>
+	</root>
+
+	<root>
+		<keyword>优先级别</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>中</ddlname>
+	</root>
+
+	<root>
+		<keyword>优先级别</keyword>
+		<ddlcode>3</ddlcode>
+		<ddlname>低</ddlname>
+	</root>
+
+	<root>
+		<keyword>评价状态</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>已评价</ddlname>
+	</root>
+
+	<root>
+		<keyword>评价状态</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>待评价</ddlname>
+	</root>
+
+	<root>
+		<keyword>维护状态</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>未处理</ddlname>
+	</root>
+
+	<root>
+		<keyword>维护状态</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>待维护</ddlname>
+	</root>
+
+	<root>
+		<keyword>维护状态</keyword>
+		<ddlcode>3</ddlcode>
+		<ddlname>已维护</ddlname>
+	</root>
+
+	<root>
+		<keyword>审核状态</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>待审核</ddlname>
+	</root>
+
+	<root>
+		<keyword>审核状态</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>已通过</ddlname>
+	</root>
+
+	<root>
+		<keyword>审核状态</keyword>
+		<ddlcode>3</ddlcode>
+		<ddlname>驳回</ddlname>
+	</root>
+
+	<root>
+		<keyword>删除标识</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>真删除</ddlname>
+	</root>
+
+	<root>
+		<keyword>删除标识</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>假删除</ddlname>
+	</root>
+	<!-- 以上是系统必须的 -->
+
+	<root>
+		<keyword>区域</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>教室</ddlname>
+	</root>
+
+	<root>
+		<keyword>区域</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>寝室</ddlname>
+	</root>
+
+	<root>
+		<keyword>区域</keyword>
+		<ddlcode>3</ddlcode>
+		<ddlname>机房</ddlname>
+	</root>
+
+	<root>
+		<keyword>区域</keyword>
+		<ddlcode>4</ddlcode>
+		<ddlname>办公室</ddlname>
+	</root>
+
+	<root>
+		<keyword>安装位置</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>A4059</ddlname>
+	</root>
+
+	<root>
+		<keyword>安装位置</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>6139</ddlname>
+	</root>
+
+	<root>
+		<keyword>安装位置</keyword>
+		<ddlcode>3</ddlcode>
+		<ddlname>D4982</ddlname>
+	</root>
+
+	<root>
+		<keyword>安装位置</keyword>
+		<ddlcode>4</ddlcode>
+		<ddlname>D1069</ddlname>
+	</root>
+
+	<root>
+		<keyword>安装位置</keyword>
+		<ddlcode>5</ddlcode>
+		<ddlname>U7867</ddlname>
+	</root>
+
+	<root>
+		<keyword>维护类型</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>电工</ddlname>
+	</root>
+
+	<root>
+		<keyword>维护类型</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>木工</ddlname>
+	</root>
+
+	<root>
+		<keyword>维护类型</keyword>
+		<ddlcode>3</ddlcode>
+		<ddlname>泥工</ddlname>
+	</root>
+
+	<root>
+		<keyword>维护类型</keyword>
+		<ddlcode>4</ddlcode>
+		<ddlname>管道工</ddlname>
+	</root>
+
+	<root>
+		<keyword>维护类型</keyword>
+		<ddlcode>5</ddlcode>
+		<ddlname>业务用户</ddlname>
+
+	</root>
+
+</dictionary>

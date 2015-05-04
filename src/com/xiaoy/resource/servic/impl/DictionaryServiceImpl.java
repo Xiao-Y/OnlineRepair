@@ -185,4 +185,16 @@ public class DictionaryServiceImpl implements DictionaryService
 		}
 		return map;
 	}
+
+	@Override
+	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
+	public void dictionaryInit(List<Dictionary> list)
+	{
+		dictionaryDao.deleteAll();
+		
+		for(Dictionary t : list)
+		{
+			dictionaryDao.saveOrUpdate(t);
+		}
+	}
 }

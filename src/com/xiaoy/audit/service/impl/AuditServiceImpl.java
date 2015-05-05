@@ -218,6 +218,7 @@ public class AuditServiceImpl implements AuditService
 			Evaluate evaluate = new Evaluate();
 			evaluate.setReportingUuid(auditForm.getReportingUuid());
 			evaluate.setReportingUserUuid(auditForm.getReportingUserUuid());
+			evaluate.setEvaluateStatCode(DictionaryForm.EVALUATE_STAT_NO);
 			
 			//3.修改设备信息故障
 			DeviceInfo deviceInfo = deviceInfoDao.findObjectById(auditForm.getDeviceTypeUuid());
@@ -315,13 +316,18 @@ public class AuditServiceImpl implements AuditService
 		// 审核通过的
 		if (auditStatCode.equals(DictionaryForm.AUDITSTAT_SUCCESS))
 		{
-			audit.setMaintainUuid(auditForm.getMaintainUuid());
+			String maintainUuid = auditForm.getMaintainUuid();
+			if(!StringUtils.isEmpty(maintainUuid))
+			{
+				audit.setMaintainUuid(maintainUuid);
+			}
 			// 维护状态
 			String maintainSataCode = auditForm.getMaintainStatCode();
 			audit.setMaintainStatCode(maintainSataCode);
 			if (maintainSataCode.equals(DictionaryForm.MAINTAIN_STAT_SUCCESS))
 			{
-				audit.setFinishTime(new Date());
+				String str = DateHelper.dateTimeConverString(new Date());
+				audit.setFinishTime(DateHelper.stringConverDate(str));
 			} else
 			{
 				audit.setFinishTime(null);

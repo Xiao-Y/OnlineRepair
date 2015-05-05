@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <!-- 分页标签样式 -->
-<link href="${pageContext.request.contextPath }/css/pageTag2.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.request.contextPath }/css/pageTag.css" rel="stylesheet" type="text/css"/>
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
 	
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>

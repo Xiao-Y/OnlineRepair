@@ -123,10 +123,10 @@
 	</menu>
 
 	<menu>
-		<code>evaluateInfoEdit</code>
+		<code>message</code>
 		<codeName>留言管理</codeName>
 		<order>052</order>
-		<url></url>
+		<url>/EvaluateMag/messageAction_message.action</url>
 		<parentCode>evaluateMag</parentCode>
 	</menu>
 

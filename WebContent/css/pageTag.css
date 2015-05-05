@@ -1,47 +1,31 @@
-@CHARSET "UTF-8";
-/*标签的字体样式*/
-.pagination {
-	margin-top: 20px;
-	text-align: left;
-	font-family: 宋体, Arial, Verdana;
+.div_page {
+	align: center;
+	width: 100%;
+	height: 22px;
+}
+
+.table_page {
+	align: center;
+	width: 100%;
+	background-color: #E5E5E5;
+}
+
+.tr_page td {
 	font-size: 13px;
-	line-height: 150%;
-	min-width: 800px;
-	word-break: break-all;
+	text-align: center;
+	text-align: center;
 }
 
-/* 分页标签样式 */
-.pagination {
-	padding: 5px;
-	float: right;
+.tr_page a:HOVER {
+	color: #ff0000;
 }
 
-.pagination a,.pagination a:link,.pagination a:visited {
-	padding: 2px 5px 2px 5px;
-	margin: 2px;
-	border: 1px solid #aaaadd;
+.tr_page a {
 	text-decoration: none;
 	color: #006699;
 }
 
-.pagination a:hover,.pagination a:active {
-	border: 1px solid #ff0000;
-	color: #000;
-	text-decoration: none;
-}
-
-.pagination span.current {
-	padding: 2px 5px 2px 5px;
-	margin: 2px;
-	border: 1px solid #ff0000;
+.td_span span {
+	color: #ff0000;
 	font-weight: bold;
-	background-color: #ff0000;
-	color: #FFF;
-}
-
-.pagination span.disabled {
-	padding: 2px 5px 2px 5px;
-	margin: 2px;
-	border: 1px solid #eee;
-	color: #ddd;
 }

@@ -32,6 +32,7 @@ public class AuditInfoAction extends BaseAction implements ModelDriven<AuditForm
 	@Resource
 	private AuditService auditService;
 
+	//数据字典
 	@Resource
 	private DictionaryService dictionaryService;
 

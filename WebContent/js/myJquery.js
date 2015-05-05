@@ -749,4 +749,24 @@ function auditInfoRefuseButton(){
 }
 //审核管理====================end
 
+//评价留言=====================start
+//删除留言
+function deleteMessageById(messageUuid){
+	$.ajax({
+        type: "POST",
+        url: "${pageContext.request.contextPath }/EvaluateMag/messageAction_deleteMessageById.action",
+        async: false,
+        data: {"date":new Date,"messageUuid":messageUuid,},
+        success: function (data) {
+        	if(data == '1'){
+        		$("#tr"+messageUuid).remove();
+        	}else if(data == '0'){
+        		alert("删除失败！！");
+        	}else{
+        		alert("服务器错误，稍后再试！！");
+        	}
+        }
+     });
+}
+//评价留言=====================end
 

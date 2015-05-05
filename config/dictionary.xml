@@ -132,6 +132,19 @@
 		<ddlcode>2</ddlcode>
 		<ddlname>假删除</ddlname>
 	</root>
+	
+	<root>
+		<keyword>回复状态</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>已回复</ddlname>
+	</root>
+	
+	<root>
+		<keyword>回复状态</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>未回复</ddlname>
+	</root>
+	
 	<!-- 以上是系统必须的 -->
 
 	<root>

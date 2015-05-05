@@ -12,6 +12,21 @@ public class DictionaryForm
 	 * 维护类别
 	 */
 	public static final String MAINTAIN_TYPE_NAME = "维护类型";
+	
+	/**
+	 * 回复状态
+	 */
+	public static final String REPLY_SATA = "回复状态";
+
+	/**
+	 * 已回复
+	 */
+	public static final String REPLY_SATA_OK = "1";
+	
+	/**
+	 * 未回复
+	 */
+	public static final String REPLY_SATA_NO = "2";
 
 	/**
 	 * 性别
@@ -107,6 +122,16 @@ public class DictionaryForm
 	 * 维护状态：已维护，审核通过时
 	 */
 	public static final String MAINTAIN_STAT_SUCCESS = "3";
+	
+	/**
+	 * 评价状态：已评价
+	 */
+	public static final String EVALUATE_STAT_OK = "1";
+	
+	/**
+	 * 评价状态：未评价
+	 */
+	public static final String EVALUATE_STAT_NO = "2";
 
 	/* 字典id */
 	private String seqID;

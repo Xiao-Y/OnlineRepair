@@ -11,8 +11,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  * 
  * @author XiaoY
  * @explain 自定义分页标签 <br/>
- *          使用方式: &lt x:pager pageSize="10" pageNo="1" recordCount="100"
- *          url="index.jsp" / &gt
+ *          使用方式: &lt x:pager pageSize="10" pageNo="1" recordCount="100" url="index.jsp" / &gt
  * 
  * @date: 2015年3月15日 下午8:58:29
  */
@@ -66,15 +65,14 @@ public class PageTag extends TagSupport
 		}
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("\r\n<div class='pagination' align='center'>\r\n");
-		sb.append(
-				"<form name='pageController' id='pageController' action='' method='post'> &nbsp&nbsp;")
-				.append("<input type='hidden' id='pageNo' name='pageNo' value='"
-						+ pageNo + "' />&nbsp;&nbsp;");
+		sb.append("\r\n<div class='div_page'>\r\n");
+		sb.append("<form name='pageController' id='pageController' action='' method='post'> &nbsp&nbsp;");
+		sb.append("<table class='table_page'>");
+		sb.append("<tr class='tr_page'>");
+		sb.append("<input type='hidden' id='pageNo' name='pageNo' value='" + pageNo + "' />&nbsp;&nbsp;");
 
 		// ------------------------------------ 获取所有請求中的参数
-		HttpServletRequest request = (HttpServletRequest) pageContext
-				.getRequest();
+		HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 		Enumeration<String> enumeration = request.getParameterNames();
 		String name = null;
 		String value = null;
@@ -92,76 +90,65 @@ public class PageTag extends TagSupport
 				}
 				continue;
 			}
-			sb.append("<input type='hidden' name='").append(name)
-					.append("' value='").append(value).append("'/>&nbsp;");
+			sb.append("<input type='hidden' name='").append(name).append("' value='").append(value).append("'/>&nbsp;");
 		}
 		// ----------------------------------------------------
-
-		sb.append("总共" + recordCount + "条记录   分" + pageNo +"/"+ pageCount + "页   ");
-
+		sb.append("<td class='td_span'>总共<span>" + recordCount + "</span>条记录&nbsp;&nbsp;&nbsp;分<span>" + pageNo + "/" + pageCount + "</span>页</td>");
+		sb.append("<td width='35%'></td>");
 		if (pageNo == 1)
 		{
-			sb.append("首页");
-			sb.append(" ");
-			sb.append("&lt;&lt;上一页&nbsp;");
+			sb.append("<td>首页</td>");
+			sb.append("<td>上一页</td>");
 		} else
 		{
-			sb.append("<a href='#' onclick='turnOverPage(1)'>首页</a>&nbsp;");
-			sb.append(" ");
-			sb.append("<a href='#' onclick='turnOverPage(")
-					.append((pageNo - 1)).append(")'>&lt;&lt;上一页</a>&nbsp;");
+			sb.append("<td><a href='javascript:void(0);' onclick='turnOverPage(1)'>首页</a></td>");
+			sb.append("<td><a href='javascript:void(0);' onclick='turnOverPage(").append((pageNo - 1)).append(")'>上一页</a></td>");
 		}
 		sb.append(" ");
 		if (pageNo == pageCount)
 		{
-			sb.append("下一页&gt;&gt;");
-			sb.append(" ");
-			sb.append("尾页&nbsp;");
+			sb.append("<td>下一页</td>");
+			sb.append("<td>尾页</td>");
 		} else
 		{
-			sb.append("<a href='#' onclick='turnOverPage(")
-					.append((pageNo + 1)).append(")'>下一页&gt;&gt;</a>&nbsp;");
-			sb.append(" ");
-			sb.append("<a href='#' onclick='turnOverPage(").append(pageCount)
-					.append(")'>尾页</a>&nbsp;");
+			sb.append("<td><a href='javascript:void(0);' onclick='turnOverPage(").append((pageNo + 1)).append(")'>下一页</a></td>");
+			sb.append("<td><a href='javascript:void(0);' onclick='turnOverPage(").append(pageCount).append(")'>尾页</a></td>");
 		}
 
-		sb.append(" 跳到&nbsp;<select onChange='turnOverPage(this.value)'>&nbsp;");
+		sb.append("<td>跳到&nbsp;&nbsp;&nbsp;<select style='width: 100px' onChange='turnOverPage(this.value)'>");
 		for (int i = 1; i <= pageCount; i++)
 		{
 			if (i == pageNo)
 			{
-				sb.append("  <option value='").append(i)
-						.append("' selected='selected'>第").append(i)
-						.append("页</option>&nbsp;");
+				sb.append("  <option value='").append(i).append("' selected='selected'>第").append(i).append("页</option>&nbsp;");
 			} else
 			{
-				sb.append("  <option value='").append(i).append("'>第")
-						.append(i).append("页</option>&nbsp;");
+				sb.append("  <option value='").append(i).append("'>第").append(i).append("页</option>&nbsp;");
 			}
 		}
-		sb.append("</select>&nbsp;");
-		sb.append(" &nbsp;");
-		sb.append("</form>&nbsp;");
+		sb.append("</select></td>");
+		sb.append("</tr>");
+		sb.append("</table>");
+		sb.append("</form>");
 
 		// 生成提交表单的JS
-		
-        sb.append("<script type='text/javascript'>");
-        sb.append("  function turnOverPage(no){");
-        sb.append("    var form = document.pageController;");
-        sb.append("    if(no").append(">").append(pageCount).append(") {");
-        sb.append("        no=").append(pageCount).append(";");
-        sb.append("    }");
-        sb.append("    if(no").append("< 1){");
-        sb.append("        no=1;");
-        sb.append("    }");
-        sb.append("    form.").append("pageNo").append(".value=no;");
-        sb.append("    form.action='").append(url).append("';");
-        sb.append("    form.submit();");
-        sb.append("  }");
-        sb.append("</script>");
-        
-        sb.append("</div>");
+
+		sb.append("<script type='text/javascript'>");
+		sb.append("  function turnOverPage(no){");
+		sb.append("    var form = document.pageController;");
+		sb.append("    if(no").append(">").append(pageCount).append(") {");
+		sb.append("        no=").append(pageCount).append(";");
+		sb.append("    }");
+		sb.append("    if(no").append("< 1){");
+		sb.append("        no=1;");
+		sb.append("    }");
+		sb.append("    form.").append("pageNo").append(".value=no;");
+		sb.append("    form.action='").append(url).append("';");
+		sb.append("    form.submit();");
+		sb.append("  }");
+		sb.append("</script>");
+
+		sb.append("</div>");
 		try
 		{
 			pageContext.getOut().println(sb.toString());

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-4 23:27:06 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xiaoy.base.entites.Message" table="MESSAGE">
+        <id name="messageUuid" type="java.lang.String">
+            <column name="MESSAGEUUID" />
+            <generator class="uuid" />
+        </id>
+        <property name="titleMes" type="java.lang.String">
+            <column name="TITLE_MES" />
+        </property>
+        <property name="replyMes" type="java.lang.String">
+            <column name="REPLY_MES" />
+        </property>
+        <property name="replySata" type="java.lang.String">
+            <column name="REPLY_SATA" />
+        </property>
+        <property name="messageTime" type="java.util.Date">
+            <column name="MESSAGE_TIME" />
+        </property>
+        <property name="messageMes" type="java.lang.String">
+            <column name="MESSAGE_MES" />
+        </property>
+        <many-to-one name="user" class="com.xiaoy.base.entites.User" fetch="join">
+            <column name="USER_UUID" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

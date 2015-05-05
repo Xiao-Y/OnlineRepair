@@ -186,9 +186,27 @@
 
 	<!-- 评价留言管理====start -->
 	<package name="evaluate" namespace="/EvaluateMag" extends="struts-default">
+		<!-- 评价管理 -->
 		<action name="evaluateAction_*" class="com.xiaoy.evaluate.web.action.EvaluateAction" method="{1}">
 			<result name="evaluateList">/WEB-INF/page/EvaluateMag/evaluateInfoList.jsp</result>
+			<result name="evaluateInfoEdit">/WEB-INF/page/EvaluateMag/evaluateInfoEdit.jsp</result>
 		</action>
+		
+		<!-- 留言管理 -->
+		<action name="messageAction_*" class="com.xiaoy.evaluate.web.action.MessageAction" method="{1}">
+			<result name="message">/WEB-INF/page/EvaluateMag/message.jsp</result>
+			
+			<result name="success" type="redirectAction">
+				<param name="actionName">messageAction_message</param>
+				<param name="namespace">/EvaluateMag</param>
+			</result>
+			
+			<result name="ajax-success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
 	</package>
 	<!-- 评价留言管理====end -->
 	

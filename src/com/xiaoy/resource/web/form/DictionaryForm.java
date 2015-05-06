@@ -22,6 +22,11 @@ public class DictionaryForm
 	 * 回复状态
 	 */
 	public static final String REPLY_SATA = "回复状态";
+	
+	/**
+	 * 满意度
+	 */
+	public static final String RANK = "满意度";
 
 	/**
 	 * 已回复
@@ -79,14 +84,14 @@ public class DictionaryForm
 	public static final String DELETE_FLAG = "删除标识";
 	
 	/**
-	 * 真删除
+	 * 未删除
 	 */
 	public static final String DELETE_FLAG_TRUE = "1";
 	
 	/**
 	 * 假删除
 	 */
-	public static final String DELETE_FLAG_false = "2";
+	public static final String DELETE_FLAG_FALSE = "2";
 
 	/**
 	 * 设备状态：运行正常

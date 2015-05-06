@@ -197,7 +197,8 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 	@Override
 	public List<Object[]> findReportingBugInfoList(ReportingForm reportingForm)
 	{
-		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.MAINTAIN_STAT_CODE,a.AUDIT_STAT_CODE,a.MAINTAIN_UUID,r.REPORTING_UUID ");
+		StringBuffer hql = new StringBuffer("SELECT d.AREA_CODE,d.INSTALLATION_SITE_CODE,di.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME, ");
+		hql.append(" a.MAINTAIN_STAT_CODE,a.AUDIT_STAT_CODE,a.MAINTAIN_UUID,r.REPORTING_UUID,di.DEVICETYPE_UUID,u.USER_UUID,a.AUDIT_UUID ");
 		hql.append(" from audit a,devicestate d,reporting r,deviceinfo di,user u ");
 		hql.append(" where r.REPORTING_UUID = a.REPORTING_UUID ");
 		hql.append(" and r.DEVICE_STATE_UUID = d.DEVICE_STATE_UUID ");

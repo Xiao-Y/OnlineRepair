@@ -90,4 +90,11 @@ public interface DeviceStateService {
 	 * @return	Boolean ture表示存在。false表示不存在
 	 */
 	Boolean findDeviceStateCondition(DeviceStateForm form);
+
+	/**
+	 * 通过设备状态信息查询出设备是否异常
+	 * @param deviceStateUuid	设备状态uuid
+	 * @return	设备状态
+	 */
+	String findDeviceStateInfoDeviceStatUuid(String deviceStateUuid);
 }

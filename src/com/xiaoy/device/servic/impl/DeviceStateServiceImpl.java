@@ -340,4 +340,15 @@ public class DeviceStateServiceImpl implements DeviceStateService {
 		}
 		return false;
 	}
+
+	@Override
+	public String findDeviceStateInfoDeviceStatUuid(String deviceStateUuid)
+	{
+		DeviceState deviceState = deviceStateDao.findObjectById(deviceStateUuid);
+		if(deviceState != null)
+		{
+			return deviceState.getStateCode();
+		}
+		return null;
+	}
 }

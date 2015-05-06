@@ -89,7 +89,7 @@ td {
 		</tr>
 		
 		<tr>
-			<td align="right" width="20%" class="ta_01">优先级别：</td>
+			<td align="right" width="20%" class="ta_01">优先级别：<font color="#FF0000">*</font></td>
 			<td class="ta_01" bgColor="#ffffff">
 				<s:if test="%{#request.priorCodes != null && #request.priorCodes.size() > 0}">
 		       		<s:select list="%{#request.priorCodes}" id="priorCode" name="priorCode"

@@ -17,7 +17,6 @@ import com.xiaoy.resource.web.form.DictionaryForm;
 @Repository
 public class EvaluateDaoImpl extends CommonImpl<Evaluate> implements EvaluateDao
 {
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Object[]> findEvaluateList(EvaluateForm evaluateForm)
@@ -73,9 +72,25 @@ public class EvaluateDaoImpl extends CommonImpl<Evaluate> implements EvaluateDao
 		hqlWhere.append(" and r.DEVICE_STATE_UUID = d.DEVICE_STATE_UUID ");
 		hqlWhere.append(" and d.DEVICETYPE_UUID = de.DEVICETYPE_UUID ");
 		hqlWhere.append(" and r.USER_UUID = u.USER_UUID ");
+		hqlWhere.append(" and a.REPORTING_UUID = r.REPORTING_UUID ");
 		hqlWhere.append(" and a.MAINTAIN_STAT_CODE =  " + DictionaryForm.MAINTAIN_STAT_SUCCESS);
+		hqlWhere.append(" and e.DELETE_FLAG = " + DictionaryForm.DELETE_FLAG_TRUE);
 	}
 
+	@Override
+	public Object[] findEvaluateByUuid(String evaluateUuid)
+	{
+		StringBuffer hqlWhere = new StringBuffer("");
+		hqlWhere.append(" SELECT d.AREA_CODE, d.INSTALLATION_SITE_CODE,de.DEVICE_NAME,u.NAME,r.REPORTING_PHONE, ");
+		hqlWhere.append(" a.FINISH_TIME,e.EVALUATEUUID,e.EVALUATE_STAT_CODE,r.REPORTING_UUID,u.USER_UUID,r.REPORTING_TIME, ");
+		hqlWhere.append(" de.VERSION,a.AUDIT_UUID,r.ORDER_TIME,r.DEVICE_PIC_URL,r.ACCOUNT,r.REMARK,a.MAINTAIN_UUID,a.AUDIT_TIME,e.RANK_CODE ");
+		this.getWhere(hqlWhere);
+		
+		Query query = this.getSession().createSQLQuery(hqlWhere.toString());
+		
+		return (Object[]) query.uniqueResult();
+	}
+	
 	private Map<String, Object> getMapWhereParam(EvaluateForm evaluateForm, StringBuffer hqlWhere)
 	{
 		Map<String, Object> paramsMapValue = null;

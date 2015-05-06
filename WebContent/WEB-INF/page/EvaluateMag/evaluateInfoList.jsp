@@ -27,10 +27,6 @@
 		});
 	});
 	
-	function findEvaluateInfo(){
-		$("#form1").attr("action","${pageContext.request.contextPath}/EvaluateMag/evaluateAction_evaluateList.action");
-		$("#form1").submit();
-	}
 </script> 
 
 </head>
@@ -135,6 +131,7 @@
 				<td class="ta_01" align="right">
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Find" type="button" onclick="findEvaluateInfo();" value="查询" name="BT_Find" >&nbsp;&nbsp;
 				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_Reset" >&nbsp;&nbsp;
+				    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" onclick="deletesEvaluateInfo();" type="button" value="批量删除" name="BT_Reset" >&nbsp;&nbsp;
 				</td>
 			</tr>
 			<tr>
@@ -143,14 +140,17 @@
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
 						<tr style="font-weight:bold;font-size:12pt;height:25px;background-color:#afd1f3">
+							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">
+								<input type="checkbox" id="checkbox" name="checkbox" onclick="quanxuan();">
+							</td>
 							<th align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</th>
 						    <th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">区域</th>
 							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</th>
 						    <th align="center" width="15%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备名</th>
 							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人</th>
-							<th align="center" width="11%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人联系方式</th>
-							<th align="center" width="12%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报时间</th>
-							<th align="center" width="12%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护时间</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人联系方式</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报时间</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护时间</th>
 							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">评价状态</th>
 							<th align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">删除</th>
 						</tr>
@@ -160,6 +160,9 @@
 						<s:if test="%{#request.list != null && #request.list.size() > 0}">
 							<s:iterator value="%{#request.list}" var="evaluate" status="u">
 								<tr id="<s:property value="%{#evaluate.evaluateUuid}"/>" onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
+									<td style="HEIGHT:22px" align="center" width="5%">
+										<input type="checkbox" id="${evaluate.evaluateUuid}" name="ids" class="ids" value="${evaluate.evaluateUuid}">
+									</td>
 									<td style="HEIGHT:22px" align="center">
 										<s:property value="%{#u.getIndex() + 1}"/>
 									</td>
@@ -190,7 +193,9 @@
 									</td>									
 									<td style="height:22px" align="center">
 										<s:if test="%{#evaluate.evaluateStatCode == 1}">
-											<s:property value="%{#evaluate.evaluateStatName}"/>
+											<a href="${pageContext.request.contextPath}/EvaluateMag/evaluateAction_evaluateInfoView.action?evaluateUuid=<s:property value="%{#evaluate.evaluateUuid}"/>">
+												<s:property value="%{#evaluate.evaluateStatName}"/>
+											</a>
 										</s:if>
 										<s:else>
 											<a href="${pageContext.request.contextPath}/EvaluateMag/evaluateAction_evaluateInfoEdit.action?evaluateUuid=<s:property value="%{#evaluate.evaluateUuid}"/>">
@@ -199,7 +204,7 @@
 										</s:else>
 									</td>
 									<td align="center" style="HEIGHT: 22px" align="center" width="5%">
-										<a href="system/elecUserAction_delete.do?userID=" onclick="return confirm('你确定要删除  XiaoY ？')">
+										<a href="javascript:deleteEvaluateInfo('${evaluate.evaluateUuid}');">
 										<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="cursor:hand"></a>												
 									</td>
 								</tr>
@@ -207,7 +212,7 @@
 						</s:if>
 						<s:else>
 							<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-								<td colspan=10 style="HEIGHT:22px" align="center" width="100%">
+								<td colspan=11 style="HEIGHT:22px" align="center" width="100%">
 									<font color="#FF0000">没有更多数据...</font>
 								</td>
 							</tr>

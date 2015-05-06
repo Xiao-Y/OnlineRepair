@@ -109,10 +109,10 @@ public class UserServiceImpl implements UserService
 		userForm.setMaintainTypeCode(user.getMaintainTypeCode());
 		if(!StringUtils.isEmpty(user.getMaintainTypeCode()))
 		{
-			userForm.setMaintainType(dictionaryDao.findDDLName(user.getMaintainTypeCode(), DictionaryForm.MAINTAIN_TYPE_NAME));
+			userForm.setMaintainTypeName(dictionaryDao.findDDLName(user.getMaintainTypeCode(), DictionaryForm.MAINTAIN_TYPE_NAME));
 		}else
 		{
-			userForm.setMaintainType("");
+			userForm.setMaintainTypeName("");
 		}
 		userForm.setName(user.getName());
 		userForm.setPassword(user.getPassword());

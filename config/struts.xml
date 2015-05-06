@@ -190,6 +190,17 @@
 		<action name="evaluateAction_*" class="com.xiaoy.evaluate.web.action.EvaluateAction" method="{1}">
 			<result name="evaluateList">/WEB-INF/page/EvaluateMag/evaluateInfoList.jsp</result>
 			<result name="evaluateInfoEdit">/WEB-INF/page/EvaluateMag/evaluateInfoEdit.jsp</result>
+			<result name="evaluateInfoView">/WEB-INF/page/EvaluateMag/evaluateInfoView.jsp</result>
+			
+			<result name="success" type="redirectAction">
+				<param name="actionName">evaluateAction_evaluateList</param>
+				<param name="namespace">/EvaluateMag</param>
+			</result>
+			
+			<result name="ajax-success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
 		</action>
 		
 		<!-- 留言管理 -->

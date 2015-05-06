@@ -23,4 +23,11 @@ public interface EvaluateDao extends Common<Evaluate>
 	 */
 	int countEvaluate(EvaluateForm evaluateForm);
 
+	/**
+	 * 根据uuid查询出来评价信息及相关信息
+	 * @param evaluateForm	含有评价uuid的
+	 * @return
+	 */
+	Object[] findEvaluateByUuid(String evaluateUuid);
+
 }

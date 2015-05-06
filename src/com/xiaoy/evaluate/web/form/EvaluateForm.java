@@ -16,6 +16,8 @@ public class EvaluateForm extends BaseForm
 	private Date evaluateTime;
 	/* 满意度 */
 	private String rankCode;
+	/*满意度名称*/
+	private String rankName;
 	/* 申报用户的uuid */
 	private String reportingUserUuid;
 	/* 申报故障信息uuid */
@@ -40,6 +42,60 @@ public class EvaluateForm extends BaseForm
 	private String reportingPhone;
 	/* 用户id */
 	private String userUuid;
+	/* 型号 */
+	private String version;
+	/* 审核uuid */
+	private String auditUuid;
+	/* 预约日期 */
+	private String orderTime;
+	/* 故障设备图片URL */
+	private String devicePicUrl;
+	/* 故障原因 */
+	private String account;
+	/* 备注 */
+	private String remark;
+	/* 维护人员Uuid */
+	private String maintainUuid;
+	/* 维护人员名字 */
+	private String maintainName;
+	/* 用户姓名 */
+	private String name;
+	/* 维护类别名称 */
+	private String maintainTypeName;
+	/* 维护人员的手机号码 */
+	private String maintainTypePhone;
+	/* 审核日期 */
+	private String auditTime;
+
+	public String getRankName()
+	{
+		return rankName;
+	}
+
+	public void setRankName(String rankName)
+	{
+		this.rankName = rankName;
+	}
+
+	public String getAuditTime()
+	{
+		return auditTime;
+	}
+
+	public void setAuditTime(String auditTime)
+	{
+		this.auditTime = auditTime;
+	}
+
+	public String getMaintainTypePhone()
+	{
+		return maintainTypePhone;
+	}
+
+	public void setMaintainTypePhone(String maintainTypePhone)
+	{
+		this.maintainTypePhone = maintainTypePhone;
+	}
 
 	public String getEvaluateStatName()
 	{
@@ -211,4 +267,103 @@ public class EvaluateForm extends BaseForm
 		this.finishTime = finishTime;
 	}
 
+	public String getVersion()
+	{
+		return version;
+	}
+
+	public void setVersion(String version)
+	{
+		this.version = version;
+	}
+
+	public String getAuditUuid()
+	{
+		return auditUuid;
+	}
+
+	public void setAuditUuid(String auditUuid)
+	{
+		this.auditUuid = auditUuid;
+	}
+
+	public String getOrderTime()
+	{
+		return orderTime;
+	}
+
+	public void setOrderTime(String orderTime)
+	{
+		this.orderTime = orderTime;
+	}
+
+	public String getDevicePicUrl()
+	{
+		return devicePicUrl;
+	}
+
+	public void setDevicePicUrl(String devicePicUrl)
+	{
+		this.devicePicUrl = devicePicUrl;
+	}
+
+	public String getAccount()
+	{
+		return account;
+	}
+
+	public void setAccount(String account)
+	{
+		this.account = account;
+	}
+
+	public String getRemark()
+	{
+		return remark;
+	}
+
+	public void setRemark(String remark)
+	{
+		this.remark = remark;
+	}
+
+	public String getMaintainUuid()
+	{
+		return maintainUuid;
+	}
+
+	public void setMaintainUuid(String maintainUuid)
+	{
+		this.maintainUuid = maintainUuid;
+	}
+
+	public String getMaintainName()
+	{
+		return maintainName;
+	}
+
+	public void setMaintainName(String maintainName)
+	{
+		this.maintainName = maintainName;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public String getMaintainTypeName()
+	{
+		return maintainTypeName;
+	}
+
+	public void setMaintainTypeName(String maintainTypeName)
+	{
+		this.maintainTypeName = maintainTypeName;
+	}
 }

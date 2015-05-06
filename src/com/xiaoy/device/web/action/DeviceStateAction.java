@@ -251,5 +251,4 @@ public class DeviceStateAction extends BaseAction implements ModelDriven<DeviceS
 		}
 		return "ajax-success";
 	}
-	
 }

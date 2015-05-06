@@ -587,18 +587,39 @@ function changeDeviceStateVersion(){
 	}
 }
 
+//检查设备是否正常运行
+function ChackReportingBugInfoByDeviceStatUuid(){
+	var deviceStateUuid = $("#deviceStateUuid").val();
+	var url = "${pageContext.request.contextPath}/ReportingMag/reportingAction_deviceStateInfoDeviceStatUuid.action";
+	var args = {"date":new Date,"deviceStateUuid":deviceStateUuid};
+	$.ajax({
+		url:url,
+		data:args,
+		success:function(data){
+			if(data == "1"){
+				var f = confirm("保存成功，等待审核。是否继续添加申报信息？");
+				if(f){
+					//继续添加
+					$("#flag").val("1");
+				}
+				Form1.submit();
+			}else if(data == "0"){
+				alert("该设备故障申报信息已存在！");
+			}else{
+				alert("服务器错误，稍后再试！");
+			}
+		}
+	});
+}
+
 //保存申报信息
 function reportingBugInfoSave(){
 	
 	$("#Form1").validate();
 	
 	if($("#Form1").valid()){
-		var f = confirm("保存成功，等待审核。是否继续添加申报信息？");
-		if(f){
-			//继续添加
-			$("#flag").val("1");
-		}
-		Form1.submit();
+		//检查设备是否正常运行
+		ChackReportingBugInfoByDeviceStatUuid();
 	}
 }
 
@@ -767,6 +788,53 @@ function deleteMessageById(messageUuid){
         	}
         }
      });
+}
+
+//提交条件查询的评价搜索
+function findEvaluateInfo(){
+	$("#form1").attr("action","${pageContext.request.contextPath}/EvaluateMag/evaluateAction_evaluateList.action");
+	$("#form1").submit();
+}
+
+//单个删除评价信息
+function deleteEvaluateInfo(evaluateUuid){
+	var f = confirm('你确定要删除该条评价？');
+	if(f){
+		var $tr = $("#"+evaluateUuid);
+		var url = "${pageContext.request.contextPath }/EvaluateMag/evaluateAction_deleteEvaluateInfo.action";
+		var args = {"date":new Date,"evaluateUuid":evaluateUuid};
+		$.post(url,args,function(data){
+			if(data == "1"){
+				$tr.remove();
+			}else if(data == "0"){
+				alert("删除失败！");
+			}else{
+				alert("服务器错误，稍后再试！");
+			}
+		});
+	}
+}
+
+//批量删除评价信息
+function deletesEvaluateInfo(){
+	var url = "${pageContext.request.contextPath }/EvaluateMag/evaluateAction_deletesEvaluateInfo.action";
+	var flag = false;
+	$.each($("input:checkbox"), function(i, val) {
+		if (val.checked == true) {
+			flag = confirm("确定要删除设备信息？");
+			return false;
+		}
+	});
+
+	if (flag == false) {
+		alert("请选择需要删除的设备信息");
+		return false;
+	}
+
+	if (flag) {
+		$("#form1").attr("action", url);
+		$("#form1").submit();
+	}
 }
 //评价留言=====================end
 

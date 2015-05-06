@@ -14,10 +14,10 @@ public class UserForm extends BaseForm
 	private String sexCode;
 	/*性别*/
 	private String sex;
-	/* 维护的类别 */
+	/* 维护类别 */
 	private String maintainTypeCode;
-	/* 维护类别*/
-	private String maintainType;
+	/* 维护类别名称*/
+	private String maintainTypeName;
 	/* 联系方式 */
 	private String phone;
 	/* 地址 */
@@ -162,14 +162,14 @@ public class UserForm extends BaseForm
 		this.sex = sex;
 	}
 
-	public String getMaintainType()
+	public String getMaintainTypeName()
 	{
-		return maintainType;
+		return maintainTypeName;
 	}
 
-	public void setMaintainType(String maintainType)
+	public void setMaintainTypeName(String maintainTypeName)
 	{
-		this.maintainType = maintainType;
+		this.maintainTypeName = maintainTypeName;
 	}
 
 	public String getFalg() {

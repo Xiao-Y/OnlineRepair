@@ -206,12 +206,14 @@ public class AuditServiceImpl implements AuditService
 		String auditStatCode = auditForm.getAuditStatCode();
 		audit.setAuditStatCode(auditStatCode);
 		audit.setFailAccount(auditForm.getFailAccount());
+		
+		DeviceState deviceState = deviceStateDao.findObjectById(auditForm.getDeviceStateUuid());
+		deviceState.setStateCode(DictionaryForm.DEVICE_STAT_OK);
 
 		// 当审核通过的时候，添加评价信息，修改设备状态并添加评价记录、修改设备信息故障次数
 		if (auditStatCode.equals(DictionaryForm.AUDITSTAT_SUCCESS))
 		{
 			// 1.修改设备状态信息为异常
-			DeviceState deviceState = deviceStateDao.findObjectById(auditForm.getDeviceStateUuid());
 			deviceState.setStateCode(DictionaryForm.DEVICE_STAT_EXCEPTION);
 
 			// 2.添加评论信息
@@ -219,6 +221,7 @@ public class AuditServiceImpl implements AuditService
 			evaluate.setReportingUuid(auditForm.getReportingUuid());
 			evaluate.setReportingUserUuid(auditForm.getReportingUserUuid());
 			evaluate.setEvaluateStatCode(DictionaryForm.EVALUATE_STAT_NO);
+			evaluate.setDeleteFlag(DictionaryForm.DELETE_FLAG_TRUE);
 			
 			//3.修改设备信息故障
 			DeviceInfo deviceInfo = deviceInfoDao.findObjectById(auditForm.getDeviceTypeUuid());

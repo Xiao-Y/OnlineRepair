@@ -96,11 +96,11 @@
 		<ddlcode>3</ddlcode>
 		<ddlname>驳回</ddlname>
 	</root>
-
+	
 	<root>
 		<keyword>删除标识</keyword>
 		<ddlcode>1</ddlcode>
-		<ddlname>真删除</ddlname>
+		<ddlname>未删除</ddlname>
 	</root>
 
 	<root>
@@ -108,19 +108,43 @@
 		<ddlcode>2</ddlcode>
 		<ddlname>假删除</ddlname>
 	</root>
-	
+
 	<root>
 		<keyword>回复状态</keyword>
 		<ddlcode>1</ddlcode>
 		<ddlname>已回复</ddlname>
 	</root>
-	
+
 	<root>
 		<keyword>回复状态</keyword>
 		<ddlcode>2</ddlcode>
 		<ddlname>未回复</ddlname>
 	</root>
+
+	<root>
+		<keyword>满意度</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>非常满意</ddlname>
+	</root>
 	
+	<root>
+		<keyword>满意度</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>满意</ddlname>
+	</root>
+	
+	<root>
+		<keyword>满意度</keyword>
+		<ddlcode>3</ddlcode>
+		<ddlname>不满意</ddlname>
+	</root>
+	
+	<root>
+		<keyword>满意度</keyword>
+		<ddlcode>4</ddlcode>
+		<ddlname>非常不满意</ddlname>
+	</root>
+
 	<!-- 以上是系统必须的 -->
 
 	<root>
@@ -207,7 +231,7 @@
 		<ddlcode>5</ddlcode>
 		<ddlname>业务用户</ddlname>
 	</root>
-	
+
 	<!-- 必须保留:系统管理员 -->
 	<root>
 		<keyword>角色类型</keyword>

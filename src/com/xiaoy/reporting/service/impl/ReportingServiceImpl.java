@@ -21,6 +21,7 @@ import com.xiaoy.base.entites.Reporting;
 import com.xiaoy.base.entites.User;
 import com.xiaoy.base.util.DateHelper;
 import com.xiaoy.base.util.UploadImageHelper;
+import com.xiaoy.device.dao.DeviceStateDao;
 import com.xiaoy.evaluate.dao.EvaluateDao;
 import com.xiaoy.reporting.dao.ReportingDao;
 import com.xiaoy.reporting.service.ReportingService;
@@ -63,6 +64,10 @@ public class ReportingServiceImpl implements ReportingService
 	// 用户信息
 	@Resource
 	private UserDao userDao;
+	
+	//设备状态信息
+	@Resource
+	private DeviceStateDao deviceStateDao;
 
 	@Resource
 	private ReportingDao reportingDao;
@@ -71,6 +76,7 @@ public class ReportingServiceImpl implements ReportingService
 	 * 分为两步：<br/>
 	 * 1.保存故障申报信息<br/>
 	 * 2.添加故障审核信息<br/>
+	 * 3.修改设备状态为异常<br/>
 	 */
 	@Override
 	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED, readOnly = false)
@@ -93,6 +99,10 @@ public class ReportingServiceImpl implements ReportingService
 		// 添加故障审核信息
 		Audit audit = this.reportingToAudit(entity);
 		auditDao.saveObject(audit);
+		//修改设备状态为异常
+		DeviceState d = deviceStateDao.findObjectById(reportingForm.getDeviceStateUuid());
+		d.setStateCode(DictionaryForm.DEVICE_STAT_EXCEPTION);
+		
 		logService.saveLog(request, AuditForm.AUDIT_WAIT, "添加“" + reportingForm.getDeviceName() + "”故障审核");
 	}
 
@@ -215,9 +225,9 @@ public class ReportingServiceImpl implements ReportingService
 					}
 				}
 				r.setReportingUuid((String) o[9]);
-				// r.setDeviceTypeUuid((String) o[10]);
-				// r.setUserUuid((String) o[11]);
-				// r.setAuditUuid((String) o[12]);
+				r.setDeviceTypeUuid((String) o[10]);
+				r.setUserUuid((String) o[11]);
+				r.setAuditUuid((String) o[12]);
 				form.add(r);
 			}
 		}

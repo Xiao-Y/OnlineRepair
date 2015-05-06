@@ -1,5 +1,8 @@
 package com.xiaoy.evaluate.web.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +10,7 @@ import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.device.servic.DeviceInfoService;
@@ -26,7 +30,14 @@ public class EvaluateAction extends BaseAction implements ModelDriven<EvaluateFo
 	// 数据字典
 	@Resource
 	private DictionaryService dictionaryService;
+
+	//获取输入流，用于ajax的删除
+	private InputStream inputStream;
 	
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
 	/**
 	 * 设备信息
 	 */
@@ -64,18 +75,82 @@ public class EvaluateAction extends BaseAction implements ModelDriven<EvaluateFo
 		// 获取所有设备的名称
 		List<DeviceInfoForm> deviceName = deviceInfoService.findDeviceName();
 		request.setAttribute("deviceName", deviceName);
-		
+
 		List<EvaluateForm> list = evaluateService.findEvaluateList(evaluateForm);
 		request.setAttribute("list", list);
-		
+
 		int recordCount = evaluateService.countEvaluate(evaluateForm);
 		evaluateForm.setRecordCount(recordCount);
-		
+
 		return "evaluateList";
 	}
-	
+
 	public String evaluateInfoEdit()
 	{
+		// 满意度
+		List<DictionaryForm> list = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.RANK);
+		request.setAttribute("ranks", list);
+
+		evaluateForm = evaluateService.findEvaluateByUuid(evaluateForm);
+		ActionContext.getContext().getValueStack().push(evaluateForm);
+
 		return "evaluateInfoEdit";
+	}
+
+	/**
+	 * 保存评价信息
+	 * 
+	 * @return
+	 */
+	public String evaluateInfoSave()
+	{
+		evaluateService.evaluateInfoSave(evaluateForm);
+		return "success";
+	}
+
+	public String evaluateInfoView()
+	{
+		// 满意度
+		List<DictionaryForm> list = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.RANK);
+		request.setAttribute("ranks", list);
+
+		evaluateForm = evaluateService.findEvaluateByUuid(evaluateForm);
+		ActionContext.getContext().getValueStack().push(evaluateForm);
+
+		return "evaluateInfoView";
+	}
+	
+	/**
+	 * 删除单个评价
+	 * 1。将评价设备为不可以看见
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	public String deleteEvaluateInfo() throws UnsupportedEncodingException
+	{
+		try
+		{
+			String evaluateUuid = request.getParameter("evaluateUuid");
+			evaluateService.updateEvaluateInfo(evaluateUuid);
+			
+			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
+		} catch (Exception e)
+		{
+			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
+			e.printStackTrace();
+		}
+		
+		return "ajax-success";
+	}
+	
+	/**
+	 * 批量删除评论
+	 * @return
+	 */
+	public String deletesEvaluateInfo()
+	{
+		String[] ids = evaluateForm.getIds();
+		evaluateService.deletesEvaluateInfo(ids);
+		return "success";
 	}
 }

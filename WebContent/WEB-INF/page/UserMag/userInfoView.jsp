@@ -49,7 +49,7 @@ td {
 			<tr>
 				<td align="right" class="ta_01">维护类别：</td>
 		       	<td class="ta_01" bgColor="#ffffff">
-		       		<s:textfield name="maintainType" id="maintainType" maxlength="20" size="20" cssStyle="width: 134px" readonly="true"/>
+		       		<s:textfield name="maintainTypeName" id="maintainTypeName" maxlength="20" size="20" cssStyle="width: 134px" readonly="true"/>
 		       	</td>
 			    <td align="right" class="ta_01">联系方式：</td>
 				<td class="ta_01" bgColor="#ffffff">

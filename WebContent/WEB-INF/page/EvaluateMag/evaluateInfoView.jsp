@@ -18,7 +18,7 @@ td {
 
 </head>
 <body>
-<form name="Form1" id="Form1" method="post" action="${pageContext.request.contextPath }/EvaluateMag/evaluateAction_evaluateInfoSave.action">
+<form name="Form1" id="Form1" method="post">
 	<br>
     <table cellSpacing="1" cellPadding="5" width="700" align="center" bgColor="#eeeeee" style="border:1px solid #8ba7e3" border="0">
 		<tr>
@@ -89,6 +89,12 @@ td {
 				<s:textfield name="finishTime" id="finishTime" readonly="true"/>
 			</td>
 		</tr>
+		<tr>
+			<td class="ta_01" align="right" bgcolor="#f5fafe">满意度：</td>
+			<td class="ta_01" bgcolor="#ffffff" colspan="3">
+				<s:textfield name="rankName" id="rankName" readonly="true"/>
+			</td>
+		</tr>
 		
 		<tr>
 			<td class="ta_01" align="right" bgcolor="#f5fafe">上传的图片：</td>
@@ -110,15 +116,6 @@ td {
 				<textarea name="remark" id="remark" style="width:95%" rows="4" cols="52" readonly="readonly">${remark }</textarea>
 			</td>
 		</tr>
-		<tr>
-			<td class="ta_01" align="right" bgcolor="#f5fafe">满意度：</td>
-			<td class="ta_01" bgcolor="#ffffff" colspan="3">
-				<s:if test="%{#request.ranks != null && #request.ranks.size() > 0}">
-					<s:radio list="%{#request.ranks}" id="rankCode" name="rankCode"
-					listKey="ddlCode" listValue="ddlName" value="1"/>
-				</s:if>
-			</td>
-		</tr>
 		<!-- 
 		<tr>
 			<td class="ta_01" align="right" bgcolor="#f5fafe">我的评价：</td>
@@ -134,7 +131,6 @@ td {
 		</tr>
 		<tr>
 			<td class="ta_01" style="WIDTH: 100%" align="center" colSpan="4">
-				<input type="submit" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55">
 				<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
 				<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="关闭"  name="Reset1"  onClick="history.back();">
 			</td>

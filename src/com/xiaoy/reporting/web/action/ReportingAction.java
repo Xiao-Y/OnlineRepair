@@ -17,6 +17,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.device.servic.DeviceStateService;
+import com.xiaoy.device.web.action.DeviceStateAction;
 import com.xiaoy.device.web.form.DeviceStateForm;
 import com.xiaoy.reporting.service.ReportingService;
 import com.xiaoy.reporting.web.form.ReportingForm;
@@ -290,6 +291,27 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
 			e.printStackTrace();
 		}
+		return "ajax-success";
+	}
+	
+
+	/**
+	 * 通过设备状态信息查询出设备是否异常
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	public String deviceStateInfoDeviceStatUuid() throws UnsupportedEncodingException
+	{
+		String deviceStateUuid = request.getParameter("deviceStateUuid");
+		String deviceStateCode =  deviceStateService.findDeviceStateInfoDeviceStatUuid(deviceStateUuid);
+		if(!StringUtils.isEmpty(deviceStateCode) && DictionaryForm.DEVICE_STAT_EXCEPTION.equals(deviceStateCode))
+		{
+			inputStream = new ByteArrayInputStream(DeviceStateAction.FAIL.getBytes("UTF-8"));
+		}else
+		{
+			inputStream = new ByteArrayInputStream(DeviceStateAction.SUCCESS.getBytes("UTF-8"));
+		}
+		
 		return "ajax-success";
 	}
 }

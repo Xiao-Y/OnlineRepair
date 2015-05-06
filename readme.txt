@@ -1,10 +1,18 @@
 访问路径：
-http://localhost:8090/OnlineRepairDemo/index.jsp
+http://localhost:8090/OnlineRepair
+
+初始化系统：
+http://localhost:8090/OnlieRepair/ResourceMag/menuInitAction_menuInit.action
+
 
 js文件：
-My97DatePicker	日历
-uploadPreview	上传图片预览
-myJquery.js		自己的js操作
+My97DatePicker			日历
+uploadPreview			上传图片预览
+myJquery.js				自己的js操作
+jquery-easyui-1.4.2		EaseUi用于添加留言
+login.js				用于登陆
+jqueryValidate			用于表单的验证
+
 
 css文件：
 pub.css		公有的样式
@@ -99,7 +107,7 @@ pub.css		公有的样式
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jqueryValidate/com.validate.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jqueryValidate/com.validate.expand.js"></script>
 		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/pub.css" />
-		2.要验证的表单中添加class="form-validate"
+		2.要验证的表单中添加class="form-validate"，必须要有id和name
 		3.需要验证的输入项中添加data-rule-required="true"
 		注意：
 			com.validate.expand.js中可以添加自定义的方法，使用请参照其它方法;
@@ -183,6 +191,8 @@ pub.css		公有的样式
 	③去掉Function.js
 	④去掉Style.css
 	⑤修改页面分页样式，使用pageTag2.css,PageTag2.java
+	⑥抽取左侧菜单样式为单独的menu.css
+	⑦使用EaseUi完成添加留言
 	
 
 三、错误记录：
@@ -249,6 +259,15 @@ pub.css		公有的样式
 		使用了表中的关键字order，更改为orderMenu
 		
 	14、查询出来的set集合排序：<set name="menus" table="MENU" inverse="true" lazy="false" order-by="orderMenu">
+	
+	15、添加设备故障次数字段：deviceNum
+		用于记录设备的故障次数。首次添加设备是，故障次数为0、修改设备信息后，故障设备次数为0.
+		
+	16、修改时间的存储格式为：yyyy-MM-dd hh:ss:mm
+		查询的时候修改为：
+		and e.installationTime >= timestamp(:installationTime,'00 00:00:00');
+		and e.installationTime < timestamp(:installationTime,'01 00:00:00');
+		map.put("installationTime",installationTime);
 	
 申报业务流：
 用户填写申报信息，后台添加审核记录-->

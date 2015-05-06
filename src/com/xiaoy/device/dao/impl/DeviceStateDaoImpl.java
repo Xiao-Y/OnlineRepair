@@ -82,7 +82,8 @@ public class DeviceStateDaoImpl extends CommonImpl<DeviceState> implements Devic
 			}
 			
 			if(!StringUtils.isEmpty(deviceStateForm.getInstallationTime())){
-				hqlWhere.append(" and e.installationTime = timestamp(:installationTime)");
+				hqlWhere.append(" and e.installationTime >= timestamp(:installationTime,'00 00:00:00')");
+				hqlWhere.append(" and e.installationTime < timestamp(:installationTime,'01 00:00:00')");
 				paramsMapValue.put("installationTime", deviceStateForm.getInstallationTime());
 			}
 			

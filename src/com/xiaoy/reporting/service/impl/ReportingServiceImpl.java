@@ -117,8 +117,8 @@ public class ReportingServiceImpl implements ReportingService
 		entity.setPriorCode(reportingForm.getPriorCode());
 		entity.setRemark(reportingForm.getRemark());
 		entity.setReportingPhone(reportingForm.getReportingPhone());
-		String strd = DateHelper.dateConverString(new Date());
-		entity.setReportingTime(DateHelper.stringConverDate(strd));
+		//String strd = DateHelper.dateConverString();
+		entity.setReportingTime(new Date());
 		entity.setReportingUuid(reportingForm.getReportingUuid());
 
 		User user = new User();
@@ -188,42 +188,36 @@ public class ReportingServiceImpl implements ReportingService
 				r.setReportingPhone((String) o[4]);
 				r.setReportingTime(o[5] != null ? DateHelper.dateConverString((Date) o[5]) : "");
 
-				// 以下3个是由于初始化的时候系统添加的
-				// 当维护状态为0时则“未维护”
 				r.setMaintainStatCode((String) o[6]);
 				if (!StringUtils.isEmpty((String) o[6]))
 				{
-					// if(o[6].equals("0")){
-					// r.setMaintainStatName("未维护");
-					// }else{
 					r.setMaintainStatName(dictionaryDao.findDDLName((String) o[6], DictionaryForm.MAINTAIN_STAT));
-					// }
 				}
-				// //当评价状态为0时则“未评价”
-				// r.setEvaluateStatCode((String)o[7]);
-				// if(o[7])){
-				// if(o[7].equals("0")){
-				// r.setEvaluateStatName("未评价");
-				// }else{
-				// r.setEvaluateStatName(dictionaryDao.findDDLName((String)o[7], DictionaryForm.EVALUATE_STAT));
-				// }
-				// }
-				// 当审核状态为0时则“待审核”
+
 				r.setAuditStatCode((String) o[7]);
 				if (!StringUtils.isEmpty((String) o[7]))
 				{
 					r.setAuditStatName(dictionaryDao.findDDLName((String) o[7], DictionaryForm.AUDIT_STAT));
 				}
 
-				r.setMaintainTypeCode((String) o[8]);
+				// r.setMaintainTypeCode((String) o[8]);
+				// if (!StringUtils.isEmpty((String) o[8]))
+				// {
+				// r.setMaintainTypeName(dictionaryDao.findDDLName((String) o[8], DictionaryForm.MAINTAIN_TYPE_NAME));
+				// }
+				r.setMaintainUuid((String) o[8]);
 				if (!StringUtils.isEmpty((String) o[8]))
 				{
-					r.setMaintainTypeName(dictionaryDao.findDDLName((String) o[8], DictionaryForm.MAINTAIN_TYPE_NAME));
+					User user = userDao.findObjectById((String) o[8]);
+					if(user != null)
+					{
+						r.setMaintainName(user.getName());
+					}
 				}
 				r.setReportingUuid((String) o[9]);
-				r.setDeviceTypeUuid((String) o[10]);
-				r.setUserUuid((String) o[11]);
-				r.setAuditUuid((String) o[12]);
+				// r.setDeviceTypeUuid((String) o[10]);
+				// r.setUserUuid((String) o[11]);
+				// r.setAuditUuid((String) o[12]);
 				form.add(r);
 			}
 		}
@@ -272,7 +266,7 @@ public class ReportingServiceImpl implements ReportingService
 				r.setDeviceName((String) o[2]);
 				r.setName((String) o[3]);
 				r.setReportingPhone((String) o[4]);
-				r.setReportingTime( o[5] != null ? DateHelper.dateConverString((Date) o[5]) : "");
+				r.setReportingTime(o[5] != null ? DateHelper.dateConverString((Date) o[5]) : "");
 
 				r.setMaintainStatCode((String) o[6]);
 				if (!StringUtils.isEmpty((String) o[6]))

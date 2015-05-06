@@ -14,8 +14,19 @@ th {
 }
 
 a {
-	color: #0A0A0A;
-}
+	color: #3399CC; 
+	text-decoration:none;
+}/*链接设置*/
+
+a:visited {
+	color: #3399CC;
+	text-decoration: none;
+} /*访问过的链接设置*/
+
+a:hover {
+	color: #CF0000;
+	text-decoration: underline;
+} /*鼠标放上的链接设置*/
 
 * {
 	font-size: 13px;

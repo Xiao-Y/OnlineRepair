@@ -14,6 +14,11 @@ public class DictionaryForm
 	public static final String MAINTAIN_TYPE_NAME = "维护类型";
 	
 	/**
+	 * 维护类型：业务用户
+	 */
+	public static final String MAINTAIN_TYPE_NORMAL = "5";
+	
+	/**
 	 * 回复状态
 	 */
 	public static final String REPLY_SATA = "回复状态";

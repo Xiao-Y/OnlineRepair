@@ -23,6 +23,7 @@ import com.xiaoy.reporting.web.form.ReportingForm;
 import com.xiaoy.resource.servic.DictionaryService;
 import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.web.form.DictionaryForm;
+import com.xiaoy.user.service.UserService;
 import com.xiaoy.user.web.form.UserForm;
 
 @Controller
@@ -35,6 +36,10 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 	//设备状态信息
 	@Resource
 	private DeviceStateService deviceStateService;
+	
+	//用户
+	@Resource
+	private UserService userService;
 	
 	//数据字典
 	@Resource
@@ -90,6 +95,10 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 //		//维护类型
 //		List<DictionaryForm> maintainType = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.MAINTAIN_TYPE_NAME);
 //		request.setAttribute("maintainType", maintainType);
+		
+		//查询出现所有是维护人员的信息
+		List<UserForm> users = userService.findUserCoditionMaintain();
+		request.setAttribute("users", users);
 		
 		//TODO
 		//当是管理员时，不添加用户uuid。否则添加用户uuid，查询出现当前用户的申报信息

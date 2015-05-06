@@ -258,13 +258,15 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 
 			if (!StringUtils.isEmpty(auditForm.getReportingTime()))
 			{
-				hqlWhere.append(" and r.REPORTING_TIME = timestamp(:reportingTime)");
+				hqlWhere.append(" and r.REPORTING_TIME >= timestamp(:reportingTime,'00 00:00:00')");
+				hqlWhere.append(" and r.REPORTING_TIME < timestamp(:reportingTime,'01 00:00:00')");
 				param.put("reportingTime", auditForm.getReportingTime());
 			}
 			
 			if(!StringUtils.isEmpty(auditForm.getAuditTime()))
 			{
-				hqlWhere.append(" and  a.AUDIT_TIME = timestamp(:auditTime)");
+				hqlWhere.append(" and  a.AUDIT_TIME >= timestamp(:auditTime,'00 00:00:00')");
+				hqlWhere.append(" and  a.AUDIT_TIME < timestamp(:auditTime,'01 00:00:00')");
 				param.put("auditTime", auditForm.getAuditTime());
 			}
 		}

@@ -8,12 +8,6 @@
 <title>故障信息列表</title>
 <jsp:include page="/pub.jsp"/>
 <script type="text/javascript">
-	/**
-	//超链接在新窗口显示 
-	$(document).ready(function(){
-		$("a").attr("target", "_blank");
-	});
-	*/
 	//清除查询条件
 	$().ready(function(){
 		$("#BT_Reset").click(function(){
@@ -24,6 +18,7 @@
 			$("#name").val("");
 			$("#auditStatCode").val("");
 			$("#maintainTypeCode").val("");
+			$("#maintainUuid").val("");
 			
 			$("#form1").submit();
 		});
@@ -79,14 +74,13 @@
 				<td class="ta_01" align="left"  height="22">
 					<s:if test="%{#request.deviceName != null && #request.deviceName.size() > 0}">
 						<s:select list="%{#request.deviceName}" id="deviceName" name="deviceName"
-						  listKey="deviceName" listValue="deviceName"
+						  listKey="deviceUuid" listValue="deviceName"
 						  headerKey="" headerValue="---请选择---"
 						  cssStyle="width:140px"
 						/>
 					</s:if>
 				</td>
-			</tr>
-			<tr>
+				
 				<td class="ta_01" align="right"  height="22">维护状态：</td>
 				<td class="ta_01" align="left"  height="22">
 					<s:if test="%{#request.maintainStat != null && #request.maintainStat.size() > 0}">
@@ -100,12 +94,13 @@
 						<select id="" name="" style="width:140px"></select>
 					</s:else>
 				</td>
-				<%--
-				<td class="ta_01" align="right"  height="22">评价状态：</td>
+			</tr>
+			<tr>
+				<td class="ta_01" align="right"  height="22">维护人员：</td>
 				<td class="ta_01" align="left"  height="22">
-					<s:if test="%{#request.evaluateStat != null && #request.evaluateStat.size() > 0}">
-						<s:select list="%{#request.evaluateStat}" id="evaluateStatCode" name="evaluateStatCode"
-						  listKey="ddlCode" listValue="ddlName"
+					<s:if test="%{#request.users != null && #request.users.size() > 0}">
+						<s:select list="%{#request.users}" id="maintainUuid" name="maintainUuid"
+						  listKey="userUuid" listValue="name"
 						  headerKey="" headerValue="---请选择---"
 						  cssStyle="width:140px"
 						/>
@@ -114,7 +109,7 @@
 						<select id="" name="" style="width:140px"></select>
 					</s:else>
 				</td>
-				 --%>
+				
 				<td class="ta_01" align="right"  height="22">申报人：</td>
 				<td class="ta_01" align="left"  height="22">
 					<s:textfield name="name" id="name" size="21" cssStyle="width:134px"/>
@@ -176,20 +171,18 @@
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
 						<tr style="font-weight:bold;font-size:12pt;height:25px;background-color:#afd1f3">
-						    <td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</td>
-						    <td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">区域</td>
-							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</td>
-						    <td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备名</td>
-							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人</td>
-							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人手机号</td>
-							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报时间</td>
-							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护状态</td>
-							<!-- 
-							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">评价状态</td>
-							 -->
-							<td align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">审核状态</td>
-							<td align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">查看</td>
-							<td align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">删除</td>
+						    <th align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</th>
+						    <th align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">区域</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</th>
+						    <th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备名</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人手机号</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报时间</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护状态</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">审核状态</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护人员</th>
+							<th align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">查看</th>
+							<th align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">删除</th>
 						</tr>
 						<!-- 列表标题 end -->
 						
@@ -197,49 +190,55 @@
 						<s:if test="%{#request.reportingBugInfoList != null && #request.reportingBugInfoList.size() > 0}">
 							<s:iterator value="%{#request.reportingBugInfoList}" var="reportingBugInfo" status="u">
 								<tr id='<s:property value="%{#reportingBugInfo.reportingUuid}"/>' onmouseover="this.style.backgroundColor = '#D4E3E5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-									<td style="HEIGHT:22px" align="center" width="5%">
+									<td style="HEIGHT:22px" align="center">
 										<s:property value="%{#u.getIndex() + 1}"/>
 									</td>
-							       	<td style="height:22px" align="center" width="5%">
+							       	<td style="height:22px" align="center">
 							       		<s:property value="%{#reportingBugInfo.areaName}"/>
 									</td>
-									<td style="height:22px" align="center" width="10%">
+									<td style="height:22px" align="center">
 										<s:property value="%{#reportingBugInfo.installationSiteName}"/>
 									</td>
-									<td style="height:22px" align="center" width="10%">
+									<td style="height:22px" align="center">
 										<a href="${pageContext.request.contextPath }/DeviceMag/deviceAction_deviceView.action?deviceTypeUuid=${reportingBugInfo.deviceTypeUuid}">
 											<s:property value="%{#reportingBugInfo.deviceName}"/>
 										</a>
 									</td>
-									<td style="height:22px" align="center" width="10%">
+									<td style="height:22px" align="center">
 										<a href="${pageContext.request.contextPath }/UserMag/userAction_userView.action?userUuid=<s:property value="%{#reportingBugInfo.userUuid}"/>">
 											<s:property value="%{#reportingBugInfo.name}"/>
 										</a>
 									</td>									
-									<td style="height:22px" align="center" width="10%">
+									<td style="height:22px" align="center">
 										<s:property value="%{#reportingBugInfo.reportingPhone}"/>
 									</td>
-									<td style="height:22px" align="center" width="10%">
+									<td style="height:22px" align="center">
 										<s:property value="%{#reportingBugInfo.reportingTime}"/>
 									</td>									
-									<td style="height:22px" align="center" width="10%">
+									<td style="height:22px" align="center">
 										<s:property value="%{#reportingBugInfo.maintainStatName}"/>
 									</td>
-									<%--
-									<td style="height:22px" align="center" width="10%">
-										<a href="${pageContext.request.contextPath }/page/EvaluateMag/evaluateInfoEdit.jsp">
-											<s:property value="%{#reportingBugInfo.evaluateStatName}"/>
-										</a>
-									</td>									
-									 --%>									
-									<td style="height:22px" align="center" width="10%">
+																	
+									<td style="height:22px" align="center">
 										<s:property value="%{#reportingBugInfo.auditStatName}"/>
 									</td>
-									<td align="center" style="HEIGHT: 22px" align="center" width="5%">																	
+										
+									<td style="height:22px" align="center">
+										<s:if test="%{#reportingBugInfo.maintainName != '' && #reportingBugInfo.maintainName != null}">
+											<a href="${pageContext.request.contextPath }/UserMag/userAction_userView.action?userUuid=<s:property value="%{#reportingBugInfo.maintainUuid}"/>">
+												<s:property value="%{#reportingBugInfo.maintainName}"/>
+											</a>
+										</s:if>
+										<s:else>
+											<s:property value="暂无"/>暂无
+										</s:else>
+									</td>
+									
+									<td align="center" style="HEIGHT: 22px" align="center">																	
 									   <a href="${pageContext.request.contextPath }/ReportingMag/reportingAction_reportingBugInfoView.action?reportingUuid=<s:property value="%{#reportingBugInfo.reportingUuid}"/>">
 									   <img src="${pageContext.request.contextPath }/images/view.png" width="20px" height="20px" border="0" style="cursor:hand"></a>													
 									</td>
-									<td align="center" style="HEIGHT: 22px" align="center" width="5%">
+									<td align="center" style="HEIGHT: 22px" align="center">
 										<a href="javascript:deleteReportingBugInfo('${reportingBugInfo.deviceName }','${reportingBugInfo.reportingUuid }','${reportingBugInfo.auditStatCode }','${reportingBugInfo.auditUuid }');">
 										<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="cursor:hand"></a>												
 									</td>

@@ -188,6 +188,7 @@ public class DeviceInfoServiceImpl implements DeviceInfoService
 		entity.setVersion(deviceForm.getVersion());
 		entity.setRemark(deviceForm.getRemark());
 		entity.setCreatTime(new Date());
+		entity.setDeviceNum(0);
 		return entity;
 	}
 }

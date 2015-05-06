@@ -2,30 +2,6 @@
 <!-- keyword 为查询关键字 ddlcode 为标识号 ddlcode 为标识的名称 -->
 <dictionary>
 	<root>
-		<keyword>角色类型</keyword>
-		<ddlcode>1</ddlcode>
-		<ddlname>系统管理员</ddlname>
-	</root>
-
-	<root>
-		<keyword>角色类型</keyword>
-		<ddlcode>2</ddlcode>
-		<ddlname>高级管理员</ddlname>
-	</root>
-
-	<root>
-		<keyword>角色类型</keyword>
-		<ddlcode>3</ddlcode>
-		<ddlname>业务用户</ddlname>
-	</root>
-
-	<root>
-		<keyword>角色类型</keyword>
-		<ddlcode>4</ddlcode>
-		<ddlname>普通用户</ddlname>
-	</root>
-
-	<root>
 		<keyword>性别</keyword>
 		<ddlcode>1</ddlcode>
 		<ddlname>男</ddlname>
@@ -225,11 +201,36 @@
 		<ddlname>管道工</ddlname>
 	</root>
 
+	<!-- 必须保留:业务用户 -->
 	<root>
 		<keyword>维护类型</keyword>
 		<ddlcode>5</ddlcode>
 		<ddlname>业务用户</ddlname>
+	</root>
+	
+	<!-- 必须保留:系统管理员 -->
+	<root>
+		<keyword>角色类型</keyword>
+		<ddlcode>1</ddlcode>
+		<ddlname>系统管理员</ddlname>
+	</root>
 
+	<root>
+		<keyword>角色类型</keyword>
+		<ddlcode>2</ddlcode>
+		<ddlname>高级管理员</ddlname>
+	</root>
+
+	<root>
+		<keyword>角色类型</keyword>
+		<ddlcode>3</ddlcode>
+		<ddlname>业务用户</ddlname>
+	</root>
+
+	<root>
+		<keyword>角色类型</keyword>
+		<ddlcode>4</ddlcode>
+		<ddlname>普通用户</ddlname>
 	</root>
 
 </dictionary>

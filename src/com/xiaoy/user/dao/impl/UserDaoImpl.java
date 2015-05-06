@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.xiaoy.base.dao.impl.CommonImpl;
 import com.xiaoy.base.entites.User;
+import com.xiaoy.resource.web.form.DictionaryForm;
 import com.xiaoy.user.dao.UserDao;
 import com.xiaoy.user.web.form.UserForm;
 
@@ -56,6 +57,20 @@ public class UserDaoImpl extends CommonImpl<User> implements UserDao
 			hqlWhere = " and  maintainTypeCode = :maintainTypeCode ";
 			paramsMapValue.put("maintainTypeCode", maintainTypeCode);
 		}
+		List<User> user = super.findCollectionByCondition(hqlWhere, paramsMapValue);
+		
+		return user;
+	}
+
+	@Override
+	public List<User> findUserCoditionMaintain()
+	{
+		String hqlWhere = "";
+		Map<String, Object> paramsMapValue = new HashMap<String, Object>();
+			
+		hqlWhere = " and  maintainTypeCode != :maintainTypeCode ";
+		paramsMapValue.put("maintainTypeCode", DictionaryForm.MAINTAIN_TYPE_NORMAL);
+	
 		List<User> user = super.findCollectionByCondition(hqlWhere, paramsMapValue);
 		
 		return user;

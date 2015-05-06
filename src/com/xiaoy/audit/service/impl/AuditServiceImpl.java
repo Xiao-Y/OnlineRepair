@@ -199,8 +199,8 @@ public class AuditServiceImpl implements AuditService
 		// 3.修改审核信息，添加审核时间、审核人。如果驳回，添加驳回信息
 		// 在同一个事务中，直接查询出来修改，提交就更新了
 		Audit audit = auditDao.findObjectById(auditForm.getAuditUuid());
-		String sd = DateHelper.dateConverString(new Date());
-		audit.setAuditTime(DateHelper.stringConverDate(sd));
+		//String sd = DateHelper.dateConverString(new Date());
+		audit.setAuditTime(new Date());
 		// 审核人uuid
 		audit.setAuditUserUuid(userInfo.getUserUuid());
 		String auditStatCode = auditForm.getAuditStatCode();
@@ -222,7 +222,7 @@ public class AuditServiceImpl implements AuditService
 			
 			//3.修改设备信息故障
 			DeviceInfo deviceInfo = deviceInfoDao.findObjectById(auditForm.getDeviceTypeUuid());
-			deviceInfo.setDeviceNum(deviceInfo.getDeviceNum() + 1);
+			deviceInfo.setDeviceNum(deviceInfo.getDeviceNum() == null ? 0 : deviceInfo.getDeviceNum() + 1);
 
 			evaluateDao.saveObject(evaluate);
 
@@ -324,10 +324,14 @@ public class AuditServiceImpl implements AuditService
 			// 维护状态
 			String maintainSataCode = auditForm.getMaintainStatCode();
 			audit.setMaintainStatCode(maintainSataCode);
-			if (maintainSataCode.equals(DictionaryForm.MAINTAIN_STAT_SUCCESS))
+			if (DictionaryForm.MAINTAIN_STAT_SUCCESS.equals(maintainSataCode))
 			{
-				String str = DateHelper.dateTimeConverString(new Date());
-				audit.setFinishTime(DateHelper.stringConverDate(str));
+				//String str = DateHelper.dateTimeConverString(new Date());
+				//添加维护时间和修改设备状态
+				audit.setFinishTime(new Date());
+				DeviceState deviceState = deviceStateDao.findObjectById(auditForm.getDeviceStateUuid());
+				deviceState.setStateCode(DictionaryForm.DEVICE_STAT_OK);
+				
 			} else
 			{
 				audit.setFinishTime(null);

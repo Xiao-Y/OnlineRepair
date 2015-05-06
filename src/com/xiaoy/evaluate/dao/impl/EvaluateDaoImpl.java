@@ -121,14 +121,16 @@ public class EvaluateDaoImpl extends CommonImpl<Evaluate> implements EvaluateDao
 			String reportingTime = evaluateForm.getReportingTime();
 			if(!StringUtils.isEmpty(reportingTime))
 			{
-				hqlWhere.append(" and r.REPORTING_TIME = timestamp(:reportingTime) ");
+				hqlWhere.append(" and r.REPORTING_TIME >= timestamp(:reportingTime, '00 00:00:00') ");
+				hqlWhere.append(" and r.REPORTING_TIME < timestamp(:reportingTime, '01 00:00:00') ");
 				paramsMapValue.put("reportingTime", reportingTime);
 			}
 			
 			String finishTime = evaluateForm.getFinishTime();
 			if(!StringUtils.isEmpty(finishTime))
 			{
-				hqlWhere.append(" and a.FINISH_TIME = timestamp(:finishTime) ");
+				hqlWhere.append(" and a.FINISH_TIME >= timestamp(:finishTime, '00 00:00:00') ");
+				hqlWhere.append(" and a.FINISH_TIME < timestamp(:finishTime, '01 00:00:00') ");
 				paramsMapValue.put("finishTime", finishTime);
 			}
 		}

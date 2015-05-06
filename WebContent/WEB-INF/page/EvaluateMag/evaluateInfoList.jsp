@@ -189,9 +189,14 @@
 										<s:property value="%{#evaluate.finishTime}"/>
 									</td>									
 									<td style="height:22px" align="center">
-										<a href="${pageContext.request.contextPath}/EvaluateMag/evaluateAction_evaluateInfoEdit.action?evaluateUuid=<s:property value="%{#evaluate.evaluateUuid}"/>">
+										<s:if test="%{#evaluate.evaluateStatCode == 1}">
 											<s:property value="%{#evaluate.evaluateStatName}"/>
-										</a>
+										</s:if>
+										<s:else>
+											<a href="${pageContext.request.contextPath}/EvaluateMag/evaluateAction_evaluateInfoEdit.action?evaluateUuid=<s:property value="%{#evaluate.evaluateUuid}"/>">
+												<s:property value="%{#evaluate.evaluateStatName}"/>
+											</a>
+										</s:else>
 									</td>
 									<td align="center" style="HEIGHT: 22px" align="center" width="5%">
 										<a href="system/elecUserAction_delete.do?userID=" onclick="return confirm('你确定要删除  XiaoY ？')">

@@ -1,30 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<jsp:include page="/pub.jsp"/>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
-<style type="text/css">
-a {
-	color: #0A0A0A;
-	 text-decoration:none;
-}
-body {
-	background-color:#F5FAFE; 	
-}
-td {
-	background-color: #F5FAFE;
-}
-.qx_list span {
-	width: 100%; 
-	height: 100%;
-	margin-top: 6px; 
-	margin-left: 10px;
-	cursor:pointer;
-}
-</style>
+
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/menu.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.0.min.js"></script>
+
+<title>菜单</title>
+
 <!-- 切换折叠 -->
 <script type="text/javascript">
 	$().ready(function() {

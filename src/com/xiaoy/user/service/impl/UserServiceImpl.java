@@ -257,4 +257,23 @@ public class UserServiceImpl implements UserService
 		}
 		return formList;
 	}
+
+	@Override
+	public List<UserForm> findUserCoditionMaintain()
+	{
+		List<User> list = userDao.findUserCoditionMaintain();
+		List<UserForm> formList = null;
+		if(!list.isEmpty())
+		{
+			formList = new ArrayList<UserForm>();
+			
+			for(User u : list)
+			{
+				UserForm form = new UserForm();
+				BeanUtils.copyProperties(u, form);
+				formList.add(form);
+			}
+		}
+		return formList;
+	}
 }

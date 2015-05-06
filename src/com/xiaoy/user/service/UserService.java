@@ -64,4 +64,10 @@ public interface UserService
 	 * @return	List&ltUserForm&gt
 	 */
 	public List<UserForm> findUserByMaintainTypeCode(String maintainTypeCode);
+
+	/**
+	 * 查询出现所有是维护人员的信息
+	 * @return
+	 */
+	public List<UserForm> findUserCoditionMaintain();
 }

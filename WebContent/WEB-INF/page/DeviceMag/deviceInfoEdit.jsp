@@ -101,8 +101,8 @@ td {
 			</td>
 			<s:hidden name="deviceTypeUuid" id="deviceTypeUuid"/>
 		</tr>
-		<tr align="right">
-			<td>温馨提示： <font color="#FF0000">* 为必填项</font></td>
+		<tr>
+			<td align="left" colspan="4">温馨提示： <font color="#FF0000">* 为必填项</font></td>
 		</tr>
 	</table>　
 </form>

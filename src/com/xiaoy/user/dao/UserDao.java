@@ -29,4 +29,10 @@ public interface UserDao extends Common<User>
 	 */
 	List<User> findUserByMaintainTypeCode(String maintainTypeCode);
 
+	/**
+	 * 查询出现所有是维护人员的信息
+	 * @return
+	 */
+	List<User> findUserCoditionMaintain();
+
 }

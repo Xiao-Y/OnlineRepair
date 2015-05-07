@@ -63,4 +63,15 @@ public class UserRoleDaoImpl extends CommonImpl<UserRole> implements UserRoleDao
 			super.deleteObjectByCollectionIds(hqlWhere.toString(), paramsMapValue);
 		}
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Object> findRoleByUserUuid(String userUuid)
+	{
+		String hql = "select roleCode from UserRole where userUuid = :userUuid";
+		Query query = this.getSession().createQuery(hql);
+		query.setParameter("userUuid", userUuid);
+		List<Object> obj = query.list();
+		return obj;
+	}
 }

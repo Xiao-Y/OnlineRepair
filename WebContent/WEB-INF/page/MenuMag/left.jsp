@@ -57,6 +57,7 @@
 			<td vAlign="top" height="100%">
 				
 				<s:iterator value="%{#request.list}" var="me">
+					<s:if test="%{#session.popedom.indexOf(#me.code) >= 0}">
 					<!-- 父级菜单 -->
 					<div class="qx" id='${me.code}Parent' style="cursor:pointer;">
 						<table cellSpacing="0" cellPadding="0" width="100%" border="0">
@@ -75,6 +76,7 @@
 					<div class="qx_list" id="${me.code}Child">
 						<table cellSpacing="0" cellPadding="0" width="99%" border="0">
 							<s:iterator value="%{#me.menus}" var="m">
+								<s:if test="%{#session.popedom.indexOf(#m.code) >= 0}">
 								<tr height="25">
 									<td class="box05" onmouseover="backgroundColorChange(this,'#AAAAAA');" onmouseout="backgroundColorChange(this,'');">
 										<a class="cl_01" onclick="linkcolorchange(this)" href='${pageContext.request.contextPath }${m.url}' target="main">
@@ -82,9 +84,11 @@
 										</a>
 									</td>
 								</tr>
+								</s:if>
 							</s:iterator>
 						</table>
 					</div>
+					</s:if>
 				</s:iterator>
 				
 			</td>

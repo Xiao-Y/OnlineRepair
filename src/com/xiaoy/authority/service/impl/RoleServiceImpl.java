@@ -186,6 +186,23 @@ public class RoleServiceImpl implements RoleService
 	{
 		return rolePopedomDao.findObjectById(roleCode);
 	}
+
+	@Override
+	public List<String> findRoleByUserUuid(String userUuid)
+	{
+		List<Object> list = userRoleDao.findRoleByUserUuid(userUuid);
+		
+		List<String> str = null;
+		if(list != null && list.size() > 0)
+		{
+			str = new ArrayList<String>();
+			for(Object o : list)
+			{
+				str.add(o.toString());
+			}
+		}
+		return str;
+	}
 }
 
 

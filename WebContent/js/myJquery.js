@@ -838,3 +838,60 @@ function deletesEvaluateInfo(){
 }
 //评价留言=====================end
 
+
+//权限管理=====================start
+//用于保存用户角色和权限
+function saveRole(){
+	var roleid = $("#roleCode").val(); 		 
+     $("#roleid").val(roleid);
+     $("#Form2").attr("action","${pageContext.request.contextPath }/AuthorityMag/roleAction_save.action");
+     $("#Form2").submit();
+}
+
+//用于当编辑用户的角色和权限的时候load加载编辑页面
+function selectRole(){
+   
+   if($("#Form1 :input[name=roleCode]").val()=="0"){
+  	 	$("#Form1").attr("action","${pageContext.request.contextPath }/AuthorityMag/roleAction_home.action");
+      	$("#Form1").submit();            
+   }else{
+   	var roleCode = $("#Form1 :input[name=roleCode]").val();
+ 	  	$("#Form2").text("");
+       $("#Form2").load("AuthorityMag/roleAction_edit.action",{"roleCode":roleCode});
+   }
+}
+
+// 权限的全选/全不选
+function checkAllOper(oper){
+	 var selectoper = $(":input[name=popedomCode]");
+	 for(var i = 0; i < selectoper.length; i++){
+		 selectoper[i].checked = oper.checked;
+	 }
+}
+
+	//用户全选/全不选
+function checkAllUser(user){
+	 var selectoper = $(":input[name=userIds]");
+	 for(var i = 0; i < selectoper.length; i++){
+		 selectoper[i].checked = user.checked;
+	 }
+}
+	
+//当一个权限被选种后，其隐藏的复选框会被选种
+function selectChild(code){
+	var f = false;
+	
+	$(".selectoper"+ code).each(function(){
+		if($(this).attr("checked")){
+			f = true;
+			return;
+		}
+	});
+	
+	if(f){
+		$(".popedomCode"+ code).attr("checked",true);
+	}else{
+		$(".popedomCode"+ code).attr("checked",false);
+	}
+}
+//权限管理=====================end

@@ -16,13 +16,20 @@
 								<s:iterator begin="0" end="%{8 - #request.codeName.length()}" step="1">
 									&nbsp;
 								</s:iterator>
-								<s:property value="%{#me.codeName}"/>：&nbsp;&nbsp;
+								<s:property value="%{#me.codeName}"/>
+								<s:if test="%{#request.popedomCode != null && #request.popedomCode.indexOf(#me.code) >= 0}">
+									<input type="checkbox" style="display: none;" class="popedomCode${me.code }" name="popedomCode" id='<s:property value="%{#me.code}"/>' value='<s:property value="%{#me.code}"/>' checked>
+								</s:if>
+								<s:else>
+									<input type="checkbox" style="display: none;" class="popedomCode${me.code }" name="popedomCode" id='<s:property value="%{#me.code}"/>' value='<s:property value="%{#me.code}"/>'>
+								</s:else>
+								：&nbsp;&nbsp;
 								<s:iterator value="%{#me.menus}" var="m">
 									<s:if test="%{#request.popedomCode != null && #request.popedomCode.indexOf(#m.code) >= 0}">
-										<input type="checkbox"  name="popedomCode" id='<s:property value="%{#m.code}"/>' value='<s:property value="%{#m.code}"/>' checked>
+										<input type="checkbox" class="selectoper${me.code }" name="popedomCode" onclick="selectChild('${me.code }')" id='<s:property value="%{#m.code}"/>' value='<s:property value="%{#m.code}"/>' checked>
 									</s:if>
 									<s:else>
-										<input type="checkbox"  name="popedomCode" id='<s:property value="%{#m.code}"/>' value='<s:property value="%{#m.code}"/>' >
+										<input type="checkbox" class="selectoper${me.code }"  name="popedomCode" onclick="selectChild('${me.code }')" id='<s:property value="%{#m.code}"/>' value='<s:property value="%{#m.code}"/>' >
 									</s:else>
 									<s:property value="%{#m.codeName}"/>
 								</s:iterator>

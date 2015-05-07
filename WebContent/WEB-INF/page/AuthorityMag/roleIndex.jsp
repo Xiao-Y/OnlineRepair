@@ -6,44 +6,6 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <jsp:include page="/pub.jsp"/>
 <title>角色权限管理</title>
-				
-<script language="javascript">
-		  
-	 function saveRole(){
-		var roleid = $("#roleCode").val(); 		 
-          $("#roleid").val(roleid);
-          $("#Form2").attr("action","${pageContext.request.contextPath }/AuthorityMag/roleAction_save.action");
-          $("#Form2").submit();
-	}
-       
-     function selectRole(){
-        
-        if($("#Form1 :input[name=roleCode]").val()=="0"){
-       	 	$("#Form1").attr("action","${pageContext.request.contextPath }/AuthorityMag/roleAction_home.action");
-           	$("#Form1").submit();            
-        }else{
-        	var roleCode = $("#Form1 :input[name=roleCode]").val();
-      	  	$("#Form2").text("");
-            $("#Form2").load("${pageContext.request.contextPath }/AuthorityMag/roleAction_edit.action",{"roleCode":roleCode});
-        }
-     }
-     
-     // 权限的全选/全不选
-     function checkAllOper(oper){
-    	 var selectoper = $(":input[name=popedomCode]");
-    	 for(var i = 0; i < selectoper.length; i++){
-    		 selectoper[i].checked = oper.checked;
-    	 }
-     }
-     
-  	//用户全选/全不选
-     function checkAllUser(user){
-    	 var selectoper = $(":input[name=userIds]");
-    	 for(var i = 0; i < selectoper.length; i++){
-    		 selectoper[i].checked = user.checked;
-    	 }
-     }
-</script>
 <style type="text/css">
 body {
 	background-color:#F5FAFE; 	
@@ -53,7 +15,6 @@ td {
 }
 </style>
 </head>
-		
 	<body>
 		<s:form name="Form1" id="Form1"  method="post" cssStyle="margin:0px;">
 			<table cellSpacing="1" cellPadding="0" width="100%" align="center" border="0">
@@ -97,9 +58,11 @@ td {
 												<s:iterator begin="0" end="%{8 - #request.codeName.length()}" step="1">
 													&nbsp;
 												</s:iterator>
-												<s:property value="%{#me.codeName}"/>：&nbsp;&nbsp;
+												<s:property value="%{#me.codeName}"/>
+												<input type="checkbox" style="display: none;" class="popedomCode${me.code }" name="popedomCode" id='<s:property value="%{#me.code}"/>' value='<s:property value="%{#me.code}"/>'>
+												：&nbsp;&nbsp;
 												<s:iterator value="%{#me.menus}" var="m">
-													<input type="checkbox"  name="selectoper" value='<s:property value="%{#m.code}"/>' >
+													<input type="checkbox" class="selectoper${me.code }" name="popedomCode" onclick="selectChild('${me.code }')" value='<s:property value="%{#m.code}"/>' >
 													<s:property value="%{#m.codeName}"/>
 												</s:iterator>
 												<br/>

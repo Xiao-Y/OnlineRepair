@@ -45,4 +45,11 @@ public interface UserRoleDao extends Common<UserRole>
 	 * @param userRoles	含有角色Code的
 	 */
 	void deleteUserRoleByRoleCode(List<UserRole> userRoles);
+
+	/**
+	 * 通过用户的uuid查询出现该用户的所有角色
+	 * @param userUuid	用户的uuid
+	 * @return	角色
+	 */
+	List<Object> findRoleByUserUuid(String userUuid);
 }

@@ -47,5 +47,12 @@ public interface RoleService
 	 * @return
 	 */
 	RolePopedom findPopedomByroleCode(String roleCode);
+
+	/**
+	 * 通过用户的uuid查询出现用户的所有的角色
+	 * @param userUuid	用户的uuid
+	 * @return	含有权限的字符串
+	 */
+	List<String> findRoleByUserUuid(String userUuid);
 	
 }

@@ -11,8 +11,8 @@ package com.xiaoy.base.entites;
 public class UserRole
 {
 	private Integer seqId; // 主键ID
-	private String userId; // 用户ID
-	private String roleId; // 角色ID
+	private String userUuid; // 用户ID
+	private String roleCode; // 角色code
 	private String remark; // 备注
 
 	public Integer getSeqId()
@@ -25,24 +25,24 @@ public class UserRole
 		this.seqId = seqId;
 	}
 
-	public String getUserId()
+	public String getUserUuid()
 	{
-		return userId;
+		return userUuid;
 	}
 
-	public void setUserId(String userId)
+	public void setUserUuid(String userUuid)
 	{
-		this.userId = userId;
+		this.userUuid = userUuid;
 	}
 
-	public String getRoleId()
+	public String getRoleCode()
 	{
-		return roleId;
+		return roleCode;
 	}
 
-	public void setRoleId(String roleId)
+	public void setRoleCode(String roleCode)
 	{
-		this.roleId = roleId;
+		this.roleCode = roleCode;
 	}
 
 	public String getRemark()

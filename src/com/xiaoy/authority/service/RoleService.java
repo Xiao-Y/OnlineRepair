@@ -3,7 +3,7 @@ package com.xiaoy.authority.service;
 import java.util.List;
 
 import com.xiaoy.authority.web.form.RoleForm;
-import com.xiaoy.base.util.XmlObject;
+import com.xiaoy.base.entites.RolePopedom;
 import com.xiaoy.user.web.form.UserForm;
 
 
@@ -18,27 +18,6 @@ import com.xiaoy.user.web.form.UserForm;
  */
 public interface RoleService
 {
-
-	/**
-	 * 从Function.xml中读取权限集合,存放到XmlObject对象中
-	 * @return	List &ltXmlObject&gt
-	 *
-	 * @author XiaoY
-	 * @date: 
-	 * 2014年12月23日 下午7:10:33
-	 */
-	List<XmlObject> readXml();
-
-	/**
-	 * 通过角色id，查询出该角色的所有权限集合
-	 * @param roleId	角色id
-	 * @return	List &ltXmlObject&gt
-	 *
-	 * @author XiaoY
-	 * @date: 
-	 * 2014年12月25日 下午8:38:59
-	 */
-	List<XmlObject> readEditXml(String roleId);
 
 	/**
 	 * 使用角色id获得用户信息集合<br/>
@@ -61,5 +40,12 @@ public interface RoleService
 	 * 2014年12月26日 下午7:01:24
 	 */
 	void saveRole(RoleForm roleForm);
+
+	/**
+	 * 通过角色roleCode，查询出该角色的所有权限集合
+	 * @param roleCode
+	 * @return
+	 */
+	RolePopedom findPopedomByroleCode(String roleCode);
 	
 }

@@ -6,6 +6,8 @@ import com.xiaoy.base.web.form.BaseForm;
 
 public class EvaluateForm extends BaseForm
 {
+	public static final String MODEL_NAME = "【评价留言管理】-【我的评价】";
+	
 	/* 评价信息uuid */
 	private String evaluateUuid;
 	/* 评价状态 */

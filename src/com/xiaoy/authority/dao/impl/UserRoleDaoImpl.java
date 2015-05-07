@@ -27,42 +27,40 @@ public class UserRoleDaoImpl extends CommonImpl<UserRole> implements UserRoleDao
 {
 	@SuppressWarnings({ "unchecked"})
 	@Override
-	public List<Object[]> findElecUserByRoleId(String roleId)
+	public List<Object[]> findElecUserByRoleId(String roleCode)
 	{
-		String sql = " select distinct case user_role.roleid "
-				+ " when ? then '1' else '0' end as flag, "
-				+ " user.userUuid as userUuid, "
-				+ " user.name as name, "
-				+ " user.loginName as loginName "
-				+ " from user"
-				+ " left outer join user_role "
-				+ " on user.userUuid = user_role.userUuid "
-				+ " and user_role.roleid = ? ";
-		Query query = this.getSession().createSQLQuery(sql)
+		StringBuffer sql = new StringBuffer();
+		sql.append(" SELECT DISTINCT CASE ur.ROLE_CODE WHEN :roleCode THEN '1' ELSE '0' end as flag,u.USER_UUID,u.NAME,u.LOGIN_NAME ");
+		sql.append(" from user u LEFT OUTER JOIN user_role ur on u.USER_UUID = ur.USER_UUID ");
+		sql.append(" and ur.ROLE_CODE = :roleCode ");
+		Query query = this.getSession().createSQLQuery(sql.toString())
 						  .addScalar("flag")
-						  .addScalar("userUuid")
-						  .addScalar("name")
-						  .addScalar("loginName");
-		query.setParameter(0, roleId);
-		query.setParameter(1, roleId);
+						  .addScalar("USER_UUID")
+						  .addScalar("NAME")
+						  .addScalar("LOGIN_NAME");
+		query.setParameter("roleCode", roleCode);
+		query.setParameter("roleCode", roleCode);
 		List<Object[]> userList = query.list();
 		return userList;
 	}
 
 	@Override
-	public void deleteObjectByCollection(List<UserRole> userRole)
+	public void deleteUserRoleByRoleCode(List<UserRole> userRoles)
 	{
-		String hqlWhere = "";
-		Map<String, Object> paramsMapValue = null;
-		if(userRole != null && userRole.size() > 0){
-			paramsMapValue = new HashMap<String, Object>();
-			List<Integer> ids = new ArrayList<Integer>();
-			hqlWhere = " and seqId in (:seqId)";
-			for(UserRole u : userRole){
-				ids.add(u.getSeqId());
+		if(userRoles != null && userRoles.size() > 0)
+		{
+			List<String> list = new ArrayList<String>();
+			for(UserRole u : userRoles)
+			{
+				list.add(u.getRoleCode());
 			}
-			paramsMapValue.put("seqId", paramsMapValue);
+			
+			Map<String, Object> paramsMapValue = new HashMap<String, Object>();
+			StringBuffer hqlWhere = new StringBuffer("");
+			hqlWhere.append(" and  roleCode in(:roleCode)");
+			paramsMapValue.put("roleCode", list);
+			
+			super.deleteObjectByCollectionIds(hqlWhere.toString(), paramsMapValue);
 		}
-		super.deleteObjectByCollectionIds(hqlWhere, paramsMapValue);
 	}
 }

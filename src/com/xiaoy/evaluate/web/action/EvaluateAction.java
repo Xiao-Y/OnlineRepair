@@ -18,6 +18,7 @@ import com.xiaoy.device.web.form.DeviceInfoForm;
 import com.xiaoy.evaluate.service.EvaluateService;
 import com.xiaoy.evaluate.web.form.EvaluateForm;
 import com.xiaoy.resource.servic.DictionaryService;
+import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.web.form.DictionaryForm;
 
 @SuppressWarnings("serial")
@@ -27,14 +28,19 @@ public class EvaluateAction extends BaseAction implements ModelDriven<EvaluateFo
 	@Resource
 	private EvaluateService evaluateService;
 
+	// 日志管理
+	@Resource
+	private LogService logService;
+
 	// 数据字典
 	@Resource
 	private DictionaryService dictionaryService;
 
-	//获取输入流，用于ajax的删除
+	// 获取输入流，用于ajax的删除
 	private InputStream inputStream;
-	
-	public InputStream getInputStream() {
+
+	public InputStream getInputStream()
+	{
 		return inputStream;
 	}
 
@@ -82,6 +88,7 @@ public class EvaluateAction extends BaseAction implements ModelDriven<EvaluateFo
 		int recordCount = evaluateService.countEvaluate(evaluateForm);
 		evaluateForm.setRecordCount(recordCount);
 
+		logService.saveLog(request, EvaluateForm.MODEL_NAME, "进入评价列表页面");
 		return "evaluateList";
 	}
 
@@ -94,6 +101,7 @@ public class EvaluateAction extends BaseAction implements ModelDriven<EvaluateFo
 		evaluateForm = evaluateService.findEvaluateByUuid(evaluateForm);
 		ActionContext.getContext().getValueStack().push(evaluateForm);
 
+		logService.saveLog(request, EvaluateForm.MODEL_NAME, "进入评价编辑页面");
 		return "evaluateInfoEdit";
 	}
 
@@ -105,6 +113,8 @@ public class EvaluateAction extends BaseAction implements ModelDriven<EvaluateFo
 	public String evaluateInfoSave()
 	{
 		evaluateService.evaluateInfoSave(evaluateForm);
+		
+		logService.saveLog(request, EvaluateForm.MODEL_NAME, "保存评价信息");
 		return "success";
 	}
 
@@ -117,14 +127,15 @@ public class EvaluateAction extends BaseAction implements ModelDriven<EvaluateFo
 		evaluateForm = evaluateService.findEvaluateByUuid(evaluateForm);
 		ActionContext.getContext().getValueStack().push(evaluateForm);
 
+		logService.saveLog(request, EvaluateForm.MODEL_NAME, "查看评价信息");
 		return "evaluateInfoView";
 	}
-	
+
 	/**
-	 * 删除单个评价
-	 * 1。将评价设备为不可以看见
+	 * 删除单个评价 1。将评价设备为不可以看见
+	 * 
 	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	public String deleteEvaluateInfo() throws UnsupportedEncodingException
 	{
@@ -132,25 +143,29 @@ public class EvaluateAction extends BaseAction implements ModelDriven<EvaluateFo
 		{
 			String evaluateUuid = request.getParameter("evaluateUuid");
 			evaluateService.updateEvaluateInfo(evaluateUuid);
-			
+
 			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
 		} catch (Exception e)
 		{
 			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
 			e.printStackTrace();
 		}
-		
+
+		logService.saveLog(request, EvaluateForm.MODEL_NAME, "删除评价信息");
 		return "ajax-success";
 	}
-	
+
 	/**
 	 * 批量删除评论
+	 * 
 	 * @return
 	 */
 	public String deletesEvaluateInfo()
 	{
 		String[] ids = evaluateForm.getIds();
 		evaluateService.deletesEvaluateInfo(ids);
+		
+		logService.saveLog(request, EvaluateForm.MODEL_NAME, "批量删除评价信息");
 		return "success";
 	}
 }

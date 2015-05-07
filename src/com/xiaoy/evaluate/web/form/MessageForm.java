@@ -10,6 +10,8 @@ import java.util.Date;
  */
 public class MessageForm
 {
+	public static final String MODEL_NAME = "【评价留言管理】-【留言管理】";
+	
 	/* 留言uuid */
 	private String messageUuid;
 	/* 标题 */

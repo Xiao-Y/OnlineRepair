@@ -10,18 +10,18 @@ package com.xiaoy.base.entites;
  */
 public class RolePopedom
 {
-	private String roleId; 			// 主键ID
-	private String popedomCode; 	// 配置web文件中权限的编码code的字符串连接
-	private String remark; 			// 备注
+	private String roleCode; // 主键Code
+	private String popedomCode; // 配置web文件中权限的编码code的字符串连接
+	private String remark; // 备注
 
-	public String getRoleId()
+	public String getRoleCode()
 	{
-		return roleId;
+		return roleCode;
 	}
 
-	public void setRoleId(String roleId)
+	public void setRoleCode(String roleCode)
 	{
-		this.roleId = roleId;
+		this.roleCode = roleCode;
 	}
 
 	public String getPopedomCode()

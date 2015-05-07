@@ -8,11 +8,11 @@
             <column name="SEQID" />
             <generator class="increment" />
         </id>
-        <property name="userId" type="java.lang.String">
-            <column name="USERID" />
+        <property name="userUuid" type="java.lang.String">
+            <column name="USER_UUID" />
         </property>
-        <property name="roleId" type="java.lang.String">
-            <column name="ROLEID" />
+        <property name="roleCode" type="java.lang.String">
+            <column name="ROLE_CODE" />
         </property>
         <property name="remark" type="java.lang.String">
             <column name="REMARK" />

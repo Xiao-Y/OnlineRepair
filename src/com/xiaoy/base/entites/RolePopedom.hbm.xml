@@ -3,11 +3,11 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="com.xiaoy.base.entites.RolePopedom" table="ROLE_POPEDOM">
-        <id name="roleId" type="java.lang.String">
-            <column name="ROLEID" not-null="true"/>
+        <id name="roleCode" type="java.lang.String">
+            <column name="ROLE_CODE" not-null="true"/>
         </id>
-        <property name="popedomCode" type="java.lang.String">
-            <column name="POPEDOMCODE" />
+        <property name="popedomCode" type="java.lang.String" length="800">
+            <column name="POPEDOM_CODE" />
         </property>
         <property name="remark" type="java.lang.String">
             <column name="REMARK" />

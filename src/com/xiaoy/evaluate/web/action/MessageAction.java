@@ -12,6 +12,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.evaluate.service.MessageService;
 import com.xiaoy.evaluate.web.form.MessageForm;
+import com.xiaoy.resource.servic.LogService;
 
 @SuppressWarnings("serial")
 public class MessageAction extends BaseAction implements ModelDriven<MessageForm>
@@ -19,6 +20,10 @@ public class MessageAction extends BaseAction implements ModelDriven<MessageForm
 	// 留言
 	@Resource
 	private MessageService messageService;
+	
+	//日志管理
+	@Resource
+	private LogService logService;
 
 	private MessageForm messageForm = new MessageForm();
 
@@ -45,6 +50,9 @@ public class MessageAction extends BaseAction implements ModelDriven<MessageForm
 	{
 		List<MessageForm> list = messageService.findMessageAll(request);
 		request.setAttribute("list", list);
+		
+		logService.saveLog(request, MessageForm.MODEL_NAME, "进入留言列表页面");
+		
 		return "message";
 	}
 
@@ -62,6 +70,8 @@ public class MessageAction extends BaseAction implements ModelDriven<MessageForm
 		messageForm.setFlag(flag);
 
 		messageService.messageSave(messageForm, request);
+		
+		logService.saveLog(request, MessageForm.MODEL_NAME, "添加留言信息");
 		return "success";
 	}
 
@@ -78,6 +88,7 @@ public class MessageAction extends BaseAction implements ModelDriven<MessageForm
 		// 带有中文
 		inputStream = new ByteArrayInputStream(json.getBytes("UTF-8"));
 		
+		logService.saveLog(request, MessageForm.MODEL_NAME, "查看留言信息");
 		return "ajax-success";
 	}
 	
@@ -93,6 +104,8 @@ public class MessageAction extends BaseAction implements ModelDriven<MessageForm
 			inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
 			e.printStackTrace();
 		}
+		
+		logService.saveLog(request, MessageForm.MODEL_NAME, "删除留言列表页面");
 		return "ajax-success";
 	}
 }

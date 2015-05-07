@@ -1,21 +1,13 @@
 package com.xiaoy.authority.service.impl;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.struts2.ServletActionContext;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -27,7 +19,6 @@ import com.xiaoy.authority.service.RoleService;
 import com.xiaoy.authority.web.form.RoleForm;
 import com.xiaoy.base.entites.RolePopedom;
 import com.xiaoy.base.entites.UserRole;
-import com.xiaoy.base.util.XmlObject;
 import com.xiaoy.user.web.form.UserForm;
 
 /**
@@ -52,88 +43,6 @@ public class RoleServiceImpl implements RoleService
 	 */
 	@Resource
 	private RolePopedomDao rolePopedomDao;
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<XmlObject> readXml()
-	{
-		List<XmlObject> xmlList = new ArrayList<XmlObject>();
-		
-		ServletContext servletContext = ServletActionContext.getServletContext();
-		String realPath = servletContext.getRealPath("/WEB-INF/classes/Function.xml");
-		
-		File f = new File(realPath);
-		//使用dom4j开始解析xml文件
-		SAXReader read = new SAXReader();
-		try
-		{
-			Document document = read.read(f);
-			Element element = document.getRootElement();
-			XmlObject xmlObject = null;
-			for(Iterator<Element> iter = element.elementIterator("Function");iter.hasNext();)
-			{
-				Element xmlElement = iter.next();
-				xmlObject = new XmlObject();
-				xmlObject.setCode(xmlElement.elementTextTrim("FunctionCode"));
-				xmlObject.setName(xmlElement.elementTextTrim("FunctionName"));
-				xmlObject.setParentCode(xmlElement.elementTextTrim("ParentCode"));
-				xmlObject.setParentName(xmlElement.elementTextTrim("ParentName"));
-				xmlList.add(xmlObject);
-			}
-		} catch (DocumentException e)
-		{
-			new RuntimeException("解析Function.xml文件出现未知的错误！");
-			e.printStackTrace();
-		}
-		return xmlList;
-	}
-
-	@Override
-	public List<XmlObject> readEditXml(String roleId)
-	{
-		RolePopedom elecRolePopedom = rolePopedomDao.findObjectById(roleId);
-		String popedomCode = "";
-		if(elecRolePopedom != null)
-		{
-			popedomCode = elecRolePopedom.getPopedomCode();
-		}
-		
-		//通过权限的code进行匹配
-		List<XmlObject> xmlList = this.readXmlByPopedom(popedomCode);
-		return xmlList;
-	}
-
-	/**
-	 * 通过权限的code进行匹配
-	 * @param popedomCode	权限的code
-	 * @return	List &ltXmlObject&gt
-	 *
-	 * @author XiaoY
-	 * @date: 
-	 * 2014年12月25日 下午8:53:44
-	 */
-	private List<XmlObject> readXmlByPopedom(String popedomCode)
-	{
-		List<XmlObject> xmlList = this.readXml();
-		for(int i = 0; xmlList != null && i < xmlList.size(); i++)
-		{
-			XmlObject object = xmlList.get(i);
-			if(object != null)
-			{
-				//包含：表示当前权限被选种
-				if(popedomCode.contains(object.getCode()))
-				{
-					object.setFlag("1");
-				}
-				//不包含：表示当前权限没有选种
-				else
-				{
-					object.setFlag("0");
-				}
-			}
-		}
-		return xmlList;
-	}
 
 	@Override
 	public List<UserForm> findUserByRoleId(String roleId)
@@ -177,7 +86,7 @@ public class RoleServiceImpl implements RoleService
 	@Transactional(readOnly=false, propagation=Propagation.REQUIRED, isolation=Isolation.DEFAULT)
 	public void saveRole(RoleForm roleForm)
 	{
-		if(roleForm != null && !StringUtils.isEmpty(roleForm.getRoleId()))
+		if(roleForm != null && !StringUtils.isEmpty(roleForm.getRoleid()))
 		{
 			//保存角色与权限的关联
 			this.saveRolePopedom(roleForm);
@@ -196,13 +105,19 @@ public class RoleServiceImpl implements RoleService
 	 */
 	private void saveRolePopedom(RoleForm roleForm)
 	{
-		String roleId = roleForm.getRoleId();
-		String[] selectoper = roleForm.getSelectoper();
+		String roleId = roleForm.getRoleid();
+		String[] selectoper = roleForm.getPopedomCode();
 		
 		StringBuffer popedomCode = new StringBuffer("");
 		for(int i = 0; selectoper != null && i < selectoper.length; i++)
 		{
-			popedomCode.append(selectoper[i]);
+			if(i == selectoper.length - 1)
+			{
+				popedomCode.append(selectoper[i]);
+			}else
+			{
+				popedomCode.append(selectoper[i] + ",");
+			}
 		}
 		RolePopedom rolePopedom = rolePopedomDao.findObjectById(roleId);
 		//说明数据库中角色与权限的关联表中已经存在
@@ -215,7 +130,7 @@ public class RoleServiceImpl implements RoleService
 		{
 			rolePopedom = new RolePopedom();
 			rolePopedom.setPopedomCode(popedomCode.toString());
-			rolePopedom.setRoleId(roleId);
+			rolePopedom.setRoleCode(roleId);
 			rolePopedomDao.saveObject(rolePopedom);
 		}
 	}
@@ -233,39 +148,43 @@ public class RoleServiceImpl implements RoleService
 	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
 	private void saveUserRole(RoleForm roleForm)
 	{
-		String roleId = roleForm.getRoleId();
-		String[] selectuser = roleForm.getSelectuser();
+		String roleCode = roleForm.getRoleid();
+		String[] userIds = roleForm.getUserIds();
 		
 		StringBuffer hqlWhere = new StringBuffer("");
-		hqlWhere.append(" and e.roleId = :roleId");
+		hqlWhere.append(" and e.roleCode = :roleCode");
 		
 		Map<String, Object> paramsMap = new HashMap<String, Object>();
-		paramsMap.put("roleId", roleId);
+		paramsMap.put("roleCode", roleCode);
 		
-//		List<UserRole> elecUserRole = userRoleDao.findCollectionByConditionNoPage(hqlWhere, paramsMap);
 		List<UserRole> userRoles = userRoleDao.findCollectionByCondition(hqlWhere.toString(), paramsMap);
 	
 		//删除原来的用户与角色的关联关系
 		if(userRoles != null)
 		{
-			userRoleDao.deleteObjectByCollection(userRoles);
+			userRoleDao.deleteUserRoleByRoleCode(userRoles);
 		}
 		
 		List<UserRole> list = new ArrayList<UserRole>();
-		for(int i = 0; selectuser != null && i < selectuser.length; i++)
+		for(int i = 0; userIds != null && i < userIds.length; i++)
 		{
 			UserRole userRole = new UserRole();
-			userRole.setRoleId(roleId);
-			userRole.setUserId(selectuser[i]);
+			userRole.setRoleCode(roleCode);
+			userRole.setUserUuid(userIds[i]);
 			list.add(userRole);
 		}
 		
 		if(list != null && list.size() > 0)
 		{
 			//保存新的用户与角色的关联关系
-		//	userRoleDao.saveObjectByCollection(list);
 			userRoleDao.saveObjectCollection(list);
 		}
+	}
+
+	@Override
+	public RolePopedom findPopedomByroleCode(String roleCode)
+	{
+		return rolePopedomDao.findObjectById(roleCode);
 	}
 }
 

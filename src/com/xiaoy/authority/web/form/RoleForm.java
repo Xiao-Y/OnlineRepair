@@ -11,42 +11,58 @@ package com.xiaoy.authority.web.form;
  */
 public class RoleForm
 {
+	
+	public static final String MODE_NAME = "【权限管理】-【角色权限管理】";
+	
 	//角色的id
-	private String roleId;
+	private String roleCode;
 	
 	//权限的id
-	private String[] selectoper;
+	private String[] popedomCode;
 	
 	//用户的id
-	private String[] selectuser;
+	private String[] userIds;
+	
+	//角色id
+	private String roleid;
 
-	public String getRoleId()
+	public String getRoleCode()
 	{
-		return roleId;
+		return roleCode;
 	}
 
-	public void setRoleId(String roleId)
+	public void setRoleCode(String roleCode)
 	{
-		this.roleId = roleId;
+		this.roleCode = roleCode;
 	}
 
-	public String[] getSelectoper()
+	public String[] getPopedomCode()
 	{
-		return selectoper;
+		return popedomCode;
 	}
 
-	public void setSelectoper(String[] selectoper)
+	public void setPopedomCode(String[] popedomCode)
 	{
-		this.selectoper = selectoper;
+		this.popedomCode = popedomCode;
 	}
 
-	public String[] getSelectuser()
+	public String[] getUserIds()
 	{
-		return selectuser;
+		return userIds;
 	}
 
-	public void setSelectuser(String[] selectuser)
+	public void setUserIds(String[] userIds)
 	{
-		this.selectuser = selectuser;
+		this.userIds = userIds;
+	}
+
+	public String getRoleid()
+	{
+		return roleid;
+	}
+
+	public void setRoleid(String roleid)
+	{
+		this.roleid = roleid;
 	}
 }

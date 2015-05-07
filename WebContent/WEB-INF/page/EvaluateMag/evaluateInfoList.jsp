@@ -137,7 +137,9 @@
 			<tr>
 				<td class="ta_01" align="center" bgColor="#f5fafe" colspan="5">			
 					<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="DataGrid1"
-						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
+						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; 
+						width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; 
+						background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
 						<tr style="font-weight:bold;font-size:12pt;height:25px;background-color:#afd1f3">
 							<td align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">

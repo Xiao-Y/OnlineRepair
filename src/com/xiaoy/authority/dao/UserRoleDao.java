@@ -41,9 +41,8 @@ public interface UserRoleDao extends Common<UserRole>
 	List<Object[]> findElecUserByRoleId(String roleId);
 
 	/**
-	 * 删除原来的用户与角色的关联关系
-	 * @param elecUserRole	
+	 * 删除所有属于这个角色的用户
+	 * @param userRoles	含有角色Code的
 	 */
-	void deleteObjectByCollection(List<UserRole> elecUserRole);
-	
+	void deleteUserRoleByRoleCode(List<UserRole> userRoles);
 }

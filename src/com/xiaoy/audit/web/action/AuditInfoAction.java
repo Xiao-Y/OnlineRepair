@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -159,6 +160,11 @@ public class AuditInfoAction extends BaseAction implements ModelDriven<AuditForm
 	 */
 	public String auditInfoPassList()
 	{
+		
+		HttpSession session = request.getSession();
+		UserForm userInfo = (UserForm) session.getAttribute("userInfo");
+		auditForm.setMaintainUuid(userInfo.getUserUuid());
+		
 		// 发送查询条件到页面
 		this.sendSelectPage();
 

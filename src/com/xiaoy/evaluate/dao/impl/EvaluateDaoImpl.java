@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import com.xiaoy.authority.service.RoleService;
 import com.xiaoy.base.dao.impl.CommonImpl;
 import com.xiaoy.base.entites.Evaluate;
 import com.xiaoy.evaluate.dao.EvaluateDao;
@@ -17,6 +20,11 @@ import com.xiaoy.resource.web.form.DictionaryForm;
 @Repository
 public class EvaluateDaoImpl extends CommonImpl<Evaluate> implements EvaluateDao
 {
+	
+	//角色
+	@Resource
+	private RoleService roleService;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Object[]> findEvaluateList(EvaluateForm evaluateForm)
@@ -85,8 +93,10 @@ public class EvaluateDaoImpl extends CommonImpl<Evaluate> implements EvaluateDao
 		hqlWhere.append(" a.FINISH_TIME,e.EVALUATEUUID,e.EVALUATE_STAT_CODE,r.REPORTING_UUID,u.USER_UUID,r.REPORTING_TIME, ");
 		hqlWhere.append(" de.VERSION,a.AUDIT_UUID,r.ORDER_TIME,r.DEVICE_PIC_URL,r.ACCOUNT,r.REMARK,a.MAINTAIN_UUID,a.AUDIT_TIME,e.RANK_CODE ");
 		this.getWhere(hqlWhere);
+		hqlWhere.append(" and e.EVALUATEUUID = :evaluateUuid");
 		
 		Query query = this.getSession().createSQLQuery(hqlWhere.toString());
+		query.setParameter("evaluateUuid", evaluateUuid);
 		
 		return (Object[]) query.uniqueResult();
 	}
@@ -147,6 +157,13 @@ public class EvaluateDaoImpl extends CommonImpl<Evaluate> implements EvaluateDao
 				hqlWhere.append(" and a.FINISH_TIME >= timestamp(:finishTime, '00 00:00:00') ");
 				hqlWhere.append(" and a.FINISH_TIME < timestamp(:finishTime, '01 00:00:00') ");
 				paramsMapValue.put("finishTime", finishTime);
+			}
+			
+			List<String> list = roleService.findRoleByUserUuid(evaluateForm.getUserUuid());
+			if(list != null && list.size() > 0  && !list.contains(DictionaryForm.ROLE_TYPE_ADMIN) && !list.contains(DictionaryForm.ROLE_TYPE_SA))
+			{
+				hqlWhere.append(" and e.REPORTING_USER_UUID = :userUuid ");
+				paramsMapValue.put("userUuid", evaluateForm.getUserUuid());
 			}
 		}
 		return paramsMapValue;

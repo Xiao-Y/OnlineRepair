@@ -5,7 +5,7 @@
 	<tr>
 		<td>
 		   <fieldset style="width:100%; border : 1px solid #73C8F9;text-align:left;COLOR:#023726;FONT-SIZE: 12px;">
-		   		<legend align="left">权限分配</legend>
+		   		<legend align="left">权限分配</legend><br/>
 		   		<table cellSpacing="0" cellPadding="0" width="90%" align="center" bgColor="#f5fafe" border="0">	
 		   			<tr height="30">
 		   				<td> 全选/全不选<input type="checkbox" name="selectoperAll" onClick="checkAllOper(this)"/></td>
@@ -37,7 +37,7 @@
 							</s:iterator>
 						</s:if>
 					  </tr>						
-				 </table>	
+				 </table><br/>	
 		     </fieldset>
 	  	</td>
 	</tr>

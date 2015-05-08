@@ -75,10 +75,12 @@
 			</td>
 		</tr>
 		<tr>
+			<!-- 
 			<td align="right"  width="20%" class="ta_01">优先级别：</td>
 			<td class="ta_01" bgColor="#ffffff" width="30%">
 				<s:textfield id="priorName" name="priorName" size="20" readonly="true"/>
 			</td>
+			 -->
 			<td align="right"  width="20%" class="ta_01">审核状态：</td>
 			<td class="ta_01" bgColor="#ffffff" width="30%">
 				<s:if test="%{#request.auditStat != null && #request.auditStat.size() > 0}">
@@ -86,6 +88,8 @@
 					listKey="ddlCode" listValue="ddlName" onchange="auditStateChange();" />
 				</s:if>
 			</td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr id="tr_MaintainType">
 			<td align="right"  width="20%" class="ta_01">维护类别：<font color="#FF0000">*</font></td>

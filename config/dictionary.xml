@@ -248,7 +248,7 @@
 	<root>
 		<keyword>角色类型</keyword>
 		<ddlcode>3</ddlcode>
-		<ddlname>业务用户</ddlname>
+		<ddlname>维护人员</ddlname>
 	</root>
 
 	<root>

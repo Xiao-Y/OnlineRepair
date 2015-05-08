@@ -247,7 +247,7 @@
 						</s:if>
 						<s:else>
 							<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-								<td colspan=6 style="HEIGHT:22px" align="center" width="100%">
+								<td colspan=12 style="HEIGHT:22px" align="center" width="100%">
 									<font color="#FF0000">没有更多数据...</font>
 								</td>
 							</tr>

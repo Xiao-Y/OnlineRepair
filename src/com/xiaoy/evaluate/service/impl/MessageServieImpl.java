@@ -2,7 +2,9 @@ package com.xiaoy.evaluate.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xiaoy.authority.service.RoleService;
 import com.xiaoy.base.entites.Message;
 import com.xiaoy.base.entites.User;
 import com.xiaoy.evaluate.dao.MessageDao;
@@ -34,6 +37,10 @@ public class MessageServieImpl implements MessageService
 	
 	@Resource
 	private DictionaryDao dictionaryDao;
+	
+	//角色
+	@Resource
+	private RoleService roleService;
 	
 	@Override
 	@Transactional(readOnly=false, isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
@@ -63,10 +70,25 @@ public class MessageServieImpl implements MessageService
 	@Override
 	public List<MessageForm> findMessageAll(HttpServletRequest request)
 	{
+		//获取用户的信息
+		HttpSession session = request.getSession();
+		UserForm userInfo = (UserForm) session.getAttribute("userInfo");
+		
+		List<String> roles = roleService.findRoleByUserUuid(userInfo.getUserUuid());
+		
+		Map<String, Object> map = null;
+		String hql = "";
+		//除系统管理员和高级管理员外，其它的都只能看见自己的留言
+		if(roles != null && roles.size() > 0  && !roles.contains(DictionaryForm.ROLE_TYPE_ADMIN) && !roles.contains(DictionaryForm.ROLE_TYPE_SA))
+		{
+			hql = hql + " and e.user.userUuid = :userUuid ";
+			map = new HashMap<String, Object>();
+			map.put("userUuid", userInfo.getUserUuid());
+		}
+		
+		List<Message> list = messageDao.findCollectionByCondition(hql, map);
+		
 		List<MessageForm> mForm = null;
-		
-		List<Message> list = messageDao.findCollectionByCondition("", null);
-		
 		if(list != null && list.size() > 0)
 		{
 			mForm = new ArrayList<MessageForm>();

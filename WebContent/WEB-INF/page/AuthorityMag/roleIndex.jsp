@@ -50,7 +50,7 @@ td {
 		 		<tr>
 		  			<td>
 		   				<fieldset style="width:100%; border : 1px solid #73C8F9;text-align:left;color:#023726;font-size: 12px;">
-		   					<legend align="left">权限分配</legend>
+		   					<legend align="left">权限分配</legend><br/>
 		     				<table cellspacing="0" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">			 
 					  			<tr>
 									<s:if test="%{#request.xmlList != null}">
@@ -69,7 +69,7 @@ td {
 										</s:iterator>
 									</s:if>
 								</tr>
-				 			</table>	
+				 			</table><br/>	
 		        		</fieldset>
 			  		</td>
 			 	</tr>					

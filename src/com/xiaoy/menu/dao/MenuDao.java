@@ -14,4 +14,13 @@ public interface MenuDao extends Common<Menu>
 	 */
 	List<Menu> findParentMenuAll();
 
+	/**
+	 * 删除所有父级不为空的的菜单
+	 */
+	void deleteMenuAllParentIsNotNull();
+
+	/**
+	 * 删除所有父级为空的的菜单
+	 */
+	void deleteMenuAllParentIsNull();
 }

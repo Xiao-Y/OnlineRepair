@@ -101,9 +101,14 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 		List<UserForm> users = userService.findUserCoditionMaintain();
 		request.setAttribute("users", users);
 		
-		//TODO
+		//获取当前用户的uuid
+		HttpSession session = request.getSession();
+		UserForm userInfo = (UserForm) session.getAttribute("userInfo");
+		reportingForm.setUserUuid(userInfo.getUserUuid());
+		
 		//当是管理员时，不添加用户uuid。否则添加用户uuid，查询出现当前用户的申报信息
 		List<ReportingForm> list = reportingService.findReportingBugInfoList(reportingForm);
+		
 		//添加分页的总记录数
 		int recordCount = reportingService.countReportingBugInfo(reportingForm);
 		reportingForm.setRecordCount(recordCount);

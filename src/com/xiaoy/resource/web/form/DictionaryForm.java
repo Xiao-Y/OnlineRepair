@@ -142,6 +142,27 @@ public class DictionaryForm
 	 * 评价状态：未评价
 	 */
 	public static final String EVALUATE_STAT_NO = "2";
+	
+
+	/**
+	 * 角色类型:系统管理员
+	 */
+	public static final String ROLE_TYPE_SA = "1";
+	
+	/**
+	 * 角色类型:高级管理员
+	 */
+	public static final String ROLE_TYPE_ADMIN = "2";
+	
+	/**
+	 * 角色类型:维护人员
+	 */
+	public static final String ROLE_TYPE_MAINTAIN = "3";
+	
+	/**
+	 * 角色类型:普通用户
+	 */
+	public static final String ROLE_TYPE_COMMON = "4";
 
 	/* 字典id */
 	private String seqID;

@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
@@ -20,6 +21,7 @@ import com.xiaoy.evaluate.web.form.EvaluateForm;
 import com.xiaoy.resource.servic.DictionaryService;
 import com.xiaoy.resource.servic.LogService;
 import com.xiaoy.resource.web.form.DictionaryForm;
+import com.xiaoy.user.web.form.UserForm;
 
 @SuppressWarnings("serial")
 public class EvaluateAction extends BaseAction implements ModelDriven<EvaluateForm>
@@ -82,6 +84,11 @@ public class EvaluateAction extends BaseAction implements ModelDriven<EvaluateFo
 		List<DeviceInfoForm> deviceName = deviceInfoService.findDeviceName();
 		request.setAttribute("deviceName", deviceName);
 
+		//获取用户的信息
+		HttpSession session = request.getSession();
+		UserForm userInfo = (UserForm) session.getAttribute("userInfo");
+		evaluateForm.setUserUuid(userInfo.getUserUuid());
+		
 		List<EvaluateForm> list = evaluateService.findEvaluateList(evaluateForm);
 		request.setAttribute("list", list);
 

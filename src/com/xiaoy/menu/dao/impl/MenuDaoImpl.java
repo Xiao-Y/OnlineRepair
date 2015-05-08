@@ -25,4 +25,20 @@ public class MenuDaoImpl extends CommonImpl<Menu> implements MenuDao
 		return menu;
 	}
 
+	@Override
+	public void deleteMenuAllParentIsNotNull()
+	{
+		String hql = " delete from Menu mm where mm.menu is not null ";
+		Query query = this.getSession().createQuery(hql);
+		query.executeUpdate();
+	}
+
+	@Override
+	public void deleteMenuAllParentIsNull()
+	{
+		String hql = " delete from Menu mm where mm.menu is null ";
+		Query query = this.getSession().createQuery(hql);
+		query.executeUpdate();
+	}
+
 }

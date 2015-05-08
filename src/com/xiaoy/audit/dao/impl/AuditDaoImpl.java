@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.xiaoy.audit.dao.AuditDao;
 import com.xiaoy.audit.web.form.AuditForm;
+import com.xiaoy.authority.service.RoleService;
 import com.xiaoy.base.dao.impl.CommonImpl;
 import com.xiaoy.base.entites.Audit;
 import com.xiaoy.resource.web.form.DictionaryForm;
@@ -17,6 +20,10 @@ import com.xiaoy.resource.web.form.DictionaryForm;
 @Repository
 public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 {
+	
+	//角色
+	@Resource
+	private RoleService roleService;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -268,6 +275,14 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 				hqlWhere.append(" and  a.AUDIT_TIME >= timestamp(:auditTime,'00 00:00:00')");
 				hqlWhere.append(" and  a.AUDIT_TIME < timestamp(:auditTime,'01 00:00:00')");
 				param.put("auditTime", auditForm.getAuditTime());
+			}
+			
+			List<String> list = roleService.findRoleByUserUuid(auditForm.getMaintainUuid());
+			//当是维护人员的时候,可以查看分配给自己的故障信息
+			if (list != null && list.size() > 0 && !list.contains(DictionaryForm.ROLE_TYPE_ADMIN) && !list.contains(DictionaryForm.ROLE_TYPE_SA) && list.contains(DictionaryForm.ROLE_TYPE_MAINTAIN))
+			{
+				hqlWhere.append(" and  a.MAINTAIN_UUID = :maintainUuid ");
+				param.put("maintainUuid", auditForm.getMaintainUuid());
 			}
 		}
 		return param;

@@ -11,10 +11,12 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.xiaoy.audit.dao.AuditDao;
+import com.xiaoy.authority.service.RoleService;
 import com.xiaoy.base.dao.impl.CommonImpl;
 import com.xiaoy.base.entites.Reporting;
 import com.xiaoy.reporting.dao.ReportingDao;
 import com.xiaoy.reporting.web.form.ReportingForm;
+import com.xiaoy.resource.web.form.DictionaryForm;
 
 @Repository
 public class ReportingDaoImpl extends CommonImpl<Reporting> implements ReportingDao
@@ -23,6 +25,10 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 	// 审核信息
 	@Resource
 	private AuditDao auditDao;
+
+	// 角色
+	@Resource
+	private RoleService roleService;
 
 	// @Override
 	// @SuppressWarnings("unchecked")
@@ -275,6 +281,23 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 				paramsMap.put("auditStatCode", auditStatCode);
 				hql.append(" and a.AUDIT_STAT_CODE = :auditStatCode ");
 			}
+
+			List<String> list = roleService.findRoleByUserUuid(reportingForm.getUserUuid());
+			// 普通用户
+			if (list != null && list.size() > 0 && list.size() == 1 && list.contains(DictionaryForm.ROLE_TYPE_COMMON))
+			{
+				hql.append(" and r.USER_UUID = :userUuid ");
+				paramsMap.put("userUuid", reportingForm.getUserUuid());
+			}
+
+			if (list != null && list.size() > 0 && !list.contains(DictionaryForm.ROLE_TYPE_ADMIN) && !list.contains(DictionaryForm.ROLE_TYPE_SA) && list.contains(DictionaryForm.ROLE_TYPE_MAINTAIN))
+			{
+				hql.append(" and (r.USER_UUID = :userUuid ");
+				hql.append(" or  a.MAINTAIN_UUID = :maintainUuid) ");
+				paramsMap.put("userUuid", reportingForm.getUserUuid());
+				paramsMap.put("maintainUuid", reportingForm.getUserUuid());
+			}
+
 		}
 		return paramsMap;
 	}

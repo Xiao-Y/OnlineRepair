@@ -218,7 +218,6 @@
 		<parentCode>countMag</parentCode>
 	</menu>
 
-
 	<!-- 可以在系统管理的的update配置来true和false来决定是否更新系统数据 -->
 	<menu>
 		<code>systemMag</code>

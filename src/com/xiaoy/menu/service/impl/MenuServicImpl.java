@@ -25,7 +25,14 @@ public class MenuServicImpl implements MenuService
 	@Transactional(readOnly = false, isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 	public void menuInit(List<Menu> entities)
 	{
-
+		/**
+		 * 删除所有的菜单
+		 * 1、先删除父级菜单不为空的
+		 * 2、再删除父级菜单为空的
+		 */
+		menuDao.deleteMenuAllParentIsNotNull();
+		menuDao.deleteMenuAllParentIsNull();
+		
 		if (entities != null && entities.size() > 0)
 		{
 			for (Menu t : entities)

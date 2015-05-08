@@ -87,7 +87,7 @@ td {
 				<s:textfield id="orderTime" name="orderTime" cssClass="Wdate" size="20" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
 			</td>
 		</tr>
-		
+		<!-- 
 		<tr>
 			<td align="right" width="20%" class="ta_01">优先级别：<font color="#FF0000">*</font></td>
 			<td class="ta_01" bgColor="#ffffff">
@@ -105,6 +105,7 @@ td {
 			<td></td>
 			<td></td>
 		</tr>
+		 -->
 		<tr>
 			<td class="ta_01" width="20%" align="right">故障设备图片：</td>
 			<td class="ta_01" width="80%" bgcolor="#ffffff" colspan="3">

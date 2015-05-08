@@ -140,7 +140,7 @@ td {
 				<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="返回"  name="Reset1"  onClick="history.back()">
 			</td>
 		</tr>
-		<tr align="right">
+		<tr align="left">
 			<td colspan="4">温馨提示： <font color="#FF0000">* 为必填项</font></td>
 		</tr>
 	</table>　

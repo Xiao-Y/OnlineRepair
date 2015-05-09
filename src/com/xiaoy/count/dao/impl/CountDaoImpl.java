@@ -48,9 +48,21 @@ public class CountDaoImpl extends BaseDao implements CountDao
 	@Override
 	public List<Object[]> deviceSum()
 	{
-		String hql = "SELECT d.deviceName,count(*) FROM DeviceInfo d GROUP BY d.deviceName";
+		String hql = "SELECT d.deviceName,sum(d.deviceAmount) FROM DeviceInfo d GROUP BY d.deviceName";
 		Query query = this.getSession().createQuery(hql);
 		List<Object[]> list = query.list();
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> evaluateCount(String userUuid)
+	{
+		String hql = " SELECT RANK_CODE,count(*) from evaluate e, audit a where e.REPORTING_UUID = a.REPORTING_UUID ";
+		hql = hql + " and a.MAINTAIN_UUID = :maintainUuid and RANK_CODE is not null GROUP BY RANK_CODE ";
+		Query query = this.getSession().createSQLQuery(hql);
+		query.setParameter("maintainUuid", userUuid);
+		List<Object[]> list = query.list();
+		
 		return list;
 	}
 }

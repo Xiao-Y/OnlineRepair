@@ -2,41 +2,81 @@ package com.xiaoy.resource.web.form;
 
 public class DictionaryForm
 {
-	
+
 	/**
 	 * 角色类型
 	 */
 	public static final String ROLE_TYPE = "角色类型";
+	
+	/**
+	 * 角色类型:系统管理员
+	 */
+	public static final String ROLE_TYPE_SA = "1";
+
+	/**
+	 * 角色类型:高级管理员
+	 */
+	public static final String ROLE_TYPE_ADMIN = "2";
+
+	/**
+	 * 角色类型:维护人员
+	 */
+	public static final String ROLE_TYPE_MAINTAIN = "3";
+
+	/**
+	 * 角色类型:普通用户
+	 */
+	public static final String ROLE_TYPE_COMMON = "4";
 
 	/**
 	 * 维护类别
 	 */
 	public static final String MAINTAIN_TYPE_NAME = "维护类型";
-	
+
 	/**
 	 * 维护类型：业务用户
 	 */
 	public static final String MAINTAIN_TYPE_NORMAL = "5";
-	
+
 	/**
 	 * 回复状态
 	 */
 	public static final String REPLY_SATA = "回复状态";
-	
+
+	/**
+	 * 回复状态：已回复
+	 */
+	public static final String REPLY_SATA_OK = "1";
+
+	/**
+	 * 回复状态：未回复
+	 */
+	public static final String REPLY_SATA_NO = "2";
+
 	/**
 	 * 满意度
 	 */
 	public static final String RANK = "满意度";
 
 	/**
-	 * 已回复
+	 * 满意度:非常满意
 	 */
-	public static final String REPLY_SATA_OK = "1";
-	
+	public static final String RANK_VERY = "1";
+
 	/**
-	 * 未回复
+	 * 满意度:满意
 	 */
-	public static final String REPLY_SATA_NO = "2";
+	public static final String RANK_GOOD = "2";
+
+	/**
+	 * 满意度:不满意
+	 */
+	public static final String RANK_YAWP = "3";
+
+	/**
+	 * 满意度:非常不满意
+	 */
+	public static final String RANK_VERY_YAWP = "4";
 
 	/**
 	 * 性别
@@ -54,6 +94,16 @@ public class DictionaryForm
 	public static final String STATE_NAME = "运行状态";
 
 	/**
+	 * 设备状态：运行正常
+	 */
+	public static final String DEVICE_STAT_OK = "1";
+
+	/**
+	 * 设备状态：运行异常
+	 */
+	public static final String DEVICE_STAT_EXCEPTION = "2";
+
+	/**
 	 * 安装位置
 	 */
 	public static final String INSTALLATION_SITE_NAME = "安装位置";
@@ -69,39 +119,39 @@ public class DictionaryForm
 	public static final String MAINTAIN_STAT = "维护状态";
 
 	/**
+	 * 维护状态：未处理，待审核时
+	 */
+	public static final String MAINTAIN_STAT_NO = "1";
+
+	/**
+	 * 维护状态：待维护，审核通过时
+	 */
+	public static final String MAINTAIN_STAT_WAIT = "2";
+
+	/**
+	 * 维护状态：已维护，审核通过时
+	 */
+	public static final String MAINTAIN_STAT_SUCCESS = "3";
+
+	/**
 	 * 评价状态
 	 */
 	public static final String EVALUATE_STAT = "评价状态";
 
 	/**
+	 * 评价状态：已评价
+	 */
+	public static final String EVALUATE_STAT_OK = "1";
+
+	/**
+	 * 评价状态：未评价
+	 */
+	public static final String EVALUATE_STAT_NO = "2";
+
+	/**
 	 * 审核状态
 	 */
 	public static final String AUDIT_STAT = "审核状态";
-	
-	/**
-	 * 删除标识
-	 */
-	public static final String DELETE_FLAG = "删除标识";
-	
-	/**
-	 * 未删除
-	 */
-	public static final String DELETE_FLAG_TRUE = "1";
-	
-	/**
-	 * 假删除
-	 */
-	public static final String DELETE_FLAG_FALSE = "2";
-
-	/**
-	 * 设备状态：运行正常
-	 */
-	public static final String DEVICE_STAT_OK = "1";
-	
-	/**
-	 * 设备状态：运行异常
-	 */
-	public static final String DEVICE_STAT_EXCEPTION = "2";
 
 	/**
 	 * 审核：待审核
@@ -117,52 +167,21 @@ public class DictionaryForm
 	 * 审核：驳回
 	 */
 	public static final String AUDITSTAT_FAIL = "3";
-	
-	/**
-	 * 维护状态：未处理，待审核时
-	 */
-	public static final String MAINTAIN_STAT_NO = "1";
-	
-	/**
-	 * 维护状态：待维护，审核通过时
-	 */
-	public static final String MAINTAIN_STAT_WAIT = "2";
-	
-	/**
-	 * 维护状态：已维护，审核通过时
-	 */
-	public static final String MAINTAIN_STAT_SUCCESS = "3";
-	
-	/**
-	 * 评价状态：已评价
-	 */
-	public static final String EVALUATE_STAT_OK = "1";
-	
-	/**
-	 * 评价状态：未评价
-	 */
-	public static final String EVALUATE_STAT_NO = "2";
-	
 
 	/**
-	 * 角色类型:系统管理员
+	 * 删除标识
 	 */
-	public static final String ROLE_TYPE_SA = "1";
-	
+	public static final String DELETE_FLAG = "删除标识";
+
 	/**
-	 * 角色类型:高级管理员
+	 * 未删除
 	 */
-	public static final String ROLE_TYPE_ADMIN = "2";
-	
+	public static final String DELETE_FLAG_TRUE = "1";
+
 	/**
-	 * 角色类型:维护人员
+	 * 假删除
 	 */
-	public static final String ROLE_TYPE_MAINTAIN = "3";
-	
-	/**
-	 * 角色类型:普通用户
-	 */
-	public static final String ROLE_TYPE_COMMON = "4";
+	public static final String DELETE_FLAG_FALSE = "2";
 
 	/* 字典id */
 	private String seqID;

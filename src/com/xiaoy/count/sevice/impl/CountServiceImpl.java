@@ -1,5 +1,6 @@
 package com.xiaoy.count.sevice.impl;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +107,41 @@ public class CountServiceImpl implements CountService
 			for (Object[] o : list)
 			{
 				map.put((String) o[0], (double) ((Long) o[1]));
+			}
+		}
+		return map;
+	}
+
+	@Override
+	public Map<String, Double> evaluateCount(String userUuid)
+	{
+		Map<String, Double> map = null;
+		List<Object[]> list = countDao.evaluateCount(userUuid);
+		List<DictionaryForm> ddl = dictionaryService.findDictionaryListByKeyWord(DictionaryForm.RANK);
+		map = new HashMap<String, Double>();
+		if (list != null && list.size() > 0)
+		{
+			for (int j = 0; j < list.size(); j++)
+			{
+				for (int i = 0; i < ddl.size(); i++)
+				{
+					DictionaryForm d = ddl.get(i);
+					if (list.get(j)[0].equals(d.getDdlCode()))
+					{
+						map.put(d.getDdlName(), ((BigInteger) list.get(j)[1]).doubleValue());
+						ddl.remove(i);
+						break;
+					}
+				}
+
+			}
+		}
+
+		if (ddl != null && ddl.size() > 0)
+		{
+			for (DictionaryForm d : ddl)
+			{
+				map.put(d.getDdlName(), 0.0);
 			}
 		}
 		return map;

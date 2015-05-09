@@ -86,6 +86,8 @@ public class MessageServieImpl implements MessageService
 			map.put("userUuid", userInfo.getUserUuid());
 		}
 		
+		hql = hql + " order by messageTime desc ";
+		
 		List<Message> list = messageDao.findCollectionByCondition(hql, map);
 		
 		List<MessageForm> mForm = null;

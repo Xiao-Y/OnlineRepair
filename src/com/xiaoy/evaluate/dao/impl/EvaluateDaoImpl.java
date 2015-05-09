@@ -36,6 +36,8 @@ public class EvaluateDaoImpl extends CommonImpl<Evaluate> implements EvaluateDao
 		
 		Map<String, Object> paramsMapValue = this.getMapWhereParam(evaluateForm, hqlWhere);
 		
+		hqlWhere.append(" order by a.FINISH_TIME desc ");
+		
 		Query query = this.getSession().createSQLQuery(hqlWhere.toString());
 		//从第几条记录开始
 		query.setFirstResult((evaluateForm.getPageNo() - 1) * evaluateForm.getPageSize());

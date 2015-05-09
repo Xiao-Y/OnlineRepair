@@ -299,6 +299,8 @@ public class ReportingDaoImpl extends CommonImpl<Reporting> implements Reporting
 			}
 
 		}
+		
+		hql.append(" order by r.REPORTING_TIME desc ");
 		return paramsMap;
 	}
 

@@ -29,4 +29,11 @@ public interface CountService
 	 */
 	Map<String, Double> deviceSum();
 
+	/**
+	 * 统计维护人员的各种评价
+	 * @param userUuid	维护人员的uuid
+	 * @return
+	 */
+	Map<String, Double> evaluateCount(String userUuid);
+
 }

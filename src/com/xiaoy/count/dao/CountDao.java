@@ -29,4 +29,11 @@ public interface CountDao
 	 */
 	List<Object[]> deviceSum();
 
+	/**
+	 * 统计维护人员的各种评价
+	 * @param userUuid
+	 * @return
+	 */
+	List<Object[]> evaluateCount(String userUuid);
+
 }

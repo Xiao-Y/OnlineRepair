@@ -203,6 +203,13 @@
 	</menu>
 
 	<menu>
+		<code>evaluateCount</code>
+		<codeName>给我的评价统计</codeName>
+		<order>083</order>
+		<url>/CountMag/countAction_evaluateCount.action</url>
+		<parentCode>countMag</parentCode>
+	</menu>
+	<menu>
 		<code>deviceBreakdownCount</code>
 		<codeName>设备故障次数统计</codeName>
 		<order>083</order>

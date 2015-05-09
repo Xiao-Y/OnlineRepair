@@ -39,6 +39,8 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 
 		sql.append(hqlWhere.toString());
 
+		sql.append(" order by r.REPORTING_TIME desc ");
+		
 		Query query = this.getSession().createSQLQuery(sql.toString());
 		// 从第几条记录开始
 		query.setFirstResult((auditForm.getPageNo() - 1) * auditForm.getPageSize());
@@ -112,6 +114,8 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 
 		sql.append(hqlWhere.toString());
 
+		sql.append(" order by a.AUDIT_TIME desc ");
+		
 		Query query = this.getSession().createSQLQuery(sql.toString());
 		// 从第几条记录开始
 		query.setFirstResult((auditForm.getPageNo() - 1) * auditForm.getPageSize());
@@ -207,6 +211,8 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 		Map<String, Object> paramsMapValue = this.getMapWhereParam(auditForm, hqlWhere);
 
 		sql.append(hqlWhere.toString());
+		
+		sql.append(" order by a.AUDIT_TIME desc ");
 
 		Query query = this.getSession().createSQLQuery(sql.toString());
 		// 从第几条记录开始

@@ -15,7 +15,7 @@ function exitsys(){
 		<frame name=topFrame src="${pageContext.request.contextPath }/MenuMag/menuAction_top.action" noResize scrolling=no>
 		<frameset border=0 frameSpacing=0 frameBorder="no" cols=168,*>
 			<frame name="leftFrame" src="${pageContext.request.contextPath }/MenuMag/menuAction_left.action" noResize scrolling="auto">
-			<frame name="main" scrolling="auto">
+			<frame name="main" scrolling="auto" src="${pageContext.request.contextPath }/MenuMag/menuAction_loading.action">
 			<!-- 
 			<frame name="main" scrolling="auto" src="${pageContext.request.contextPath }/MenuMag/menuAction_loading.action">
 			 -->

@@ -44,20 +44,23 @@
 							<td width="15%" align="center"><font color="#FFFFFF"><b>|</b></font></td>
 						</tr>
 					</table>
-				<td width="16%" height="19" bgcolor="#0965CA">
+				<td width="25%" height="19" bgcolor="#0965CA">
 					<table cellSpacing="2" height="19" cellPadding="0" width="100%" border="0">
 						<tr>
-							<td valign="top"><b><font color="#FFFFFF">欢迎您!&nbsp;&nbsp;&nbsp;${userInfo.name } </font></b>
+							<td valign="top"><b><font color="#FFFFFF">&nbsp;&nbsp;${userInfo.name }&nbsp;欢迎您!&nbsp;&nbsp; </font></b>
+							</td>
+							<td width="5%" align="center"><font color="#FFFFFF"><b>|</b></font></td>
+							<td valign="top"><b><font color="#FFFFFF">角色：&nbsp;${roleStr } </font></b>
 							</td>
 						</tr>
 					</table>
 				</td>
-				<td width="46%" height="19" bgcolor="#0965CA"></td>
+				<td width="36%" height="19" bgcolor="#0965CA"></td>
 				<td width="18%" height="19" bgcolor="#0965CA" align="center">
 					<table border="0" width="100%" cellspacing="0" cellpadding="0">
 						<tr>
 							<td width="100%" align="center">
-								<a href="${pageContext.request.contextPath }/MenuMag/menuAction_home.action" target="_top">
+								<a href="${pageContext.request.contextPath }/MenuMag/menuAction_loading.action" target="main">
 									<font color="#FFFFFF"><b>返回首页</b></font>
 								</a>
 								<font color="#FFFFFF"><b>|</b></font>
@@ -65,7 +68,7 @@
 									<font color="#FFFFFF"><b>重新登录</b></font>
 								</a> 
 								<font color="#FFFFFF"><b>|</b></font>
-								<a href="javascript:parent.exitsys()" target="_top"> 
+								<a href="${pageContext.request.contextPath }/login.jsp" target="_top">
 									<font color="#FFFFFF"><b>退出系统</b></font>
 								</a>
 							</td>

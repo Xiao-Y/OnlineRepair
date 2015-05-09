@@ -17,7 +17,11 @@ import com.xiaoy.base.entites.Menu;
 import com.xiaoy.base.util.ComparatorMenu;
 import com.xiaoy.base.web.action.BaseAction;
 import com.xiaoy.menu.service.MenuService;
+import com.xiaoy.resource.servic.DictionaryService;
 import com.xiaoy.resource.servic.LogService;
+import com.xiaoy.resource.servic.NoticeService;
+import com.xiaoy.resource.web.form.DictionaryForm;
+import com.xiaoy.resource.web.form.NoticeForm;
 import com.xiaoy.user.service.UserService;
 import com.xiaoy.user.web.form.UserForm;
 
@@ -48,6 +52,14 @@ public class MenuAction extends BaseAction implements ModelDriven<Menu>
 	// 角色
 	@Resource
 	private RoleService roleService;
+	
+	//公告
+	@Resource
+	private NoticeService noticeService;
+	
+	//数据字典
+	@Resource
+	private DictionaryService dictionaryService;
 
 	@Resource
 	private LogService logService;
@@ -92,23 +104,27 @@ public class MenuAction extends BaseAction implements ModelDriven<Menu>
 
 			// 获取用户的所有角色
 			List<String> roles = roleService.findRoleByUserUuid(form.getUserUuid());
-
+			StringBuffer roleStr = new StringBuffer("");
 			if (roles != null && roles.size() > 0)
 			{
 				StringBuffer popedom = new StringBuffer("");
 
 				for (int i = 0; i < roles.size(); i++)
 				{
-					if (i <= roles.size() - 1)
+					String role = roles.get(i);
+					if (i < roles.size() - 1)
 					{
 						// 权限信息
-						popedom.append(roleService.findPopedomByroleCode(roles.get(i)).getPopedomCode() + ",");
+						popedom.append(roleService.findPopedomByroleCode(role).getPopedomCode() + ",");
+						roleStr.append(dictionaryService.findDDLName(role, DictionaryForm.ROLE_TYPE) + ",");
 					}else
 					{
-						popedom.append(roleService.findPopedomByroleCode(roles.get(i)).getPopedomCode());
+						popedom.append(roleService.findPopedomByroleCode(role).getPopedomCode());
+						roleStr.append(dictionaryService.findDDLName(role, DictionaryForm.ROLE_TYPE));
 					}
 				}
 				session.setAttribute("popedom", popedom);
+				session.setAttribute("roleStr", roleStr.toString());
 			}
 
 			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
@@ -128,6 +144,9 @@ public class MenuAction extends BaseAction implements ModelDriven<Menu>
 	 */
 	public String loading()
 	{
+		//公告信息
+		List<NoticeForm> list = noticeService.getNoticeIndex();
+		request.setAttribute("list", list);
 		return "loading";
 	}
 

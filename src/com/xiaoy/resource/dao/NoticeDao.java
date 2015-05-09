@@ -7,11 +7,19 @@ import com.xiaoy.base.entites.Notice;
 
 public interface NoticeDao extends Common<Notice>
 {
-	
+
 	/**
 	 * 不带分页的查询，查询出所有的公告信息
-	 * @return	List &ltNotice&gt
+	 * 
+	 * @return List &ltNotice&gt
 	 */
 	List<Notice> findNoticeList();
+
+	/**
+	 * 首页公告，查询出现前5条
+	 * 
+	 * @return
+	 */
+	List<Notice> getNoticeIndex();
 
 }

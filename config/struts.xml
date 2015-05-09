@@ -47,7 +47,7 @@
 	<package name="menu" namespace="/MenuMag" extends="struts-default">
 		<action name="menuAction_*" class="com.xiaoy.menu.web.MenuAction" method="{1}">
 			<result name="home">/WEB-INF/page/MenuMag/home.jsp</result>
-			<result name="loading">/WEB-INF/page/MenuMag/loading.jsp</result>
+			<result name="loading">/WEB-INF/page/MenuMag/notice.jsp</result>
 			<result name="buttom">/WEB-INF/page/MenuMag/buttom.jsp</result>
 			<result name="left">/WEB-INF/page/MenuMag/left.jsp</result>
 			<result name="top">/WEB-INF/page/MenuMag/top.jsp</result>

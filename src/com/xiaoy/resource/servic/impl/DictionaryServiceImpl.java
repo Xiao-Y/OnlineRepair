@@ -197,4 +197,10 @@ public class DictionaryServiceImpl implements DictionaryService
 			dictionaryDao.saveOrUpdate(t);
 		}
 	}
+
+	@Override
+	public String findDDLName(String role, String roleType)
+	{
+		return dictionaryDao.findDDLName(role, roleType);
+	}
 }

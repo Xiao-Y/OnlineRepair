@@ -92,4 +92,13 @@ public class NoticeServiceImpl implements NoticeService
 	{
 		noticeDao.deleteObjectByid(id);
 	}
+
+
+	@Override
+	public List<NoticeForm> getNoticeIndex()
+	{
+		List<Notice> noticeList = noticeDao.getNoticeIndex();
+		List<NoticeForm> list = this.NoticeFormListVoToPo(noticeList);
+		return list;
+	}
 }

@@ -77,4 +77,12 @@ public interface DictionaryService
 	 * @param list
 	 */
 	public void dictionaryInit(List<Dictionary> list);
+
+	/**
+	 * 通过key和关键字查询出现key的名称
+	 * @param role
+	 * @param roleType
+	 * @return
+	 */
+	public String findDDLName(String role, String roleType);
 }

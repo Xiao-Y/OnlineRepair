@@ -317,4 +317,11 @@ public class UserServiceImpl implements UserService
 		}
 		return formList;
 	}
+
+	@Override
+	public Boolean findUserByLoginName(String loginName)
+	{
+		Boolean flag = userDao.findUserByLoginName(loginName);
+		return flag;
+	}
 }

@@ -27,7 +27,7 @@ td {
 		       <td align="right" class="ta_01" width="15%">登陆名：<font color="#FF0000">*</font></td>
 		       <td class="ta_01" bgColor="#ffffff" width="35%">
 		       		<s:hidden id="userUuid" name="userUuid"/>
-		       		<s:textfield name="loginName" id="loginName" maxlength="25" size="20" cssStyle="width: 134px" data-rule-required="true"/>
+		       		<s:textfield name="loginName" id="loginName" maxlength="25" size="20" cssStyle="width: 134px" data-rule-required="true" readonly="true"/>
 		       </td>
 		       <td width="18%" align="right" class="ta_01" width="15%">姓名：<font color="#FF0000">*</font></td>
 		       <td class="ta_01" bgColor="#ffffff" width="35%">

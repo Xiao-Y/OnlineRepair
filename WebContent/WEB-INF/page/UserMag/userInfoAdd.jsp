@@ -13,6 +13,11 @@ td {
 	background-color: #F5FAFE;
 }
 </style>
+<script type="text/javascript">
+setTimeout(function() {
+	$("#loginName").focus();
+}, 200);
+</script>
 <title>添加用户信息</title>
 
 </head>
@@ -28,7 +33,8 @@ td {
 		    <tr>
 		       <td align="right" class="ta_01" width="15%">登陆名：<font color="#FF0000">*</font></td>
 		       <td class="ta_01" bgColor="#ffffff" width="35%">
-		       		<s:textfield name="loginName" id="loginName" maxlength="25" size="20" cssStyle="width: 134px" data-rule-required="true"/>
+		       		<s:textfield name="loginName" id="loginName" tabindex="" onkeyup="checkLoginName();" maxlength="25" size="20" cssStyle="width: 134px" data-rule-required="true"/>
+		       		<span id="loginNameErr"></span>
 		       </td>
 		       <td align="right" class="ta_01" width="15%">姓名：<font color="#FF0000">*</font></td>
 		       <td class="ta_01" bgColor="#ffffff" width="35%">
@@ -89,7 +95,7 @@ td {
 			</tr>
 			<tr>
 				<td class="ta_01" style="WIDTH: 100%" align="center" colSpan="4">
-					<input type="submit" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55">
+					<input type="submit" id="BT_Submit" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55">
 					<font face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
 					<input style="font-size:12px; color:black; height=22;width=55"  type="button" value="返回"  name="Reset1"  onClick="history.back()">
 				</td>

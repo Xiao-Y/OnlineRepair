@@ -105,7 +105,8 @@ public class AuditDaoImpl extends CommonImpl<Audit> implements AuditDao
 	public List<Object[]> findAuditInfoPassList(AuditForm auditForm)
 	{
 		StringBuffer sql = new StringBuffer("");
-		sql.append(" SELECT de.AREA_CODE,de.INSTALLATION_SITE_CODE,d.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME,a.REPORTING_UUID,u.USER_UUID,a.AUDIT_UUID,a.MAINTAIN_UUID,a.AUDIT_TIME ");
+		sql.append(" SELECT de.AREA_CODE,de.INSTALLATION_SITE_CODE,d.DEVICE_NAME,u.NAME,r.REPORTING_PHONE,r.REPORTING_TIME, ");
+		sql.append(" a.REPORTING_UUID,u.USER_UUID,a.AUDIT_UUID,a.MAINTAIN_UUID,a.AUDIT_TIME,a.MAINTAIN_STAT_CODE ");
 		this.appendSQLWhere(sql);
 		sql.append(" and a.AUDIT_STAT_CODE= " + DictionaryForm.AUDITSTAT_SUCCESS);
 

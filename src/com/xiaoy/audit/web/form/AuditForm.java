@@ -26,6 +26,8 @@ public class AuditForm extends BaseForm
 	private String auditTime;
 	/* 维护状态 */
 	private String maintainStatCode;
+	/*维护状态名称*/
+	private String maintainStatName;
 	/* 完成时间 */
 	private String finishTime;
 	/* 驳回原因 */
@@ -365,5 +367,15 @@ public class AuditForm extends BaseForm
 	public void setReportingPhone(String reportingPhone)
 	{
 		this.reportingPhone = reportingPhone;
+	}
+
+	public String getMaintainStatName()
+	{
+		return maintainStatName;
+	}
+
+	public void setMaintainStatName(String maintainStatName)
+	{
+		this.maintainStatName = maintainStatName;
 	}
 }

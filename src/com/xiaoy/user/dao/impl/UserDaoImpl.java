@@ -75,4 +75,20 @@ public class UserDaoImpl extends CommonImpl<User> implements UserDao
 		
 		return user;
 	}
+
+	@Override
+	public Boolean findUserByLoginName(String loginName)
+	{
+		boolean flag = false;
+		String hqlWhere = " and loginName = :loginName ";
+		Map<String, Object> paramsMapValue = new HashMap<String, Object>();
+		paramsMapValue.put("loginName", loginName);
+		
+		List<User> user = super.findCollectionByCondition(hqlWhere, paramsMapValue);
+		if(user != null && user.size() > 0)
+		{
+			flag = true;
+		}
+		return flag;
+	}
 }

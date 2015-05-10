@@ -134,16 +134,17 @@
 						style="border-right:gray 1px solid; border-top:gray 1px solid; border-left:gray 1px solid; width:100%; word-break:break-all; border-bottom:gray 1px solid; border-collapse:collapse; background-color:#f5fafe; word-wrap:break-word">
 						<!-- 列表标题 begin -->
 						<tr style="font-weight:bold;font-size:12pt;height:25px;background-color:#afd1f3">
-							<th align="center" width="5%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</th>
+							<th align="center" width="3%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</th>
 						    <th align="center" width="6%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">区域</th>
 							<th align="center" width="6%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">安装位置</th>
 						    <th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">设备名</th>
 							<th align="center" width="7%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人</th>
-							<th align="center" width="12%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人联系方式</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报人联系方式</th>
 							<th align="center" width="7%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护人员</th>
-							<th align="center" width="12%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护人员联系方式</th>
+							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护人员联系方式</th>
 							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">申报时间</th>
 							<th align="center" width="10%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">审核通过时间</th>
+							<th align="center" width="6%" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">维护状态</th>
 							<th align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">编辑</th>
 							<!-- 
 							<th align="center" width="5%"  height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">删除</th>
@@ -191,6 +192,9 @@
 							</td>
 							<td style="height:22px" align="center">
 								<s:property value="%{#audit.auditTime}"/>
+							</td>
+							<td style="height:22px" align="center">
+								<s:property value="%{#audit.maintainStatName}"/>
 							</td>	
 							<td align="center" style="HEIGHT: 22px" align="center">																	
 							   <a href="${pageContext.request.contextPath }/AuditMag/auditInfoAction_auditInfoPassEdit.action?maintainName=<s:property value="%{#audit.maintainName}"/>&auditUuid=<s:property value="%{#audit.auditUuid}"/>&deviceName=<s:property value="%{#audit.deviceName}"/>">

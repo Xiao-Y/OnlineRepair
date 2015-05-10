@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>首页公告</title>
 </head>
-<body>
+<body  style="background-color:#F5FAFE;">
 	<div
 		style="width: 750px; margin: auto; position: relative; z-index: 999; font-size: 12px; font-weight: normal; text-align: left; background: #fff;">
 		<div

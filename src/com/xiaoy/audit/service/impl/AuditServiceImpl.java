@@ -280,6 +280,12 @@ public class AuditServiceImpl implements AuditService
 					auditForm.setMaintainPhone(userForm.getPhone());
 				}
 				auditForm.setAuditTime(o[10] != null ? DateHelper.dateConverString((Date) o[10]) : "");
+				auditForm.setMaintainStatCode((String) o[11]);
+				if (o[11] != null)
+				{
+					auditForm.setMaintainStatName(dictionaryDao.findDDLName((String) o[11], DictionaryForm.MAINTAIN_STAT));
+				}
+				
 				formList.add(auditForm);
 			}
 		}

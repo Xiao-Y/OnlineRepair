@@ -456,6 +456,31 @@ function checkDevice(){
 //设备管理=====================end
 
 //用户信息管理操作===============start
+
+//添加用户时，验证登陆名是否重复
+function checkLoginName(){
+	var loginName = $("#loginName").val();
+	if(loginName != ''){
+		var url = "${pageContext.request.contextPath }/UserMag/userAction_userCheckLoginName.action";
+		var args = {"date":new Date, "loginName":loginName};
+		$.ajax({
+			url:url,
+			data:args,
+			success:function(data){
+				if(data == '1'){
+					$("#loginNameErr").html("<font id='err' color='#FF0000'>用户名重复</font>");
+					$("#BT_Submit").attr("disabled",true);
+				}else if(data == '0'){
+					$("#err").remove();
+					$("#BT_Submit").attr("disabled",false);
+				}else{
+					alert("服务器错误，稍后再试！");
+				}
+			}
+		});
+	}
+}
+
 //删除用户信息
 function deleteUser(name,userUuid){
 	var f = confirm('你确定要删除 ' + name + ' ？');

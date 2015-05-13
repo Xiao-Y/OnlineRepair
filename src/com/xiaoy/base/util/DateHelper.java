@@ -92,7 +92,7 @@ public class DateHelper
 	 */
 	public static String dateTimeConverString(Date dateTime)
 	{
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String strdate = null;
 		strdate = dateTime != null ? sdf.format(dateTime) : ""; 
 		return strdate;

@@ -164,7 +164,7 @@ td {
 		</tr>
 		
 		<tr>
-			<td class="ta_01" align="right" width="20%">故障原因：</td>
+			<td class="ta_01" align="right" width="20%">故障描述：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
 				<s:textarea name="account" id="account" style="width:90%" rows="4" cols="52" readonly="true"/>
 			</td>

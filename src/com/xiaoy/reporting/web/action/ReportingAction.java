@@ -114,6 +114,8 @@ public class ReportingAction extends BaseAction implements ModelDriven<Reporting
 		reportingForm.setRecordCount(recordCount);
 		
 		request.setAttribute("reportingBugInfoList", list);
+		
+		logService.saveLog(request, MENU_MODEL, "进入申报故障列表");
 		return "reportingBugInfoList";
 	}
 	

@@ -5,21 +5,29 @@
 <jsp:include page="/pub.jsp"/>
 <html>
 <head>
+<script type="text/javascript">
+	$(function(){
+		$("#BT_Reset").click(function(){
+			$("#opeName").val("");
+			$("#Form1").submit();
+		});
+	});
+</script>
 <title>日志管理</title>		
 </head>
 		
 <body style="background-color:#F5FAFE;">
-		<form id="Form1" name="Form1" action="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action" method="post"> 
+		<s:form id="Form1" name="Form1" action="ResourceMag/logAction_logIndex.action" method="post"> 
 			<table cellspacing="1" cellpadding="0" width="100%" align="center" border="0">
 				<tr>
-					<td class="ta_01" colspan=2 align="center" background="../images/b-info.gif">
+					<td class="ta_01" colspan=2 align="center" background="${pageContext.request.contextPath }/images/b-info.gif">
 						<font face="宋体" size="2"><strong>日志信息管理</strong></font>
 					</td>
 				</tr>
 				<tr height=10><td></td></tr>
 				<tr>
 					<td class="ta_01" align="center" height="22">
-						操作人：<s:textfield name="opeName" value="%{#list.opeName}" id="opeName" cssStyle="width:140px" />
+						操作人：<s:textfield name="opeName" id="opeName" cssStyle="width:140px" />
 					</td>
 				</tr>
 		    </table>	
@@ -35,7 +43,8 @@
 				             </TABLE>
 	                   </td>
 						<td class="ta_01" align="right">
-						    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="button" value="查询" name="BT_find"  onclick="gotoquery('system/elecLogAction_home.do')"/>&nbsp;&nbsp;
+						    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Add" type="submit" value="查询" name="BT_find"/>&nbsp;&nbsp;
+						    <input style="font-size:12px; color:black; height=20;width=80" id="BT_Reset" type="button" value="清除" name="BT_find"/>&nbsp;&nbsp;
 							<input style="font-size:12px; color:black; height=20;width=80" id="BT_Delete" type="button" value="删除当前页日志" name="BT_Delete"  onClick="logDelete('page')" />
 							<input style="font-size:12px; color:black; height=20;width=80" id="BT_Delete" type="button" value="删除所有日志" name="BT_Delete"  onClick="logDelete('all')" />
 						</td>
@@ -75,7 +84,7 @@
 								</s:if>
 								<s:else>
 									<tr onmouseover="this.style.backgroundColor = '#d4e3e5'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-										<td colspan=4 align="center" width="100%">
+										<td colspan=5 align="center" width="100%">
 											<font color="#FF0000">没有更多数据...</font>
 										</td>
 									</tr>
@@ -85,7 +94,7 @@
 					</tr>
 				</TBODY>
 			</table>
-		</form>
+		</s:form>
 		<x:pager pageNo="${pageNo}" recordCount="${recordCount}" pageSize="${pageSize}" url="${pageContext.request.contextPath }/ResourceMag/logAction_logIndex.action"/>
 	</body>
 </HTML>

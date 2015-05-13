@@ -72,13 +72,13 @@ td {
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="right" bgcolor="#f5fafe">修改故障图片：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe">修改设备图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
 				<s:file id="image" name="image"/>
 			</td>
 		</tr>
 		<tr>
-			<td class="ta_01" align="right" bgcolor="#f5fafe">修改后故障图片：</td>
+			<td class="ta_01" align="right" bgcolor="#f5fafe">修改设备障图片：</td>
 			<td class="ta_01" bgcolor="#ffffff" colspan="3">
 				<div id="imgdiv"><img id="imgShow" width="500px" height="300px"/></div>
 			</td>

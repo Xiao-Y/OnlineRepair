@@ -27,8 +27,10 @@ public class GenericSuperclass
 		// Type[] type = pt.getActualTypeArguments();
 		// return (Class) type[0];
 
+		//得到泛型化的超类：CommonImpl<T>
 		ParameterizedType pt = (ParameterizedType) tClass
 				.getGenericSuperclass();
+		//得到泛型
 		Class entity = (Class) pt.getActualTypeArguments()[0];
 		System.out.println("实际类型-------->" + entity);
 		return entity;

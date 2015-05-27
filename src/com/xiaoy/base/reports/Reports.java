@@ -11,6 +11,7 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis3D;
 import org.jfree.chart.axis.NumberAxis3D;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
@@ -144,8 +145,8 @@ public class Reports
 		// 处理y轴上显示的刻度
 		// 不自动分格
 		numberAxis3D.setAutoTickUnitSelection(true);
-//		NumberTickUnit unit = new NumberTickUnit(1);
-//		numberAxis3D.setTickUnit(unit);
+		NumberTickUnit unit = new NumberTickUnit(1);
+		numberAxis3D.setTickUnit(unit);
 
 		// 2.3、获取绘图区域对象(每个种类都不一样，可以输出，获取categoryPlot.getRenderer()的返回值)
 		BarRenderer3D barRenderer3D = (BarRenderer3D) categoryPlot.getRenderer();

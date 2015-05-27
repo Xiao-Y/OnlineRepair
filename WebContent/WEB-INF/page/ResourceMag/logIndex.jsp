@@ -56,7 +56,7 @@
 								<tr style="FONT-WEIGHT:bold;FONT-SIZE:12pt;HEIGHT:25px;BACKGROUND-COLOR:#afd1f3">
 									<th align="center" width="5%" height=20 background="${pageContext.request.contextPath }/images/tablehead.jpg">序号</th>
 									<th align="center" width="10%" height=20 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作人</th>
-									<th align="center" width="15%" height=20 background="${pageContext.request.contextPath }/images/tablehead.jpg">ip地址</th>
+									<th align="center" width="15%" height=20 background="${pageContext.request.contextPath }/images/tablehead.jpg">IP地址</th>
 									<th align="center" width="15%" height=20 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作时间</th>
 									<th align="center" width="45%" height=20 background="${pageContext.request.contextPath }/images/tablehead.jpg">操作情况</th>
 								</tr>

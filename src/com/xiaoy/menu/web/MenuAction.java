@@ -105,6 +105,7 @@ public class MenuAction extends BaseAction implements ModelDriven<Menu>
 			// 获取用户的所有角色
 			List<String> roles = roleService.findRoleByUserUuid(form.getUserUuid());
 			StringBuffer roleStr = new StringBuffer("");
+			StringBuffer roleCode = new StringBuffer("");
 			if (roles != null && roles.size() > 0)
 			{
 				StringBuffer popedom = new StringBuffer("");
@@ -116,14 +117,17 @@ public class MenuAction extends BaseAction implements ModelDriven<Menu>
 					{
 						// 权限信息
 						popedom.append(roleService.findPopedomByroleCode(role).getPopedomCode() + ",");
+						roleCode.append(role + ",");
 						roleStr.append(dictionaryService.findDDLName(role, DictionaryForm.ROLE_TYPE) + ",");
 					}else
 					{
 						popedom.append(roleService.findPopedomByroleCode(role).getPopedomCode());
+						roleCode.append(role);
 						roleStr.append(dictionaryService.findDDLName(role, DictionaryForm.ROLE_TYPE));
 					}
 				}
 				session.setAttribute("popedom", popedom);
+				session.setAttribute("roleCode", roleCode.toString());
 				session.setAttribute("roleStr", roleStr.toString());
 			}
 

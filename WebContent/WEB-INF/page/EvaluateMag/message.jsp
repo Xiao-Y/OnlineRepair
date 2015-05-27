@@ -111,11 +111,11 @@ function replyOk(messageUuid){
 			<table style="background-image:url(../images/message_bg.png); width: 78%">
 				<tr style="width: 100%">
 					<td align="left">标题：<font color="#FF0000">*</font></td>
-					<td align="left"><input name="titleMes" id="titleMes" size="30" data-rule-required="true"></td>
+					<td align="left" width="90%" ><input name="titleMes" id="titleMes" size="30" data-rule-required="true"></td>
 				</tr>
 				<tr style="width: 100%">
 					<td align="left">内容：<font color="#FF0000">*</font></td>
-					<td align="left"><textarea id="messageMes" name="messageMes" rows="11" cols="50" style="background-image:url(../images/message_me.png);resize: none;" data-rule-required="true"></textarea></td>
+					<td align="left" width="90%"><textarea id="messageMes" name="messageMes" rows="11" cols="50" style="background-image:url(../images/message_me.png);resize: none;" data-rule-required="true"></textarea></td>
 				</tr>
 				<tr style="width: 100%">
 					<td></td>
@@ -138,15 +138,20 @@ function replyOk(messageUuid){
 			<s:if test="%{#request.list != null && #request.list.size() > 0}">
 				<s:iterator value="%{#request.list}" var="mess">
 				<tr id="tr${mess.messageUuid}" style="background-image:url(../images/message_title.png);">
-					<td><s:date name="%{#mess.messageTime}" format="yy-MM-dd hh:ss:mm" /></td>
+					<td><s:date name="%{#mess.messageTime}" format="yyyy-MM-dd HH:mm:ss" /></td>
 					<td><s:property value="%{#mess.titleMes}"/></td>
 					<td><s:property value="%{#mess.messageMes}"/></td>
-					<td class="<s:property value="%{#mess.messageUuid}"/>">
+					<td class="<s:property value="%{#mess.messageUuid}"/>" align="center">
 						<s:if test="%{#mess.replySata == 1}">
 							<input type="button" id="${mess.messageUuid}" onclick="replyOk('${mess.messageUuid}')" name="reply" value="${mess.replySateName}"/>
 						</s:if>
 						<s:else>
-							<input type="button" id="${mess.messageUuid}" onclick="reply('${mess.messageUuid}')" name="reply" value="${mess.replySateName}"/>
+							<s:if test="%{#session.roleCode.indexOf('1') >= 0 || #session.roleCode.indexOf('2') >= 0}">
+								<input type="button" id="${mess.messageUuid}" onclick="reply('${mess.messageUuid}')" name="reply" value="${mess.replySateName}"/>
+							</s:if>
+							<s:else>
+								${mess.replySateName}
+							</s:else>
 						</s:else>
 					</td>
 					<td><input type="button" id="deleteMessae" name="deleteMessae" onclick="deleteMessageById('${mess.messageUuid}');" value="删除"></td>

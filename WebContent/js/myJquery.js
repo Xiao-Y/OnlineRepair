@@ -502,7 +502,7 @@ function deleteUser(name,userUuid){
 
 //批量删除用户信息 
 function userDel() {
-	var url = "${pageContext.request.contextPath }/UserMag/userAction_userDelete.action";
+	var url = "${pageContext.request.contextPath }/UserMag/userAction_userDeletes.action";
 	var flag = false;
 	$.each($("input:checkbox"), function(i, val) {
 		if (val.checked == true) {

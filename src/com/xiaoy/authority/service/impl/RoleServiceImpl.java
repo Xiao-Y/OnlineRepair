@@ -145,7 +145,6 @@ public class RoleServiceImpl implements RoleService
 	 * @date: 
 	 * 2014年12月26日 下午7:26:26
 	 */
-	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED, readOnly=false)
 	private void saveUserRole(RoleForm roleForm)
 	{
 		String roleCode = roleForm.getRoleid();

@@ -84,7 +84,7 @@ td {
 			</td>
 			<td align="right" class="ta_01">预约日期：</td>
 			<td class="ta_01" bgColor="#ffffff">
-				<s:textfield id="orderTime" name="orderTime" cssClass="Wdate" size="20" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false})"/>
+				<s:textfield id="orderTime" name="orderTime" cssClass="Wdate" size="20" style="width: 137px" onclick="WdatePicker({readOnly:true,highLineWeekDay:false,minDate:'%y-%M-{%d+1}'})"/>
 			</td>
 		</tr>
 		<!-- 

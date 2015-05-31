@@ -44,7 +44,7 @@
 							<td width="15%" align="center"><font color="#FFFFFF"><b>|</b></font></td>
 						</tr>
 					</table>
-				<td width="25%" height="19" bgcolor="#0965CA">
+				<td width="30%" height="19" bgcolor="#0965CA">
 					<table cellSpacing="2" height="19" cellPadding="0" width="100%" border="0">
 						<tr>
 							<td valign="top"><b><font color="#FFFFFF">&nbsp;&nbsp;${userInfo.name }&nbsp;欢迎您!&nbsp;&nbsp; </font></b>
@@ -55,7 +55,7 @@
 						</tr>
 					</table>
 				</td>
-				<td width="36%" height="19" bgcolor="#0965CA"></td>
+				<td width="30%" height="19" bgcolor="#0965CA"></td>
 				<td width="18%" height="19" bgcolor="#0965CA" align="center">
 					<table border="0" width="100%" cellspacing="0" cellpadding="0">
 						<tr>

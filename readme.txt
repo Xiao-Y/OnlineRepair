@@ -1,8 +1,11 @@
 访问路径：
 http://localhost:8090/OnlineRepair
 
-初始化系统：
+初始化菜单：
 http://localhost:8090/OnlieRepair/ResourceMag/menuInitAction_menuInit.action
+
+初始化数据字典：
+http://localhost:8090/OnlieRepair/ResourceMag/dictionaryAction_dictionaryInit.action
 
 
 js文件：
